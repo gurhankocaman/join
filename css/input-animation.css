@@ -4,7 +4,7 @@
     left: 50%;
     z-index: 999;
     transform: translate(-50%, -50%);
-    animation: moveLogo 2s ease-in-out forwards;
+    animation: moveLogo 1s ease-in-out forwards;
   }
   
   @keyframes moveLogo {
@@ -21,7 +21,7 @@
   .background-animation {
     background-color: #F5F5F5;
     background-size: cover;
-    animation: fadeBackground 2s ease-in-out forwards;
+    animation: fadeBackground 1s ease-in-out forwards;
   }
   
   @keyframes fadeBackground {
