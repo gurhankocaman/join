@@ -27,8 +27,7 @@ h1 {
     cursor: pointer;
 }
 
-.dark-btn:hover,
-.signup-btn:hover {
+.dark-btn:hover {
     background-color: #29ABE2;
     transition: all 125ms ease-in-out;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
@@ -61,9 +60,17 @@ h1 {
     padding: 64px;
 }
 
-.login-header img {
+.login-logo-animation {
     width: 100px;
+    position: relative;
+    animation: mymove 2s;
+    z-index: 999;
 }
+
+@keyframes mymove {
+    from {top: 50vh; left: 50vh;}
+    to {top: 0%; left: 0%;}
+  }
 
 .login-header-right {
     font-size: 21px;
@@ -81,7 +88,12 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     margin-left: 10px;
+}
 
+.signup-btn:hover {
+    background-color: #29ABE2;
+    transition: all 125ms ease-in-out;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 .login-container {
@@ -108,9 +120,11 @@ h1 {
     margin-top: 24px;
     margin-bottom: 35px;
 }
+
 .login-form {
     display: flex;
     flex-direction: column;
+    width: 60%;
 }
 
 .login-input-fields {
@@ -119,13 +133,33 @@ h1 {
     border-radius: 10px;
     font-size: 21px;
     padding: 0 21px;
+    margin-bottom: 29px;
+
 }
 
 .login-input-fields::placeholder {
     color: #D1D1D1;
 }
 
-.remember-me-container {
+.input-email-icon {
+    background: url(../assets/img/email-icon.png);
+}
+
+.input-password-icon {
+    background: url(../assets/img/password-icon.png);
+}
+
+.input-email-icon,
+.input-password-icon {
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position-x: calc(100% - 21px);
+    background-position-y: center;
+}
+
+.remember-me-container,
+.login-btn-container {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 29px;
 }
