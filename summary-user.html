@@ -6,49 +6,94 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary</title>
-    <link rel="stylesheet" href="/css/summary-user.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="css/header-side.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="/css/summary-user.css">
     <script src="js/script.js"></script>
 </head>
 
 <body onload="init()">
-    
+
     <div w3-include-html="templates/header.html"></div>
     <div w3-include-html="templates/nav.html"></div>
-    
+
 
     <main>
-    
-
-
-        <!-- Main Right -->
-        <div class="summary-main-container">
-            <div class="summary-headline">
+        <div class="main-container">
+            <div class="headline">
                 <h1>Summary</h1>
-                <div class="summary-border-blue"></div>
-                <span>Everything in a nutshell</span>
+                <div class="headline-subtext">
+                    <div class="border-blue"></div>
+                    <span>Everything in a nutshell</span>
+                </div>
             </div>
-            <div class="summary-content">
-                <div class="summary-content-left">
-                    <div class="summary-content-first-row">
-                        <div class="summary-task-small">
-                            <span class="summary-task-small-number">5</span>
-                            <span>Tasks In Board</span>
+            <div class="content">
+
+                <!-- Main Left -->
+                <div class="content-left">
+
+                    <!-- Tasks First Row -->
+                    <div class="content-first-row">
+                        <div class="task-small-container">
+                            <span class="task-number">5</span>
+                            <span class="task-subtext">Tasks In Board</span>
                         </div>
-                        <div class="summary-task-small">
-                            <span class="summary-task-small-number">2</span>
-                            <span>Tasks In Progress</span>
+                        <div class="task-small-container">
+                            <span class="task-number">2</span>
+                            <span class="task-subtext">Tasks In Progress</span>
                         </div>
-                        <div class="summary-task-small">
-                            <span class="summary-task-small-number">2</span>
-                            <span>Awaiting Feedback</span>
+                        <div class="task-small-container">
+                            <span class="task-number">2</span>
+                            <span class="task-subtext">Awaiting Feedback</span>
+                        </div>
+                    </div>
+                    <!-- Tasks Second Row -->
+                    <div class="content-second-row">
+                        <div class="task-urgent-container">
+                            <div class="urgent-img">
+                                <img src="./assets/img/urgent-icon.png">
+                            </div>
+                            <div class="justify-content-tasks">
+                                <span class="task-urgent-number">1</span>
+                                <span>Urgent</span>
+                            </div>
+                            <div class="border-gray">
+                            </div>
+                            <div class="justify-content-tasks">
+                                <span class="task-urgent-date">October 16, 2022</span>
+                                <span>Upcoming Deadline</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tasks Third Row-->
+                    <div class="content-third-row">
+                        <div class="task-todo-container">
+                            <div class="todo-img">
+                                <img src="./assets/img/task-todo.png">
+                            </div>
+                            <div class="justify-content-tasks">
+                                <span class="task-number">1</span>
+                                <span class="task-subtext">To-do</span>
+                            </div>
+                        </div>
+                        <div class="task-done-container">
+                            <div class="done-img">
+                                <img src="./assets/img/task-done.png">
+                            </div>
+                            <div class="justify-content-tasks">
+                                <span class="task-number">1</span>
+                                <span class="task-subtext">Done</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="summary-content-right">Good Morning,<br>User</div>
+
+                <!-- Main Right -->
+                <div class="content-right">
+                    <span class="user-greetings">Good morning,</span>
+                    <span class="user-name">User</span>
+                </div>
             </div>
 
         </div>
