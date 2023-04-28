@@ -3,12 +3,12 @@
     display: flex;
     justify-content: space-between;
     padding: 64px;
-}  
+}
 
 .login-header-left img {
     width: 100px;
 }
-  
+
 .login-header-right {
     font-size: 21px;
     font-weight: 400;
@@ -71,7 +71,6 @@
     font-size: 21px;
     padding: 0 21px;
     margin-bottom: 29px;
-
 }
 
 .login-input-fields::placeholder {
@@ -99,4 +98,59 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 29px;
+}
+
+@media (max-width: 1000px) {
+
+    h1 {
+        font-size: 47px;
+    }
+
+    .login-header-right {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 59px;
+        width: 287px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .login-container {
+        width: 372px;
+    }
+
+    .login-border-bottom {
+        width: 88px;
+    }
+
+
+    .login-form {
+        width: 80%;
+    }
+
+    .login-input-fields {
+        height: 41px;
+    }
+
+    .remember-me-container {
+        flex-direction: column-reverse;
+        gap: 16px;
+        margin-bottom: 35px;
+    }
+
+    .login-btn-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 0;
+    }
+
+    .dark-btn,
+    .light-btn {
+        width: 180px;
+        font-size: 16px;
+    }
+
 }

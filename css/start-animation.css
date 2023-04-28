@@ -58,3 +58,9 @@
     opacity: 1;
   }
 }
+
+@media (max-width: 1000px) {
+  .login-header-left img {
+    width: 64px;
+  }
+}
