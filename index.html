@@ -25,12 +25,14 @@
     </header>
 
     <main>
+        <!-- Login -->
         <div class="login-container login-container-centered">
             <h1>Log in</h1>
             <span class="login-border-bottom"></span>
             <form class="login-form">
                 <input class="login-input-fields input-email-icon" type="email" id="email" placeholder="Email" required>
-                <input class="login-input-fields input-password-icon" type="password" id="password" placeholder="Password" required>
+                <input class="login-input-fields input-password-icon" type="password" id="password"
+                    placeholder="Password" required>
                 <div class="remember-me-container">
                     <div><input type="checkbox"> Remember me</div>
                     <a href="#">Forgot my password</a>
@@ -38,6 +40,56 @@
                 <div class="login-btn-container">
                     <button class="dark-btn">Login</button>
                     <button class="light-btn" onclick="window.location.href='/summary-user.html'">Guest Log in</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sign Up -->
+        <div class="login-container login-container-centered d-none">
+            <img class="login-arrow-back" src="./assets/img/arrow-left-blue.png">
+            <h1>Sign Up</h1>
+            <span class="login-border-bottom"></span>
+            <form class="login-form">
+                <input class="login-input-fields input-user-icon" type="text" id="signup-name" placeholder="Name"
+                    required>
+                <input class="login-input-fields input-email-icon" type="email" id="signup-email" placeholder="Email"
+                    required>
+                <input class="login-input-fields input-password-icon" type="password" id="signup-password"
+                    placeholder="Password" required>
+                <div class="login-btn-container">
+                    <button class="dark-btn">Sign up</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Forgot Password-->
+        <div class="reset-password-container login-container-centered d-none">
+            <img class="login-arrow-back" src="./assets/img/arrow-left-blue.png">
+            <h1 class="forgot-password-headline">I forgot my password</h1>
+            <span class="login-border-bottom"></span>
+            <span class="forgot-password-text">Don't worry! We will send you an email with the instructions to reset your password.</span>
+            <form class="login-form">
+                <input class="login-input-fields input-email-icon" type="email" id="forgot-password" placeholder="Email"
+                    required>
+                <div class="login-btn-container">
+                    <button class="dark-btn">Send me the email</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Reset Password -->
+        <div class="reset-password-container login-container-centered d-none">
+            <img class="login-arrow-back" src="./assets/img/arrow-left-blue.png">
+            <h1 class="forgot-password-headline">Reset your password</h1>
+            <span class="login-border-bottom"></span>
+            <span class="forgot-password-text">Change your account password</span>
+            <form class="login-form">
+                <input class="login-input-fields input-password-icon" type="password" id="new-password"
+                    placeholder="New password" required>
+                    <input class="login-input-fields input-password-icon" type="password" id="confirm-new-password"
+                    placeholder="Confirm password" required>
+                <div class="login-btn-container">
+                    <button class="dark-btn">Continue</button>
                 </div>
             </form>
         </div>

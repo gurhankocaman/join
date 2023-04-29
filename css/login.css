@@ -1,4 +1,8 @@
 /* Login Page */
+.d-none {
+    display: none !important;
+}
+
 .login-header {
     display: flex;
     justify-content: space-between;
@@ -51,6 +55,12 @@
     transform: translate(-50%, -50%);
 }
 
+.login-arrow-back {
+    position: absolute;
+    left: 36px;
+    cursor: pointer;
+}
+
 .login-border-bottom {
     border: 3px solid #29ABE2;
     width: 150px;
@@ -77,6 +87,10 @@
     color: #D1D1D1;
 }
 
+.input-user-icon {
+    background: url(../assets/img/user-icon.png);
+}
+
 .input-email-icon {
     background: url(../assets/img/email-icon.png);
 }
@@ -85,6 +99,7 @@
     background: url(../assets/img/password-icon.png);
 }
 
+.input-user-icon,
 .input-email-icon,
 .input-password-icon {
     background-repeat: no-repeat;
@@ -100,10 +115,29 @@
     margin-bottom: 29px;
 }
 
+/* Reset Password */
+.reset-password-container {
+    width: 826px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 0px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 30px;
+}
+
+.forgot-password-text {
+    font-size: 21px;
+    text-align: center;
+    margin-bottom: 29px;
+}
+
 @media (max-width: 1000px) {
 
     h1 {
         font-size: 47px;
+        text-align: center;
     }
 
     .login-header-right {
@@ -119,6 +153,11 @@
 
     .login-container {
         width: 372px;
+    }
+
+    .login-arrow-back {
+        left: 4px;
+        top: 5px;
     }
 
     .login-border-bottom {
@@ -151,6 +190,20 @@
     .light-btn {
         width: 180px;
         font-size: 16px;
+    }
+
+    .forgot-password-headline {
+        font-size: 40px;
+    }
+
+    .reset-password-container {
+        width: 372px;
+    }
+    
+    .forgot-password-text {
+        font-size: 21px;
+        text-align: center;
+        margin-bottom: 29px;
     }
 
 }
