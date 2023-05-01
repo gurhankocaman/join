@@ -1,3 +1,4 @@
+/* Summary User */
 .main-container {
     margin-left: 232px;
     margin-top: 171px;
@@ -191,6 +192,7 @@
     font-weight: 700;
 }
 
+/*Summary User Responsive */
 @media (max-width: 1400px) {
     .content-right {
         display: none;
@@ -279,5 +281,4 @@
     .done-img img {
         width: 22px;
     }
-
 }

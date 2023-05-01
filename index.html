@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/login.css">
-    <link rel="stylesheet" href="./css/start-animation.css">
 </head>
 
-<body class="background-animation">
+<body>
     <div class="background-cover"></div>
     <header class="login-header">
         <div class="login-header-left">
-            <img class="logo-animation" src="./assets/img/join-logo.png">
+            <div class="background-cover"></div>
+            <div class="background-animation"></div>
+            <div class="logo-animation"></div>
         </div>
         <div class="login-header-right">
             <span>Not a join user?</span>
@@ -67,7 +68,8 @@
             <img class="login-arrow-back" src="./assets/img/arrow-left-blue.png">
             <h1 class="forgot-password-headline">I forgot my password</h1>
             <span class="login-border-bottom"></span>
-            <span class="forgot-password-text">Don't worry! We will send you an email with the instructions to reset your password.</span>
+            <span class="forgot-password-text">Don't worry! We will send you an email with the instructions to reset
+                your password.</span>
             <form class="login-form">
                 <input class="login-input-fields input-email-icon" type="email" id="forgot-password" placeholder="Email"
                     required>
@@ -86,7 +88,7 @@
             <form class="login-form">
                 <input class="login-input-fields input-password-icon" type="password" id="new-password"
                     placeholder="New password" required>
-                    <input class="login-input-fields input-password-icon" type="password" id="confirm-new-password"
+                <input class="login-input-fields input-password-icon" type="password" id="confirm-new-password"
                     placeholder="Confirm password" required>
                 <div class="login-btn-container">
                     <button class="dark-btn">Continue</button>
