@@ -200,7 +200,7 @@
     .reset-password-container {
         width: 372px;
     }
-    
+
     .forgot-password-text {
         font-size: 21px;
         text-align: center;
@@ -219,20 +219,21 @@
     z-index: 999;
     animation: fadeOut 1s ease-in-out forwards;
     animation-delay: 1s;
-  }
-  
-  @keyframes fadeOut {
+}
+
+@keyframes fadeOut {
     0% {
-      opacity: 1;
+        opacity: 1;
     }
+
     100% {
-      opacity: 0;
-      display: none;
-      z-index: -999;
+        opacity: 0;
+        display: none;
+        z-index: -999;
     }
-  }
-  
-  .logo-animation {
+}
+
+.logo-animation {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -246,51 +247,59 @@
     background-position: center;
     animation: moveLogo 1s ease-in-out forwards;
     animation-delay: 1s;
-    }
-  
-  @keyframes moveLogo {
+}
+
+@keyframes moveLogo {
     0% {
-      transform: translate(-50%, -50%) ;
+        transform: translate(-50%, -50%);
     }
+
     100% {
-      top: 0;
-      left: 0;
-      transform: translate(-40px, -40px) scale(0.367);
-      z-index: 0;
-    }
-  }
-  
-  .background-animation {
-    overflow: hidden;
-    background-color: #F5F5F5;
-    background-size: cover;
-    animation: fadeBackground 1s ease-in-out forwards;
-  }
-  
-  /* Start Animation Responsive */
-  @media (max-width: 1000px) {
-    .background-cover {
-      background-color: #2A3647;
-    }
-  
-    .logo-animation {
-      width: 100px;
-      height: 120px;
-      background-image: url('../assets/img/join-logo-white.png');
-    }
-  
-    @keyframes moveLogo {
-      0% {
-        background-image: url('../assets/img/join-logo-white.png');
-      }
-      50% {
-        background-image: url('../assets/img/join-logo.png');
-      }
-      100% {
-        background-image: url('../assets/img/join-logo.png');
         top: 0;
         left: 0;
-        transform: translate(0, 0) scale(0.64);
-      }
+        transform: translate(-40px, -40px) scale(0.367);
+        z-index: 0;
     }
-  }
+}
+
+/* Start Animation Responsive */
+@media (max-width: 1000px) {
+
+    .background-cover {
+        background-color: #2A3647;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            display: none;
+        }
+    }
+
+    .logo-animation {
+        width: 100px;
+        height: 120px;
+        background-image: url('../assets/img/join-logo-white.png');
+    }
+
+    @keyframes moveLogo {
+        0% {
+            background-image: url('../assets/img/join-logo-white.png');
+        }
+
+        50% {
+            background-image: url('../assets/img/join-logo.png');
+        }
+
+        100% {
+            background-image: url('../assets/img/join-logo.png');
+            top: 0;
+            left: 0;
+            transform: translate(0, 0) scale(0.64);
+        }
+    }
+}
