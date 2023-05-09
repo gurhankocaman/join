@@ -13,7 +13,7 @@
     <script src="js/login.js"></script>
 </head>
 
-<body>
+<body onload="init()">
     <div class="background-cover"></div>
     <header class="login-header">
         <div class="login-header-left">
@@ -60,7 +60,7 @@
                 <input class="login-input-fields input-password-icon" type="password" id="signup-password"
                     placeholder="Password" required>
                 <div class="login-btn-container">
-                    <button class="dark-btn">Sign up</button>
+                    <button id="register-btn" class="dark-btn">Sign up</button>
                 </div>
             </form>
         </div>

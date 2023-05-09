@@ -1,8 +1,11 @@
-let users = [{
-    'name': 'Testuser',
-    'email': 'test@test.de',
-    'password': 'test123'
-}];
+async function init() {
+    loadUsers();
+}
+
+
+async function loadUsers() {
+    users = JSON.parse(await getItem('users'));
+}
 
 // Login 
 function login() {
@@ -31,13 +34,20 @@ function errorMessage() {
 }
 
 // Register User
-function newUser() {
+async function newUser() {
     let name = document.getElementById('signup-name');
     let email = document.getElementById('signup-email');
     let password = document.getElementById('signup-password');
+
     users.push({name: name.value, email: email.value, password: password.value});
+
+    await setItem('users', JSON.stringify(users));
     closeSignUpForm();
     successMessage();
+
+    name.value = '';
+    email.value = '';
+    password.value = '';
 }
 
 // shows message if registration was succesfull
@@ -81,3 +91,11 @@ function closeForgotPasswordForm() {
 function resetPassword() {
     alert('Under construction');
 }
+
+// optional: delete users from backend filtered by email
+async function deleteUser(email) {
+    let storedUsers = await getItem('users');
+    let users = JSON.parse(storedUsers);
+    let filteredUsers = users.filter((user) => user.email !== email);
+    await setItem('users', JSON.stringify(filteredUsers));
+    }

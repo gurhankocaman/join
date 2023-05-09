@@ -1,3 +1,6 @@
+// global arrays
+let users = [];
+
 const STORAGE_TOKEN = 'A8GJT5S6UBP8EPYL0725HTO6OYCZCCP07A7XDAEY';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
