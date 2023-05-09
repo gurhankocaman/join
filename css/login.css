@@ -109,14 +109,15 @@
 }
 
 .remember-me-container,
-.login-btn-container {
+.login-btn-container,
+.feedback-container {
     display: flex;
     justify-content: space-around;
     margin-bottom: 29px;
 }
 
 /* Reset Password */
-.reset-password-container {
+.forgot-password-container {
     width: 826px;
     display: flex;
     flex-direction: column;
@@ -156,8 +157,9 @@
     }
 
     .login-arrow-back {
-        left: 4px;
-        top: 5px;
+        width: 28px;
+        left: 16px;
+        top: 16px;
     }
 
     .login-border-bottom {
@@ -197,7 +199,7 @@
         font-size: 40px;
     }
 
-    .reset-password-container {
+    .forgot-password-container {
         width: 372px;
     }
 
@@ -277,6 +279,7 @@
         100% {
             opacity: 0;
             display: none;
+            z-index: 0;
         }
     }
 
