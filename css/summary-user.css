@@ -200,16 +200,22 @@
 }
 
 @media (max-width: 1000px) {
+    .main-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: 152px 16px 96px 16px;
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 700px) {
     body {
         font-size: 14px;
     }
 
     h1 {
         font-size: 47px;
-    }
-
-    .main-container {
-        margin-top: 152px;
     }
 
     .content {
@@ -263,6 +269,10 @@
         font-size: 16px;
     }
 
+    .content-first-row, .content-third-row {
+        gap: 16px;
+    }
+
     .task-todo-container,
     .task-done-container {
         width: 177px;
@@ -280,5 +290,12 @@
     .todo-img img,
     .done-img img {
         width: 22px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .content-left {
+        width: 340px;
     }
 }
