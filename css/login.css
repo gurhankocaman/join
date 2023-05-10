@@ -223,6 +223,22 @@
     }
 }
 
+@media (max-height: 800px) {
+    .login-input-fields,
+    .feedback-container,
+    .remember-me-container {
+        margin-bottom: 16px;
+    }
+
+    .login-btn-container {
+        flex-direction: row;
+    }
+
+    .login-header-right {
+        bottom: 24px;
+    }
+}
+
 /* Start Animation */
 .background-cover {
     position: fixed;
@@ -316,6 +332,7 @@
             top: 0;
             left: 0;
             transform: translate(0, 0) scale(0.64);
+            z-index: 0;
         }
     }
 }
