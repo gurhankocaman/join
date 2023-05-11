@@ -38,7 +38,7 @@
                         <div class="d-none" id="newCategory">
                             <input id="customCategory" type="text" placeholder="new Category">
                             <div>
-                                <img src="../img/crossx.svg">
+                                <img src="../assets/img/drop-down-arrow.png">
                             </div>
                         </div>
                         
@@ -57,16 +57,14 @@
                             </div>
                         </div>
                         <h4>Assigned to</h4>
-                        <div class="dropdown">
-                            <button type="button" class="dropbtn">
-                                <span id="dropbtnAssigned">choose Contact</span>
-                                
-                                <input class="dropdownInput"
-                                    id="dropdownInputAssigned">
-                                <img src=".."></button>
-                            <div id="myAssignedDropdownATP" class="dropdown-content d-none">
-                            </div>
-                        </div>
+
+                        <select name="" id="chooseContact" class="chooseContact">
+                        <option selected disabled>Choose Contact</option>
+                        <option value="contact1">Contact 1</option>
+                        <option value="contact2">Contact 2</option>
+                        <option value="contact3">Contact 3</option>
+                        </select>
+
                         <div id="assignedAddTask" style="display: flex; margin-top: 15px;"></div>
                     </div>
                 </div>

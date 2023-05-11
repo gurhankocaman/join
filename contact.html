@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <script src="./js/script.js"></script>
+    <script src="./js/contact.js"></script>
+    <link rel="icon" type="image/x-icon" href="../index/assets/img/join_logo.svg">
+    <link rel="stylesheet" href="./css/header-side.css">
+    <link rel="stylesheet" href="./css/contact.css">
+    <link rel="stylesheet" href="./css/contactResponsive.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+</head>
+
+<body onload="init()">
+    <div w3-include-html="assets/templates/header.html"></div>
+    <div w3-include-html="assets/templates/nav.html"></div>
+
+    <div class="contactBody">
+
+        <div id="contactList" class="contactList"></div>
+        <div id="contact" class="contactMenu"></div>
+        <div id="popUpContainer" class="popUpContainer d-none"></div>
+        <div id="overlayAddContact" class="overlayAddContact"></div>
+        <div id="contactRightSide" class="contactRightSide"></div>
+        <div id="overlayEditContact" class="overlayEditContact"></div>
+        <button onclick="addNewContact()" id="newContact" class="newContact buttonGlobal1">
+            <div class="textNewContact">New Contact</div>
+            <img src="/img/Capa 1add.png" class="iconAdd">
+        </button>
+    </div>
+    
+    <div id="newContactPopUp">
+
+    </div>
+</body>
+
+</html>
