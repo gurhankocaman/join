@@ -1,18 +1,30 @@
-let currentUser = [];
-
 function initSummary() {
     init(); // Sidebar and Header
+    currentUser();
     greetUser();
     getTime();
-    
+
 };
 
+
 function greetUser() {
-    let content = document.getElementById('user-greetings');
-    content.innerHTML = '';
-    content.innerHTML += getTime();
-    console.log(currentUser);
+    let username = document.getElementById('user-name');
+    username.innerHTML = '';
+    username.innerHTML += currentUser();
+    let message = document.getElementById('user-greetings');
+    message.innerHTML = '';
+    message.innerHTML += getTime();
+   
+    
 }
+
+
+function currentUser() {
+    let params = new URLSearchParams(window.location.search);
+    let username = params.get('username');
+    return username;
+}
+
 
 function getTime() {
     const time = new Date();

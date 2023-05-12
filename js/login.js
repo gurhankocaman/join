@@ -1,7 +1,6 @@
-async function init() {
+async function initLogin() {
     loadUsers();
 }
-
 
 async function loadUsers() {
     users = JSON.parse(await getItem('users'));
@@ -15,8 +14,11 @@ function login() {
     let user = users.find(currentUser => currentUser.email == email.value && currentUser.password == password.value);
 
     if (user) {
-        console.log(user);
-        window.location.href = ('summary-user.html');
+        // commit username as query parameter and redirect to next page
+        let username = user['name'];
+        let url = 'summary-user.html?username=' + username;
+        console.log(url);
+        window.location.href = url;
         
     } else {
         errorMessage();
