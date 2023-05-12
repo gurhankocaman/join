@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="css/header-side.css">
     <link rel="stylesheet" href="/css/summary-user.css">
+    <script src="js/storage.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/summary-user.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="initSummary()">
 
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
@@ -91,7 +93,7 @@
 
                 <!-- Main Right -->
                 <div class="content-right">
-                    <span class="user-greetings">Good morning,</span>
+                    <span id="user-greetings" class="user-greetings">Hello,</span>
                     <span class="user-name">User</span>
                 </div>
             </div>

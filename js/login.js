@@ -15,7 +15,9 @@ function login() {
     let user = users.find(currentUser => currentUser.email == email.value && currentUser.password == password.value);
 
     if (user) {
+        console.log(user);
         window.location.href = ('summary-user.html');
+        
     } else {
         errorMessage();
     }
