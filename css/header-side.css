@@ -1,15 +1,19 @@
-/* body {
+:root {
+    --nav-width: 232px;
+    --header-height: 89px;
+}
+
+body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 21px;
     color: #000000;
-} */
+}
 
 
-/* header and nav start */
+/* header start */
 
-/*header css*/
 header {
     display: flex;
     flex-direction: row;
@@ -54,13 +58,48 @@ header {
     display: none;
 }
 
-/*nav css*/
+@media(max-width:1200px) {
+     :root {
+        --nav-width: 0;
+    }
+}
+
+@media(max-width: 1000px) {
+    .header-help-icon {
+        display: none;
+    }
+
+    .header-logo img {
+        display: block;
+    }
+
+    .headline {
+        display: none;
+    }
+    .header-logo {
+        display: block;
+    }
+    header {
+        padding: 0 25px;
+        height: 80px;
+    }
+     :root {
+        --header-height: 0;
+    }
+}
+
+
+/* header end */
+
+
+/* nav start */
+
 nav {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 66px 0px;
-    gap: 100px;
+    gap: 103px;
     position: fixed;
     width: 232px;
     left: 0px;
@@ -92,13 +131,13 @@ nav {
     white-space: nowrap;
 }
 
+.nav-main:hover {
+    background-color: #091931;
+}
+
 .nav-content {
     display: flex;
     align-items: center;
-}
-
-.nav-main:hover {
-    background-color: #091931;  
 }
 
 .nav-icon-container {
@@ -120,34 +159,36 @@ nav {
 }
 
 .legal-notice:hover {
-    background-color: #091931;   
+    background-color: #091931;
 }
 
-
-/*header responsive*/
-@media(max-width: 1000px) {
-   .header-help-icon {
-       display: none;
-   }
-
-   .header-logo img {
-       display: block;
-   }
-
-   .header-headline {
-       display: none;
-   }
-   .header-logo {
-       display: block;
-   }
-   header {
-       padding: 0 25px;
-       height: 80px;
-   }
-   
+.d-none {
+    display: none !important;
 }
 
-/*nav responsive*/
+.logout-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 90px;
+    right: 32px;
+    width: 130px;
+    height: 36px;
+    padding: 10px;
+    background: #2A3647;
+    border-radius: 20px 0px 20px 20px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logout-menu span {
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    cursor: pointer;
+}
+
 @media(max-width: 1000px) {
     nav {
         top: unset;
@@ -203,3 +244,5 @@ nav {
         justify-content: center;
     }
 }
+
+/* nav end */
