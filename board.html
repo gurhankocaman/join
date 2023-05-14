@@ -10,18 +10,19 @@
     <link rel="stylesheet" href="/css/board.css">
     <script src="js/storage.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/board.js"></script>
+    
 </head>
-<body onload="initSummary()">
+<body onload="init()">
 
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
 
     <div class="board-section" id="board-section" onclick="closeMenu()">
         <div class="board-header">
-            <div class="headline-mobile d-none">Kanban Project Management Tool</div>
+            
             <div class="board-add-task">
                 <h2>Board</h2>
+                <div class="headline-mobile d-none">Kanban Project Management Tool</div>              
                 <img onclick="openAddTask()" class="add-task-btn-mobile hide-content" src="assets/img/add_task_mob.svg" alt="">
             </div>
             <div class="search-container">
