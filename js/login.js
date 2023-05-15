@@ -14,18 +14,21 @@ function login() {
     let user = users.find(currentUser => currentUser.email == email.value && currentUser.password == password.value);
 
     if (user) {
-        // commit username as query parameter and redirect to next page
-        let username = user['name'];
-        let url = 'summary-user.html?username=' + username;
-        console.log(url);
-        window.location.href = url;
-        
+        // save user in local storage and redirect to next page
+        let userAsText = JSON.stringify(user);
+        localStorage.setItem('currentUser', userAsText);
+        window.location.href = 'summary-user.html';
+
     } else {
         errorMessage();
     }
 
     email.value = '';
     password.value = '';
+}
+
+function guestLogin() {
+    window.location.href = 'summary-user.html';
 }
 
 // shows message if email or password is wrong
@@ -43,7 +46,7 @@ async function newUser() {
     let email = document.getElementById('signup-email');
     let password = document.getElementById('signup-password');
 
-    users.push({name: name.value, email: email.value, password: password.value});
+    users.push({ name: name.value, email: email.value, password: password.value });
 
     await setItem('users', JSON.stringify(users));
     closeSignUpForm();
@@ -93,7 +96,7 @@ function closeForgotPasswordForm() {
 
 
 function resetPassword() {
-    alert('Under construction');
+    alert('No function yet');
 }
 
 // optional: delete users from backend filtered by email
@@ -102,4 +105,4 @@ async function deleteUser(email) {
     let users = JSON.parse(storedUsers);
     let filteredUsers = users.filter((user) => user.email !== email);
     await setItem('users', JSON.stringify(filteredUsers));
-    }
+}

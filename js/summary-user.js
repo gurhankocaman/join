@@ -1,31 +1,36 @@
 function initSummary() {
     init(); // Sidebar and Header
-    currentUser();
-    greetUser();
+    getUsername();
     getTime();
-
+    greetUser();
 };
 
 
 function greetUser() {
-    let username = document.getElementById('user-name');
-    username.innerHTML = '';
-    username.innerHTML += currentUser();
-    let message = document.getElementById('user-greetings');
-    message.innerHTML = '';
-    message.innerHTML += getTime();
-   
-    
+    document.getElementById('user-greetings').innerHTML = '';
+    document.getElementById('user-name').innerHTML = '';
+
+    if (getUsername()) {
+        document.getElementById('user-greetings').innerHTML += `<div>${getTime()}</div>`;
+        document.getElementById('user-name').innerHTML += `<div>${getUsername()}</div>`;
+    } else {
+        document.getElementById('user-greetings').innerHTML += `<div>${getTime().slice(0, -1)}</div>`;
+    }
 }
 
+// load current user from local storage
+function getUsername() {
+    let userAsText = localStorage.getItem('currentUser');
 
-function currentUser() {
-    let params = new URLSearchParams(window.location.search);
-    let username = params.get('username');
-    return username;
+    if (userAsText) {
+        user = JSON.parse(userAsText);
+        username = user['name'];
+        return username;
+    }
+
 }
 
-
+// get current time for greetings message
 function getTime() {
     const time = new Date();
     let userGreetings;
