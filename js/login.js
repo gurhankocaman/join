@@ -28,6 +28,7 @@ function login() {
 }
 
 function guestLogin() {
+    localStorage.setItem('currentUser', '');
     window.location.href = 'summary-user.html';
 }
 
