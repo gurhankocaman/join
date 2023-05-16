@@ -1,5 +1,6 @@
 async function initLogin() {
     loadUsers();
+    rememberUser();
 }
 
 async function loadUsers() {
@@ -10,13 +11,22 @@ async function loadUsers() {
 function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
-    // filters Array users for email and password match
+    // check radio button, when checked returns true
+    let rememberUser = document.getElementById('remember-me-checkbox').checked;
+
+    // filters array users for email and password match
     let user = users.find(currentUser => currentUser.email == email.value && currentUser.password == password.value);
 
     if (user) {
-        // save user in local storage and redirect to next page
+        // save user in local storage
         let userAsText = JSON.stringify(user);
         localStorage.setItem('currentUser', userAsText);
+
+        // save remember me button status in local storage
+        let rememberUserAsText = JSON.stringify(rememberUser);
+        localStorage.setItem('rememberUser', rememberUserAsText);
+
+        //redirect to next page
         window.location.href = 'summary-user.html';
 
     } else {
@@ -25,6 +35,24 @@ function login() {
 
     email.value = '';
     password.value = '';
+}
+
+// function that checks if remember button was activated while logging in
+async function rememberUser() {
+    let rememberUserAsText = localStorage.getItem('rememberUser');
+    remember = JSON.parse(rememberUserAsText);
+
+    // get current user
+    let userAsText = localStorage.getItem('currentUser');
+    if (userAsText) {
+        user = JSON.parse(userAsText);
+        username = user['email'];
+    }
+
+    // get login status and return email-address
+    if (remember === true) {
+        document.getElementById('email').value = `${username}`;
+    }
 }
 
 function guestLogin() {
@@ -99,6 +127,7 @@ function closeForgotPasswordForm() {
 function resetPassword() {
     alert('No function yet');
 }
+
 
 // optional: delete users from backend filtered by email
 async function deleteUser(email) {
