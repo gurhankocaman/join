@@ -47,11 +47,13 @@ async function rememberUser() {
     if (userAsText) {
         user = JSON.parse(userAsText);
         username = user['email'];
+        password = user['password'];
     }
 
     // get login status and return email-address
     if (remember === true) {
         document.getElementById('email').value = `${username}`;
+        document.getElementById('password').value = `${password}`;
     }
 }
 
@@ -121,11 +123,14 @@ function closeForgotPasswordForm() {
     document.getElementById('forgot-password-container').classList.add('d-none');
     document.getElementById('login-container').classList.remove('d-none');
     document.getElementById('login-header-right').classList.remove('d-none');
+    document.getElementById('confirmation-msg').classList.add('d-none');
 }
 
-
 function resetPassword() {
-    alert('No function yet');
+    let email = document.getElementById('forgot-password');
+    console.log('Password reset link should be send to this email: ' + email.value);
+    email.value = '';
+    document.getElementById('confirmation-msg').classList.remove('d-none');
 }
 
 

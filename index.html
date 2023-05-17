@@ -63,6 +63,7 @@
                     <button id="register-btn" class="dark-btn">Sign up</button>
                 </div>
             </form>
+
         </div>
 
         <!-- Forgot Password-->
@@ -76,9 +77,14 @@
                 <input class="login-input-fields input-email-icon" type="email" id="forgot-password" placeholder="Email"
                     required>
                 <div class="login-btn-container">
-                    <button class="dark-btn" onclick="resetPassword()">Send me the email</button>
+                    <button class="dark-btn" onclick="resetPassword(); return false">Send me the email</button>
                 </div>
             </form>
+            <!-- Sent Message Confirmation Button -->
+            <div id="confirmation-msg" class="confirmation-msg d-none" onclick="closeForgotPasswordForm()">
+                <img src="assets/img/send-check.png">
+                <span>E-Mail reset not in use</span>
+            </div>
         </div>
 
         <!-- Reset Password -->
