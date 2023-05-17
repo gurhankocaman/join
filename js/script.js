@@ -2,6 +2,7 @@ async function init() {
     await includeHTML();
 }
 
+
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -14,4 +15,21 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
+}
+
+
+function toggleLogoutMenu() {
+    let menu = document.getElementById('logout-menu');
+    if (menu.classList.contains('d-none')) {
+        menu.classList.remove('d-none');
+    } else {
+        menu.classList.add('d-none');
+    }
+}
+
+
+function logout() {
+    localStorage.setItem('currentUser', '');
+    localStorage.setItem('rememberUser', '');
+    window.location.href = 'index.html';
 }

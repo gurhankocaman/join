@@ -6,11 +6,11 @@
     <div class="header-nav">
         <img class="add-btn-mobile d-none" src="assets/img/add_task_btn_mob.svg" alt="add-button">
         <a class="help-icon"href="help.html"><img class="header-help-icon" src="/assets/img/Help-Icon.png"></a>
-        <img class="header-user-img" src="/assets/img/User-Guest-Icon.png">
+        <img onclick="toggleLogoutMenu()" class="header-user-img" src="/assets/img/User-Guest-Icon.png">
     </div> 
-    <div class="logout-menu d-none">
+    <div id="logout-menu" class="logout-menu d-none">
         <a href="help.html"><span class="hide-content">Help</span></a>
         <a href="legal-notice.html"><span href="legal-notice.html" class="hide-content">Legal notice</span></a>
-        <span>Log out</span>
+        <span onclick="logout()">Log out</span>
     </div>
 </header>
