@@ -24,7 +24,34 @@ async function initAddTaskPopup() {
     getMinDate();
 }
 
+/**
+ * Gets "tasklist" from the server
+ */
+async function loadTasklistForId() {
+    await downloadFromServer();
+    tempTasklist = JSON.parse(backend.getItem("tasklist")) || [];
+}
 
+/**
+ * Gets "contacts" from the server
+ */
+async function loadContacts() {
+    await downloadFromServer();
+    contactList = JSON.parse(backend.getItem("contacts")) || [];
+}
+
+/**
+ * Gets "categorys" from the server
+ */
+async function loadCategorys() {
+    await downloadFromServer();
+    categorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
+    tempCategorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
+}
+
+/**
+ * sets "taskid" as running number
+ */
 function getIdFromTasklist() {
     taskId = tempTasklist.length;
 }
