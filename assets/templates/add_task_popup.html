@@ -1,0 +1,62 @@
+<div class="background-popup" onclick="closePopup()"></div>
+<div class="add_task_popup">
+    <div class="add_task_headline">Add Task</div>
+        <div class="add_task_box">
+            <div class="add_task_box_left">
+                <label class="title_label" for="title_input">Title</label>
+                <input class="title_input" type="text" placeholder="Enter a Title" id="title_input" required>
+                <div class="title_alert d-none" id="title_alert">Please enter a title!</div>
+                <label class="description_label" for="description_input">Description</label>
+                <textarea class="description_input" id="description_input" required></textarea>
+                <div class="description_alert d-none" id="description_alert">Please enter a description!</div>
+                <p class="category_label">Category</p>
+                <div class="category_selection" id="category_selection">
+                    <div class="selection" onclick="openCategorySelection()">
+                        <span>Select task category</span>
+                        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+                    </div>
+                </div>
+                <div class="category_colors" id="category_colors"></div>
+                <div class="category_alert d-none" id="category_alert">Please select a category!</div>
+                <div id="mistake-category-fields" class="mistake-category-fields"></div>
+                <p class="assign_label">Assigned to</p>
+                <div class="assign_selection" id="assign-container">
+                    <div class="selection" onclick="openAssignToSelection()">
+                        <span class="flex">Select contacts to assign</span>
+                        <img src="./assets/img/vector-2.png" alt="klick">
+                    </div>
+                </div>
+                <div class="assign_alert d-none" id="assign_alert">Please assign a person to the task!</div>
+                <div class="assignedpersons" id="assignedpersons"></div>
+            </div>
+            <div class="add_task_box_right">
+                <label class="duedate_label" for="duedate">Due date</label>
+                <input class="duedate_input" type="date" id="duedate" required placeholder="dd/mm/yyyy">
+                <div class="duedate_alert d-none" id="duedate_alert">Please select a due date!</div>
+                <div class="prio">Prio
+                    <div class="prioselect">
+                        <div class="prio-urgent" id="urgent" onclick="selectPriority('urgent')">Urgent <img
+                                src="assets/img/urgent.svg"></div>
+                        <div class="prio-medium" id="medium" onclick="selectPriority('medium')">Medium <img
+                                src="assets/img/medium.svg"></div>
+                        <div class="prio-low" id="low" onclick="selectPriority('low')">Low <img
+                                src="assets/img/low.svg"></div>
+                    </div>
+                    <div class="prio_alert d-none" id="prio_alert">Please select a priority!</div>
+                </div>
+                <p class="subtask_label">Subtasks</p>
+                <div id="subtaskinput" class="subtask_inputarea">
+                    <div onclick="addInput()" class="subtask_input">
+                        <span class="subtaskplaceholder">Add new subtask</span>
+                        <img src="./assets/img/plus-subtask.png" alt="Add" id="subtask-plus">
+                    </div>
+                </div>
+                <div class="addedsubtasks" id="subtasks"></div>
+            </div>
+        </div>
+        <div class="exit" onclick="closePopup()">x</div>
+        <div class="cancel" onclick="closePopup()">Cancel <img src="./assets/img/x-lightblue.png" class="cancelimg">
+        </div>
+        <div class="create_task" onclick="createTask()">Create Task <img src="./assets/img/checkmark.png"
+                class="checkmark"></div>
+</div>
