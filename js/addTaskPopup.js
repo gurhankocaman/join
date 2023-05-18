@@ -24,37 +24,7 @@ async function initAddTaskPopup() {
     getMinDate();
 }
 
-/**
- * Gets "tasklist" from the server
- */
-async function loadTasklistForId() {
-    setURL("https://maximilian-leyh.developerakademie.net/smallest_backend_ever");
-    await downloadFromServer();
-    tempTasklist = JSON.parse(backend.getItem("tasklist")) || [];
-}
 
-/**
- * Gets "contacts" from the server
- */
-async function loadContacts() {
-    setURL("https://maximilian-leyh.developerakademie.net/smallest_backend_ever");
-    await downloadFromServer();
-    contactList = JSON.parse(backend.getItem("contacts")) || [];
-}
-
-/**
- * Gets "categorys" from the server
- */
-async function loadCategorys() {
-    setURL("https://maximilian-leyh.developerakademie.net/smallest_backend_ever");
-    await downloadFromServer();
-    categorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
-    tempCategorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
-}
-
-/**
- * sets "taskid" as running number
- */
 function getIdFromTasklist() {
     taskId = tempTasklist.length;
 }
