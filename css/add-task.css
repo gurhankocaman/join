@@ -496,6 +496,12 @@ textarea {
     display: none;
 }
 
+ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
 @media(max-width: 1000px) {
     #tasks {
         display: none;

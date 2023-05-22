@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/header-side.css">
     <link rel="stylesheet" href="/css/summary-user.css">
     <script src="js/script.js"></script>
+    <script src="js/add-task.js"></script>
+    <script src="js/login.js"></script>
     <link rel="stylesheet" href="css/add-task.css">
     
     
@@ -35,12 +37,12 @@
                         <textarea required id="descriptionField" class="textAreaStyle1"
                             placeholder="enter a description"></textarea>
                         <h4>Category</h4>
-                        <div class="d-none" id="newCategory">
-                            <input id="customCategory" type="text" placeholder="new Category">
-                            <div>
-                                <img src="../assets/img/drop-down-arrow.png">
-                            </div>
-                        </div>
+                        <select name="" id="chooseCategory" class="chooseContact">
+                            <option selected disabled>Choose Contact</option>
+                            <option value="category1">Category 1</option>
+                            <option value="category2">Category 2</option>
+                            <option value="category3">Category 3</option>
+                            </select>
                         
                         <div class="d-none" id="categoryColors">
                             <div class="categoryColor" id="1" style="background-color: #8aa4ff;">
@@ -78,25 +80,33 @@
                         <h4>Prio</h4>
                         <div id="prioField" class="prio">
                             <div id="Urgent-button" class="button1">Urgent <img
-                                    id="Urgent" src="../img/prioUrgent.svg"></div>
+                                    id="Urgent" src="../assets/img/Capa 2.png"></div>
 
                             <div id="Medium-button" class="button1">Medium<input
                                     class="dropdownInput" id="inputPrio"><img
-                                    id="Medium" src="../img/prioMedium.svg"></div>
+                                    id="Medium" src="../assets/img/Capa 2 (1).png"></div>
                             <div id="Low-button" class="button1">Low <img id="Low"
-                                    src="../img/prioLow.svg"></div>
+                                    src="../assets/img/Capa 2 (2).png"></div>
                         </div>
                         <h4>Subtasks</h4>
                         <div id="subtaskField">
                             <div>
                                 <input id="subtaskInput" type="text" placeholder="new Subtask">
-                                <img src="../img/tick.svg">
+                                <img onclick="addSubtask()" src="../assets/img/plus.png">
                             </div>
+                            
+                        </div>
+                        <div class="subtaskList d-none">
+                                <ul>
+                                    <li><input type="checkbox">test</li>
+                                    <li><input type="checkbox">test</li>
+                                    <li><input type="checkbox">test</li>
+                                </ul>
                         </div>
                     </div>
                 </div>
                 <div class="finishButtonsATP">
-                    <button class="buttonGlobal1" id="createTaskButton" type="submit">Create Task</button>
+                    <button onclick="createTask()" class="buttonGlobal1" id="createTaskButton" type="submit">Create Task</button>
                 </div>
             </div>
         </div>
