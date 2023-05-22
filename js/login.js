@@ -98,18 +98,13 @@ async function createTask() {
     let priority = document.getElementById('?????');
     let subtask = document.getElementById('??????');
 
-    tasks.push({ title: title.value, description: description.value, category: category.value, contact: contact.value, date: date.value, priority: priority.value, subtask: subtask.value });
+    tasks.push({ title: title.value});
 
     await setItem('tasks', JSON.stringify(tasks));
     
 
     title.value = '';
-    description.value = '';
-    category.value = '';
-    contact.value = '';
-    date.value = '';
-    priority.value = '';
-    subtask.value = '';
+    
 }
 
 // shows message if registration was succesfull
