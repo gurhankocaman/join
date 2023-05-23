@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="css/header-side.css">
     <link rel="stylesheet" href="/css/summary-user.css">
     <script src="js/script.js"></script>
-    <script src="js/add-task.js"></script>
-    <script src="js/login.js"></script>
     <script src="js/storage.js"></script>
+    <script src="js/add-task.js"></script>
+    
     <link rel="stylesheet" href="css/add-task.css">
     
     
@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
-<body onload="init()">
+<body onload="init(), loadTasks()">
     
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="finishButtonsATP">
+                <div class="finishButtonsATP" id="addTaskBTN">
                     <button onclick="createTask()" class="buttonGlobal1" id="createTaskButton" type="submit">Create Task</button>
                 </div>
             </div>

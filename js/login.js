@@ -88,24 +88,7 @@ async function newUser() {
     password.value = '';
 }
 
-// Create Task
-async function createTask() {
-    let title = document.getElementById('titleField');
-    let description = document.getElementById('descriptionField');
-    let category = document.getElementById('chooseCategory');
-    let contact = document.getElementById('chooseContact');
-    let date = document.getElementById('dueDateField');
-    let priority = document.getElementById('?????');
-    let subtask = document.getElementById('??????');
 
-    tasks.push({ title: title.value});
-
-    await setItem('tasks', JSON.stringify(tasks));
-    
-
-    title.value = '';
-    
-}
 
 // shows message if registration was succesfull
 function successMessage() {
