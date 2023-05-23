@@ -40,22 +40,26 @@ function login() {
 // function that checks if remember button was activated while logging in
 async function rememberUser() {
     let rememberUserAsText = localStorage.getItem('rememberUser');
-    remember = JSON.parse(rememberUserAsText);
-
-    // get current user
-    let userAsText = localStorage.getItem('currentUser');
-    if (userAsText) {
+    
+    // checks if remember user has a value
+    if (rememberUserAsText) {
+      remember = JSON.parse(rememberUserAsText);
+  
+      // get current user
+      let userAsText = localStorage.getItem('currentUser');
+      if (userAsText) {
         user = JSON.parse(userAsText);
         username = user['email'];
         password = user['password'];
-    }
-
-    // get login status and return email-address
-    if (remember === true) {
+      }
+  
+      // get login status and return email-address
+      if (remember === true) {
         document.getElementById('email').value = `${username}`;
         document.getElementById('password').value = `${password}`;
+      }
     }
-}
+  }
 
 function guestLogin() {
     localStorage.setItem('currentUser', '');
