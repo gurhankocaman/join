@@ -18,6 +18,10 @@
     font-weight: 400;
 }
 
+.danger-text {
+    color: red;
+}
+
 .signup-btn {
     height: 51px;
     padding: 0px 16px;
