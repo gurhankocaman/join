@@ -26,7 +26,7 @@
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
 
-    <form>
+    <form onsubmit="createTask(); return false;">
         <div id="addTaskPageBody" class="addTaskPage">
             <h1 class="headline">Add Task</h1>
             <div class="addTaskLR">
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="finishButtonsATP" id="addTaskBTN">
-                    <button onclick="createTask()" class="buttonGlobal1" id="createTaskButton" type="submit">Create Task</button>
+                    <button class="buttonGlobal1" id="createTaskButton" type="submit">Create Task</button>
                 </div>
             </div>
         </div>
