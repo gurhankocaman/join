@@ -5,36 +5,93 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacts</title>
-    <script src="./js/script.js"></script>
-    <script src="./js/contact.js"></script>
-    <link rel="icon" type="image/x-icon" href="../index/assets/img/join_logo.svg">
-    <link rel="stylesheet" href="./css/header-side.css">
-    <link rel="stylesheet" href="./css/contact.css">
-    <link rel="stylesheet" href="./css/contactResponsive.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link rel="icon" type="image/x-icon" href="assets/img/join_logo.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/header-side.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <script src="js/storage.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/login.js"></script>
+    <script src="assets/templates/contact-template.js"></script>
+    <title>Contact | Join</title>
 </head>
 
-<body onload="init()">
-    <div w3-include-html="assets/templates/header.htm"></div>
-    <div w3-include-html="assets/templates/nav.htm"></div>
-    
-    <div class="contactField">
-        <div class="contactList">
-            
-        </div>
-        <div class="contactDetails">
-            <div class="contactHeader">
-                <h1>Contacts</h1>
-                <span>Better With a Team</span>
-            </div>
-            
-        </div>
+<body onload="initContact()">
+    <!-- Header + Nav Templates> -->
+    <div w3-include-html="assets/templates/header.html"></div>
+    <div w3-include-html="assets/templates/nav.html"></div>
+    <!-- Main Content -->
+    <div class="overflow">
+        <main class="contacts-main-container">
+            <!-- Content - left side -->
+            <section class="contact-list-container" id="hide-contacts">
+                <div>
+                    <div id="contactList"></div>
+                </div>
+            </section>
+            <!-- Content - right side -->
+            <section id="contactOverlay" class="contact-selection-container contact-selection-overlay edit-contact">
+                <div class="contact-header-container">
+                    <h1 class="contact-header">Contacts</h1>
+                    <div class="contact-header-seperator"></div>
+                    <h2 class="contact-header-slogan">Better with a team</h2>
+                </div>
+                <div id="contactSelection"></div>
+                <div id="formContainer"></div>
+            </section>
+            <button onclick="showContactForm()" title="add contact" class="contact-add-btn contact-btn-position"
+                id="contact-add-btn">
+                <p>New Contact</p>
+                <img class="contact-btn-icon" src="./assets/img/add_contact.svg" alt="#">
+            </button>
+        </main>
     </div>
 
-    </div>
+        <div id="contactForm" class="contact-form-overlay contact-form-overlay-position edit-contact d-none">
+            <div class="contact-form-left">
+                <img class="contact-form-logo" src="./assets/img/Logo-Join.png" alt="#">
+                <span class="contact-form-heading">Add Contact</span>
+                <p class="contact-form-slogan">Tasks are better with a team!</p>
+                <img class="contact-form-underline" src="assets/img/underline.svg" alt="">
+            </div>
+            <div class="contact-form-right">
+                <img class="contact-form-user-icon" src="./assets/img/contact-user-icon.svg">
+                <div class="contact-input-container margin-top">
+                    <div class="icon-top-right" title="close form">
+                        <img class="contact-cancel-icon" src="./assets/img/contact-cancel-icon.svg" alt="#"  onclick="closeAddContactForm()" >
+                        <img class="contact-cancel-icon-mobile hide-content" src="assets/img/x_ixon.png" alt="" onclick="closeAddContactForm()">
+                    </div>
+                    <form onsubmit="addContacts(); return false;">
+                        <div class="form-group">
+                            <input class="contact-input-field input-name-img" type="text" placeholder="First Name"
+                                id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="contact-input-field input-name-img" type="text" placeholder="Last Name"
+                                id="lastName" name="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="contact-input-field input-email-img" type="email" placeholder="Email"
+                                id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="contact-input-field input-phone-img" type="tel" placeholder="Phone" id="phone"
+                                name="phone" pattern="[+0-9\s]+" required>
+                        </div>
+                        <div class="form-group color-picker">
+                            <input class="p-none" type="color" id="color" name="color" value="#000000" required>
+                        </div>
+                        <div class="form-group btn-centered">
+                            <button type="submit" class="contact-add-btn">
+                                <p>Create Contact</p>
+                                <img class="contact-create-icon" src="./assets/img/contact-create-icon.svg" alt="#">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 </body>
 
 </html>
