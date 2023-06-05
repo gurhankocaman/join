@@ -9,8 +9,8 @@ let previouslySelectedContact = null;
  */
 async function initContact() {
     await includeHTML();
-    downloadFromServer();
-    contacts = getItem('contacts') || [];
+    const serverContacts = await downloadFromServer();
+    contacts = serverContacts || [];
     loadContacts();
 }
 

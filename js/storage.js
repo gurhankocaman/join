@@ -18,3 +18,8 @@ async function getItem(key) {
   return fetch(url).then(res => res.json()).then(res => res.data.value);
 }
 
+async function downloadFromServer() {
+  const getContacts = JSON.parse(await getItem('contacts'));
+  console.log(getContacts);
+  return getContacts;
+}
