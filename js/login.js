@@ -1,32 +1,42 @@
+let users = [];
+
+/**
+ * Initializes the login process.
+ * Loads users and remembers the user if applicable.
+ * @returns {Promise<void>}
+ */
 async function initLogin() {
     loadUsers();
     rememberUser();
 }
 
+/**
+ * Loads users from backend.
+ * @returns {Promise<void>}
+ */
 async function loadUsers() {
     users = JSON.parse(await getItem('users'));
 }
 
-// Login 
+/**
+ * Performs the login process.
+ */
 function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
-    // check radio button, when checked returns true
+    // Check radio button. If the button is checked, true is returned.
     let rememberUser = document.getElementById('remember-me-checkbox').checked;
-
-    // filters array users for email and password match
+    // Filters array users for email and password match.
     let user = users.find(currentUser => currentUser.email == email.value && currentUser.password == password.value);
 
     if (user) {
-        // save user in local storage
+        // Save user in local storage.
         let userAsText = JSON.stringify(user);
         localStorage.setItem('currentUser', userAsText);
-
-        // save remember me button status in local storage
+        // Save remember me button status in local storage.
         let rememberUserAsText = JSON.stringify(rememberUser);
         localStorage.setItem('rememberUser', rememberUserAsText);
-
-        //redirect to next page
+        // Redirect to next page.
         window.location.href = 'summary-user.html';
 
     } else {
@@ -37,23 +47,23 @@ function login() {
     password.value = '';
 }
 
-// function that checks if remember button was activated while logging in
+/**
+ * Checks if the remember user feature is enabled and sets the email and password accordingly.
+ * @returns {Promise<void>}
+ */
 async function rememberUser() {
     let rememberUserAsText = localStorage.getItem('rememberUser');
-
-    // checks if remember user has a value
+    // Checks if remember user has a value.
     if (rememberUserAsText) {
         remember = JSON.parse(rememberUserAsText);
-
-        // get current user
+        // Get current user.
         let userAsText = localStorage.getItem('currentUser');
         if (userAsText) {
             user = JSON.parse(userAsText);
             username = user['email'];
             password = user['password'];
         }
-
-        // get login status and return email-address
+        // Get login status and return email-address.
         if (remember === true) {
             document.getElementById('email').value = `${username}`;
             document.getElementById('password').value = `${password}`;
@@ -61,7 +71,9 @@ async function rememberUser() {
     }
 }
 
-// shows message if email or password is wrong
+/**
+ * Displays an error message for an incorrect login attempt.
+ */
 function loginError() {
     let content = document.getElementById('feedback-container');
     content.innerHTML = '';
@@ -70,12 +82,17 @@ function loginError() {
     `;
 }
 
+/**
+ * Performs a guest login.
+ */
 function guestLogin() {
     localStorage.setItem('currentUser', '');
     window.location.href = 'summary-user.html';
 }
 
-// Register User
+/**
+ * Registers a new user.
+ */
 function newUser() {
     let name = document.getElementById('signup-name').value;
     let email = document.getElementById('signup-email').value;
@@ -83,7 +100,12 @@ function newUser() {
     matchEmail(name, email, password);
 }
 
-// Checks if Email is already in use
+/**
+ * Checks if the email is already in use before registering a new user.
+ * @param {string} name - The name of the user.
+ * @param {string} email - The email of the user.
+ * @param {string} password - The password of the user.
+ */
 function matchEmail(name, email, password) {
     let found = false;
 
@@ -91,7 +113,7 @@ function matchEmail(name, email, password) {
         const newEmail = users[i]['email'];
         if (newEmail === email) {
             found = true;
-            break; // stops function if match is found
+            break; // Stops function if match is found.
         }
     }
 
@@ -103,6 +125,13 @@ function matchEmail(name, email, password) {
     }
 }
 
+/**
+ * Registers a new user and stores their information.
+ * @param {string} name - The name of the user.
+ * @param {string} email - The email of the user.
+ * @param {string} password - The password of the user.
+ * @returns {Promise<void>}
+ */
 async function registerUser(name, email, password) {
     users.push({ name: name, email: email, password: password });
 
@@ -115,6 +144,9 @@ async function registerUser(name, email, password) {
     password.value = '';
 }
 
+/**
+ * Displays an error message for a registration attempt with an already registered email.
+ */
 function registerError() {
     let content = document.getElementById('feedback-container');
     content.innerHTML = '';
@@ -123,9 +155,9 @@ function registerError() {
     `;
 }
 
-
-
-// shows message if registration was succesfull
+/**
+ * Displays a success message for a successful registration.
+ */
 function registrationSuccessful() {
     let content = document.getElementById('feedback-container');
     content.innerHTML = '';
@@ -134,7 +166,9 @@ function registrationSuccessful() {
     `;
 }
 
-
+/**
+ * Opens the sign-up form.
+ */
 function openSignUpForm() {
     document.getElementById('login-container').classList.add('d-none');
     document.getElementById('login-header-right').classList.add('d-none');
@@ -142,21 +176,27 @@ function openSignUpForm() {
 
 }
 
-
+/**
+ * Closes the sign-up form.
+ */
 function closeSignUpForm() {
     document.getElementById('signup-container').classList.add('d-none');
     document.getElementById('login-container').classList.remove('d-none');
     document.getElementById('login-header-right').classList.remove('d-none');
 }
 
-// Reset Password
+/**
+ * Opens the forgot password form.
+ */
 function openForgotPasswordForm() {
     document.getElementById('login-container').classList.add('d-none');
     document.getElementById('login-header-right').classList.add('d-none');
     document.getElementById('forgot-password-container').classList.remove('d-none');
 }
 
-
+/**
+ * Closes the forgot password form.
+ */
 function closeForgotPasswordForm() {
     document.getElementById('forgot-password-container').classList.add('d-none');
     document.getElementById('login-container').classList.remove('d-none');
@@ -164,18 +204,12 @@ function closeForgotPasswordForm() {
     document.getElementById('confirmation-msg').classList.add('d-none');
 }
 
+/**
+ * Resets the password for a user.
+ */
 function resetPassword() {
     let email = document.getElementById('forgot-password');
     console.log('Password reset link should be send to this email: ' + email.value);
     email.value = '';
     document.getElementById('confirmation-msg').classList.remove('d-none');
-}
-
-
-// optional: delete users from backend filtered by email
-async function deleteUser(email) {
-    let storedUsers = await getItem('users');
-    let users = JSON.parse(storedUsers);
-    let filteredUsers = users.filter((user) => user.email !== email);
-    await setItem('users', JSON.stringify(filteredUsers));
 }
