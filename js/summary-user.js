@@ -1,36 +1,50 @@
+/**
+ * Initializes the summary by performing necessary setup tasks.
+ */
 function initSummary() {
-    init(); // Sidebar and Header
+    init(); // Initialize Sidebar and Header
     getUsername();
     getTime();
     greetUser();
 };
 
-
+/**
+ * Greets the user by displaying a personalized message.
+ * Updates the user-greetings and user-name elements in the HTML document.
+ */
 function greetUser() {
     document.getElementById('user-greetings').innerHTML = '';
     document.getElementById('user-name').innerHTML = '';
 
     if (getUsername()) {
+        // Display current time in user-greetings element
         document.getElementById('user-greetings').innerHTML += `<div>${getTime()}</div>`;
+        // Display username in user-name element
         document.getElementById('user-name').innerHTML += `<div>${getUsername()}</div>`;
     } else {
+        // Display modified time (without comma) in user-greetings element
         document.getElementById('user-greetings').innerHTML += `<div>${getTime().slice(0, -1)}</div>`;
     }
 }
 
-// load current user from local storage
+/**
+ * Retrieves the current username from local storage.
+ * @returns {string} The username of the current user.
+ */
 function getUsername() {
     let userAsText = localStorage.getItem('currentUser');
 
     if (userAsText) {
-        user = JSON.parse(userAsText);
-        username = user['name'];
+        let user = JSON.parse(userAsText);
+        let username = user['name'];
         return username;
     }
-
 }
 
-// get current time for greetings message
+/**
+ * Gets the current time and determines the appropriate greeting message based on the hour.
+ * @returns {string} The greeting message based on the current time.
+ */
 function getTime() {
     const time = new Date();
     let userGreetings;
