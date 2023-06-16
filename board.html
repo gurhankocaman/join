@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="css/font.css">
     <link rel="stylesheet" href="css/header-side.css">
     <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" href="/css/add-task-popup.css">
     <script src="js/storage.js"></script>
     <script src="js/script.js"></script>
     <script src="js/board.js"></script>
@@ -16,64 +18,164 @@
 </head>
 
 <body onload="init()">
+    <!-- Header + Nav Templates> -->
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
-    <div class="board-section" id="board-section">
-        <div class="board-header">
-            <div class="headline-mobile d-none">Kanban Project Management Tool</div>
-            <div class="board-add-task">
-                <h2>Board</h2>
-                <img onclick="openAddTask()" class="add-task-btn-mobile hide-content" src="assets/img/add_task_mob.svg" alt="">
-            </div>
-            <div class="search-container">
-                <div class="search-box"><input type="text" placeholder="Find Task" onkeyup="findTasks()" id="findTask">
-                    <div class="dividing-line"></div>
-                    <div class="search-icon"><img src="assets/img/magnifier.png" alt=""></div>
+
+    <!-- Main Content> -->
+    <main>
+        <div class="board-section">
+            <div class="board-header">
+                <div class="headline-mobile d-none">Kanban Project Management Tool</div>
+                <div class="board-add-task">
+                    <h1>Board</h1>
+                    <img onclick="openAddTask()" class="add-task-btn-mobile d-none" src="assets/img/add_task_mob.svg"
+                        alt="">
                 </div>
-                <button class="add-task" onclick="openAddTask()">Add task +</button>
+                <div class="search-container">
+                    <div class="search-box"><input type="text" placeholder="Find Task" onkeyup="findTasks()">
+                        <div class="dividing-line"></div>
+                        <div class="search-icon"><img src="assets/img/magnifier.png" alt=""></div>
+                    </div>
+                    <button class="dark-btn" onclick="openAddTask()">Add task +</button>
+                </div>
+
             </div>
 
+            <div class="board-content">
+                <div class="board-column">
+                    <div class="board-column-head">
+                        <h3>To Do</h3>
+                        <div class="add-task-column" onclick="openAddTask('to-do')">+</div>
+                    </div>
+                    <div class="drop-ground" id="to-do">
+                    </div>
+                </div>
+                <div class="board-column">
+                    <div class="board-column-head">
+                        <h3>In Progress</h3>
+                        <div class="add-task-column" onclick="openAddTask('in-progress')">+</div>
+                    </div>
+                    <div class="drop-ground" id="in-progress"></div>
+                </div>
+                <div class="board-column">
+                    <div class="board-column-head">
+                        <h3>Awaiting Feedback</h3>
+                        <div class="add-task-column" onclick="openAddTask('awaiting-feedback')">+</div>
+                    </div>
+                    <div class="drop-ground" id="awaiting-feedback"></div>
+                </div>
+                <div class="board-column">
+                    <div class="board-column-head">
+                        <h3>Done</h3>
+                        <div class="add-task-column" onclick="openAddTask('done')">+</div>
+                    </div>
+                    <div class="drop-ground" id="done"></div>
+                </div>
+            </div>
         </div>
+    </main>
 
-        <div class="board">
-            <div class="splits">
-                <div class="splits-head">
-                    <h3>To Do</h3>
-                    <div class="add_plus" onclick="openAddTask('to_do')">+</div>
-                </div>
-                <div class="drop-ground" id="to_do">
-                </div>
+    <!-- Add Task PopUp -->
+    <div class="add-task-overlay d-none" id="add-task-popup">
+        <div class="add-task-popup">
+            <div>
+                <h1>Add Task</h1>
             </div>
-            <div class="splits">
-                <div class="splits-head">
-                    <h3>In Progress</h3>
-                    <div class="add_plus" onclick="openAddTask('in_progress')">+</div>
-                </div>
-                <div class="drop-ground" id="in_progress"></div>
+            <div class="close-btn">
+                <img onclick="closePopUp()" src="../assets/img/close-btn.png">
             </div>
-            <div class="splits">
-                <div class="splits-head">
-                    <h3>Awaiting Feedback</h3>
-                    <div class="add_plus" onclick="openAddTask('awaiting_feedback')">+</div>
+            <form onsubmit="createTask(); return false;">
+                <div class="add-task-content">
+                    <!-- Content Left -->
+                    <div class="add-task-content-left">
+                        <div class="">
+                            <h4>Title</h4>
+                            <input id="" type="text" class="text-area-style" placeholder="Enter a Title">
+                            <h4>Description</h4>
+                            <textarea id="" class="text-area-style" placeholder="Enter a description"></textarea>
+                            <h4>Category</h4>
+                            <select name="choose-category" id="" class="choose-category">
+                                <option selected disabled>Select task category</option>
+                                <option value="category1">Category 1</option>
+                                <option value="category2">Category 2</option>
+                                <option value="category3">Category 3</option>
+                            </select>
+
+                            <div class="category-colors" id="">
+                                <div class="category-color" id="1" style="background-color: #8aa4ff;">
+                                </div>
+                                <div class="category-color" id="2" style="background-color: #ff0000;">
+                                </div>
+                                <div class="category-color" id="3" style="background-color: #2ad300;">
+                                </div>
+                                <div class="category-color" id="4" style="background-color: #ff8a00;">
+                                </div>
+                                <div class="category-color" id="5" style="background-color: #e200be;">
+                                </div>
+                                <div class="category-color" id="6" style="background-color: #0038ff;">
+                                </div>
+                            </div>
+                            <h4>Assigned to</h4>
+
+                            <select name="choose-contact" id="" class="choose-contact">
+                                <option selected disabled>Select contacts to assign</option>
+                                <option value="contact1">Contact 1</option>
+                                <option value="contact2">Contact 2</option>
+                                <option value="contact3">Contact 3</option>
+                            </select>
+
+                            <div id="" style="display: flex; margin-top: 15px;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="content-dividing-line"></div>
+                    </div>
+
+                    <!-- Content Right -->
+                    <div class="add-task-content-right">
+                        <div class="">
+                            <h4>Due date</h4>
+                            <input id="" name="due-date" class="text-area-style" type="date">
+                            <h4>Prio</h4>
+                            <div id="" class="prio">
+                                <div id="" class="prio-button">Urgent <img id=""
+                                        src="../assets/img/Capa 2.png"></div>
+
+                                <div id="" class="prio-button">Medium<input class="dropdown-input" id=""><img
+                                        id="" src="../assets/img/Capa 2 (1).png"></div>
+                                <div id="" class="prio-button">Low <img id="" src="../assets/img/Capa 2 (2).png">
+                                </div>
+                            </div>
+                            <h4>Subtasks</h4>
+                            <div id="" class="add-task-subtasks">
+                                <div>
+                                    <input id="" type="text" placeholder="Add new subtask">
+                                    <img onclick="addSubtask()" src="../assets/img/plus.png">
+                                </div>
+
+                            </div>
+                            <div class="subtask-list">
+                                <ul>
+                                    <li><input type="checkbox">Subtask 1</li>
+                                    <li><input type="checkbox">Subtask 2</li>
+                                    <li><input type="checkbox">Subtask 3</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="create-buttons">
+                            <button class="light-btn" id="" type="submit">Cancel</button>
+                            <button class="dark-btn" id="" type="submit">Create Task</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="drop-ground" id="awaiting_feedback"></div>
-            </div>
-            <div class="splits">
-                <div class="splits-head">
-                    <h3>Done</h3>
-                    <div class="add_plus" onclick="openAddTask('done')">+</div>
-                </div>
-                <div class="drop-ground" id="done"></div>
-            </div>
+
+            </form>
         </div>
     </div>
-    <div class="board-bottom"></div>
-    <div id="popUp">
-    </div>
+
 
 </body>
 
 </html>
-
-
-
