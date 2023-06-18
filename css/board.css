@@ -78,9 +78,9 @@
 .add-task-column {
     border: solid 2px black;
     border-radius: 10px;
-    font-size: 2rem;
-    line-height: 2rem;
-    width: 2rem;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,6 +96,21 @@
 
 .d-none {
     display: none !important;
+}
+
+/* tasks */
+.drag-area {
+    min-width: 260px;
+    min-height: 100px;
+}
+
+.task-container {
+    border: 1px solid transparent;
+    width: 250px;
+    border-radius: 30px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    padding: 18px;
 }
 
 /* popup card */

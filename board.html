@@ -17,7 +17,7 @@
     <script src="js/login.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="init(); updateTasksHTML()">
     <!-- Header + Nav Templates> -->
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
@@ -48,7 +48,7 @@
                         <h3>To Do</h3>
                         <div class="add-task-column" onclick="openAddTask('to-do')">+</div>
                     </div>
-                    <div class="drag-area" id="to-do">
+                    <div class="drag-area" id="to-do" ondrop="moveTo('to-do')" ondragover="allowDrop(event)">
                     </div>
                 </div>
                 <div class="board-column">
@@ -56,21 +56,21 @@
                         <h3>In Progress</h3>
                         <div class="add-task-column" onclick="openAddTask('in-progress')">+</div>
                     </div>
-                    <div class="drag-area" id="in-progress"></div>
+                    <div class="drag-area" id="in-progress" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)"></div>
                 </div>
                 <div class="board-column">
                     <div class="board-column-head">
                         <h3>Awaiting Feedback</h3>
                         <div class="add-task-column" onclick="openAddTask('awaiting-feedback')">+</div>
                     </div>
-                    <div class="drag-area" id="awaiting-feedback"></div>
+                    <div class="drag-area" id="awaiting-feedback" ondrop="moveTo('awaiting-feedback')" ondragover="allowDrop(event)"></div>
                 </div>
                 <div class="board-column">
                     <div class="board-column-head">
                         <h3>Done</h3>
                         <div class="add-task-column" onclick="openAddTask('done')">+</div>
                     </div>
-                    <div class="drag-area" id="done"></div>
+                    <div class="drag-area" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
                 </div>
             </div>
         </div>
