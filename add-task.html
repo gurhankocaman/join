@@ -39,7 +39,7 @@
                             placeholder="enter a description"></textarea>
                         <h4>Category</h4>
                         <select name="" id="chooseCategory" class="chooseContact">
-                            <option selected disabled>Choose Contact</option>
+                            <option selected disabled>Choose Category</option>
                             <option value="category1">Category 1</option>
                             <option value="category2">Category 2</option>
                             <option value="category3">Category 3</option>
@@ -80,14 +80,16 @@
                         <input required id="dueDateField" name="dueDateField" class="textAreaStyle1" type="date">
                         <h4>Prio</h4>
                         <div id="prioField" class="prio">
-                            <div id="Urgent-button" class="button1">Urgent <img
-                                    id="Urgent" src="../assets/img/Capa 2.png"></div>
+                            <input value="Urgent" type="checkbox" id="prio-button" class="button1">Urgent <img
+                                    id="Urgent" src="../assets/img/Capa 2.png"></input type="checkbox">
 
-                            <div id="Medium-button" class="button1">Medium<input
-                                    class="dropdownInput" id="inputPrio"><img
-                                    id="Medium" src="../assets/img/Capa 2 (1).png"></div>
-                            <div id="Low-button" class="button1">Low <img id="Low"
-                                    src="../assets/img/Capa 2 (2).png"></div>
+                            <input value="Medium" type="checkbox" id="prio-button" class="button1">Medium<img
+                                    id="Medium" src="../assets/img/Capa 2 (1).png"></input type="checkbox">
+                            <input value="Low" type="checkbox" iprio-button" class="button1">Low <img id="Low"
+                                    src="../assets/img/Capa 2 (2).png"></input type="checkbox">
+                        </div>
+                        <div>
+                            
                         </div>
                         <h4>Subtasks</h4>
                         <div id="subtaskField">
