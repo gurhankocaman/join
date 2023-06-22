@@ -37,3 +37,21 @@ function resetContactOptions() {
     var contactOptions = document.getElementById("chooseContact");
     contactOptions.selectedIndex = 0;
 }
+
+async function loadContacts() {
+   contacts = JSON.parse(await getItem('contacts'));
+}
+
+
+async function setContactOptions(){
+    await loadContacts();
+    let contactSelectBox = document.getElementById('chooseContact');
+    for (let i = 0; i < contacts.length; i++) {
+        contactSelectBox.innerHTML += `<option value="${contacts[i]['firstName'] + contacts[i]['lastName']}">${contacts[i]['firstName'] + contacts[i]['lastName']}</option>`; 
+    }
+}
+
+function addCategory(){
+    let field = document.getElementById('categoryToInput');
+    field.innerHTML = ''
+}
