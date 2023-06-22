@@ -20,8 +20,20 @@ async function createTask() {
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
     description.value = '';
-    
+    resetCategoryOptions();
+    resetContactOptions();
+    let inputs = document.getElementById('prio-button');
+    inputs.checked = false;
     date.value = '';
-
     subtask.value = '';
+}
+
+function resetCategoryOptions() {
+    var categoryOptions = document.getElementById("chooseCategory");
+    categoryOptions.selectedIndex = 0;
+ }
+
+function resetContactOptions() {
+    var contactOptions = document.getElementById("chooseContact");
+    contactOptions.selectedIndex = 0;
 }
