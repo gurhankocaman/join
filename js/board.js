@@ -1,3 +1,13 @@
+async function initBoard() {
+    loadTasks();
+    updateTasksHTML()
+}
+
+async function loadTasks() {
+    tasks = JSON.parse(await getItem('tasks'));
+    console.log(tasks);
+}
+
 let testContent = [{
     'id': 0,
     'title': 'Task 1',
