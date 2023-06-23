@@ -1,5 +1,5 @@
 let tasks = [];
-
+let categories = [];
 // Load Tasks
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks')) || [];
