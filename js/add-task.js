@@ -1,5 +1,5 @@
 let tasks = [];
-
+let categories = [];
 // Create Task
 async function createTask() {
 
@@ -15,7 +15,7 @@ async function createTask() {
     var checkedValue = document.querySelector('.button1:checked').value;
     var subtask = document.getElementById('subtaskInput');
 
-    tasks.push({ "title" : title.value, "description" : description.value, "Category" : categoryValue, "AssignedTo" : contactValue, "Date" : date.value, "Priority" : checkedValue, "Subtask" : subtask.value});
+    tasks.push({ "title" : title.value, "description" : description.value, "category" : categoryValue, "AssignedTo" : contactValue, "Date" : date.value, "Priority" : checkedValue, "Subtask" : subtask.value});
 
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
@@ -57,16 +57,24 @@ function addCategory() {
     var selectedValue = selectElement.value;
     
     if (selectedValue === "NewCategory") {
-      // Perform your action here
-      console.log("Option 2 selected!");
         selectToInput();
-
     }
   }
 
 function selectToInput(){
     let selectToInput = document.getElementById('selectToInput');
     selectToInput.innerHTML = `
-    <input class="textAreaStyle1"></input>
-    <img onclick="" src="../assets/img/plus.png">`
+    <div id="subtaskField">
+        <div>
+            <input id="newCategoryInput" type="text" placeholder="New Category">
+            <img onclick="addNewCategory()" src="../assets/img/plus.png">
+        </div>                  
+    </div>`
+}
+
+async function addNewCategory(){
+    var category = document.getElementById('newCategoryInput');
+
+    categories.push({"category" : category.value});
+    await setItem('tasks', JSON.stringify(tasks));
 }
