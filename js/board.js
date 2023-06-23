@@ -1,49 +1,12 @@
 async function initBoard() {
     loadTasks();
-   
+
 }
 
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
-    addStatusToObject(tasks);
-   
-} 
-
-
-function addStatusToObject(tasks) {
-    for (let i = 0; i < tasks.length; i++) {
-        const element = tasks[i];
-        element.status = 'to-do';
-        element.id = 0;
-        console.log(element);
-    }
     updateTasksHTML();
 }
-
-/* let testContent = [{
-    'id': 0,
-    'title': 'Task 1',
-    'status': 'to-do'
-}, {
-    'id': 1,
-    'title': 'Task 2',
-    'status': 'to-do'
-}, {
-    'id': 2,
-    'title': 'Task 3',
-    'status': 'in-progress'
-},
-{
-    'id': 3,
-    'title': 'Task 4',
-    'status': 'awaiting-feedback'
-},
-{
-    'id': 4,
-    'title': 'Task 5',
-    'status': 'done'
-}
-]; */
 
 // Drag And Drop
 let currentDraggedElement;
@@ -91,10 +54,36 @@ function moveTo(status) {
     updateTasksHTML();
 }
 
-function generateTasksHTML(element) {
+// Generate Tasks 
+function generateTasksHTML(tasks) {
+    const initials = getUserInitials(tasks['assignedTo']);
+
     return /*html*/ `
-        <div class="task-container" draggable="true" ondragstart="startDragging(${element['id']})">${element['title']}</div>
-        `;
+        <div class="card-container" draggable="true" ondragstart="startDragging(${tasks['id']})" onclick="openPopupCard()">
+            <div class="card-category">${tasks['category']}</div>
+            <div class="card-title">${tasks['title']}</div>
+            <div class="card-description">${tasks['description']}</div>
+            <div class="card-progress">
+                <div class="progress-bar"></div>
+            </div>
+            <div class="card-user">
+                <div>${initials}</div>
+            </div>
+        </div>
+    `;
+}
+
+// Getting name initials
+function getUserInitials(username) {
+    const splitNames = username.split(' '); // Teilt den String in Wörter auf
+    const initials = splitNames.map(word => word.charAt(0)); // Extrahiert den ersten Buchstaben jedes Wortes
+    return initials.join(''); // Verbindet die Initialen zu einem String und gibt sie zurück
+}
+
+// 
+
+function openPopupCard() {
+    document.getElementById('popup-card').classList.remove('d-none');
 }
 
 // Add Task Pop Up

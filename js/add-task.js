@@ -21,7 +21,7 @@ async function createTask() {
     var checkedValue = document.querySelector('.button1:checked').value;
     var subtask = document.getElementById('subtaskInput');
 
-    tasks.push({ "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValue, "date" : date.value, "priority" : checkedValue, "subtask" : subtask.value});
+    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValue, "date" : date.value, "priority" : checkedValue, "subtask" : subtask.value});
 
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
