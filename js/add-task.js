@@ -80,7 +80,7 @@ function selectToInput(){
 
 async function addNewCategory(){
     var category = document.getElementById('newCategoryInput');
-
+    
     categories.push({"category" : category.value});
     await setItem('categories', JSON.stringify(categories));
 }
