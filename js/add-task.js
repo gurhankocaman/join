@@ -51,7 +51,22 @@ async function setContactOptions(){
     }
 }
 
-function addCategory(){
-    let field = document.getElementById('categoryToInput');
-    field.innerHTML = ''
+
+function addCategory() {
+    var selectElement = document.getElementById("chooseCategory");
+    var selectedValue = selectElement.value;
+    
+    if (selectedValue === "NewCategory") {
+      // Perform your action here
+      console.log("Option 2 selected!");
+        selectToInput();
+
+    }
+  }
+
+function selectToInput(){
+    let selectToInput = document.getElementById('selectToInput');
+    selectToInput.innerHTML = `
+    <input class="textAreaStyle1"></input>
+    <img onclick="" src="../assets/img/plus.png">`
 }
