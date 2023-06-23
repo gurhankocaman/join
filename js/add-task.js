@@ -1,5 +1,11 @@
 let tasks = [];
 
+// Load Tasks
+async function loadTasks() {
+    tasks = JSON.parse(await getItem('tasks')) || [];
+    console.log(tasks);
+}
+
 // Create Task
 async function createTask() {
 
@@ -15,7 +21,7 @@ async function createTask() {
     var checkedValue = document.querySelector('.button1:checked').value;
     var subtask = document.getElementById('subtaskInput');
 
-    tasks.push({ "title" : title.value, "description" : description.value, "Category" : categoryValue, "AssignedTo" : contactValue, "Date" : date.value, "Priority" : checkedValue, "Subtask" : subtask.value});
+    tasks.push({ "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValue, "date" : date.value, "priority" : checkedValue, "subtask" : subtask.value});
 
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
