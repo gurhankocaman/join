@@ -47,7 +47,7 @@ async function setContactOptions(){
     await loadContacts();
     let contactSelectBox = document.getElementById('chooseContact');
     for (let i = 0; i < contacts.length; i++) {
-        contactSelectBox.innerHTML += `<option value="${contacts[i]['firstName'] + contacts[i]['lastName']}">${contacts[i]['firstName'] + contacts[i]['lastName']}</option>`; 
+        contactSelectBox.innerHTML += `<option value="${contacts[i]['firstName'] + ' ' + contacts[i]['lastName']}">${contacts[i]['firstName'] + ' ' + contacts[i]['lastName']}</option>`; 
     }
 }
 
