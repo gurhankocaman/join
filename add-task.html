@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
-<body onload="init(), loadTasks(), loadContacts(), setContactOptions()">
+<body onload="init(), loadTasks(), loadContacts(), loadCategories(), setCategoryOptions(), setContactOptions()">
     
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
@@ -42,9 +42,6 @@
                             <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
                                 <option selected disabled>Choose Category</option>
                                 <option value="NewCategory">New Category</option>
-                                <option value="category1">Category 1</option>
-                                <option value="category2">Category 2</option>
-                                <option value="category3">Category 3</option>
                             </select>
                         </div>
                         <div class="d-none" id="categoryColors">

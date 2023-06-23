@@ -3,7 +3,14 @@ let categories = [];
 // Load Tasks
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks')) || [];
-    console.log(tasks);
+}
+
+async function loadCategories() {
+    categories = JSON.parse(await getItem('categories')) || [];
+}
+
+async function loadContacts() {
+    contacts = JSON.parse(await getItem('contacts')) || [];
 }
 
 // Create Task
@@ -44,9 +51,7 @@ function resetContactOptions() {
     contactOptions.selectedIndex = 0;
 }
 
-async function loadContacts() {
-   contacts = JSON.parse(await getItem('contacts'));
-}
+
 
 
 async function setContactOptions(){
@@ -76,6 +81,8 @@ function selectToInput(){
             <img onclick="addNewCategory()" src="../assets/img/plus.png">
         </div>                  
     </div>`
+    var element = document.getElementById("categoryColors");
+    element.classList.remove("d-none");
 }
 
 async function addNewCategory(){
@@ -83,4 +90,25 @@ async function addNewCategory(){
     
     categories.push({"category" : category.value});
     await setItem('categories', JSON.stringify(categories));
+    resetSelect();
+}
+
+function resetSelect(){
+    let selectToInput = document.getElementById('selectToInput');
+    selectToInput.innerHTML = `
+    <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
+        <option selected disabled>Choose Category</option>
+        <option value="NewCategory">New Category</option>
+    </select>`;
+    var element = document.getElementById("categoryColors");
+    element.classList.add("d-none");
+    setCategoryOptions();
+}
+
+async function setCategoryOptions(){
+    await loadCategories();
+    let categorySelectBox = document.getElementById('chooseCategory');
+    for (let i = 0; i < categories.length; i++) {
+        categorySelectBox.innerHTML += `<option value="${categories[i]['category']}">${categories[i]['category']}</option>`
+    }
 }
