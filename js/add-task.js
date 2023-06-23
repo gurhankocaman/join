@@ -82,5 +82,5 @@ async function addNewCategory(){
     var category = document.getElementById('newCategoryInput');
 
     categories.push({"category" : category.value});
-    await setItem('tasks', JSON.stringify(tasks));
+    await setItem('categories', JSON.stringify(categories));
 }
