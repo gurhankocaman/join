@@ -121,6 +121,7 @@ async function addNewSubtask(){
 async function renderSubtasks(){
     await loadSubtasks();
     let subtaskList = document.getElementById('subtaskList');
+    subtaskList.innerHTML = ''
     for (let i = 0; i < subtasks.length; i++) {
         subtaskList.innerHTML += `<li><input type="checkbox" name="${subtasks[i]['subtask']}">${subtasks[i]['subtask']}</li>`
     }
