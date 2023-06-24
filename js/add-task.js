@@ -1,5 +1,6 @@
 let tasks = [];
 let categories = [];
+let subtasks = [];
 // Load Tasks
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks')) || [];
@@ -11,6 +12,10 @@ async function loadCategories() {
 
 async function loadContacts() {
     contacts = JSON.parse(await getItem('contacts')) || [];
+}
+
+async function loadSubtasks() {
+    subtasks = JSON.parse(await getItem('subtasks')) || [];
 }
 
 // Create Task
@@ -91,6 +96,23 @@ async function addNewCategory(){
     categories.push({"category" : category.value});
     await setItem('categories', JSON.stringify(categories));
     resetSelect();
+}
+
+async function addNewSubtask(){
+    var subtask = document.getElementById('subtaskInput');
+    
+    subtasks.push({"subtask" : subtask.value});
+    await setItem('subtasks', JSON.stringify(subtasks));
+    subtask.value = ''
+    renderSubtasks();
+}
+
+async function renderSubtasks(){
+    await loadSubtasks();
+    let subtaskList = document.getElementById('subtaskList');
+    for (let i = 0; i < subtasks.length; i++) {
+        subtaskList.innerHTML += `<li><input type="checkbox" value="${subtasks[i]['subtask']}">${subtasks[i]['subtask']}</li>`
+    }
 }
 
 function resetSelect(){

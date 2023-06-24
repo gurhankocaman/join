@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
-<body onload="init(), loadTasks(), loadContacts(), loadCategories(), setCategoryOptions(), setContactOptions()">
+<body onload="init(), loadTasks(), loadContacts(), loadCategories(), loadSubtasks(), setCategoryOptions(), setContactOptions(), renderSubtasks()">
     
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
@@ -92,15 +92,13 @@
                         <div id="subtaskField">
                             <div>
                                 <input id="subtaskInput" type="text" placeholder="new Subtask">
-                                <img onclick="addSubtask()" src="../assets/img/plus.png">
+                                <img onclick="addNewSubtask()" src="../assets/img/plus.png">
                             </div>
                             
                         </div>
-                        <div class="subtaskList d-none">
-                                <ul>
-                                    <li><input type="checkbox">test</li>
-                                    <li><input type="checkbox">test</li>
-                                    <li><input type="checkbox">test</li>
+                        <div>
+                                <ul id="subtaskList">
+                                    
                                 </ul>
                         </div>
                     </div>
