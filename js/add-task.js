@@ -1,6 +1,7 @@
 let tasks = [];
 let categories = [];
 let subtasks = [];
+var subtaskValues = [];
 // Load Tasks
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks')) || [];
@@ -33,7 +34,10 @@ async function createTask() {
     var checkedValue = document.querySelector('.button1:checked').value;
     var subtask = document.getElementById('subtaskInput');
 
-    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValue, "date" : date.value, "priority" : checkedValue, "subtask" : subtask.value});
+    subtasksToArray()
+    
+
+    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValue, "date" : date.value, "priority" : checkedValue, "subtask" : subtaskValues});
 
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
@@ -44,6 +48,13 @@ async function createTask() {
     inputs.checked = false;
     date.value = '';
     subtask.value = '';
+}
+
+function subtasksToArray(){
+    var subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
+    subtasks.forEach(function(input) {
+      subtaskValues.push(input.name);
+    });
 }
 
 function resetCategoryOptions() {
@@ -111,7 +122,7 @@ async function renderSubtasks(){
     await loadSubtasks();
     let subtaskList = document.getElementById('subtaskList');
     for (let i = 0; i < subtasks.length; i++) {
-        subtaskList.innerHTML += `<li><input type="checkbox" value="${subtasks[i]['subtask']}">${subtasks[i]['subtask']}</li>`
+        subtaskList.innerHTML += `<li><input type="checkbox" name="${subtasks[i]['subtask']}">${subtasks[i]['subtask']}</li>`
     }
 }
 
