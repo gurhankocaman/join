@@ -220,7 +220,6 @@
     width: 50px;
     height: 50px;
     box-sizing: border-box;
-    background-size: cover;
     border: 1px solid #2a3647;
     border-radius: 10px 0px 0px 10px;
     cursor: pointer;
@@ -228,7 +227,16 @@
 
 .delete-btn:hover {
     border: 2px solid #29abe2;
-  }
+}
+
+.delete-btn:hover img {
+    content: url("../assets/img/delete-btn-blue.png");
+}
+
+.delete-btn img {
+    max-width: 100%;
+    height: auto;
+}
 
 .edit-btn {
     display: flex;
