@@ -5,6 +5,11 @@ async function initBoard() {
 
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
+
+    for (let i = 0; i < tasks.length; i++) {
+        generatePopupCardHTML(i);
+
+    }
     updateTasksHTML();
 }
 
@@ -59,14 +64,14 @@ function generateTasksHTML(tasks) {
     const initials = getUserInitials(tasks['assignedTo']);
 
     return /*html*/ `
-        <div class="card-container" draggable="true" ondragstart="startDragging(${tasks['id']})" onclick="openPopupCard()">
-            <div class="card-category">${tasks['category']}</div>
-            <div class="card-title">${tasks['title']}</div>
-            <div class="card-description">${tasks['description']}</div>
-            <div class="card-progress">
+        <div class="card-container margin-bottom-10" draggable="true" ondragstart="startDragging(${tasks['id']})" onclick="openPopupCard()">
+            <div class="card-category margin-bottom-10">${tasks['category']}</div>
+            <div class="card-title margin-bottom-10">${tasks['title']}</div>
+            <div class="card-description margin-bottom-10">${tasks['description']}</div>
+            <div class="margin-bottom-10">
                 <div class="progress-bar"></div>
             </div>
-            <div class="card-user">
+            <div class="card-user-initials">
                 <div>${initials}</div>
             </div>
         </div>
@@ -80,10 +85,57 @@ function getUserInitials(username) {
     return initials.join(''); // Verbindet die Initialen zu einem String und gibt sie zurück
 }
 
-// 
+// popup card
+function generatePopupCardHTML(i) {
+    let content = document.getElementById('popup-card');
+    content.innerHTML = '';
+    content.innerHTML += /*html*/ `
+    <div>
+        <div class="close-popup-card" onclick="closePopupCard()">
+            <img src="../assets/img/close-btn.png">
+         </div>
+        <div class="popup-card-category margin-bottom-25">${tasks[i]['category']}</div>
+        <div class="popup-card-title margin-bottom-25">
+            <h2>${tasks[i]['title']}</h2>
+        </div>
+        <div class="margin-bottom-25">${tasks[i]['description']}</div>
+        <div class="margin-bottom-25">
+            <b>Due date:</b> ${tasks[i]['date']}
+        </div>
+        <div class="margin-bottom-25">
+            <b>Priority:</b> ${tasks[i]['priority']}
+        </div>
+        <div>
+            <b>Assigned To:</b>
+            <div class="popup-card-assigned-to-container">
+                
+                <div class="popup-card-user-initials">
+                </div>
+                <div>
+                    ${tasks[i]['assignedTo']}
+                </div>
+            </div>
+        </div>
+        <div class="popup-card-btns">
+            <div class="delete-btn">
+                <img src="../assets/img/delete-button.png">
+            </div>
+            <div class="edit-btn">
+                <img src="../assets/img/edit-pencil.png">
+            </div>
+        </div>
+    </div>
+    `;
+
+
+}
 
 function openPopupCard() {
     document.getElementById('popup-card').classList.remove('d-none');
+}
+
+function closePopupCard() {
+    document.getElementById('popup-card').classList.add('d-none');
 }
 
 // Add Task Pop Up
