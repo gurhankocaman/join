@@ -57,6 +57,12 @@ function allowDrop(ev) {
 function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     updateTasksHTML();
+    saveTasks(); // Aufruf der saveTasks-Funktion, um die aktualisierten tasks zu speichern
+}
+
+// Speichern der aktualisierten Tasksansicht
+async function saveTasks() {
+    await setItem('tasks', JSON.stringify(tasks));
 }
 
 // Generate Tasks 
