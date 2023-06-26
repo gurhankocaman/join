@@ -15,29 +15,29 @@ function updateTasksHTML() {
     let toDo = tasks.filter(t => t['status'] == 'to-do');
     document.getElementById('to-do').innerHTML = '';
     for (let i = 0; i < toDo.length; i++) {
-        const element = toDo[i];
-        document.getElementById('to-do').innerHTML += generateTasksHTML(element);
+        const task = toDo[i];
+        document.getElementById('to-do').innerHTML += generateTasksHTML(task);
     }
 
     let inProgress = tasks.filter(t => t['status'] == 'in-progress');
     document.getElementById('in-progress').innerHTML = '';
     for (let i = 0; i < inProgress.length; i++) {
-        const element = inProgress[i];
-        document.getElementById('in-progress').innerHTML += generateTasksHTML(element);
+        const task = inProgress[i];
+        document.getElementById('in-progress').innerHTML += generateTasksHTML(task);
     }
 
     let awaitingFeedback = tasks.filter(t => t['status'] == 'awaiting-feedback');
     document.getElementById('awaiting-feedback').innerHTML = '';
     for (let i = 0; i < awaitingFeedback.length; i++) {
-        const element = awaitingFeedback[i];
-        document.getElementById('awaiting-feedback').innerHTML += generateTasksHTML(element);
+        const task = awaitingFeedback[i];
+        document.getElementById('awaiting-feedback').innerHTML += generateTasksHTML(task);
     }
 
     let done = tasks.filter(t => t['status'] == 'done');
     document.getElementById('done').innerHTML = '';
     for (let i = 0; i < done.length; i++) {
-        const element = done[i];
-        document.getElementById('done').innerHTML += generateTasksHTML(element);
+        const task = done[i];
+        document.getElementById('done').innerHTML += generateTasksHTML(task);
     }
 }
 
@@ -62,11 +62,9 @@ async function saveTasks() {
 
 // Generate Tasks 
 function generateTasksHTML(task) {
-    let initials = getUserInitials(task['assignedTo']);
-
 
     return /*html*/ `
-        <div class="card-container margin-bottom-10" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
+        <div class="card-container margin-bottom-25" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
             <div class="card-category margin-bottom-10">${task['category']}</div>
             <div class="card-title margin-bottom-10">${task['title']}</div>
             <div class="card-description margin-bottom-10">${task['description']}</div>
@@ -74,21 +72,14 @@ function generateTasksHTML(task) {
                 <div class="progress-bar"></div>
             </div>
             <div class="card-user-initials">
-                <div>${initials}</div>
+                <div>${getUserInitials(task['assignedTo'])}</div>
             </div>
         </div>
     `;
 }
 
-// Getting name initials
-function getUserInitials(username) {
-    const splitNames = username.split(' '); // Teilt den String in Wörter auf
-    const initials = splitNames.map(word => word.charAt(0)); // Extrahiert den ersten Buchstaben jedes Wortes
-    return initials.join(''); // Verbindet die Initialen zu einem String und gibt sie zurück
-}
-
 // popup card
-function generatePopupCardHTML() {
+function generatePopupCardHTML(i) {
     let content = document.getElementById('popup-card');
     content.innerHTML = '';
     content.innerHTML += /*html*/ `
@@ -112,6 +103,7 @@ function generatePopupCardHTML() {
             <div class="popup-card-assigned-to-container">
                 
                 <div class="popup-card-user-initials">
+                <div>${getUserInitials(tasks[i]['assignedTo'])}</div>
                 </div>
                 <div>
                     ${tasks[i]['assignedTo']}
@@ -128,13 +120,18 @@ function generatePopupCardHTML() {
         </div>
     </div>
     `;
-
-
 }
 
-function openPopupCard() {
+// Getting name initials
+function getUserInitials(username) {
+    const splitNames = username.split(' '); // Teilt den String in Wörter auf
+    const initials = splitNames.map(word => word.charAt(0)); // Extrahiert den ersten Buchstaben jedes Wortes
+    return initials.join(''); // Verbindet die Initialen zu einem String und gibt sie zurück
+}
+
+function openPopupCard(i) {
     document.getElementById('popup-card').classList.remove('d-none');
-    generatePopupCardHTML();
+    generatePopupCardHTML(i);
 }
 
 function closePopupCard() {
