@@ -5,11 +5,6 @@ async function initBoard() {
 
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
-
-    for (let i = 0; i < tasks.length; i++) {
-        generatePopupCardHTML(i);
-
-    }
     updateTasksHTML();
 }
 
@@ -21,28 +16,32 @@ function updateTasksHTML() {
     document.getElementById('to-do').innerHTML = '';
     for (let i = 0; i < toDo.length; i++) {
         const element = toDo[i];
-        document.getElementById('to-do').innerHTML += generateTasksHTML(element);
+        document.getElementById('to-do').innerHTML += generateTasksHTML(element, i);
+        generatePopupCardHTML(i);
     }
 
     let inProgress = tasks.filter(t => t['status'] == 'in-progress');
     document.getElementById('in-progress').innerHTML = '';
     for (let i = 0; i < inProgress.length; i++) {
         const element = inProgress[i];
-        document.getElementById('in-progress').innerHTML += generateTasksHTML(element);
+        document.getElementById('in-progress').innerHTML += generateTasksHTML(element, i);
+        generatePopupCardHTML(i);
     }
 
     let awaitingFeedback = tasks.filter(t => t['status'] == 'awaiting-feedback');
     document.getElementById('awaiting-feedback').innerHTML = '';
     for (let i = 0; i < awaitingFeedback.length; i++) {
         const element = awaitingFeedback[i];
-        document.getElementById('awaiting-feedback').innerHTML += generateTasksHTML(element);
+        document.getElementById('awaiting-feedback').innerHTML += generateTasksHTML(element, i);
+        generatePopupCardHTML(i);
     }
 
     let done = tasks.filter(t => t['status'] == 'done');
     document.getElementById('done').innerHTML = '';
     for (let i = 0; i < done.length; i++) {
         const element = done[i];
-        document.getElementById('done').innerHTML += generateTasksHTML(element);
+        document.getElementById('done').innerHTML += generateTasksHTML(element, i);
+        generatePopupCardHTML(i);
     }
 }
 
@@ -66,14 +65,15 @@ async function saveTasks() {
 }
 
 // Generate Tasks 
-function generateTasksHTML(tasks) {
-    const initials = getUserInitials(tasks['assignedTo']);
+function generateTasksHTML(task, i) {
+    console.log(task);
+    const initials = getUserInitials(task['assignedTo']);
 
     return /*html*/ `
-        <div class="card-container margin-bottom-10" draggable="true" ondragstart="startDragging(${tasks['id']})" onclick="openPopupCard()">
-            <div class="card-category margin-bottom-10">${tasks['category']}</div>
-            <div class="card-title margin-bottom-10">${tasks['title']}</div>
-            <div class="card-description margin-bottom-10">${tasks['description']}</div>
+        <div class="card-container margin-bottom-10" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${i})">
+            <div class="card-category margin-bottom-10">${task['category']}</div>
+            <div class="card-title margin-bottom-10">${task['title']}</div>
+            <div class="card-description margin-bottom-10">${task['description']}</div>
             <div class="margin-bottom-10">
                 <div class="progress-bar"></div>
             </div>
