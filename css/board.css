@@ -141,6 +141,12 @@
     border: none;
 }
 
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .card-user-initials,
 .popup-card-user-initials {
     display: flex;
@@ -195,6 +201,25 @@
     font-size: 61px;
     font-weight: 700;
     margin: 0;
+}
+
+.popup-card-prio-container {
+    display: flex;
+    font-size: 21px;
+    align-items: center;
+}
+
+.popup-card-prio-btn {
+    color: white;
+    border-radius: 10px;
+    padding: 4px 18px;
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.popup-card-prio-btn img {
+    margin-left: 10px;
 }
 
 .popup-card-assigned-to-container {
