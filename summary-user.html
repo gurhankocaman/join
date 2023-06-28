@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/summary-user.css">
     <script src="js/storage.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/add-task.js"></script>
     <script src="js/summary-user.js"></script>
 </head>
 
@@ -38,15 +39,15 @@
                     <!-- Tasks First Row -->
                     <div class="content-first-row">
                         <div class="task-small-container">
-                            <span class="task-number">5</span>
+                            <span id="tasks-in-board" class="task-number"></span>
                             <span class="task-subtext">Tasks In Board</span>
                         </div>
                         <div class="task-small-container">
-                            <span class="task-number">2</span>
+                            <span id="tasks-in-progress" class="task-number"></span>
                             <span class="task-subtext">Tasks In Progress</span>
                         </div>
                         <div class="task-small-container">
-                            <span class="task-number">2</span>
+                            <span id="tasks-awaiting-feedback" class="task-number"></span>
                             <span class="task-subtext">Awaiting Feedback</span>
                         </div>
                     </div>

@@ -1,12 +1,47 @@
 /**
  * Initializes the summary by performing necessary setup tasks.
  */
-function initSummary() {
+async function initSummary() {
     init(); // Initialize Sidebar and Header
+    loadTasks();
+};
+
+async function loadTasks() {
+    tasks = JSON.parse(await getItem('tasks'));
+    loadContent();
+}
+
+function loadContent() {
+    numberOfTasks();
+    tasksInProgress();
+    tasksAwaitingFeedback();
     getUsername();
     getTime();
     greetUser();
-};
+}
+
+function numberOfTasks() {
+    document.getElementById('tasks-in-board').innerHTML = '';
+    document.getElementById('tasks-in-board').innerHTML = /*html*/`
+        ${tasks.length}
+    `;
+}
+
+function tasksInProgress() {
+    let inProgress = tasks.filter(t => t['status'] == 'in-progress');
+    document.getElementById('tasks-in-progress').innerHTML = '';
+    document.getElementById('tasks-in-progress').innerHTML += `
+        ${inProgress.length}
+    `;
+}
+
+function tasksAwaitingFeedback() {
+    let awaitingFeedback = tasks.filter(t => t['status'] == 'awaiting-feedback');
+    document.getElementById('tasks-awaiting-feedback').innerHTML = '';
+    document.getElementById('tasks-awaiting-feedback').innerHTML += `
+        ${awaitingFeedback.length}
+    `;
+}
 
 /**
  * Greets the user by displaying a personalized message.
@@ -62,3 +97,5 @@ function getTime() {
 
     return userGreetings;
 }
+
+
