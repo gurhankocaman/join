@@ -8,13 +8,7 @@ async function loadTasks() {
     updateTasksHTML();
 }
 
-/**
- * Updates the IDs of tasks in the "tasks" array.
- * Each task is assigned a unique ID based on its position in the array.
- * Saves the updated tasks after the update.
- *
- * @returns {void} No value is returned.
- */
+// Property Id = Index Of Array
 function updateId() {
     for (let i = 0; i < tasks.length; i++) {
         tasks[i].id = i;

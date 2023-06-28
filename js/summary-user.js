@@ -1,29 +1,46 @@
 /**
- * Initializes the summary by performing necessary setup tasks.
+ * Initializes the summary page.
+ * Calls the necessary functions to initialize the sidebar, header, and load tasks.
  */
 async function initSummary() {
     init(); // Initialize Sidebar and Header
     loadTasks();
 };
 
+/**
+ * Loads the tasks from local storage.
+ * Parses the tasks JSON and assigns it to the 'tasks' variable.
+ * Calls the 'loadContent' function.
+ */
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
     loadContent();
 }
 
+/**
+ * Loads the content on the summary page.
+ * Checks if there are any tasks available.
+ * If tasks are available, calls several functions to display task-related information.
+ * Calls functions to get the username, current time, and greet the user.
+ */
 function loadContent() {
-    numberOfTasks();
-    tasksInProgress();
-    tasksAwaitingFeedback();
-    tasksUrgent();
-    getDeadline();
-    tasksToDo();
-    tasksDone();
+    if (tasks.length > 0) {
+        numberOfTasks();
+        tasksInProgress();
+        tasksAwaitingFeedback();
+        tasksUrgent();
+        getDeadline();
+        tasksToDo();
+        tasksDone();
+    }
     getUsername();
     getTime();
     greetUser();
 }
 
+/**
+ * Displays the number of tasks in the HTML document.
+ */
 function numberOfTasks() {
     document.getElementById('tasks-in-board').innerHTML = '';
     document.getElementById('tasks-in-board').innerHTML = /*html*/`
@@ -31,6 +48,9 @@ function numberOfTasks() {
     `;
 }
 
+/**
+ * Displays the number of tasks in progress in the HTML document.
+ */
 function tasksInProgress() {
     let inProgress = tasks.filter(t => t['status'] == 'in-progress');
     document.getElementById('tasks-in-progress').innerHTML = '';
@@ -39,6 +59,9 @@ function tasksInProgress() {
     `;
 }
 
+/**
+ * Displays the number of tasks awaiting feedback in the HTML document.
+ */
 function tasksAwaitingFeedback() {
     let awaitingFeedback = tasks.filter(t => t['status'] == 'awaiting-feedback');
     document.getElementById('tasks-awaiting-feedback').innerHTML = '';
@@ -47,6 +70,9 @@ function tasksAwaitingFeedback() {
     `;
 }
 
+/**
+ * Displays the number of urgent tasks in the HTML document.
+ */
 function tasksUrgent() {
     let urgent = tasks.filter(t => t['priority'] == 'Urgent');
     document.getElementById('tasks-urgent').innerHTML = '';
@@ -55,14 +81,27 @@ function tasksUrgent() {
     `;
 }
 
+/**
+ * Displays the upcoming deadline in the HTML document.
+ */
 function getDeadline() {
-    let deadline = tasks[0]['date'];
     document.getElementById('upcoming-deadline').innerHTML = '';
-    document.getElementById('upcoming-deadline').innerHTML += /*html*/`
-        ${deadline}
+    let oldestDate = tasks[0].date;
+
+    for (let i = 1; i < tasks.length; i++) {
+        if (tasks[i].date < oldestDate) {
+            oldestDate = tasks[i].date;
+        }
+    }
+
+    document.getElementById('upcoming-deadline').innerHTML += `
+            ${oldestDate}
     `;
 }
 
+/**
+ * Displays the number of tasks to do in the HTML document.
+ */
 function tasksToDo() {
     let toDo = tasks.filter(t => t['status'] == 'to-do');
     document.getElementById('tasks-to-do').innerHTML = '';
@@ -71,6 +110,9 @@ function tasksToDo() {
     `;
 }
 
+/**
+ * Displays the number of tasks done in the HTML document.
+ */
 function tasksDone() {
     let done = tasks.filter(t => t['status'] == 'done');
     document.getElementById('tasks-done').innerHTML = '';
@@ -133,5 +175,13 @@ function getTime() {
 
     return userGreetings;
 }
+
+/**
+ * Redirects the user to the board.html page.
+ */
+function linkToBoard() {
+    window.location.href = 'board.html';
+}
+
 
 

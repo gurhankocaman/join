@@ -38,54 +38,54 @@
 
                     <!-- Tasks First Row -->
                     <div class="content-first-row">
-                        <div class="task-small-container">
-                            <span id="tasks-in-board" class="task-number"></span>
+                        <div class="task-small-container" onclick="linkToBoard()">
+                            <span id="tasks-in-board" class="task-number">0</span>
                             <span class="task-subtext">Tasks In Board</span>
                         </div>
-                        <div class="task-small-container">
-                            <span id="tasks-in-progress" class="task-number"></span>
+                        <div class="task-small-container" onclick="linkToBoard()">
+                            <span id="tasks-in-progress" class="task-number">0</span>
                             <span class="task-subtext">Tasks In Progress</span>
                         </div>
-                        <div class="task-small-container">
-                            <span id="tasks-awaiting-feedback" class="task-number"></span>
+                        <div class="task-small-container" onclick="linkToBoard()">
+                            <span id="tasks-awaiting-feedback" class="task-number">0</span>
                             <span class="task-subtext">Awaiting Feedback</span>
                         </div>
                     </div>
                     <!-- Tasks Second Row -->
                     <div class="content-second-row">
-                        <div class="task-urgent-container">
+                        <div class="task-urgent-container" onclick="linkToBoard()">
                             <div class="urgent-img">
                                 <img src="./assets/img/urgent-icon.png">
                             </div>
                             <div class="justify-content-tasks">
-                                <span id="tasks-urgent" class="task-urgent-number"></span>
+                                <span id="tasks-urgent" class="task-urgent-number">0</span>
                                 <span>Urgent</span>
                             </div>
                             <div class="border-gray">
                             </div>
                             <div class="justify-content-tasks">
-                                <span id="upcoming-deadline" class="task-urgent-date"></span>
+                                <span id="upcoming-deadline" class="task-urgent-date">-</span>
                                 <span>Upcoming Deadline</span>
                             </div>
                         </div>
                     </div>
                     <!-- Tasks Third Row-->
                     <div class="content-third-row">
-                        <div class="task-todo-container">
+                        <div class="task-todo-container" onclick="linkToBoard()">
                             <div class="todo-img">
                                 <img src="./assets/img/task-todo.png">
                             </div>
                             <div class="justify-content-tasks">
-                                <span id="tasks-to-do" class="task-number"></span>
+                                <span id="tasks-to-do" class="task-number">0</span>
                                 <span class="task-subtext">To-do</span>
                             </div>
                         </div>
-                        <div class="task-done-container">
+                        <div class="task-done-container" onclick="linkToBoard()">
                             <div class="done-img">
                                 <img src="./assets/img/task-done.png">
                             </div>
                             <div class="justify-content-tasks">
-                                <span id="tasks-done" class="task-number"></span>
+                                <span id="tasks-done" class="task-number">0</span>
                                 <span class="task-subtext">Done</span>
                             </div>
                         </div>
