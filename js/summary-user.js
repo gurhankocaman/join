@@ -15,6 +15,10 @@ function loadContent() {
     numberOfTasks();
     tasksInProgress();
     tasksAwaitingFeedback();
+    tasksUrgent();
+    getDeadline();
+    tasksToDo();
+    tasksDone();
     getUsername();
     getTime();
     greetUser();
@@ -30,7 +34,7 @@ function numberOfTasks() {
 function tasksInProgress() {
     let inProgress = tasks.filter(t => t['status'] == 'in-progress');
     document.getElementById('tasks-in-progress').innerHTML = '';
-    document.getElementById('tasks-in-progress').innerHTML += `
+    document.getElementById('tasks-in-progress').innerHTML += /*html*/`
         ${inProgress.length}
     `;
 }
@@ -38,8 +42,40 @@ function tasksInProgress() {
 function tasksAwaitingFeedback() {
     let awaitingFeedback = tasks.filter(t => t['status'] == 'awaiting-feedback');
     document.getElementById('tasks-awaiting-feedback').innerHTML = '';
-    document.getElementById('tasks-awaiting-feedback').innerHTML += `
+    document.getElementById('tasks-awaiting-feedback').innerHTML += /*html*/`
         ${awaitingFeedback.length}
+    `;
+}
+
+function tasksUrgent() {
+    let urgent = tasks.filter(t => t['priority'] == 'Urgent');
+    document.getElementById('tasks-urgent').innerHTML = '';
+    document.getElementById('tasks-urgent').innerHTML += /*html*/`
+        ${urgent.length}
+    `;
+}
+
+function getDeadline() {
+    let deadline = tasks[0]['date'];
+    document.getElementById('upcoming-deadline').innerHTML = '';
+    document.getElementById('upcoming-deadline').innerHTML += /*html*/`
+        ${deadline}
+    `;
+}
+
+function tasksToDo() {
+    let toDo = tasks.filter(t => t['status'] == 'to-do');
+    document.getElementById('tasks-to-do').innerHTML = '';
+    document.getElementById('tasks-to-do').innerHTML += /*html*/`
+        ${toDo.length}
+    `;
+}
+
+function tasksDone() {
+    let done = tasks.filter(t => t['status'] == 'done');
+    document.getElementById('tasks-done').innerHTML = '';
+    document.getElementById('tasks-done').innerHTML += /*html*/`
+        ${done.length}
     `;
 }
 
