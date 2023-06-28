@@ -1,11 +1,25 @@
 async function initBoard() {
     loadTasks();
-
 }
 
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
+    updateId();
     updateTasksHTML();
+}
+
+/**
+ * Updates the IDs of tasks in the "tasks" array.
+ * Each task is assigned a unique ID based on its position in the array.
+ * Saves the updated tasks after the update.
+ *
+ * @returns {void} No value is returned.
+ */
+function updateId() {
+    for (let i = 0; i < tasks.length; i++) {
+        tasks[i].id = i;
+        saveTasks();
+    }
 }
 
 // Drag And Drop
@@ -131,7 +145,7 @@ function generatePopupCardHTML(i) {
             </div>
         </div>
         <div class="popup-card-btns">
-            <div class="delete-btn">
+            <div onclick="deleteTask(${i})" class="delete-btn">
                 <img src="../assets/img/delete-button.png">
             </div>
             <div class="edit-btn">
@@ -140,6 +154,13 @@ function generatePopupCardHTML(i) {
         </div>
     </div>
     `;
+}
+
+function deleteTask(i) {
+ tasks.splice(i, 1);
+ saveTasks();
+ closePopupCard();
+ updateTasksHTML();
 }
 
 // Show Prio Images Card
@@ -161,7 +182,7 @@ function checkPopupCardPrio(prio) {
     if (prio === 'Low') {
         prioText = 'Low';
         prioImg = "../assets/img/prio-low-white.png"
-        prioColor = "#7AE229"; 
+        prioColor = "#7AE229";
 
     }
     return /*html*/ `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>
