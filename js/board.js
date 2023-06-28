@@ -152,6 +152,7 @@ function generatePopupCardHTML(i) {
 
 function deleteTask(i) {
  tasks.splice(i, 1);
+ updateId();
  saveTasks();
  closePopupCard();
  updateTasksHTML();
