@@ -158,6 +158,28 @@ function deleteTask(i) {
  updateTasksHTML();
 }
 
+
+// Search
+
+function findTasks() {
+    // Eingegebenen Suchwert abrufen
+    let searchValue = document.querySelector('.search-box input').value;
+  
+    // Durch das Array tasks iterieren
+    for (let i = 0; i < tasks.length; i++) {
+      // Titel und Beschreibung der aktuellen Aufgabe abrufen
+      let taskTitle = tasks[i].title;
+      let taskDescription = tasks[i].description;
+  
+      // Prüfen, ob der Suchwert im Titel oder in der Beschreibung enthalten ist
+      if (taskTitle.includes(searchValue) || taskDescription.includes(searchValue)) {
+        console.log('Übereinstimmung gefunden:');
+        console.log(tasks[i]);
+      }
+    }
+  }
+  
+  
 // Show Prio Images Card
 function checkPopupCardPrio(prio) {
     let prioImg;
