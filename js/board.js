@@ -123,13 +123,13 @@ function checkCardPrio(prio) {
     let prioImg;
 
     if (prio === 'Urgent') {
-        prioImg = "../assets/img/prio-urgent.png"
+        prioImg = "./assets/img/prio-urgent.png"
     }
     if (prio === 'Medium') {
-        prioImg = "../assets/img/prio-medium.png"
+        prioImg = "./assets/img/prio-medium.png"
     }
     if (prio === 'Low') {
-        prioImg = "../assets/img/prio-low.png"
+        prioImg = "./assets/img/prio-low.png"
     }
     return /*html*/ `<img src="${prioImg}">
     `;
@@ -142,7 +142,7 @@ function generatePopupCardHTML(i) {
     content.innerHTML += /*html*/ `
     <div>
         <div class="close-popup-card" onclick="closePopupCard()">
-            <img src="../assets/img/close-btn.png">
+            <img src="./assets/img/close-btn.png">
          </div>
         <div class="popup-card-category margin-bottom-25">${tasks[i]['category']}</div>
         <div class="popup-card-title margin-bottom-25">
@@ -174,10 +174,10 @@ function generatePopupCardHTML(i) {
         </div>
         <div class="popup-card-btns">
             <div onclick="deleteTask(${i})" class="delete-btn">
-                <img src="../assets/img/delete-button.png">
+                <img src="./assets/img/delete-button.png">
             </div>
             <div class="edit-btn">
-                <img src="../assets/img/edit-pencil.png">
+                <img src="./assets/img/edit-pencil.png">
             </div>
         </div>
     </div>
@@ -201,17 +201,17 @@ function checkPopupCardPrio(prio) {
 
     if (prio === 'Urgent') {
         prioText = 'Urgent';
-        prioImg = "../assets/img/prio-urgent-white.png";
+        prioImg = "./assets/img/prio-urgent-white.png";
         prioColor = "#FF3D00";
     }
     if (prio === 'Medium') {
         prioText = 'Medium';
-        prioImg = "../assets/img/prio-medium-white.png";
+        prioImg = "./assets/img/prio-medium-white.png";
         prioColor = "#FFA800";
     }
     if (prio === 'Low') {
         prioText = 'Low';
-        prioImg = "../assets/img/prio-low-white.png"
+        prioImg = "./assets/img/prio-low-white.png"
         prioColor = "#7AE229";
 
     }
