@@ -158,7 +158,6 @@ function generatePopupCardHTML(i) {
         <div>
             <b>Assigned To:</b>
             <div class="popup-card-assigned-to-container">
-                
                 <div class="popup-card-user-initials">
                 <div>${getUserInitials(tasks[i]['assignedTo'])}</div>
                 </div>
@@ -166,6 +165,12 @@ function generatePopupCardHTML(i) {
                     ${tasks[i]['assignedTo']}
                 </div>
             </div>
+        </div>
+        <div>
+            <b>Subtasks:</b>
+                <div>
+                    ${tasks[i].subtask}
+                </div>        
         </div>
         <div class="popup-card-btns">
             <div onclick="deleteTask(${i})" class="delete-btn">
