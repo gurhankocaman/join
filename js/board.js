@@ -76,8 +76,7 @@ function generateTasksHTML(task) {
     if (filteredTasks.length > 0 && !filteredTasks.includes(task)) {
         return ''; // Wenn das Task-Objekt nicht im filteredTasks-Array enthalten ist, wird ein leerer String zurückgegeben und der Task wird nicht angezeigt
     } else {
-
-    return /*html*/ `
+        return /*html*/ `
         <div class="card-container margin-bottom-25" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
             <div class="card-category margin-bottom-10">${task['category']}</div>
             <div class="card-title margin-bottom-10">${task['title']}</div>
@@ -92,7 +91,31 @@ function generateTasksHTML(task) {
                 <div class="card-prio">${checkCardPrio(task['priority'])}</div>
             </div>
         </div>
-    `;}
+    `;
+    }
+}
+
+// Search
+function findTasks() {
+    let searchValue = document.querySelector('.search-box input').value;
+    searchValue = searchValue.toLowerCase();
+
+    filteredTasks = [];
+
+    if (searchValue.length > 0) {
+        for (let i = 0; i < tasks.length; i++) {
+            let taskTitle = tasks[i].title;
+            taskTitle = taskTitle.toLowerCase();
+            let taskDescription = tasks[i].description;
+            taskDescription = taskDescription.toLowerCase();
+
+            if (taskTitle.includes(searchValue) || taskDescription.includes(searchValue)) {
+                filteredTasks.push(tasks[i]);
+            } 
+        }
+    }
+    console.log(filteredTasks);
+    updateTasksHTML();
 }
 
 // Show Prio Images Card
@@ -161,31 +184,6 @@ function deleteTask(i) {
     updateId();
     saveTasks();
     closePopupCard();
-    updateTasksHTML();
-}
-
-
-// Search
-
-function findTasks() {
-    let searchValue = document.querySelector('.search-box input').value;
-    searchValue = searchValue.toLowerCase();
-
-    filteredTasks = [];
-
-    if (searchValue.length > 0) {
-        for (let i = 0; i < tasks.length; i++) {
-            let taskTitle = tasks[i].title;
-            taskTitle = taskTitle.toLowerCase();
-
-            if (taskTitle.includes(searchValue)) {
-                filteredTasks.push(tasks[i]);
-            }
-        }
-    } else {
-        filteredTasks = [];
-    }
-    console.log(filteredTasks);
     updateTasksHTML();
 }
 

@@ -49,6 +49,10 @@
     align-items: center;
 }
 
+.search-box input:focus {
+    outline: none;
+}
+
 .search-icon {
     width: 20px;
     height: 20px;
