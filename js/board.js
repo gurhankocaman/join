@@ -73,6 +73,9 @@ async function saveTasks() {
 
 // Generate Tasks 
 function generateTasksHTML(task) {
+    if (filteredTasks.length > 0 && !filteredTasks.includes(task)) {
+        return ''; // Wenn das Task-Objekt nicht im filteredTasks-Array enthalten ist, wird ein leerer String zurückgegeben und der Task wird nicht angezeigt
+    } else {
 
     return /*html*/ `
         <div class="card-container margin-bottom-25" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
@@ -89,7 +92,7 @@ function generateTasksHTML(task) {
                 <div class="card-prio">${checkCardPrio(task['priority'])}</div>
             </div>
         </div>
-    `;
+    `;}
 }
 
 // Show Prio Images Card
@@ -165,26 +168,25 @@ function deleteTask(i) {
 // Search
 
 function findTasks() {
-    // Eingegebenen Suchwert abrufen
     let searchValue = document.querySelector('.search-box input').value;
     searchValue = searchValue.toLowerCase();
-    
-    // Array filteredTasks leeren
+
     filteredTasks = [];
 
     if (searchValue.length > 0) {
-        // Durch das Array tasks iterieren
         for (let i = 0; i < tasks.length; i++) {
-            // Titel und Beschreibung der aktuellen Aufgabe abrufen
             let taskTitle = tasks[i].title;
             taskTitle = taskTitle.toLowerCase();
-            // Prüfen, ob der Suchwert im Titel enthalten ist
+
             if (taskTitle.includes(searchValue)) {
                 filteredTasks.push(tasks[i]);
             }
         }
+    } else {
+        filteredTasks = [];
     }
     console.log(filteredTasks);
+    updateTasksHTML();
 }
 
 
@@ -239,4 +241,3 @@ function openAddTask() {
 function closePopUp() {
     document.getElementById('add-task-popup').classList.add('d-none');
 }
-
