@@ -111,7 +111,7 @@ function findTasks() {
 
             if (taskTitle.includes(searchValue) || taskDescription.includes(searchValue)) {
                 filteredTasks.push(tasks[i]);
-            } 
+            }
         }
     }
     console.log(filteredTasks);
@@ -155,7 +155,7 @@ function generatePopupCardHTML(i) {
         <div class="popup-card-prio-container margin-bottom-25">
             <b>Priority:</b> ${checkPopupCardPrio(tasks[i]['priority'])}
         </div>
-        <div>
+        <div class="margin-bottom-25">
             <b>Assigned To:</b>
             <div class="popup-card-assigned-to-container">
                 <div class="popup-card-user-initials">
@@ -166,11 +166,10 @@ function generatePopupCardHTML(i) {
                 </div>
             </div>
         </div>
-        <div>
-            <b>Subtasks:</b>
-                <div>
-                    ${tasks[i].subtask}
-                </div>        
+        <div class="margin-bottom-25">
+                    <b>Subtasks:</b>
+                    <div id="popup-card-subtasks">
+                </div>           
         </div>
         <div class="popup-card-btns">
             <div onclick="deleteTask(${i})" class="delete-btn">
@@ -182,7 +181,25 @@ function generatePopupCardHTML(i) {
         </div>
     </div>
     `;
+    generateSubtasks(tasks[i].subtask);
 }
+
+function generateSubtasks(subtasks) {
+    let content = document.getElementById('popup-card-subtasks');
+    content.innerHTML = '';
+    console.log(subtasks.length);
+    for (let i = 0; i < subtasks.length; i++) {
+        const subtask = subtasks[i];
+        content.innerHTML += /*html*/`
+          <input type="checkbox" id="subtask" name="subtask" value="subtask${i}" onclick="submitCheckboxValue(this)">
+            <label for="subtask">${subtask}</label><br>
+        `;
+    }
+}
+
+function submitCheckboxValue(checkbox) {
+    console.log(checkbox.value);
+  }
 
 function deleteTask(i) {
     tasks.splice(i, 1);
