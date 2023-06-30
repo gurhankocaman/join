@@ -1,3 +1,6 @@
+let tasks = [];
+let filteredTasks = [];
+
 async function initBoard() {
     loadTasks();
 }
@@ -151,11 +154,11 @@ function generatePopupCardHTML(i) {
 }
 
 function deleteTask(i) {
- tasks.splice(i, 1);
- updateId();
- saveTasks();
- closePopupCard();
- updateTasksHTML();
+    tasks.splice(i, 1);
+    updateId();
+    saveTasks();
+    closePopupCard();
+    updateTasksHTML();
 }
 
 
@@ -164,22 +167,27 @@ function deleteTask(i) {
 function findTasks() {
     // Eingegebenen Suchwert abrufen
     let searchValue = document.querySelector('.search-box input').value;
-  
-    // Durch das Array tasks iterieren
-    for (let i = 0; i < tasks.length; i++) {
-      // Titel und Beschreibung der aktuellen Aufgabe abrufen
-      let taskTitle = tasks[i].title;
-      let taskDescription = tasks[i].description;
-  
-      // Prüfen, ob der Suchwert im Titel oder in der Beschreibung enthalten ist
-      if (taskTitle.includes(searchValue) || taskDescription.includes(searchValue)) {
-        console.log('Übereinstimmung gefunden:');
-        console.log(tasks[i]);
-      }
+    searchValue = searchValue.toLowerCase();
+    
+    // Array filteredTasks leeren
+    filteredTasks = [];
+
+    if (searchValue.length > 0) {
+        // Durch das Array tasks iterieren
+        for (let i = 0; i < tasks.length; i++) {
+            // Titel und Beschreibung der aktuellen Aufgabe abrufen
+            let taskTitle = tasks[i].title;
+            taskTitle = taskTitle.toLowerCase();
+            // Prüfen, ob der Suchwert im Titel enthalten ist
+            if (taskTitle.includes(searchValue)) {
+                filteredTasks.push(tasks[i]);
+            }
+        }
     }
-  }
-  
-  
+    console.log(filteredTasks);
+}
+
+
 // Show Prio Images Card
 function checkPopupCardPrio(prio) {
     let prioImg;
