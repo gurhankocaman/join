@@ -81,8 +81,11 @@ function generateTasksHTML(task) {
             <div class="card-category margin-bottom-10">${task['category']}</div>
             <div class="card-title margin-bottom-10">${task['title']}</div>
             <div class="card-description margin-bottom-10">${task['description']}</div>
-            <div class="margin-bottom-10">
-                <div class="progress-bar"></div>
+            <div class="progress-bar-container">
+               
+                    <progress max="100" value="50"></progress>
+                
+                <div class="progress-bar-counter">1/2 Done</div>
             </div>
             <div class="card-bottom">
                 <div class="card-user-initials">
@@ -135,6 +138,7 @@ function checkCardPrio(prio) {
     `;
 }
 
+
 // popup card
 function generatePopupCardHTML(i) {
     let content = document.getElementById('popup-card');
@@ -181,25 +185,42 @@ function generatePopupCardHTML(i) {
         </div>
     </div>
     `;
-    generateSubtasks(tasks[i].subtask);
+    generateSubtasks(i, tasks[i].subtask);
+    readLocalStorageValues(i);
 }
 
-function generateSubtasks(subtasks) {
+
+function generateSubtasks(taskId, subtasks) {
     let content = document.getElementById('popup-card-subtasks');
     content.innerHTML = '';
-    console.log(subtasks.length);
+
     for (let i = 0; i < subtasks.length; i++) {
-        const subtask = subtasks[i];
         content.innerHTML += /*html*/`
-          <input type="checkbox" id="subtask" name="subtask" value="subtask${i}" onclick="submitCheckboxValue(this)">
-            <label for="subtask">${subtask}</label><br>
-        `;
+        <input type="checkbox" id="subtask${i}" onchange="submitCheckboxValue(${taskId}, ${i})">
+        <label for="subtask${i}">${subtasks[i]}</label><br>
+      `;
     }
 }
 
-function submitCheckboxValue(checkbox) {
-    console.log(checkbox.value);
-  }
+
+function submitCheckboxValue(taskId, i) {
+    let checkbox = document.getElementById(`subtask${i}`);
+    let isChecked = checkbox.checked;
+    localStorage.setItem(`checkbox_${taskId}_${i}`, JSON.stringify(isChecked));
+}
+
+
+function readLocalStorageValues(taskId) {
+    let subtasks = document.getElementById('popup-card-subtasks').getElementsByTagName('input');
+
+    for (let i = 0; i < subtasks.length; i++) {
+        let isChecked = JSON.parse(localStorage.getItem(`checkbox_${taskId}_${i}`));
+        if (isChecked) {
+            subtasks[i].checked = true;
+        }
+    }
+}
+
 
 function deleteTask(i) {
     tasks.splice(i, 1);
