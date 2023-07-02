@@ -82,7 +82,7 @@ function generateTasksHTML(task) {
             <div class="card-title margin-bottom-10">${task['title']}</div>
             <div class="card-description margin-bottom-10">${task['description']}</div>
             <div class="progress-bar-container">
-                    <progress max="100" value="50"></progress>
+                <progress max="100" value="50"></progress>
                 <div class="progress-bar-counter">1/2 Done</div>
             </div>
             <div class="card-bottom">
@@ -95,6 +95,7 @@ function generateTasksHTML(task) {
     `;
     }
 }
+
 
 // Search
 function findTasks() {
@@ -184,51 +185,40 @@ function generatePopupCardHTML(i) {
     </div>
     `;
     generateSubtasks(i, tasks[i].subtask);
-    loadCheckboxValues(i);
 }
 
 
 function generateSubtasks(taskId, subtasks) {
     let content = document.getElementById('popup-card-subtasks');
     content.innerHTML = '';
-
+  
     for (let i = 0; i < subtasks.length; i++) {
-        content.innerHTML += /*html*/`
-        <input type="checkbox" id="subtask${i}" onchange="submitCheckboxValue(${taskId}, ${i})">
+      let isChecked = getCheckboxValue(taskId, i); // Abrufen des gespeicherten Werts
+      content.innerHTML += /*html*/`
+        <input type="checkbox" id="subtask${i}" onchange="submitCheckboxValue(${taskId}, ${i})" ${isChecked ? 'checked' : ''}>
         <label for="subtask${i}">${subtasks[i]}</label><br>
       `;
     }
-}
-
-
-function submitCheckboxValue(taskId, i) {
-    let checkbox = document.getElementById(`subtask${i}`);
+  }
+  
+  function submitCheckboxValue(taskId, subtaskId) {
+    let checkbox = document.getElementById(`subtask${subtaskId}`);
     let isChecked = checkbox.checked;
-    localStorage.setItem(`checkbox_${taskId}_${i}`, JSON.stringify(isChecked));
-}
-
-
-function loadCheckboxValues(taskId) {
-    let subtasks = document.getElementById('popup-card-subtasks').getElementsByTagName('input');
-    let checkboxValues = []; // Array zur Zwischenspeicherung der Checkbox-Werte
-
-    for (let i = 0; i < subtasks.length; i++) {
-        let isChecked = JSON.parse(localStorage.getItem(`checkbox_${taskId}_${i}`));
-        if (isChecked) {
-            subtasks[i].checked = true;
-            checkboxValues.push(subtasks[i].id); // Checkbox-Wert zum Array hinzufügen
-        }
-    }
-
-    let percent = checkboxValues.length / tasks[taskId].subtask.length * 100;
-    console.log('Prozent:', percent);
-    // generateProgressBar(percent);
-}
-
-function generateProgressBar() {
-    let progressBar = document.getElementById("progress-bar");
-    progressBar.value = percent;
-}
+    saveCheckboxValue(taskId, subtaskId, isChecked); // Speichern des Werts
+    console.log(taskId, subtaskId, isChecked);
+  }
+  
+  function saveCheckboxValue(taskId, subtaskId, isChecked) {
+    let key = `task_${taskId}_subtask_${subtaskId}`;
+    localStorage.setItem(key, isChecked);
+  }
+  
+  function getCheckboxValue(taskId, subtaskId) {
+    let key = `task_${taskId}_subtask_${subtaskId}`;
+    let value = localStorage.getItem(key);
+    return value === 'true'; // Konvertieren des gespeicherten Werts in einen Booleschen Wert
+  }
+  
 
 
 function deleteTask(i) {
