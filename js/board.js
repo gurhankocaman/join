@@ -82,9 +82,7 @@ function generateTasksHTML(task) {
             <div class="card-title margin-bottom-10">${task['title']}</div>
             <div class="card-description margin-bottom-10">${task['description']}</div>
             <div class="progress-bar-container">
-               
                     <progress max="100" value="50"></progress>
-                
                 <div class="progress-bar-counter">1/2 Done</div>
             </div>
             <div class="card-bottom">
@@ -186,7 +184,7 @@ function generatePopupCardHTML(i) {
     </div>
     `;
     generateSubtasks(i, tasks[i].subtask);
-    readLocalStorageValues(i);
+    loadCheckboxValues(i);
 }
 
 
@@ -210,15 +208,26 @@ function submitCheckboxValue(taskId, i) {
 }
 
 
-function readLocalStorageValues(taskId) {
+function loadCheckboxValues(taskId) {
     let subtasks = document.getElementById('popup-card-subtasks').getElementsByTagName('input');
+    let checkboxValues = []; // Array zur Zwischenspeicherung der Checkbox-Werte
 
     for (let i = 0; i < subtasks.length; i++) {
         let isChecked = JSON.parse(localStorage.getItem(`checkbox_${taskId}_${i}`));
         if (isChecked) {
             subtasks[i].checked = true;
+            checkboxValues.push(subtasks[i].id); // Checkbox-Wert zum Array hinzufügen
         }
     }
+
+    let percent = checkboxValues.length / tasks[taskId].subtask.length * 100;
+    console.log('Prozent:', percent);
+    // generateProgressBar(percent);
+}
+
+function generateProgressBar() {
+    let progressBar = document.getElementById("progress-bar");
+    progressBar.value = percent;
 }
 
 
