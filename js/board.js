@@ -204,10 +204,21 @@ function generateSubtasks(taskId, subtasks) {
   function submitCheckboxValue(taskId, subtaskId) {
     let checkbox = document.getElementById(`subtask${subtaskId}`);
     let isChecked = checkbox.checked;
-    saveCheckboxValue(taskId, subtaskId, isChecked); // Speichern des Werts
+    saveCheckboxValue(taskId, subtaskId, isChecked);
     console.log(taskId, subtaskId, isChecked);
   }
   
+  /* async function saveCheckboxValue(taskId, subtaskId, isChecked) {
+    let key = `task_${taskId}_subtask_${subtaskId}`;
+    await setItem(key, JSON.stringify(isChecked));
+  }
+  
+  async function getCheckboxValue(taskId, subtaskId) {
+    let key = `task_${taskId}_subtask_${subtaskId}`;
+    let value = JSON.parse(await getItem(key));
+    return value === 'true';
+  } */
+
   function saveCheckboxValue(taskId, subtaskId, isChecked) {
     let key = `task_${taskId}_subtask_${subtaskId}`;
     localStorage.setItem(key, isChecked);
@@ -216,10 +227,8 @@ function generateSubtasks(taskId, subtasks) {
   function getCheckboxValue(taskId, subtaskId) {
     let key = `task_${taskId}_subtask_${subtaskId}`;
     let value = localStorage.getItem(key);
-    return value === 'true'; // Konvertieren des gespeicherten Werts in einen Booleschen Wert
-  }
-  
-
+    return value === 'true'; 
+  } 
 
 function deleteTask(i) {
     tasks.splice(i, 1);
