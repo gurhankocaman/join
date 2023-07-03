@@ -209,7 +209,7 @@ function generateSubtasks(taskId, subtasks) {
     saveCheckboxValue(taskId, subtaskId, isChecked);
   }
   
- async function saveCheckboxValue(taskId, subtaskId, isChecked) {
+  async function saveCheckboxValue(taskId, subtaskId, isChecked) {
     let key = `task_${taskId}_subtask_${subtaskId}`;
     let saveCheckboxValue = isChecked;
     console.log('saveCheckboxValue = isChecked : ' + saveCheckboxValue);
@@ -220,7 +220,8 @@ function generateSubtasks(taskId, subtasks) {
     let key = `task_${taskId}_subtask_${subtaskId}`;
     let value = JSON.parse(await getItem(key));
     console.log('getCheckboxValue : ' + value);
-    return value == true;
+    // returned nur, wenn der mit getItem aufgerufene Wert True ist, ansonsten wird false returned
+    return value === 'true';
   } 
 
   /* function saveCheckboxValue(taskId, subtaskId, isChecked) {
