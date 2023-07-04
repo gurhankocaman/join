@@ -82,7 +82,7 @@ function generateTasksHTML(task) {
             <div class="card-title margin-bottom-10">${task['title']}</div>
             <div class="card-description margin-bottom-10">${task['description']}</div>
             <div class="progress-bar-container">
-                <progress max="100" value="50"></progress>
+                <progress id="progress-bar-${task.id}" max="100" value="50"></progress>
                 <div class="progress-bar-counter">1/2 Done</div>
             </div>
             <div class="card-bottom">
@@ -119,6 +119,7 @@ function findTasks() {
     console.log(filteredTasks);
     updateTasksHTML();
 }
+
 
 // Show Prio Images Card
 function checkCardPrio(prio) {
@@ -185,86 +186,61 @@ function generatePopupCardHTML(taskIndex) {
       </div>
     `;
     generateSubtasks(taskIndex, tasks[taskIndex].subtask);
-  }
-  
-  async function generateSubtasks(taskIndex, subtasks) {
+}
+
+
+async function generateSubtasks(taskIndex, subtasks) {
     let content = document.getElementById(`popup-card-subtasks-${taskIndex}`);
     content.innerHTML = '';
-  
+
+    let checkboxValues = []; // Array zur Zwischenspeicherung der Checkbox-Werte
+
     for (let i = 0; i < subtasks.length; i++) {
-      const checkboxId = `subtask-${taskIndex}-${i}`;
-  
-      // Überprüfen, ob der Checkbox-Wert im Remote Storage gespeichert ist
-      const storedValue = await getItem(`task_${taskIndex}_subtask_${i}`);
-      const isChecked = storedValue === 'true'; // Wert in einen booleschen Wert umwandeln
-  
-      content.innerHTML += /*html*/ `
+        const checkboxId = `subtask-${taskIndex}-${i}`;
+
+        // Überprüfen, ob der Checkbox-Wert im Remote Storage gespeichert ist
+        const storedValue = await getItem(`task_${taskIndex}_subtask_${i}`);
+        const isChecked = storedValue === 'true'; // Wert in einen booleschen Wert umwandeln
+
+        content.innerHTML += /*html*/ `
         <input type="checkbox" id="${checkboxId}" onchange="submitCheckboxValue(${taskIndex}, ${i})" ${isChecked ? 'checked' : ''}>
         <label for="${checkboxId}">${subtasks[i]}</label><br>
       `;
+
+        if (isChecked) {
+            subtasks[i].checked = true;
+            checkboxValues.push(subtasks[i].id); // Checkbox-Wert zum Array hinzufügen
+        }
+
+        let percent = checkboxValues.length / tasks[taskIndex].subtask.length * 100;
+        let progressBar = document.getElementById(`progress-bar-${taskIndex}`);
+        progressBar.value = percent;
+
+        saveProgressValue(`progress-bar-${taskIndex}`, percent);
     }
-  }
-  
-  async function submitCheckboxValue(taskIndex, checkboxIndex) {
+}
+
+
+async function submitCheckboxValue(taskIndex, checkboxIndex) {
     const checkboxId = `subtask-${taskIndex}-${checkboxIndex}`;
     const checkbox = document.getElementById(checkboxId);
     const isChecked = checkbox.checked;
     await saveCheckboxValue(taskIndex, checkboxIndex, isChecked);
-  }
-  
-  async function saveCheckboxValue(taskIndex, subtaskId, isChecked) {
+}
+
+
+async function saveCheckboxValue(taskIndex, subtaskId, isChecked) {
     let key = `task_${taskIndex}_subtask_${subtaskId}`;
     let saveCheckboxValue = isChecked;
     await setItem(key, JSON.stringify(saveCheckboxValue));
-  }
-  
+}
 
-/* 
-function generateSubtasks(taskId, subtasks) {
-  let content = document.getElementById('popup-card-subtasks');
-  content.innerHTML = '';
- 
-  for (let i = 0; i < subtasks.length; i++) {
-    let isChecked = getCheckboxValue(taskId, i); // Abrufen des gespeicherten Werts
-    content.innerHTML += `
-    <input type="checkbox" id="subtask${i}" onchange="submitCheckboxValue(${taskId}, ${i})" ${isChecked ? 'checked' : ''}>
-    <label for="subtask${i}">${subtasks[i]}</label><br>
-  `;
+async function saveProgressValue(progressBar, percent) {
+    let key = progressBar;
+    let progressValue = percent;
+    await setItem(key, JSON.stringify(progressValue));
 }
-}
-function submitCheckboxValue(taskIndex, subtaskId) {
-  let checkbox = document.getElementById(`subtask${subtaskId}`);
-  let isChecked = checkbox.checked;
-  console.log('isChecked : ' + isChecked);
-  console.log(taskIndex, subtaskId, isChecked);
-  saveCheckboxValue(taskIndex, subtaskId, isChecked);
-}
- 
-async function saveCheckboxValue(taskIndex, subtaskId, isChecked) {
-  let key = `task_${taskIndex}_subtask_${subtaskId}`;
-  let saveCheckboxValue = isChecked;
-  console.log('saveCheckboxValue = isChecked : ' + saveCheckboxValue);
-  await setItem(key, JSON.stringify(saveCheckboxValue));
-}
- 
-async function getCheckboxValue(taskIndex, subtaskId) {
-  let key = `task_${taskIndex}_subtask_${subtaskId}`;
-  let value = JSON.parse(await getItem(key));
-  console.log('getCheckboxValue : ' + value);
-  // returned nur, wenn der mit getItem aufgerufene Wert True ist, ansonsten wird false returned
-  return value === 'true';
-} /*
 
-/* function saveCheckboxValue(taskIndex, subtaskId, isChecked) {
-  let key = `task_${taskId}_subtask_${subtaskId}`;
-  localStorage.setItem(key, isChecked);
-}
- 
-function getCheckboxValue(taskIndex, subtaskId) {
-  let key = `task_${taskId}_subtask_${subtaskId}`;
-  let value = localStorage.getItem(key);
-  return value === 'true'; 
-} */
 
 function deleteTask(i) {
     tasks.splice(i, 1);
