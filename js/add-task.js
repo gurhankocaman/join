@@ -53,7 +53,7 @@ async function createTask() {
 function subtasksToArray(){
     var subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
     subtasks.forEach(function(input) {
-      subtaskValues.push(input.name);
+      subtaskValues.push({name: input.name, checked: false});
     });
 }
 
