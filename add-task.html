@@ -60,10 +60,15 @@
                         </div>
                         <h4>Assigned to</h4>
 
-                        <select name="" id="chooseContact" class="chooseContact">
+                        <select name="" id="chooseContact" class="chooseContact" onchange="selectContact()">
                         <option selected disabled>Choose Contact</option>
                         
                         </select>
+                        <div>
+                            <ul id="contactList">
+                                
+                            </ul>
+                    </div>
 
                         <div id="assignedAddTask" style="display: flex; margin-top: 15px;"></div>
                     </div>

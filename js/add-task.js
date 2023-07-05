@@ -2,6 +2,8 @@ let tasks = [];
 let categories = [];
 let subtasks = [];
 var subtaskValues = [];
+var contactValues = [];
+
 // Load Tasks
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks')) || [];
@@ -37,7 +39,7 @@ async function createTask() {
     subtasksToArray()
     
 
-    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValue, "date" : date.value, "priority" : checkedValue, "subtask" : subtaskValues});
+    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValues, "date" : date.value, "priority" : checkedValue, "subtask" : subtaskValues});
 
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
@@ -146,3 +148,18 @@ async function setCategoryOptions(){
         categorySelectBox.innerHTML += `<option value="${categories[i]['category']}">${categories[i]['category']}</option>`
     }
 }
+
+function selectContact() {
+    var contact = document.getElementById('chooseContact');
+    var contactValue = contact.options[contact.selectedIndex].value;
+    contactValues.push({"name" : contactValue});
+
+    let contactList = document.getElementById('contactList');
+    contactList.innerHTML = '';
+    for (let i = 0; i < contactValues.length; i++) {
+        contactList.innerHTML += `<li>${contactValues[i]["name"]}</li>`
+    }
+    contact.selectedIndex = 0;
+}
+
+
