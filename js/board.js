@@ -172,7 +172,7 @@ function generatePopupCardHTML(taskIndex) {
           </div>
           <div class="margin-bottom-25">
               <b>Subtasks:</b>
-              <div id="popup-card-subtasks-${taskIndex}">
+              <div id="popup-card-subtasks">
               </div>
           </div>
           <div class="popup-card-btns">
@@ -185,62 +185,46 @@ function generatePopupCardHTML(taskIndex) {
           </div>
       </div>
     `;
-    generateSubtasks(taskIndex, tasks[taskIndex].subtask);
+    generateSubtasks(taskIndex);
+    generateProgressBar(taskIndex);
 }
 
 
-async function generateSubtasks(taskIndex, subtasks) {
-    let content = document.getElementById(`popup-card-subtasks-${taskIndex}`);
+function generateSubtasks(taskIndex) {
+    let subtasks = tasks[taskIndex].subtask; // enthält das Array der Unteraufgaben für den gegebenen taskIndex
+    let checkboxValues = []; // Array zur Zwischenspeicherung der Checkbox-Werte
+    let content = document.getElementById('popup-card-subtasks');
     content.innerHTML = '';
 
-    let checkboxValues = []; // Array zur Zwischenspeicherung der Checkbox-Werte
-
     for (let i = 0; i < subtasks.length; i++) {
-        const checkboxId = `subtask-${taskIndex}-${i}`;
+        const checkboxId = `subtask-${taskIndex}-${i}`;  // eindeutige ID für das Checkbox-Element wird generiert
+        
+        // Zustand der Unteraufgabe (aus dem "checked"-Attribut) wird überprüft und in der Variable "isChecked" gespeichert
+        // wenn die Unteraufgabe als "checked" markiert ist, wird der Wert 'checked' zugewiesen, ansonsten ein leerer String ('').
+        const isChecked = subtasks[i].checked ? 'checked' : '';
 
-        // Überprüfen, ob der Checkbox-Wert im Remote Storage gespeichert ist
-        const storedValue = await getItem(`task_${taskIndex}_subtask_${i}`);
-        const isChecked = storedValue === 'true'; // Wert in einen booleschen Wert umwandeln
-
-        content.innerHTML += /*html*/ `
-        <input type="checkbox" id="${checkboxId}" onchange="submitCheckboxValue(${taskIndex}, ${i})" ${isChecked ? 'checked' : ''}>
-        <label for="${checkboxId}">${subtasks[i]}</label><br>
-      `;
-
-        if (isChecked) {
-            subtasks[i].checked = true;
-            checkboxValues.push(subtasks[i].id); // Checkbox-Wert zum Array hinzufügen
-        }
-
-        let percent = checkboxValues.length / tasks[taskIndex].subtask.length * 100;
-        let progressBar = document.getElementById(`progress-bar-${taskIndex}`);
-        progressBar.value = percent;
-
-        saveProgressValue(`progress-bar-${taskIndex}`, percent);
+        content.innerHTML += `
+            <input type="checkbox" id="${checkboxId}" onchange="submitCheckboxValue(${taskIndex}, ${i})" ${isChecked}>
+            <label for="${checkboxId}">${subtasks[i].name}</label><br>
+        `;
     }
+};
+
+
+function submitCheckboxValue(taskIndex, i) {
+    let checkbox = document.getElementById(`subtask-${taskIndex}-${i}`);
+    // Checked-Eigenschaft wird in das entsprechende Unteraufgabenobjekt gespeichert
+    tasks[taskIndex].subtask[i].checked = checkbox.checked;
+    saveTasks();
 }
 
 
-async function submitCheckboxValue(taskIndex, checkboxIndex) {
-    const checkboxId = `subtask-${taskIndex}-${checkboxIndex}`;
-    const checkbox = document.getElementById(checkboxId);
-    const isChecked = checkbox.checked;
-    await saveCheckboxValue(taskIndex, checkboxIndex, isChecked);
+function generateProgressBar(taskIndex) {
+    let trueSubtasks = tasks[taskIndex].subtask.filter(subtask => subtask.checked === true);
+    let percent = trueSubtasks.length / tasks[taskIndex].subtask.length * 100;
+    let progressBar = document.getElementById(`progress-bar-${taskIndex}`);
+    progressBar.value = percent;
 }
-
-
-async function saveCheckboxValue(taskIndex, subtaskId, isChecked) {
-    let key = `task_${taskIndex}_subtask_${subtaskId}`;
-    let saveCheckboxValue = isChecked;
-    await setItem(key, JSON.stringify(saveCheckboxValue));
-}
-
-async function saveProgressValue(progressBar, percent) {
-    let key = progressBar;
-    let progressValue = percent;
-    await setItem(key, JSON.stringify(progressValue));
-}
-
 
 function deleteTask(i) {
     tasks.splice(i, 1);
