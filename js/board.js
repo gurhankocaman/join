@@ -163,7 +163,7 @@ function generatePopupCardHTML(taskIndex) {
     let content = document.getElementById('popup-card');
     content.innerHTML = '';
     content.innerHTML += /*html*/ `
-      <div>
+      <div class="popup-card-content">
           <div class="close-popup-card" onclick="closePopupCard()">
               <img src="./assets/img/close-btn.png">
           </div>
@@ -178,7 +178,7 @@ function generatePopupCardHTML(taskIndex) {
           <div class="popup-card-prio-container margin-bottom-25">
               <b>Priority:</b> ${checkPopupCardPrio(tasks[taskIndex]['priority'])}
           </div>
-          <div class="margin-bottom-25">
+          <div><div class="margin-bottom-25">
               <b>Assigned To:</b>
               <div class="popup-card-assigned-to-container">
                   <div class="popup-card-user-initials">
@@ -202,6 +202,7 @@ function generatePopupCardHTML(taskIndex) {
                   <img src="./assets/img/edit-pencil.png">
               </div>
           </div>
+</div>
       </div>
     `;
     generateSubtasks(taskIndex);
