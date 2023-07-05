@@ -84,8 +84,8 @@ function generateTasksHTML(task) {
             <div class="card-title margin-bottom-10">${task['title']}</div>
             <div class="card-description margin-bottom-10">${task['description']}</div>
             <div class="progress-bar-container">
-                <progress id="progress-bar-${task.id}" max="100" value="50"></progress>
-                <div id="progress-value-${task.id}" class="progress-bar-counter">1/2 Done</div>
+                <progress id="progress-bar-${task.id}" max="100" value="0"></progress>
+                <div id="progress-value-${task.id}" class="progress-bar-counter"></div>
             </div>
             <div class="card-bottom">
                 <div class="card-user-initials">
@@ -112,7 +112,7 @@ function generateProgressBar() {
 function generateProgressValues(trueSubtasks, allSubtasks, i) {
     let content = document.getElementById(`progress-value-${i}`);
     content.innerHTML = '';
-    content.innerHTML += `${trueSubtasks}/${allSubtasks}`;
+    content.innerHTML += `${trueSubtasks}/${allSubtasks} Done`;
 }
 
 
@@ -163,47 +163,42 @@ function generatePopupCardHTML(taskIndex) {
     let content = document.getElementById('popup-card');
     content.innerHTML = '';
     content.innerHTML += /*html*/ `
-      <div class="popup-card-content">
-          <div class="close-popup-card" onclick="closePopupCard()">
-              <img src="./assets/img/close-btn.png">
-          </div>
-          <div class="popup-card-category margin-bottom-25">${tasks[taskIndex]['category']}</div>
-          <div class="popup-card-title margin-bottom-25">
-              <h2>${tasks[taskIndex]['title']}</h2>
-          </div>
-          <div class="margin-bottom-25">${tasks[taskIndex]['description']}</div>
-          <div class="margin-bottom-25">
-              <b>Due date:</b> ${tasks[taskIndex]['date']}
-          </div>
-          <div class="popup-card-prio-container margin-bottom-25">
-              <b>Priority:</b> ${checkPopupCardPrio(tasks[taskIndex]['priority'])}
-          </div>
-          <div><div class="margin-bottom-25">
-              <b>Assigned To:</b>
-              <div class="popup-card-assigned-to-container">
-                  <div class="popup-card-user-initials">
-                  <div>${getUserInitials(tasks[taskIndex]['assignedTo'])}</div>
-                  </div>
-                  <div>
-                      ${tasks[taskIndex]['assignedTo']}
-                  </div>
-              </div>
-          </div>
-          <div class="margin-bottom-25">
-              <b>Subtasks:</b>
-              <div id="popup-card-subtasks">
-              </div>
-          </div>
-          <div class="popup-card-btns">
-              <div onclick="deleteTask(${taskIndex})" class="delete-btn">
-                  <img src="./assets/img/delete-button.png">
-              </div>
-              <div class="edit-btn">
-                  <img src="./assets/img/edit-pencil.png">
-              </div>
-          </div>
-</div>
-      </div>
+        <div class="popup-card-content">
+            <div class="close-popup-card" onclick="closePopupCard()">
+                <img src="./assets/img/close-btn.png">
+            </div>
+            <div class="popup-card-category margin-bottom-25">${tasks[taskIndex]['category']}</div>
+            <div class="popup-card-title margin-bottom-25">
+                <h2>${tasks[taskIndex]['title']}</h2>
+            </div>
+            <div class="margin-bottom-25">${tasks[taskIndex]['description']}</div>
+            <div class="margin-bottom-25">
+                <b>Due date:</b> ${tasks[taskIndex]['date']}
+            </div>
+            <div class="popup-card-prio-container margin-bottom-25">
+                <b>Priority:</b> ${checkPopupCardPrio(tasks[taskIndex]['priority'])}
+            </div>
+            <div>
+                <div class="margin-bottom-25"><b>Assigned To:</b>
+                    <div class="popup-card-assigned-to-container">
+                        <div class="popup-card-user-initials">
+                            <div>${getUserInitials(tasks[taskIndex]['assignedTo'])}</div>
+                        </div>
+                    <div>${tasks[taskIndex]['assignedTo']}</div>
+                </div>
+            </div>
+            <div class="margin-bottom-25"><b>Subtasks:</b>
+                <div id="popup-card-subtasks"></div>
+            </div>
+            <div class="popup-card-btns">
+                <div onclick="deleteTask(${taskIndex})" class="delete-btn">
+                    <img src="./assets/img/delete-button.png">
+                </div>
+                <div class="edit-btn">
+                    <img src="./assets/img/edit-pencil.png">
+                </div>
+            </div>
+        </div>
     `;
     generateSubtasks(taskIndex);
 }

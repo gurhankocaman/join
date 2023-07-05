@@ -143,17 +143,15 @@
     justify-content: space-between;
     align-items: center;
 }
-progress {
-    width: 85%;
-}
 
-progress[value]::-webkit-progress-value {
-    background-color: red;
+progress {
+    width: 75%;
 }
 
 .progress-bar-counter {
     font-size: 12px;
 }
+
 .card-bottom {
     display: flex;
     justify-content: space-between;
@@ -182,19 +180,19 @@ progress[value]::-webkit-progress-value {
     transform: translate(-50%, -50%);
     z-index: 999;
     width: 623px;
+    max-height: 100%;
     background-color: #ffffff;
     border-radius: 30px;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     padding: 50px;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .popup-card-content {
-    max-height: 800px; /* Setze hier die gewünschte maximale Höhe des Inhalts ein */
-    overflow: auto; /* Aktiviert den Scrollbalken, wenn der Inhalt die maximale Höhe überschreitet */
-  }
+    
+}
 
 .close-popup-card {
     position: absolute;
@@ -298,7 +296,7 @@ progress[value]::-webkit-progress-value {
 
 .edit-btn:hover {
     background-color: #29abe2;
-  }
+}
 
 /* add task popup */
 .add-task-overlay {
@@ -427,11 +425,11 @@ progress[value]::-webkit-progress-value {
     }
 }
 
-@media(max-width: 800px) {
+@media(max-width: 768px) {
     .popup-card {
         width: auto;
     }
-    
+
     .popup-card-assigned-to-container {
         margin-top: 10px;
     }
@@ -443,7 +441,8 @@ progress[value]::-webkit-progress-value {
         gap: 10px;
     }
 
-    .delete-btn, .edit-btn {
+    .delete-btn,
+    .edit-btn {
         border-radius: 10px;
     }
 }
