@@ -7,10 +7,16 @@ async function initBoard() {
 
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
+    generateHTML();
+}
+
+function generateHTML() {
     updateId();
     updateTasksHTML();
     generateProgressBar();
+    generateUsers();
 }
+
 
 // Property Id = Index Of Array
 function updateId() {
@@ -98,23 +104,6 @@ function generateTasksHTML(task) {
     }
 }
 
-function generateProgressBar() {
-    for (let i = 0; i < tasks.length; i++) {
-        const element = tasks[i];
-        let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
-        let percent = trueSubtasks.length / tasks[i].subtask.length * 100;
-        let progressBar = document.getElementById(`progress-bar-${i}`);
-        progressBar.value = percent;
-        generateProgressValues(trueSubtasks.length, tasks[i].subtask.length, i);
-    }
-}
-
-function generateProgressValues(trueSubtasks, allSubtasks, i) {
-    let content = document.getElementById(`progress-value-${i}`);
-    content.innerHTML = '';
-    content.innerHTML += `${trueSubtasks}/${allSubtasks} Done`;
-}
-
 
 // Search
 function findTasks() {
@@ -184,7 +173,7 @@ function generatePopupCardHTML(taskIndex) {
                         <div class="popup-card-user-initials">
                             <div>${getUserInitials(tasks[taskIndex]['assignedTo'])}</div>
                         </div>
-                    <div>${tasks[taskIndex]['assignedTo']}</div>
+                    <div id="assigned-to">Users</div>
                 </div>
             </div>
             <div class="margin-bottom-25"><b>Subtasks:</b>
@@ -202,6 +191,28 @@ function generatePopupCardHTML(taskIndex) {
     `;
     generateSubtasks(taskIndex);
 }
+
+function generateUsers() {
+    for (let i = 0; i < tasks.length; i++) {
+        for (let j = 0; j < tasks[i].assignedTo.length; j++) {
+            console.log(tasks[i].assignedTo[j]);
+        }
+       
+    }
+}
+function generateProgressBar() {
+    for (let i = 0; i < tasks.length; i++) {
+        let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
+        let percent = trueSubtasks.length / tasks[i].subtask.length * 100;
+        let progressBar = document.getElementById(`progress-bar-${i}`);
+        progressBar.value = percent;
+
+        let content = document.getElementById(`progress-value-${i}`);
+        content.innerHTML = '';
+        content.innerHTML += `${trueSubtasks.length}/${tasks[i].subtask.length} Done`;
+    }
+}
+
 
 
 function generateSubtasks(taskIndex) {
@@ -271,9 +282,9 @@ function checkPopupCardPrio(prio) {
 
 // Getting name initials
 function getUserInitials(username) {
-    const splitNames = username.split(' '); // Teilt den String in Wörter auf
-    const initials = splitNames.map(word => word.charAt(0)); // Extrahiert den ersten Buchstaben jedes Wortes
-    return initials.join(''); // Verbindet die Initialen zu einem String und gibt sie zurück
+    // const splitNames = username.split(' '); // Teilt den String in Wörter auf
+    // const initials = splitNames.map(word => word.charAt(0)); // Extrahiert den ersten Buchstaben jedes Wortes
+    // return initials.join(''); // Verbindet die Initialen zu einem String und gibt sie zurück
 }
 
 function openPopupCard(i) {
