@@ -144,7 +144,7 @@
     align-items: center;
 }
 progress {
-    width: 75%;
+    width: 85%;
 }
 
 progress[value]::-webkit-progress-value {

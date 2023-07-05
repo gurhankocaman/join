@@ -9,6 +9,7 @@ async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
     updateId();
     updateTasksHTML();
+    generateProgressBar();
 }
 
 // Property Id = Index Of Array
@@ -63,6 +64,7 @@ function allowDrop(ev) {
 function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     updateTasksHTML();
+    generateProgressBar();
     saveTasks(); // Aufruf der saveTasks-Funktion, um die aktualisierten tasks zu speichern
 }
 
@@ -83,7 +85,7 @@ function generateTasksHTML(task) {
             <div class="card-description margin-bottom-10">${task['description']}</div>
             <div class="progress-bar-container">
                 <progress id="progress-bar-${task.id}" max="100" value="50"></progress>
-                <div class="progress-bar-counter">1/2 Done</div>
+                <div id="progress-value-${task.id}" class="progress-bar-counter">1/2 Done</div>
             </div>
             <div class="card-bottom">
                 <div class="card-user-initials">
@@ -94,6 +96,23 @@ function generateTasksHTML(task) {
         </div>
     `;
     }
+}
+
+function generateProgressBar() {
+    for (let i = 0; i < tasks.length; i++) {
+        const element = tasks[i];
+        let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
+        let percent = trueSubtasks.length / tasks[i].subtask.length * 100;
+        let progressBar = document.getElementById(`progress-bar-${i}`);
+        progressBar.value = percent;
+        generateProgressValues(trueSubtasks.length, tasks[i].subtask.length, i);
+    }
+}
+
+function generateProgressValues(trueSubtasks, allSubtasks, i) {
+    let content = document.getElementById(`progress-value-${i}`);
+    content.innerHTML = '';
+    content.innerHTML += `${trueSubtasks}/${allSubtasks}`;
 }
 
 
@@ -186,7 +205,6 @@ function generatePopupCardHTML(taskIndex) {
       </div>
     `;
     generateSubtasks(taskIndex);
-    generateProgressBar(taskIndex);
 }
 
 
@@ -198,7 +216,7 @@ function generateSubtasks(taskIndex) {
 
     for (let i = 0; i < subtasks.length; i++) {
         const checkboxId = `subtask-${taskIndex}-${i}`;  // eindeutige ID für das Checkbox-Element wird generiert
-        
+
         // Zustand der Unteraufgabe (aus dem "checked"-Attribut) wird überprüft und in der Variable "isChecked" gespeichert
         // wenn die Unteraufgabe als "checked" markiert ist, wird der Wert 'checked' zugewiesen, ansonsten ein leerer String ('').
         const isChecked = subtasks[i].checked ? 'checked' : '';
@@ -216,14 +234,7 @@ function submitCheckboxValue(taskIndex, i) {
     // Checked-Eigenschaft wird in das entsprechende Unteraufgabenobjekt gespeichert
     tasks[taskIndex].subtask[i].checked = checkbox.checked;
     saveTasks();
-}
-
-
-function generateProgressBar(taskIndex) {
-    let trueSubtasks = tasks[taskIndex].subtask.filter(subtask => subtask.checked === true);
-    let percent = trueSubtasks.length / tasks[taskIndex].subtask.length * 100;
-    let progressBar = document.getElementById(`progress-bar-${taskIndex}`);
-    progressBar.value = percent;
+    generateProgressBar();
 }
 
 function deleteTask(i) {
