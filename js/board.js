@@ -14,7 +14,7 @@ function generateHTML() {
     updateId();
     updateTasksHTML();
     generateProgressBar();
-    // generateUsers();
+    generateUsers();
 }
 
 
@@ -94,8 +94,7 @@ function generateTasksHTML(task) {
                 <div id="progress-value-${task.id}" class="progress-bar-counter"></div>
             </div>
             <div class="card-bottom">
-                <div class="card-user-initials">
-                    <div>${getUserInitials(task['assignedTo'])}</div>
+                <div class="card-users" id="card-user-initials-${task.id}">
                 </div>
                 <div class="card-prio">${checkCardPrio(task['priority'])}</div>
             </div>
@@ -169,11 +168,7 @@ function generatePopupCardHTML(taskIndex) {
             </div>
             <div>
                 <div class="margin-bottom-25"><b>Assigned To:</b>
-                    <div class="popup-card-assigned-to-container">
-                        <div class="popup-card-user-initials">
-                            <div>${getUserInitials(tasks[taskIndex]['assignedTo'])}</div>
-                        </div>
-                    <div>${generateUsers(taskIndex)}</div>
+                    <div>${generateUsersPopupCard(taskIndex)}</div>
                 </div>
             </div>
             <div class="margin-bottom-25"><b>Subtasks:</b>
@@ -192,31 +187,39 @@ function generatePopupCardHTML(taskIndex) {
     generateSubtasks(taskIndex);
 }
 
-function generateUsers(taskIndex) {
+function generateUsersPopupCard(taskIndex) {
     let usersHTML = '';
     for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        usersHTML += /*html*/ `<div>${tasks[taskIndex].assignedTo[i].name}</div>`;
+        usersHTML += /*html*/ `
+            <div class="popup-card-assigned-to-container">
+            <div class="popup-card-user-initials">
+                <div>${getUserInitials(tasks[taskIndex].assignedTo[i].name)}</div>
+            </div>
+                <div>${tasks[taskIndex].assignedTo[i].name}</div>
+            </div>`;
     }
     return usersHTML;
 }
 
-
-
-// Getting name initials
-function getUserInitials(username) {
-    // const splitNames = username.split(' '); // Teilt den String in Wörter auf
-    // const initials = splitNames.map(word => word.charAt(0)); // Extrahiert den ersten Buchstaben jedes Wortes
-    // return initials.join(''); // Verbindet die Initialen zu einem String und gibt sie zurück
-}
-
-/*function generateUsers(tasks) {
-    for (let i = 0; i < tasks.length; i++) {
-        for (let j = 0; j < tasks[i].assignedTo.length; j++) {
-            return tasks[i].assignedTo[j];
+function getUserInitials(name) {
+    const words = name.split(" "); // Teile den Namen in einzelne Wörter auf
+    const initials = words.map(word => word.charAt(0));  // Initialen für jeden Namen erstellen
+    const initialsString = initials.join(""); // Initialen zu einem String zusammenführen
+    return initialsString;
+  }
+  
+function generateUsers() {
+    for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
+        let content = document.getElementById(`card-user-initials-${taskIndex}`);
+        content.innerHTML = '';
+        for (let j = 0; j < tasks[taskIndex].assignedTo.length; j++) {
+            content.innerHTML += /*html*/ `
+            <div class="card-user-initials">${getUserInitials(tasks[taskIndex].assignedTo[j].name)}</div>`;
         }
        
     }
-}*/
+}
+
 function generateProgressBar() {
     for (let i = 0; i < tasks.length; i++) {
         let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
