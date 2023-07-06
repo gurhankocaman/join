@@ -14,7 +14,7 @@ function generateHTML() {
     updateId();
     updateTasksHTML();
     generateProgressBar();
-    generateUsers();
+    // generateUsers();
 }
 
 
@@ -173,7 +173,7 @@ function generatePopupCardHTML(taskIndex) {
                         <div class="popup-card-user-initials">
                             <div>${getUserInitials(tasks[taskIndex]['assignedTo'])}</div>
                         </div>
-                    <div id="assigned-to">Users</div>
+                    <div>${generateUsers(taskIndex)}</div>
                 </div>
             </div>
             <div class="margin-bottom-25"><b>Subtasks:</b>
@@ -192,14 +192,31 @@ function generatePopupCardHTML(taskIndex) {
     generateSubtasks(taskIndex);
 }
 
-function generateUsers() {
+function generateUsers(taskIndex) {
+    let usersHTML = '';
+    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
+        usersHTML += /*html*/ `<div>${tasks[taskIndex].assignedTo[i].name}</div>`;
+    }
+    return usersHTML;
+}
+
+
+
+// Getting name initials
+function getUserInitials(username) {
+    // const splitNames = username.split(' '); // Teilt den String in Wörter auf
+    // const initials = splitNames.map(word => word.charAt(0)); // Extrahiert den ersten Buchstaben jedes Wortes
+    // return initials.join(''); // Verbindet die Initialen zu einem String und gibt sie zurück
+}
+
+/*function generateUsers(tasks) {
     for (let i = 0; i < tasks.length; i++) {
         for (let j = 0; j < tasks[i].assignedTo.length; j++) {
-            console.log(tasks[i].assignedTo[j]);
+            return tasks[i].assignedTo[j];
         }
        
     }
-}
+}*/
 function generateProgressBar() {
     for (let i = 0; i < tasks.length; i++) {
         let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
@@ -277,14 +294,6 @@ function checkPopupCardPrio(prio) {
     }
     return /*html*/ `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>
     `;
-}
-
-
-// Getting name initials
-function getUserInitials(username) {
-    // const splitNames = username.split(' '); // Teilt den String in Wörter auf
-    // const initials = splitNames.map(word => word.charAt(0)); // Extrahiert den ersten Buchstaben jedes Wortes
-    // return initials.join(''); // Verbindet die Initialen zu einem String und gibt sie zurück
 }
 
 function openPopupCard(i) {
