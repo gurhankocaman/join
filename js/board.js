@@ -7,14 +7,10 @@ async function initBoard() {
 
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
-    generateHTML();
-}
-
-function generateHTML() {
     updateId();
     updateTasksHTML();
-    generateProgressBar();
     generateUsers();
+    generateProgressBar();
 }
 
 
@@ -69,9 +65,17 @@ function allowDrop(ev) {
 
 function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
+    saveTasks();
     updateTasksHTML();
     generateProgressBar();
-    saveTasks(); // Aufruf der saveTasks-Funktion, um die aktualisierten tasks zu speichern
+}
+
+function moveTask(taskIndex, status) {
+    tasks[taskIndex].status = status;
+    saveTasks(); 
+    updateTasksHTML();
+    generateProgressBar();
+    closePopupCard();
 }
 
 // Speichern der aktualisierten Tasksansicht
@@ -174,6 +178,17 @@ function generatePopupCardHTML(taskIndex) {
             <div class="margin-bottom-25"><b>Subtasks:</b>
                 <div id="popup-card-subtasks"></div>
             </div>
+            <div class="popup-card-move-task">
+                <b>Move Task:</b>
+                <div>
+                    <div class="popup-card-move-task">
+                        <button onclick="moveTask('${taskIndex}', 'todo')">To Do</button>
+                        <button onclick="moveTask('${taskIndex}', 'in-progress')">In Progress</button>
+                        <button onclick="moveTask('${taskIndex}', 'awaiting-feedback')">Awaiting Feedback</button>
+                        <button onclick="moveTask('${taskIndex}', 'done')">Done</button>
+                    </div>
+                </div>
+            </div>
             <div class="popup-card-btns">
                 <div onclick="deleteTask(${taskIndex})" class="delete-btn">
                     <img src="./assets/img/delete-button.png">
@@ -227,9 +242,9 @@ function generateProgressBar() {
         let progressBar = document.getElementById(`progress-bar-${i}`);
         progressBar.value = percent;
 
-        let content = document.getElementById(`progress-value-${i}`);
-        content.innerHTML = '';
-        content.innerHTML += `${trueSubtasks.length}/${tasks[i].subtask.length} Done`;
+        let progressValue = document.getElementById(`progress-value-${i}`);
+        progressValue.innerHTML = '';
+        progressValue.innerHTML += `${trueSubtasks.length}/${tasks[i].subtask.length} Done`;
     }
 }
 
@@ -237,7 +252,6 @@ function generateProgressBar() {
 
 function generateSubtasks(taskIndex) {
     let subtasks = tasks[taskIndex].subtask; // enthält das Array der Unteraufgaben für den gegebenen taskIndex
-    let checkboxValues = []; // Array zur Zwischenspeicherung der Checkbox-Werte
     let content = document.getElementById('popup-card-subtasks');
     content.innerHTML = '';
 
@@ -317,4 +331,9 @@ function closePopUp() {
     document.getElementById('add-task-popup').classList.add('d-none');
 }
 
-
+function clearTasks() {
+    tasks = [];
+    filteredTasks = [];
+    updateTasksHTML();
+    saveTasks();
+}
