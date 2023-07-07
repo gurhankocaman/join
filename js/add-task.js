@@ -3,6 +3,7 @@ let categories = [];
 let subtasks = [];
 var subtaskValues = [];
 var contactValues = [];
+var categoryColors = [];
 
 // Load Tasks
 async function loadTasks() {
@@ -39,7 +40,7 @@ async function createTask() {
     subtasksToArray()
     
 
-    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValues, "date" : date.value, "priority" : checkedValue, "subtask" : subtaskValues});
+    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValues, "date" : date.value, "priority" : checkedValue, "subtask" : subtaskValues, "color" : categoryColors});
 
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
@@ -109,6 +110,17 @@ async function addNewCategory(){
     categories.push({"category" : category.value});
     await setItem('categories', JSON.stringify(categories));
     resetSelect();
+    addCategoryColor();
+
+    
+    
+}
+
+async function addCategoryColor(){
+    var color = document.getElementById('colorSelect');
+
+    categoryColors.push({"color" : color.value});
+    await setItem('categoryColors', JSON.stringify(categoryColors));
 }
 
 async function addNewSubtask(){
