@@ -195,9 +195,7 @@ progress {
     overflow: auto;
 }
 
-.popup-card-content {
-    
-}
+.popup-card-content {}
 
 .close-popup-card {
     position: absolute;
@@ -235,6 +233,8 @@ progress {
     border-radius: 10px;
     padding: 4px 18px;
     margin-left: 25px;
+    width: 111px;
+    height: 41px;
     display: flex;
     align-items: center;
 }
@@ -253,20 +253,20 @@ progress {
 .popup-card-dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  .popup-card-dropdown-content {
+}
+
+.popup-card-dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     z-index: 1;
-  }
-  
-  .popup-card-dropdown:hover .popup-card-dropdown-content {
+}
+
+.popup-card-dropdown:hover .popup-card-dropdown-content {
     display: block;
-  }
+}
 
 .popup-card-btns {
     position: absolute;
@@ -318,6 +318,41 @@ progress {
 
 .edit-btn:hover {
     background-color: #29abe2;
+}
+
+/* edit task */
+
+.edit-task-title input,
+.edit-task-description input {
+    width: 100%;
+    padding: 12px 10px;
+}
+
+.edit-task-input {
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    outline: transparent;
+    font-size: 21px;
+}
+
+.edit-task-show-prio {
+    display: flex;
+}
+
+.edit-task-prio-urgent {
+    background-color: #FF3D00;
+    cursor: pointer;
+}
+
+.edit-task-prio-medium {
+    background-color: #FFA800;
+    cursor: pointer;
+}
+
+.edit-task-prio-low {
+    background-color: #7AE229;
+    cursor: pointer;
 }
 
 /* add task popup */

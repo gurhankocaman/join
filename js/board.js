@@ -2,17 +2,12 @@ let tasks = [];
 let filteredTasks = [];
 
 async function initBoard() {
-    loadTasks();
-}
-
-async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
     updateId();
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
 }
-
 
 // Property Id = Index Of Array
 function updateId() {
@@ -67,15 +62,16 @@ function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     saveTasks();
     updateTasksHTML();
+    generateUsers();
     generateProgressBar();
 }
 
 function moveTask(taskIndex, status) {
     tasks[taskIndex].status = status;
-    saveTasks(); 
+    saveTasks();
     updateTasksHTML();
+    generateUsers();
     generateProgressBar();
-    closePopupCard();
 }
 
 // Speichern der aktualisierten Tasksansicht
@@ -93,7 +89,7 @@ function generateTasksHTML(task) {
             <div class="card-category margin-bottom-10">${task['category']}</div>
             <div class="card-title margin-bottom-10">${task['title']}</div>
             <div class="card-description margin-bottom-10">${task['description']}</div>
-            <div class="progress-bar-container">
+            <div id="progress-bar-container" class="progress-bar-container">
                 <progress id="progress-bar-${task.id}" max="100" value="0"></progress>
                 <div id="progress-value-${task.id}" class="progress-bar-counter"></div>
             </div>
@@ -193,7 +189,7 @@ function generatePopupCardHTML(taskIndex) {
                 <div onclick="deleteTask(${taskIndex})" class="delete-btn">
                     <img src="./assets/img/delete-button.png">
                 </div>
-                <div class="edit-btn">
+                <div onclick="editTask(${taskIndex})" class="edit-btn">
                     <img src="./assets/img/edit-pencil.png">
                 </div>
             </div>
@@ -201,6 +197,54 @@ function generatePopupCardHTML(taskIndex) {
     `;
     generateSubtasks(taskIndex);
 }
+
+function editTask(taskIndex) {
+    let content = document.getElementById('popup-card');
+    content.innerHTML = '';
+    content.innerHTML += /*html*/ `
+        <div class="popup-card-content">
+            <div class="close-popup-card" onclick="closePopupCard()">
+                <img src="./assets/img/close-btn.png">
+            </div>
+            <div class="popup-card-category margin-bottom-25">${tasks[taskIndex]['category']}</div>
+            <div class="edit-task-title margin-bottom-25">
+                <p><b>Title</b></p>
+                <input required id="input-title-edit-task" value="${tasks[taskIndex]['title']}" class="edit-task-input" type="text" placeholder="Enter a title">
+            </div>
+            <div class="edit-task-description margin-bottom-25">
+                <p><b>Description</b></p>
+                <input required id="input-description-edit-task" value="${tasks[taskIndex]['description']}" class="edit-task-input" type="text" placeholder="Enter a description">
+            </div>
+            <div class="popup-card-prio-container margin-bottom-25">
+                <b>Priority:</b> 
+                <div class="edit-task-show-prio">
+                    <div class="popup-card-prio-btn edit-task-prio-urgent" onclick="saveEdit(${taskIndex}, 'Urgent')">
+                        Urgent<img src="./assets/img/prio-urgent-white.png"></div>
+                    <div class="popup-card-prio-btn edit-task-prio-medium" onclick="saveEdit(${taskIndex}, 'Medium')">
+                        Medium<img src="./assets/img/prio-medium-white.png"></div>
+                    <div class="popup-card-prio-btn edit-task-prio-low" onclick="saveEdit(${taskIndex}, 'Low')">
+                        Low <img src="./assets/img/prio-low-white.png"></div>
+                </div>
+            </div>
+            <div class="popup-card-btns">
+                <div onclick="saveEdit(${taskIndex})">
+                    OK ✓
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+async function saveEdit(taskIndex, prio) {
+    tasks[taskIndex]['title'] = document.getElementById('input-title-edit-task').value;
+    tasks[taskIndex]['description'] = document.getElementById('input-description-edit-task').value;
+    tasks[taskIndex]['priority'] = prio; // Speichere den Wert in einer Eigenschaft des tasks-Objekts
+    console.log(tasks[taskIndex]['title']);
+    console.log(tasks[taskIndex]['description']);
+    console.log(tasks[taskIndex]['priority']);
+    // await setItem('tasks', JSON.stringify(tasks));
+}
+
 
 function generateUsersPopupCard(taskIndex) {
     let usersHTML = '';
@@ -221,8 +265,8 @@ function getUserInitials(name) {
     const initials = words.map(word => word.charAt(0));  // Initialen für jeden Namen erstellen
     const initialsString = initials.join(""); // Initialen zu einem String zusammenführen
     return initialsString;
-  }
-  
+}
+
 function generateUsers() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
         let content = document.getElementById(`card-user-initials-${taskIndex}`);
@@ -231,22 +275,27 @@ function generateUsers() {
             content.innerHTML += /*html*/ `
             <div class="card-user-initials">${getUserInitials(tasks[taskIndex].assignedTo[j].name)}</div>`;
         }
-       
+
     }
 }
 
 function generateProgressBar() {
     for (let i = 0; i < tasks.length; i++) {
-        let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
-        let percent = trueSubtasks.length / tasks[i].subtask.length * 100;
-        let progressBar = document.getElementById(`progress-bar-${i}`);
-        progressBar.value = percent;
+        if (tasks[i].subtask && tasks[i].subtask.length > 0) {
+            let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
+            let percent = trueSubtasks.length / tasks[i].subtask.length * 100;
+            let progressBar = document.getElementById(`progress-bar-${i}`);
+            progressBar.value = percent;
 
-        let progressValue = document.getElementById(`progress-value-${i}`);
-        progressValue.innerHTML = '';
-        progressValue.innerHTML += `${trueSubtasks.length}/${tasks[i].subtask.length} Done`;
+            let progressValue = document.getElementById(`progress-value-${i}`);
+            progressValue.innerHTML = '';
+            progressValue.innerHTML += `${trueSubtasks.length}/${tasks[i].subtask.length} Done`;
+        } else {
+            document.getElementById('progress-bar-container').classList.add('d-none');
+        }
     }
 }
+
 
 
 
@@ -324,7 +373,8 @@ function closePopupCard() {
 
 // Add Task Pop Up
 function openAddTask() {
-    document.getElementById('add-task-popup').classList.remove('d-none');
+    window.location.href = 'add-task.html';
+    // document.getElementById('add-task-popup').classList.remove('d-none');
 }
 
 function closePopUp() {
