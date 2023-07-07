@@ -198,6 +198,7 @@ function generatePopupCardHTML(taskIndex) {
     `;
     generateSubtasks(taskIndex);
 }
+let selectedPriority; // Globale Variable zum Speichern der ausgewählten Priorität beim editieren der Tasks
 
 function editTask(taskIndex) {
     let content = document.getElementById('popup-card');
@@ -219,11 +220,11 @@ function editTask(taskIndex) {
             <div class="popup-card-prio-container margin-bottom-25">
                 <b>Priority:</b> 
                 <div class="edit-task-show-prio">
-                    <div class="popup-card-prio-btn edit-task-prio-urgent" onclick="saveEdit(${taskIndex}, 'Urgent')">
+                    <div class="popup-card-prio-btn edit-task-prio-urgent" onclick="selectPriority('Urgent')"> 
                         Urgent<img src="./assets/img/prio-urgent-white.png"></div>
-                    <div class="popup-card-prio-btn edit-task-prio-medium" onclick="saveEdit(${taskIndex}, 'Medium')">
+                    <div class="popup-card-prio-btn edit-task-prio-medium" onclick="selectPriority('Medium')">
                         Medium<img src="./assets/img/prio-medium-white.png"></div>
-                    <div class="popup-card-prio-btn edit-task-prio-low" onclick="saveEdit(${taskIndex}, 'Low')">
+                    <div class="popup-card-prio-btn edit-task-prio-low" onclick="selectPriority('Low')">
                         Low <img src="./assets/img/prio-low-white.png"></div>
                 </div>
             </div>
@@ -236,18 +237,24 @@ function editTask(taskIndex) {
     `;
 }
 
-async function saveEdit(taskIndex, prio) {
+function selectPriority(priority) {
+    selectedPriority = priority; // Speichere die ausgewählte Priorität in der globalen Variable
+}
+
+async function saveEdit(taskIndex) {
     tasks[taskIndex]['title'] = document.getElementById('input-title-edit-task').value;
     tasks[taskIndex]['description'] = document.getElementById('input-description-edit-task').value;
-    tasks[taskIndex]['priority'] = prio; // Speichere den Wert in einer Eigenschaft des tasks-Objekts
+    tasks[taskIndex]['priority'] = selectedPriority; // Verwende den Wert aus der globalen Variable
     console.log(tasks[taskIndex]['title']);
     console.log(tasks[taskIndex]['description']);
     console.log(tasks[taskIndex]['priority']);
     await setItem('tasks', JSON.stringify(tasks));
+    closePopupCard();
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
 }
+
 
 
 function generateUsersPopupCard(taskIndex) {
@@ -299,8 +306,6 @@ function generateProgressBar() {
         }
     }
 }
-
-
 
 
 function generateSubtasks(taskIndex) {
