@@ -58,20 +58,21 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function moveTo(status) {
+async function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
-    saveTasks();
+    await saveTasks();
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
 }
 
-function moveTask(taskIndex, status) {
+async function moveTask(taskIndex, status) {
     tasks[taskIndex].status = status;
-    saveTasks();
+    await saveTasks();
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
+    closePopupCard();
 }
 
 // Speichern der aktualisierten Tasksansicht
@@ -178,7 +179,7 @@ function generatePopupCardHTML(taskIndex) {
                 <b>Move Task:</b>
                 <div>
                     <div class="popup-card-move-task">
-                        <button onclick="moveTask('${taskIndex}', 'todo')">To Do</button>
+                        <button onclick="moveTask('${taskIndex}', 'to-do')">To Do</button>
                         <button onclick="moveTask('${taskIndex}', 'in-progress')">In Progress</button>
                         <button onclick="moveTask('${taskIndex}', 'awaiting-feedback')">Awaiting Feedback</button>
                         <button onclick="moveTask('${taskIndex}', 'done')">Done</button>
@@ -242,7 +243,10 @@ async function saveEdit(taskIndex, prio) {
     console.log(tasks[taskIndex]['title']);
     console.log(tasks[taskIndex]['description']);
     console.log(tasks[taskIndex]['priority']);
-    // await setItem('tasks', JSON.stringify(tasks));
+    await setItem('tasks', JSON.stringify(tasks));
+    updateTasksHTML();
+    generateUsers();
+    generateProgressBar();
 }
 
 
