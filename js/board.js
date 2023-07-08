@@ -222,14 +222,14 @@ function editTask(taskIndex) {
                 <input required id="input-date-edit-task" value="${tasks[taskIndex]['date']}" class="edit-task-input" type="date" placeholder="DD/MM/YYYY">
             </div>
             <div class="popup-card-prio-container edit-task-prio-container margin-bottom-25">
-                <b>Priority:</b> 
+                <b class="margin-bottom-25">Priority:</b> 
                 <div class="edit-task-show-prio">
-                    <div class="popup-card-prio-btn edit-task-prio-urgent" onclick="selectPriority('Urgent')"> 
-                        Urgent<img src="./assets/img/prio-urgent-white.png"></div>
-                    <div class="popup-card-prio-btn edit-task-prio-medium" onclick="selectPriority('Medium')">
-                        Medium<img src="./assets/img/prio-medium-white.png"></div>
-                    <div class="popup-card-prio-btn edit-task-prio-low" onclick="selectPriority('Low')">
-                        Low <img src="./assets/img/prio-low-white.png"></div>
+                    <div id="edit-task-prio-urgent" class="edit-task-prio-btn" onclick="selectPriority('Urgent')"> 
+                        Urgent<img src="./assets/img/prio-urgent.png"></div>
+                    <div id="edit-task-prio-medium" class="edit-task-prio-btn" onclick="selectPriority('Medium')">
+                        Medium<img src="./assets/img/prio-medium.png"></div>
+                    <div id="edit-task-prio-low" class="edit-task-prio-btn" onclick="selectPriority('Low')">
+                        Low <img src="./assets/img/prio-low.png"></div>
                 </div>
             </div>
             <div>
@@ -247,8 +247,27 @@ function editTask(taskIndex) {
 }
 
 function selectPriority(priority) {
+    const urgentBtn = document.getElementById('edit-task-prio-urgent');
+    const mediumBtn = document.getElementById('edit-task-prio-medium');
+    const lowBtn = document.getElementById('edit-task-prio-low');
+
+    // Entferne die classList von allen Buttons
+    urgentBtn.classList.remove('edit-task-prio-urgent');
+    mediumBtn.classList.remove('edit-task-prio-medium');
+    lowBtn.classList.remove('edit-task-prio-low');
+
     selectedPriority = priority; // Speichere die ausgewählte Priorität in der globalen Variable
+
+    // Füge die classList nur zum ausgewählten Button hinzu
+    if (priority === 'Urgent') {
+        urgentBtn.classList.add('edit-task-prio-urgent');
+    } else if (priority === 'Medium') {
+        mediumBtn.classList.add('edit-task-prio-medium');
+    } else if (priority === 'Low') {
+        lowBtn.classList.add('edit-task-prio-low');
+    }
 }
+
 
 async function saveEdit(taskIndex) {
     tasks[taskIndex]['title'] = document.getElementById('input-title-edit-task').value;
