@@ -7,6 +7,7 @@ async function initBoard() {
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
+    generateCategoryColor();
 }
 
 // Property Id = Index Of Array
@@ -64,6 +65,7 @@ async function moveTo(status) {
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
+    generateCategoryColor();
 }
 
 async function moveTask(taskIndex, status) {
@@ -72,6 +74,7 @@ async function moveTask(taskIndex, status) {
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
+    generateCategoryColor();
     closePopupCard();
 }
 
@@ -87,7 +90,7 @@ function generateTasksHTML(task) {
     } else {
         return /*html*/ `
         <div class="card-container margin-bottom-25" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
-            <div class="card-category margin-bottom-10">${task['category']}</div>
+            <div id ="card-category" class="card-category margin-bottom-10">${task['category']}</div>
             <div class="card-title margin-bottom-10">${task['title']}</div>
             <div class="card-description margin-bottom-10">${task['description']}</div>
             <div id="progress-bar-container" class="progress-bar-container">
@@ -156,7 +159,7 @@ function generatePopupCardHTML(taskIndex) {
             <div class="close-popup-card" onclick="closePopupCard()">
                 <img src="./assets/img/close-btn.png">
             </div>
-            <div class="popup-card-category margin-bottom-25">${tasks[taskIndex]['category']}</div>
+            <div id="popup-card-category-${taskIndex}" class="popup-card-category margin-bottom-25">${tasks[taskIndex]['category']}</div>
             <div class="popup-card-title margin-bottom-25">
                 <h2>${tasks[taskIndex]['title']}</h2>
             </div>
@@ -232,11 +235,6 @@ function editTask(taskIndex) {
                         Low <img src="./assets/img/prio-low.png"></div>
                 </div>
             </div>
-            <div>
-                <div class="margin-bottom-25"><b>Assigned To:</b>
-                    <div>${generateUsersPopupCard(taskIndex)}</div>
-                </div>
-            </div>
             <div class="popup-card-btns">
                 <div class="dark-btn save-btn" onclick="saveEdit(${taskIndex})">
                     <span>OK ✓</span>
@@ -283,6 +281,7 @@ async function saveEdit(taskIndex) {
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
+    generateCategoryColor();
 }
 
 
@@ -337,6 +336,16 @@ function generateProgressBar() {
     }
 }
 
+function generateCategoryColor() {
+    for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
+        document.getElementById('card-category').style.backgroundColor = `${'red'}`;
+    }
+}
+
+function generatePopupCardCategoryColor(taskIndex) {
+        document.getElementById(`popup-card-category-${taskIndex}`).style.backgroundColor = `${'red'}`;
+}
+
 
 function generateSubtasks(taskIndex) {
     let subtasks = tasks[taskIndex].subtask; // enthält das Array der Unteraufgaben für den gegebenen taskIndex
@@ -372,6 +381,9 @@ function deleteTask(i) {
     saveTasks();
     closePopupCard();
     updateTasksHTML();
+    generateUsers();
+    generateProgressBar();
+    generateCategoryColor();
 }
 
 
@@ -404,6 +416,7 @@ function checkPopupCardPrio(prio) {
 function openPopupCard(i) {
     document.getElementById('popup-card').classList.remove('d-none');
     generatePopupCardHTML(i);
+    generatePopupCardCategoryColor(i);
 }
 
 function closePopupCard() {

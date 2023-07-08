@@ -118,7 +118,6 @@
 }
 
 .card-category {
-    background-color: red;
     border-radius: 8px;
     display: flex;
     justify-content: center;
@@ -205,7 +204,6 @@ progress {
 }
 
 .popup-card-category {
-    background-color: red;
     border-radius: 8px;
     display: flex;
     justify-content: center;
@@ -253,7 +251,8 @@ progress {
 }
 
 .move-task-btn {
-    padding: 2px 8px;
+    height: 41px;
+    padding: 4px 18px;
     border-radius: 8px;
     border: 1px solid #2A3647;
     font-weight: 700;
@@ -324,7 +323,7 @@ progress {
 .edit-task-title input,
 .edit-task-description input,
 .edit-due-date input {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 12px 10px;
 }
 
@@ -519,7 +518,7 @@ progress {
 
 @media(max-width: 768px) {
     .popup-card {
-        width: auto;
+        width: 380px;
         font-size: 16px;
     }
 
@@ -554,11 +553,20 @@ progress {
     }
 
     .edit-task-show-prio {
-        width: 500px;
+        width: 380px;
+    }
+
+    .edit-task-prio-btn {
+        width: auto;
     }
 }
 
 @media(max-width: 480px) {
+    .popup-card {
+        width: auto;
+        font-size: 16px;
+    }
+
     .board-column {
         width: auto;
     }
@@ -582,6 +590,11 @@ progress {
     }
 
     .edit-task-show-prio {
+        width: 240px;
+    }
+
+    .edit-task-show-prio {
+        gap: 10px;
         flex-direction: column;
     }
 }
