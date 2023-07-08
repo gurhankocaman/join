@@ -175,14 +175,14 @@ function generatePopupCardHTML(taskIndex) {
             <div class="margin-bottom-25"><b>Subtasks:</b>
                 <div id="popup-card-subtasks"></div>
             </div>
-            <div class="popup-card-move-task">
+            <div class="margin-bottom-25">
                 <b>Move Task:</b>
                 <div>
                     <div class="popup-card-move-task">
-                        <button onclick="moveTask('${taskIndex}', 'to-do')">To Do</button>
-                        <button onclick="moveTask('${taskIndex}', 'in-progress')">In Progress</button>
-                        <button onclick="moveTask('${taskIndex}', 'awaiting-feedback')">Awaiting Feedback</button>
-                        <button onclick="moveTask('${taskIndex}', 'done')">Done</button>
+                        <button class="move-task-btn" onclick="moveTask('${taskIndex}', 'to-do')">To Do</button>
+                        <button class="move-task-btn" onclick="moveTask('${taskIndex}', 'in-progress')">In Progress</button>
+                        <button class="move-task-btn" onclick="moveTask('${taskIndex}', 'awaiting-feedback')">Awaiting Feedback</button>
+                        <button class="move-task-btn" onclick="moveTask('${taskIndex}', 'done')">Done</button>
                     </div>
                 </div>
             </div>
@@ -217,7 +217,11 @@ function editTask(taskIndex) {
                 <p><b>Description</b></p>
                 <input required id="input-description-edit-task" value="${tasks[taskIndex]['description']}" class="edit-task-input" type="text" placeholder="Enter a description">
             </div>
-            <div class="popup-card-prio-container margin-bottom-25">
+            <div class="edit-due-date margin-bottom-25">
+                <p><b>Due date:</b></p> 
+                <input required id="input-date-edit-task" value="${tasks[taskIndex]['date']}" class="edit-task-input" type="date" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="popup-card-prio-container edit-task-prio-container margin-bottom-25">
                 <b>Priority:</b> 
                 <div class="edit-task-show-prio">
                     <div class="popup-card-prio-btn edit-task-prio-urgent" onclick="selectPriority('Urgent')"> 
@@ -228,9 +232,14 @@ function editTask(taskIndex) {
                         Low <img src="./assets/img/prio-low-white.png"></div>
                 </div>
             </div>
+            <div>
+                <div class="margin-bottom-25"><b>Assigned To:</b>
+                    <div>${generateUsersPopupCard(taskIndex)}</div>
+                </div>
+            </div>
             <div class="popup-card-btns">
-                <div onclick="saveEdit(${taskIndex})">
-                    OK ✓
+                <div class="dark-btn save-btn" onclick="saveEdit(${taskIndex})">
+                    <span>OK ✓</span>
                 </div>
             </div>
         </div>
@@ -244,9 +253,11 @@ function selectPriority(priority) {
 async function saveEdit(taskIndex) {
     tasks[taskIndex]['title'] = document.getElementById('input-title-edit-task').value;
     tasks[taskIndex]['description'] = document.getElementById('input-description-edit-task').value;
+    tasks[taskIndex]['date'] = document.getElementById('input-date-edit-task').value;
     tasks[taskIndex]['priority'] = selectedPriority; // Verwende den Wert aus der globalen Variable
     console.log(tasks[taskIndex]['title']);
     console.log(tasks[taskIndex]['description']);
+    console.log(tasks[taskIndex]['date']);
     console.log(tasks[taskIndex]['priority']);
     await setItem('tasks', JSON.stringify(tasks));
     closePopupCard();
