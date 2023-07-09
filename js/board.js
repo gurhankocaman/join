@@ -1,7 +1,7 @@
 let tasks = [];
 let filteredTasks = [];
 let currentDraggedElement;
-let selectedPriority; // Globale Variable zum Speichern der ausgewählten Priorität beim editieren der Tasks
+let selectedPriority; // Variable zum Speichern der ausgewählten Priorität beim editieren der Tasks
 
 
 async function initBoard() {
@@ -21,7 +21,12 @@ function updateId() {
     }
 }
 
+// Speichern der aktualisierten Tasksansicht
+async function saveTasks() {
+    await setItem('tasks', JSON.stringify(tasks));
+}
 
+// Drag and drop
 function updateTasksHTML() {
     updateToDo();
     updateInProgress();
@@ -100,20 +105,6 @@ async function moveTask(taskIndex, status) {
     closePopupCard();
 }
 
-// Speichern der aktualisierten Tasksansicht
-async function saveTasks() {
-    await setItem('tasks', JSON.stringify(tasks));
-}
-
-// Generate Tasks 
-function generateTasksHTML(task) {
-    if (filteredTasks.length > 0 && !filteredTasks.includes(task)) {
-        return ''; // Wenn das Task-Objekt nicht im filteredTasks-Array enthalten ist, wird ein leerer String zurückgegeben und der Task wird nicht angezeigt
-    } else {
-        return tasksHTML(task);
-    }
-}
-
 // Search
 function findTasks() {
     let searchValue = document.querySelector('.search-box input').value;
@@ -140,115 +131,19 @@ function findTasks() {
     generateCategoryColor();
 }
 
-
-// Show Prio Images Card
-function checkCardPrio(prio) {
-    let prioImg;
-
-    if (prio === 'Urgent') {
-        prioImg = "./assets/img/prio-urgent.png"
-    }
-    if (prio === 'Medium') {
-        prioImg = "./assets/img/prio-medium.png"
-    }
-    if (prio === 'Low') {
-        prioImg = "./assets/img/prio-low.png"
-    }
-    return /*html*/ `<img src="${prioImg}">
-    `;
-}
-
-
-// popup card
-function generatePopupCardHTML(taskIndex) {
-    let content = document.getElementById('popup-card');
-    content.innerHTML = '';
-    content.innerHTML += popupCardHTML(taskIndex);
-    generateSubtasks(taskIndex);
-}
-
-
-function editTask(taskIndex) {
-    let content = document.getElementById('popup-card');
-    content.innerHTML = '';
-    content.innerHTML += editTaskHTML(taskIndex);
-}
-
-
-function selectPriority(priority) {
-    const urgentBtn = document.getElementById('edit-task-prio-urgent');
-    const mediumBtn = document.getElementById('edit-task-prio-medium');
-    const lowBtn = document.getElementById('edit-task-prio-low');
-
-    // Entferne die classList von allen Buttons
-    urgentBtn.classList.remove('edit-task-prio-urgent');
-    mediumBtn.classList.remove('edit-task-prio-medium');
-    lowBtn.classList.remove('edit-task-prio-low');
-
-    selectedPriority = priority; // Speichere die ausgewählte Priorität in der globalen Variable
-
-    // Füge die classList nur zum ausgewählten Button hinzu
-    if (priority === 'Urgent') {
-        urgentBtn.classList.add('edit-task-prio-urgent');
-    } else if (priority === 'Medium') {
-        mediumBtn.classList.add('edit-task-prio-medium');
-    } else if (priority === 'Low') {
-        lowBtn.classList.add('edit-task-prio-low');
+// Generate Tasks 
+function generateTasksHTML(task) {
+    if (filteredTasks.length > 0 && !filteredTasks.includes(task)) {
+        return ''; // Wenn das Task-Objekt nicht im filteredTasks-Array enthalten ist, wird ein leerer String zurückgegeben und der Task wird nicht angezeigt
+    } else {
+        return tasksHTML(task);
     }
 }
 
-async function saveEdit(taskIndex) {
-    tasks[taskIndex]['title'] = document.getElementById('input-title-edit-task').value;
-    tasks[taskIndex]['description'] = document.getElementById('input-description-edit-task').value;
-    tasks[taskIndex]['date'] = document.getElementById('input-date-edit-task').value;
 
-    if (selectedPriority) {
-        tasks[taskIndex]['priority'] = selectedPriority; // wird nur aktualisiert, wenn Wert vorhanden
-    }
-
-    await setItem('tasks', JSON.stringify(tasks));
-    closePopupCard();
-    updateTasksHTML();
-    generateUsers();
-    generateProgressBar();
-    generateCategoryColor();
-}
-
-
-
-
-function generateUsersPopupCard(taskIndex) {
-    let usersHTML = '';
-    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        usersHTML += /*html*/ `
-            <div class="popup-card-assigned-to-container">
-            <div class="popup-card-user-initials">
-                <div>${getUserInitials(tasks[taskIndex].assignedTo[i].name)}</div>
-            </div>
-                <div>${tasks[taskIndex].assignedTo[i].name}</div>
-            </div>`;
-    }
-    return usersHTML;
-}
-
-
-function getUserInitials(name) {
-    const words = name.split(" "); // Teile den Namen in einzelne Wörter auf
-    const initials = words.map(word => word.charAt(0));  // Initialen für jeden Namen erstellen
-    const initialsString = initials.join(""); // Initialen zu einem String zusammenführen
-    return initialsString;
-}
-
-
-function generateUsers() {
+function generateCategoryColor() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
-        let content = document.getElementById(`card-user-initials-${taskIndex}`);
-        content.innerHTML = '';
-        for (let j = 0; j < tasks[taskIndex].assignedTo.length; j++) {
-            content.innerHTML += /*html*/ `
-            <div class="card-user-initials">${getUserInitials(tasks[taskIndex].assignedTo[j].name)}</div>`;
-        }
-
+        document.getElementById('card-category').style.backgroundColor = `${'red'}`;
     }
 }
 
@@ -271,10 +166,53 @@ function generateProgressBar() {
 }
 
 
-function generateCategoryColor() {
+function generateUsers() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
-        document.getElementById('card-category').style.backgroundColor = `${'red'}`;
+        let content = document.getElementById(`card-user-initials-${taskIndex}`);
+        content.innerHTML = '';
+        for (let j = 0; j < tasks[taskIndex].assignedTo.length; j++) {
+            content.innerHTML += /*html*/ `
+            <div class="card-user-initials">${getUserInitials(tasks[taskIndex].assignedTo[j].name)}</div>`;
+        }
+
     }
+}
+
+
+function checkCardPrio(prio) {
+    let prioImg;
+
+    if (prio === 'Urgent') {
+        prioImg = "./assets/img/prio-urgent.png"
+    }
+    if (prio === 'Medium') {
+        prioImg = "./assets/img/prio-medium.png"
+    }
+    if (prio === 'Low') {
+        prioImg = "./assets/img/prio-low.png"
+    }
+    return /*html*/ `<img src="${prioImg}">
+    `;
+}
+
+// popup card
+function openPopupCard(i) {
+    document.getElementById('popup-card').classList.remove('d-none');
+    generatePopupCardHTML(i);
+    generatePopupCardCategoryColor(i);
+}
+
+
+function closePopupCard() {
+    document.getElementById('popup-card').classList.add('d-none');
+}
+
+
+function generatePopupCardHTML(taskIndex) {
+    let content = document.getElementById('popup-card');
+    content.innerHTML = '';
+    content.innerHTML += popupCardHTML(taskIndex);
+    generateSubtasks(taskIndex);
 }
 
 
@@ -282,10 +220,46 @@ function generatePopupCardCategoryColor(taskIndex) {
     document.getElementById(`popup-card-category-${taskIndex}`).style.backgroundColor = `${'red'}`;
 }
 
-function generateEditTaskCategoryColor(taskIndex) {
-    document.getElementById(`edit-task-category-${taskIndex}`).style.backgroundColor = `${'red'}`;
+
+function checkPopupCardPrio(prio) {
+    let prioImg;
+    let prioText;
+    let prioColor;
+
+    if (prio === 'Urgent') {
+        prioText = 'Urgent';
+        prioImg = "./assets/img/prio-urgent-white.png";
+        prioColor = "#FF3D00";
+    }
+    if (prio === 'Medium') {
+        prioText = 'Medium';
+        prioImg = "./assets/img/prio-medium-white.png";
+        prioColor = "#FFA800";
+    }
+    if (prio === 'Low') {
+        prioText = 'Low';
+        prioImg = "./assets/img/prio-low-white.png"
+        prioColor = "#7AE229";
+
+    }
+    return /*html*/ `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>
+    `;
 }
 
+
+function generateUsersPopupCard(taskIndex) {
+    let usersHTML = '';
+    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
+        usersHTML += /*html*/ `
+            <div class="popup-card-assigned-to-container">
+            <div class="popup-card-user-initials">
+                <div>${getUserInitials(tasks[taskIndex].assignedTo[i].name)}</div>
+            </div>
+                <div>${tasks[taskIndex].assignedTo[i].name}</div>
+            </div>`;
+    }
+    return usersHTML;
+}
 
 function generateSubtasks(taskIndex) {
     let subtasks = tasks[taskIndex].subtask; // enthält das Array der Unteraufgaben für den gegebenen taskIndex
@@ -327,44 +301,66 @@ function deleteTask(i) {
     generateCategoryColor();
 }
 
+// edit task
+function editTask(taskIndex) {
+    let content = document.getElementById('popup-card');
+    content.innerHTML = '';
+    content.innerHTML += editTaskHTML(taskIndex);
+    generateEditTaskCategoryColor(taskIndex);
+}
 
-// Show Prio Images Card
-function checkPopupCardPrio(prio) {
-    let prioImg;
-    let prioText;
-    let prioColor;
+function generateEditTaskCategoryColor(taskIndex) {
+    document.getElementById(`edit-task-category-${taskIndex}`).style.backgroundColor = `${'red'}`;
+}
 
-    if (prio === 'Urgent') {
-        prioText = 'Urgent';
-        prioImg = "./assets/img/prio-urgent-white.png";
-        prioColor = "#FF3D00";
-    }
-    if (prio === 'Medium') {
-        prioText = 'Medium';
-        prioImg = "./assets/img/prio-medium-white.png";
-        prioColor = "#FFA800";
-    }
-    if (prio === 'Low') {
-        prioText = 'Low';
-        prioImg = "./assets/img/prio-low-white.png"
-        prioColor = "#7AE229";
+function selectPriority(priority) {
+    const urgentBtn = document.getElementById('edit-task-prio-urgent');
+    const mediumBtn = document.getElementById('edit-task-prio-medium');
+    const lowBtn = document.getElementById('edit-task-prio-low');
 
+    // Entferne die classList von allen Buttons
+    urgentBtn.classList.remove('edit-task-prio-urgent');
+    mediumBtn.classList.remove('edit-task-prio-medium');
+    lowBtn.classList.remove('edit-task-prio-low');
+
+    selectedPriority = priority; // Speichere die ausgewählte Priorität in der globalen Variable
+
+    // Füge die classList nur zum ausgewählten Button hinzu
+    if (priority === 'Urgent') {
+        urgentBtn.classList.add('edit-task-prio-urgent');
+    } else if (priority === 'Medium') {
+        mediumBtn.classList.add('edit-task-prio-medium');
+    } else if (priority === 'Low') {
+        lowBtn.classList.add('edit-task-prio-low');
     }
-    return /*html*/ `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>
-    `;
+}
+
+async function saveEdit(taskIndex) {
+    tasks[taskIndex]['title'] = document.getElementById('input-title-edit-task').value;
+    tasks[taskIndex]['description'] = document.getElementById('input-description-edit-task').value;
+    tasks[taskIndex]['date'] = document.getElementById('input-date-edit-task').value;
+
+    if (selectedPriority) {
+        tasks[taskIndex]['priority'] = selectedPriority; // wird nur aktualisiert, wenn Wert vorhanden
+    }
+
+    await setItem('tasks', JSON.stringify(tasks));
+    closePopupCard();
+    updateTasksHTML();
+    generateUsers();
+    generateProgressBar();
+    generateCategoryColor();
 }
 
 
-function openPopupCard(i) {
-    document.getElementById('popup-card').classList.remove('d-none');
-    generatePopupCardHTML(i);
-    generatePopupCardCategoryColor(i);
+// User Initials
+function getUserInitials(name) {
+    const words = name.split(" "); // Teile den Namen in einzelne Wörter auf
+    const initials = words.map(word => word.charAt(0));  // Initialen für jeden Namen erstellen
+    const initialsString = initials.join(""); // Initialen zu einem String zusammenführen
+    return initialsString;
 }
 
-
-function closePopupCard() {
-    document.getElementById('popup-card').classList.add('d-none');
-}
 
 // Add Task Pop Up
 function openAddTask() {
@@ -378,6 +374,7 @@ function closePopUp() {
 }
 
 
+// Templates
 function tasksHTML(task) {
     return /*html*/ `
     <div class="card-container margin-bottom-25" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
