@@ -173,6 +173,9 @@ progress {
     height: 45px;
     border: 2px solid #ffffff;
     border-radius: 50%;
+}
+
+.card-user-initials {
     margin: 0 -6px;
 }
 
@@ -394,6 +397,10 @@ progress {
 
 .edit-task-prio-low img {
     content: url("../assets/img/prio-low-white.png");
+}
+
+.edit-task-assigned-to {
+    display: flex;
 }
 
 .save-btn {

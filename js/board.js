@@ -474,6 +474,11 @@ function editTaskHTML(taskIndex) {
                     Low <img src="./assets/img/prio-low.png"></div>
             </div>
         </div>
+        <div>
+            <div class="margin-bottom-25"><b>Assigned To:</b>
+                <div class="edit-task-assigned-to">${generateUsersEditTask(taskIndex)}</div>
+            </div>
+        </div>
         <div class="popup-card-btns">
             <div class="dark-btn save-btn" onclick="saveEdit(${taskIndex})">
                 <span>OK ✓</span>
@@ -481,4 +486,17 @@ function editTaskHTML(taskIndex) {
         </div>
     </div>
 `;
+}
+
+function generateUsersEditTask(taskIndex) {
+    let usersHTML = '';
+    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
+        usersHTML += /*html*/ `
+            <div class="popup-card-assigned-to-container">
+                <div class="popup-card-user-initials">
+                    <div>${getUserInitials(tasks[taskIndex].assignedTo[i].name)}</div>
+                </div>
+            </div>`;
+    }
+    return usersHTML;
 }
