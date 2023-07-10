@@ -1,7 +1,7 @@
 let tasks = [];
 let filteredTasks = [];
 let currentDraggedElement;
-let selectedPriority;
+let selectedPriority; // variable for saving the selected priority when editing tasks
 
 
 /**
@@ -354,12 +354,15 @@ function generateUsersPopupCard(taskIndex) {
  * @param {number} taskIndex - The index of the task.
  */
 function generateSubtasks(taskIndex) {
-    let subtasks = tasks[taskIndex].subtask;
+    let subtasks = tasks[taskIndex].subtask; // contains the array of subtasks for the given taskIndex
     let content = document.getElementById('popup-card-subtasks');
     content.innerHTML = '';
 
     for (let i = 0; i < subtasks.length; i++) {
-        const checkboxId = `subtask-${taskIndex}-${i}`;
+        const checkboxId = `subtask-${taskIndex}-${i}`; // unique ID for the checkbox element is generated
+
+        // state of the subtask (from the "checked" attribute) is checked and stored in the "isChecked" variable.
+        // if the subtask is marked as "checked", the value 'checked' is assigned, otherwise an empty string ('').
         const isChecked = subtasks[i].checked ? 'checked' : '';
 
         content.innerHTML += `
@@ -377,6 +380,7 @@ function generateSubtasks(taskIndex) {
  */
 function submitCheckboxValue(taskIndex, i) {
     let checkbox = document.getElementById(`subtask-${taskIndex}-${i}`);
+    // Checked property is stored in the corresponding subtask object.
     tasks[taskIndex].subtask[i].checked = checkbox.checked;
     saveTasks();
     generateProgressBar();
@@ -429,12 +433,13 @@ function selectPriority(priority) {
     const mediumBtn = document.getElementById('edit-task-prio-medium');
     const lowBtn = document.getElementById('edit-task-prio-low');
 
+    // Remove classList from all buttons
     urgentBtn.classList.remove('edit-task-prio-urgent');
     mediumBtn.classList.remove('edit-task-prio-medium');
     lowBtn.classList.remove('edit-task-prio-low');
 
-    selectedPriority = priority;
-
+    selectedPriority = priority; // Store the selected priority in the global variable
+    // Add the classList only to the selected button
     if (priority === 'Urgent') {
         urgentBtn.classList.add('edit-task-prio-urgent');
     } else if (priority === 'Medium') {
@@ -473,7 +478,7 @@ async function saveEdit(taskIndex) {
     tasks[taskIndex]['date'] = document.getElementById('input-date-edit-task').value;
 
     if (selectedPriority) {
-        tasks[taskIndex]['priority'] = selectedPriority;
+        tasks[taskIndex]['priority'] = selectedPriority; // will only be updated if value exists
     }
 
     await setItem('tasks', JSON.stringify(tasks));
@@ -491,9 +496,9 @@ async function saveEdit(taskIndex) {
  * @returns {string} The initials of the user's name.
  */
 function getUserInitials(name) {
-    const words = name.split(" ");
-    const initials = words.map(word => word.charAt(0));
-    const initialsString = initials.join("");
+    const words = name.split(" "); // Split the name into individual words
+    const initials = words.map(word => word.charAt(0));  // Create initials for each name
+    const initialsString = initials.join(""); // Combine initials into a string
     return initialsString;
 }
 

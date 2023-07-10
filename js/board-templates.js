@@ -1,4 +1,3 @@
-// Templates
 function tasksHTML(task) {
     return /*html*/ `
     <div class="card-container margin-bottom-25" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
