@@ -91,6 +91,10 @@
     color: #D1D1D1;
 }
 
+.login-input-fields:focus, .login-input-fields:active {
+    background: transparent;
+}
+
 .input-user-icon {
     background: url(../assets/img/user-icon.png);
 }
