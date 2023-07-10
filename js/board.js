@@ -1,9 +1,13 @@
 let tasks = [];
 let filteredTasks = [];
 let currentDraggedElement;
-let selectedPriority; // Variable zum Speichern der ausgewählten Priorität beim editieren der Tasks
+let selectedPriority;
 
 
+/**
+ * Initializes the board by retrieving tasks from storage, updating IDs, and generating HTML elements.
+ * @returns {Promise<void>}
+ */
 async function initBoard() {
     tasks = JSON.parse(await getItem('tasks'));
     updateId();
@@ -13,7 +17,10 @@ async function initBoard() {
     generateCategoryColor();
 }
 
-// Property Id = Index Of Array
+
+/**
+ * Updates the IDs of tasks in the array.
+ */
 function updateId() {
     for (let i = 0; i < tasks.length; i++) {
         tasks[i].id = i;
@@ -21,12 +28,19 @@ function updateId() {
     }
 }
 
-// Speichern der aktualisierten Tasksansicht
+
+/**
+ * Saves the updated tasks to storage.
+ * @returns {Promise<void>}
+ */
 async function saveTasks() {
     await setItem('tasks', JSON.stringify(tasks));
 }
 
-// Drag and drop
+
+/**
+ * Updates the HTML elements for the tasks on the board.
+ */
 function updateTasksHTML() {
     updateToDo();
     updateInProgress();
@@ -35,6 +49,9 @@ function updateTasksHTML() {
 }
 
 
+/**
+ * Updates the "To Do" column on the board.
+ */
 function updateToDo() {
     let toDo = tasks.filter(t => t['status'] == 'to-do');
     document.getElementById('to-do').innerHTML = '';
@@ -45,6 +62,9 @@ function updateToDo() {
 }
 
 
+/**
+ * Updates the "In Progress" column on the board.
+ */
 function updateInProgress() {
     let inProgress = tasks.filter(t => t['status'] == 'in-progress');
     document.getElementById('in-progress').innerHTML = '';
@@ -55,6 +75,9 @@ function updateInProgress() {
 }
 
 
+/**
+ * Updates the "Awaiting Feedback" column on the board.
+ */
 function updateAwaitingFeedback() {
     let awaitingFeedback = tasks.filter(t => t['status'] == 'awaiting-feedback');
     document.getElementById('awaiting-feedback').innerHTML = '';
@@ -65,6 +88,9 @@ function updateAwaitingFeedback() {
 }
 
 
+/**
+ * Updates the "Done" column on the board.
+ */
 function updateDone() {
     let done = tasks.filter(t => t['status'] == 'done');
     document.getElementById('done').innerHTML = '';
@@ -75,16 +101,29 @@ function updateDone() {
 }
 
 
+/**
+ * Sets the current dragged element.
+ * @param {number} id - The ID of the dragged element.
+ */
 function startDragging(id) {
     currentDraggedElement = id;
 }
 
 
+/**
+ * Allows dropping of elements during drag and drop.
+ * @param {Event} ev - The drag event.
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
 
+/**
+ * Moves the current dragged task to the specified status and updates the board.
+ * @param {string} status - The status to move the task to.
+ * @returns {Promise<void>}
+ */
 async function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     await saveTasks();
@@ -95,6 +134,12 @@ async function moveTo(status) {
 }
 
 
+/**
+ * Moves a task to the specified status based on its index and updates the board.
+ * @param {number} taskIndex - The index of the task to move.
+ * @param {string} status - The status to move the task to.
+ * @returns {Promise<void>}
+ */
 async function moveTask(taskIndex, status) {
     tasks[taskIndex].status = status;
     await saveTasks();
@@ -105,7 +150,10 @@ async function moveTask(taskIndex, status) {
     closePopupCard();
 }
 
-// Search
+
+/**
+ * Finds tasks based on the search value and updates the board.
+ */
 function findTasks() {
     let searchValue = document.querySelector('.search-box input').value;
     searchValue = searchValue.toLowerCase();
@@ -131,23 +179,34 @@ function findTasks() {
     generateCategoryColor();
 }
 
-// Generate Tasks 
+
+/**
+ * Generates the HTML for a task.
+ * @param {Object} task - The task object.
+ * @returns {string} The HTML string for the task.
+ */
 function generateTasksHTML(task) {
     if (filteredTasks.length > 0 && !filteredTasks.includes(task)) {
-        return ''; // Wenn das Task-Objekt nicht im filteredTasks-Array enthalten ist, wird ein leerer String zurückgegeben und der Task wird nicht angezeigt
+        return ''; // If the task object is not in the filteredTasks array, return an empty string and do not display the task
     } else {
         return tasksHTML(task);
     }
 }
 
 
+/**
+ * Generates the category color for each task.
+ */
 function generateCategoryColor() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
-        document.getElementById('card-category').style.backgroundColor = `${'red'}`;
+        document.getElementById('card-category').style.backgroundColor = 'red';
     }
 }
 
 
+/**
+ * Generates the progress bar and value for each task.
+ */
 function generateProgressBar() {
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].subtask && tasks[i].subtask.length > 0) {
@@ -166,19 +225,25 @@ function generateProgressBar() {
 }
 
 
+/**
+ * Generates the user initials for each task.
+ */
 function generateUsers() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
         let content = document.getElementById(`card-user-initials-${taskIndex}`);
         content.innerHTML = '';
         for (let j = 0; j < tasks[taskIndex].assignedTo.length; j++) {
-            content.innerHTML += /*html*/ `
-            <div class="card-user-initials">${getUserInitials(tasks[taskIndex].assignedTo[j].name)}</div>`;
+            content.innerHTML += `<div class="card-user-initials">${getUserInitials(tasks[taskIndex].assignedTo[j].name)}</div>`;
         }
-
     }
 }
 
 
+/**
+ * Checks the priority of a task and returns the corresponding HTML.
+ * @param {string} prio - The priority value of the task.
+ * @returns {string} The HTML string for the priority.
+ */
 function checkCardPrio(prio) {
     let prioImg;
 
@@ -191,11 +256,14 @@ function checkCardPrio(prio) {
     if (prio === 'Low') {
         prioImg = "./assets/img/prio-low.png"
     }
-    return /*html*/ `<img src="${prioImg}">
-    `;
+    return `<img src="${prioImg}">`;
 }
 
-// popup card
+
+/**
+ * Opens the popup card for a task.
+ * @param {number} i - The index of the task.
+ */
 function openPopupCard(i) {
     document.getElementById('popup-card').classList.remove('d-none');
     generatePopupCardHTML(i);
@@ -203,11 +271,18 @@ function openPopupCard(i) {
 }
 
 
+/**
+ * Closes the popup card.
+ */
 function closePopupCard() {
     document.getElementById('popup-card').classList.add('d-none');
 }
 
 
+/**
+ * Generates the HTML content for the popup card of a task.
+ * @param {number} taskIndex - The index of the task.
+ */
 function generatePopupCardHTML(taskIndex) {
     let content = document.getElementById('popup-card');
     content.innerHTML = '';
@@ -216,11 +291,20 @@ function generatePopupCardHTML(taskIndex) {
 }
 
 
+/**
+ * Generates the category color for the popup card of a task.
+ * @param {number} taskIndex - The index of the task.
+ */
 function generatePopupCardCategoryColor(taskIndex) {
-    document.getElementById(`popup-card-category-${taskIndex}`).style.backgroundColor = `${'red'}`;
+    document.getElementById(`popup-card-category-${taskIndex}`).style.backgroundColor = 'red';
 }
 
 
+/**
+ * Checks the priority of a task in the popup card and returns the corresponding HTML.
+ * @param {string} prio - The priority value of the task.
+ * @returns {string} The HTML string for the priority.
+ */
 function checkPopupCardPrio(prio) {
     let prioImg;
     let prioText;
@@ -242,35 +326,40 @@ function checkPopupCardPrio(prio) {
         prioColor = "#7AE229";
 
     }
-    return /*html*/ `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>
-    `;
+    return `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>`;
 }
 
 
+/**
+ * Generates the user initials for the popup card of a task.
+ * @param {number} taskIndex - The index of the task.
+ * @returns {string} The HTML string for the user initials.
+ */
 function generateUsersPopupCard(taskIndex) {
     let usersHTML = '';
     for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        usersHTML += /*html*/ `
-            <div class="popup-card-assigned-to-container">
+        usersHTML += `<div class="popup-card-assigned-to-container">
             <div class="popup-card-user-initials">
                 <div>${getUserInitials(tasks[taskIndex].assignedTo[i].name)}</div>
             </div>
-                <div>${tasks[taskIndex].assignedTo[i].name}</div>
-            </div>`;
+            <div>${tasks[taskIndex].assignedTo[i].name}</div>
+        </div>`;
     }
     return usersHTML;
 }
 
+
+/**
+ * Generates the subtasks for the popup card of a task.
+ * @param {number} taskIndex - The index of the task.
+ */
 function generateSubtasks(taskIndex) {
-    let subtasks = tasks[taskIndex].subtask; // enthält das Array der Unteraufgaben für den gegebenen taskIndex
+    let subtasks = tasks[taskIndex].subtask;
     let content = document.getElementById('popup-card-subtasks');
     content.innerHTML = '';
 
     for (let i = 0; i < subtasks.length; i++) {
-        const checkboxId = `subtask-${taskIndex}-${i}`;  // eindeutige ID für das Checkbox-Element wird generiert
-
-        // Zustand der Unteraufgabe (aus dem "checked"-Attribut) wird überprüft und in der Variable "isChecked" gespeichert
-        // wenn die Unteraufgabe als "checked" markiert ist, wird der Wert 'checked' zugewiesen, ansonsten ein leerer String ('').
+        const checkboxId = `subtask-${taskIndex}-${i}`;
         const isChecked = subtasks[i].checked ? 'checked' : '';
 
         content.innerHTML += `
@@ -281,15 +370,23 @@ function generateSubtasks(taskIndex) {
 };
 
 
+/**
+ * Submits the checkbox value of a subtask.
+ * @param {number} taskIndex - The index of the task.
+ * @param {number} i - The index of the subtask.
+ */
 function submitCheckboxValue(taskIndex, i) {
     let checkbox = document.getElementById(`subtask-${taskIndex}-${i}`);
-    // Checked-Eigenschaft wird in das entsprechende Unteraufgabenobjekt gespeichert
     tasks[taskIndex].subtask[i].checked = checkbox.checked;
     saveTasks();
     generateProgressBar();
 }
 
 
+/**
+ * Deletes a task.
+ * @param {number} i - The index of the task.
+ */
 function deleteTask(i) {
     tasks.splice(i, 1);
     updateId();
@@ -301,7 +398,11 @@ function deleteTask(i) {
     generateCategoryColor();
 }
 
-// edit task
+
+/**
+ * Edits a task.
+ * @param {number} taskIndex - The index of the task.
+ */
 function editTask(taskIndex) {
     let content = document.getElementById('popup-card');
     content.innerHTML = '';
@@ -309,23 +410,31 @@ function editTask(taskIndex) {
     generateEditTaskCategoryColor(taskIndex);
 }
 
+
+/**
+ * Generates the category color for the edit task popup card.
+ * @param {number} taskIndex - The index of the task.
+ */
 function generateEditTaskCategoryColor(taskIndex) {
-    document.getElementById(`edit-task-category-${taskIndex}`).style.backgroundColor = `${'red'}`;
+    document.getElementById(`edit-task-category-${taskIndex}`).style.backgroundColor = 'red';
 }
 
+
+/**
+ * Selects a priority for the task being edited.
+ * @param {string} priority - The selected priority.
+ */
 function selectPriority(priority) {
     const urgentBtn = document.getElementById('edit-task-prio-urgent');
     const mediumBtn = document.getElementById('edit-task-prio-medium');
     const lowBtn = document.getElementById('edit-task-prio-low');
 
-    // Entferne die classList von allen Buttons
     urgentBtn.classList.remove('edit-task-prio-urgent');
     mediumBtn.classList.remove('edit-task-prio-medium');
     lowBtn.classList.remove('edit-task-prio-low');
 
-    selectedPriority = priority; // Speichere die ausgewählte Priorität in der globalen Variable
+    selectedPriority = priority;
 
-    // Füge die classList nur zum ausgewählten Button hinzu
     if (priority === 'Urgent') {
         urgentBtn.classList.add('edit-task-prio-urgent');
     } else if (priority === 'Medium') {
@@ -335,13 +444,36 @@ function selectPriority(priority) {
     }
 }
 
+
+/**
+ * Generates the user initials for the edit task popup card.
+ * @param {number} taskIndex - The index of the task.
+ * @returns {string} The HTML string for the user initials.
+ */
+function generateUsersEditTask(taskIndex) {
+    let usersHTML = '';
+    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
+        usersHTML += `<div class="popup-card-assigned-to-container">
+            <div class="popup-card-user-initials">
+                <div>${getUserInitials(tasks[taskIndex].assignedTo[i].name)}</div>
+            </div>
+        </div>`;
+    }
+    return usersHTML;
+}
+
+
+/**
+ * Saves the edited task.
+ * @param {number} taskIndex - The index of the task.
+ */
 async function saveEdit(taskIndex) {
     tasks[taskIndex]['title'] = document.getElementById('input-title-edit-task').value;
     tasks[taskIndex]['description'] = document.getElementById('input-description-edit-task').value;
     tasks[taskIndex]['date'] = document.getElementById('input-date-edit-task').value;
 
     if (selectedPriority) {
-        tasks[taskIndex]['priority'] = selectedPriority; // wird nur aktualisiert, wenn Wert vorhanden
+        tasks[taskIndex]['priority'] = selectedPriority;
     }
 
     await setItem('tasks', JSON.stringify(tasks));
@@ -353,150 +485,30 @@ async function saveEdit(taskIndex) {
 }
 
 
-// User Initials
+/**
+ * Generates the initials for a user's name.
+ * @param {string} name - The user's name.
+ * @returns {string} The initials of the user's name.
+ */
 function getUserInitials(name) {
-    const words = name.split(" "); // Teile den Namen in einzelne Wörter auf
-    const initials = words.map(word => word.charAt(0));  // Initialen für jeden Namen erstellen
-    const initialsString = initials.join(""); // Initialen zu einem String zusammenführen
+    const words = name.split(" ");
+    const initials = words.map(word => word.charAt(0));
+    const initialsString = initials.join("");
     return initialsString;
 }
 
 
-// Add Task Pop Up
+/**
+ * Opens the add task popup.
+ */
 function openAddTask() {
     window.location.href = 'add-task.html';
-    // document.getElementById('add-task-popup').classList.remove('d-none');
 }
 
 
+/**
+ * Closes the add task popup.
+ */
 function closePopUp() {
     document.getElementById('add-task-popup').classList.add('d-none');
-}
-
-
-// Templates
-function tasksHTML(task) {
-    return /*html*/ `
-    <div class="card-container margin-bottom-25" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
-        <div id ="card-category" class="card-category margin-bottom-10">${task['category']}</div>
-        <div class="card-title margin-bottom-10">${task['title']}</div>
-        <div class="card-description margin-bottom-10">${task['description']}</div>
-        <div id="progress-bar-container" class="progress-bar-container">
-            <progress id="progress-bar-${task.id}" max="100" value="0"></progress>
-            <div id="progress-value-${task.id}" class="progress-bar-counter"></div>
-        </div>
-        <div class="card-bottom">
-            <div class="card-users" id="card-user-initials-${task.id}">
-            </div>
-            <div class="card-prio">${checkCardPrio(task['priority'])}</div>
-        </div>
-    </div>
-`;
-}
-
-
-function popupCardHTML(taskIndex) {
-    return /*html*/ `
-    <div class="popup-card-content">
-        <div class="close-popup-card" onclick="closePopupCard()">
-            <img src="./assets/img/close-btn.png">
-        </div>
-        <div id="popup-card-category-${taskIndex}" class="popup-card-category margin-bottom-25">${tasks[taskIndex]['category']}</div>
-        <div class="popup-card-title margin-bottom-25">
-            <h2>${tasks[taskIndex]['title']}</h2>
-        </div>
-        <div class="margin-bottom-25">${tasks[taskIndex]['description']}</div>
-        <div class="margin-bottom-25">
-            <b>Due date:</b> ${tasks[taskIndex]['date']}
-        </div>
-        <div class="popup-card-prio-container margin-bottom-25">
-            <b>Priority:</b> ${checkPopupCardPrio(tasks[taskIndex]['priority'])}
-        </div>
-        <div>
-            <div class="margin-bottom-25"><b>Assigned To:</b>
-                <div>${generateUsersPopupCard(taskIndex)}</div>
-            </div>
-        </div>
-        <div class="margin-bottom-25"><b>Subtasks:</b>
-            <div id="popup-card-subtasks"></div>
-        </div>
-        <div class="margin-bottom-25">
-            <b>Move Task:</b>
-            <div>
-                <div class="popup-card-move-task">
-                    <button class="move-task-btn" onclick="moveTask('${taskIndex}', 'to-do')">To Do</button>
-                    <button class="move-task-btn" onclick="moveTask('${taskIndex}', 'in-progress')">In Progress</button>
-                    <button class="move-task-btn" onclick="moveTask('${taskIndex}', 'awaiting-feedback')">Awaiting Feedback</button>
-                    <button class="move-task-btn" onclick="moveTask('${taskIndex}', 'done')">Done</button>
-                </div>
-            </div>
-        </div>
-        <div class="popup-card-btns">
-            <div onclick="deleteTask(${taskIndex})" class="delete-btn">
-                <img src="./assets/img/delete-button.png">
-            </div>
-            <div onclick="editTask(${taskIndex})" class="edit-btn">
-                <img src="./assets/img/edit-pencil.png">
-            </div>
-        </div>
-    </div>
-`;
-}
-
-
-function editTaskHTML(taskIndex) {
-    return /*html*/ `
-    <div class="popup-card-content">
-        <div class="close-popup-card" onclick="closePopupCard()">
-            <img src="./assets/img/close-btn.png">
-        </div>
-        <div id="edit-task-category-${taskIndex}" class="popup-card-category margin-bottom-25">${tasks[taskIndex]['category']}</div>
-        <div class="edit-task-title margin-bottom-25">
-            <p><b>Title</b></p>
-            <input required id="input-title-edit-task" value="${tasks[taskIndex]['title']}" class="edit-task-input" type="text" placeholder="Enter a title">
-        </div>
-        <div class="edit-task-description margin-bottom-25">
-            <p><b>Description</b></p>
-            <input required id="input-description-edit-task" value="${tasks[taskIndex]['description']}" class="edit-task-input" type="text" placeholder="Enter a description">
-        </div>
-        <div class="edit-due-date margin-bottom-25">
-            <p><b>Due date:</b></p> 
-            <input required id="input-date-edit-task" value="${tasks[taskIndex]['date']}" class="edit-task-input" type="date" placeholder="DD/MM/YYYY">
-        </div>
-        <div class="popup-card-prio-container edit-task-prio-container margin-bottom-25">
-            <b class="margin-bottom-25">Priority:</b> 
-            <div class="edit-task-show-prio">
-                <div id="edit-task-prio-urgent" class="edit-task-prio-btn" onclick="selectPriority('Urgent')"> 
-                    Urgent<img src="./assets/img/prio-urgent.png"></div>
-                <div id="edit-task-prio-medium" class="edit-task-prio-btn" onclick="selectPriority('Medium')">
-                    Medium<img src="./assets/img/prio-medium.png"></div>
-                <div id="edit-task-prio-low" class="edit-task-prio-btn" onclick="selectPriority('Low')">
-                    Low <img src="./assets/img/prio-low.png"></div>
-            </div>
-        </div>
-        <div>
-            <div class="margin-bottom-25"><b>Assigned To:</b>
-                <div class="edit-task-assigned-to">${generateUsersEditTask(taskIndex)}</div>
-            </div>
-        </div>
-        <div class="popup-card-btns">
-            <div class="dark-btn save-btn" onclick="saveEdit(${taskIndex})">
-                <span>OK ✓</span>
-            </div>
-        </div>
-    </div>
-`;
-}
-
-function generateUsersEditTask(taskIndex) {
-    let usersHTML = '';
-    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        usersHTML += /*html*/ `
-            <div class="popup-card-assigned-to-container">
-                <div class="popup-card-user-initials">
-                    <div>${getUserInitials(tasks[taskIndex].assignedTo[i].name)}</div>
-                </div>
-            </div>`;
-    }
-    return usersHTML;
 }
