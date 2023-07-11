@@ -31,11 +31,9 @@ async function createTask() {
     var description = document.getElementById('descriptionField');
     var category = document.getElementById('chooseCategory');
     var categoryValue = category.options[category.selectedIndex].value;
-    
     var date = document.getElementById('dueDateField');
     var checkedValue = document.querySelector('.button1:checked').value;
     var subtask = document.getElementById('subtaskInput');
-
     var categoryColor = document.getElementById('colorSelect');
 
 
@@ -112,9 +110,6 @@ async function addNewCategory(){
     categories.push({"category" : category.value});
     await setItem('categories', JSON.stringify(categories));
     resetSelect();
-    addCategoryColor();
-
-    
     
 }
 
@@ -153,6 +148,7 @@ function resetSelect(){
     var element = document.getElementById("categoryColors");
     element.classList.add("d-none");
     setCategoryOptions();
+    
 }
 
 async function setCategoryOptions(){
