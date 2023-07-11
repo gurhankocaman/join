@@ -1,7 +1,7 @@
 let tasks = [];
 let filteredTasks = [];
 let currentDraggedElement;
-let selectedPriority; // variable for saving the selected priority when editing tasks
+let selectedPriority;
 
 
 /**
@@ -135,7 +135,6 @@ async function moveTo(status) {
 
 
 /**
- * Mobile dialog to replace drag and drop function.
  * Moves a task to the specified status based on its index and updates the board.
  * @param {number} taskIndex - The index of the task to move.
  * @param {string} status - The status to move the task to.
@@ -200,7 +199,7 @@ function generateTasksHTML(task) {
  */
 function generateCategoryColor() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
-        document.getElementById('card-category').style.backgroundColor = 'red';
+        document.getElementById('card-category').style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
     }
 }
 
@@ -297,7 +296,7 @@ function generatePopupCardHTML(taskIndex) {
  * @param {number} taskIndex - The index of the task.
  */
 function generatePopupCardCategoryColor(taskIndex) {
-    document.getElementById(`popup-card-category-${taskIndex}`).style.backgroundColor = 'red';
+    document.getElementById(`popup-card-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
 }
 
 
@@ -355,15 +354,12 @@ function generateUsersPopupCard(taskIndex) {
  * @param {number} taskIndex - The index of the task.
  */
 function generateSubtasks(taskIndex) {
-    let subtasks = tasks[taskIndex].subtask; // contains the array of subtasks for the given taskIndex
+    let subtasks = tasks[taskIndex].subtask;
     let content = document.getElementById('popup-card-subtasks');
     content.innerHTML = '';
 
     for (let i = 0; i < subtasks.length; i++) {
-        const checkboxId = `subtask-${taskIndex}-${i}`; // unique ID for the checkbox element is generated
-
-        // state of the subtask (from the "checked" attribute) is checked and stored in the "isChecked" variable.
-        // if the subtask is marked as "checked", the value 'checked' is assigned, otherwise an empty string ('').
+        const checkboxId = `subtask-${taskIndex}-${i}`;
         const isChecked = subtasks[i].checked ? 'checked' : '';
 
         content.innerHTML += `
@@ -381,7 +377,7 @@ function generateSubtasks(taskIndex) {
  */
 function submitCheckboxValue(taskIndex, i) {
     let checkbox = document.getElementById(`subtask-${taskIndex}-${i}`);
-    tasks[taskIndex].subtask[i].checked = checkbox.checked; // Checked property is stored in the corresponding subtask object.
+    tasks[taskIndex].subtask[i].checked = checkbox.checked;
     saveTasks();
     generateProgressBar();
 }
@@ -389,10 +385,10 @@ function submitCheckboxValue(taskIndex, i) {
 
 /**
  * Deletes a task.
- * @param {number} taskIndex - The index of the task.
+ * @param {number} i - The index of the task.
  */
-function deleteTask(taskIndex) {
-    tasks.splice(taskIndex, 1);
+function deleteTask(i) {
+    tasks.splice(i, 1);
     updateId();
     saveTasks();
     closePopupCard();
@@ -420,7 +416,7 @@ function editTask(taskIndex) {
  * @param {number} taskIndex - The index of the task.
  */
 function generateEditTaskCategoryColor(taskIndex) {
-    document.getElementById(`edit-task-category-${taskIndex}`).style.backgroundColor = 'red';
+    document.getElementById(`edit-task-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
 }
 
 
@@ -432,13 +428,13 @@ function selectPriority(priority) {
     const urgentBtn = document.getElementById('edit-task-prio-urgent');
     const mediumBtn = document.getElementById('edit-task-prio-medium');
     const lowBtn = document.getElementById('edit-task-prio-low');
-    // Remove classList from all buttons
+
     urgentBtn.classList.remove('edit-task-prio-urgent');
     mediumBtn.classList.remove('edit-task-prio-medium');
     lowBtn.classList.remove('edit-task-prio-low');
-    // Store the selected priority in the global variable
+
     selectedPriority = priority;
-    // Add the classList only to the selected button
+
     if (priority === 'Urgent') {
         urgentBtn.classList.add('edit-task-prio-urgent');
     } else if (priority === 'Medium') {
@@ -477,7 +473,7 @@ async function saveEdit(taskIndex) {
     tasks[taskIndex]['date'] = document.getElementById('input-date-edit-task').value;
 
     if (selectedPriority) {
-        tasks[taskIndex]['priority'] = selectedPriority; // will only be updated if value exists
+        tasks[taskIndex]['priority'] = selectedPriority;
     }
 
     await setItem('tasks', JSON.stringify(tasks));
@@ -495,9 +491,9 @@ async function saveEdit(taskIndex) {
  * @returns {string} The initials of the user's name.
  */
 function getUserInitials(name) {
-    const words = name.split(" "); // Split the name into individual words
-    const initials = words.map(word => word.charAt(0));  // Create initials for each name
-    const initialsString = initials.join(""); // Combine initials into a string
+    const words = name.split(" ");
+    const initials = words.map(word => word.charAt(0));
+    const initialsString = initials.join("");
     return initialsString;
 }
 
