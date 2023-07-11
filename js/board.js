@@ -135,6 +135,7 @@ async function moveTo(status) {
 
 
 /**
+ * Mobile dialog to replace drag and drop function.
  * Moves a task to the specified status based on its index and updates the board.
  * @param {number} taskIndex - The index of the task to move.
  * @param {string} status - The status to move the task to.
@@ -380,8 +381,7 @@ function generateSubtasks(taskIndex) {
  */
 function submitCheckboxValue(taskIndex, i) {
     let checkbox = document.getElementById(`subtask-${taskIndex}-${i}`);
-    // Checked property is stored in the corresponding subtask object.
-    tasks[taskIndex].subtask[i].checked = checkbox.checked;
+    tasks[taskIndex].subtask[i].checked = checkbox.checked; // Checked property is stored in the corresponding subtask object.
     saveTasks();
     generateProgressBar();
 }
@@ -389,10 +389,10 @@ function submitCheckboxValue(taskIndex, i) {
 
 /**
  * Deletes a task.
- * @param {number} i - The index of the task.
+ * @param {number} taskIndex - The index of the task.
  */
-function deleteTask(i) {
-    tasks.splice(i, 1);
+function deleteTask(taskIndex) {
+    tasks.splice(taskIndex, 1);
     updateId();
     saveTasks();
     closePopupCard();
@@ -432,13 +432,12 @@ function selectPriority(priority) {
     const urgentBtn = document.getElementById('edit-task-prio-urgent');
     const mediumBtn = document.getElementById('edit-task-prio-medium');
     const lowBtn = document.getElementById('edit-task-prio-low');
-
     // Remove classList from all buttons
     urgentBtn.classList.remove('edit-task-prio-urgent');
     mediumBtn.classList.remove('edit-task-prio-medium');
     lowBtn.classList.remove('edit-task-prio-low');
-
-    selectedPriority = priority; // Store the selected priority in the global variable
+    // Store the selected priority in the global variable
+    selectedPriority = priority;
     // Add the classList only to the selected button
     if (priority === 'Urgent') {
         urgentBtn.classList.add('edit-task-prio-urgent');
