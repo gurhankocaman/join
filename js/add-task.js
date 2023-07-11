@@ -31,16 +31,18 @@ async function createTask() {
     var description = document.getElementById('descriptionField');
     var category = document.getElementById('chooseCategory');
     var categoryValue = category.options[category.selectedIndex].value;
-    var contact = document.getElementById('chooseContact');
-    var contactValue = contact.options[contact.selectedIndex].value;
+    
     var date = document.getElementById('dueDateField');
     var checkedValue = document.querySelector('.button1:checked').value;
     var subtask = document.getElementById('subtaskInput');
 
+    var categoryColor = document.getElementById('colorSelect');
+
+
     subtasksToArray()
     
 
-    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValues, "date" : date.value, "priority" : checkedValue, "subtask" : subtaskValues, "color" : categoryColors});
+    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValues, "date" : date.value, "priority" : checkedValue, "subtask" : subtaskValues, "categoryColor" : categoryColor.value});
 
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
