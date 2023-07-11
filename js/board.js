@@ -199,7 +199,7 @@ function generateTasksHTML(task) {
  */
 function generateCategoryColor() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
-        document.getElementById('card-category').style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
+        document.getElementById(`card-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
     }
 }
 
