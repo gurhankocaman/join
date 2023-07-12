@@ -77,7 +77,7 @@ async function setContactOptions(){
     await loadContacts();
     let contactSelectBox = document.getElementById('chooseContact');
     for (let i = 0; i < contacts.length; i++) {
-        contactSelectBox.innerHTML += `<option value="${contacts[i]['firstName'] + ' ' + contacts[i]['lastName']}">${contacts[i]['firstName'] + ' ' + contacts[i]['lastName']}</option>`; 
+        contactSelectBox.innerHTML += `<option value="${contacts[i]['id']}">${contacts[i]['firstName'] + ' ' + contacts[i]['lastName']}</option>`; 
     }
 }
 
@@ -162,12 +162,13 @@ async function setCategoryOptions(){
 function selectContact() {
     var contact = document.getElementById('chooseContact');
     var contactValue = contact.options[contact.selectedIndex].value;
-    contactValues.push({"name" : contactValue});
+    contactValues.push({"id" : contactValue});
 
     let contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
     for (let i = 0; i < contactValues.length; i++) {
-        contactList.innerHTML += `<li>${contactValues[i]["name"]}</li>`
+        const contact = contacts.find( c => c.id == contactValues[i]["id"]);
+        contactList.innerHTML += `<li>${contact.firstName + " " + contact.lastName}</li>`
     }
     contact.selectedIndex = 0;
 }
