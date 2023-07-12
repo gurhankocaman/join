@@ -1,3 +1,10 @@
+function clearTasks() {
+    tasks = [];
+    filteredTasks = [];
+    updateTasksHTML();
+    saveTasks();
+}
+
 let tasks = [];
 let filteredTasks = [];
 let currentDraggedElement;
@@ -10,11 +17,17 @@ let selectedPriority;
  */
 async function initBoard() {
     tasks = JSON.parse(await getItem('tasks'));
+    contacts = JSON.parse(await getItem('contacts'));
     updateId();
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
     generateCategoryColor();
+    getContacts();
+}
+
+function getContacts() {
+    console.log(contacts);
 }
 
 
