@@ -357,7 +357,7 @@ function generateUsersPopupCard(taskIndex) {
     for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
         usersHTML += `<div class="popup-card-assigned-to-container">
             <div class="popup-card-user-initials">
-                <div>${getUserInitials(tasks[taskIndex].assignedTo[i].name)}</div>
+                <div>User</div>
             </div>
             <div>${tasks[taskIndex].assignedTo[i].name}</div>
         </div>`;
@@ -472,7 +472,7 @@ function generateUsersEditTask(taskIndex) {
     for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
         usersHTML += `<div class="popup-card-assigned-to-container">
             <div class="popup-card-user-initials">
-                <div>${getUserInitials(tasks[taskIndex].assignedTo[i].name)}</div>
+                <div>User</div>
             </div>
         </div>`;
     }
