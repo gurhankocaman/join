@@ -6,6 +6,7 @@ function clearTasks() {
 }
 
 let tasks = [];
+let contacts = [];
 let filteredTasks = [];
 let currentDraggedElement;
 let selectedPriority;
@@ -23,13 +24,7 @@ async function initBoard() {
     generateUsers();
     generateProgressBar();
     generateCategoryColor();
-    getContacts();
 }
-
-function getContacts() {
-    console.log(contacts);
-}
-
 
 /**
  * Updates the IDs of tasks in the array.
@@ -246,11 +241,20 @@ function generateUsers() {
         let content = document.getElementById(`card-user-initials-${taskIndex}`);
         content.innerHTML = '';
         for (let j = 0; j < tasks[taskIndex].assignedTo.length; j++) {
-            content.innerHTML += `<div class="card-user-initials">${getUserInitials(tasks[taskIndex].assignedTo[j].name)}</div>`;
+            const tasksId = tasks[taskIndex].assignedTo[j];
+            console.log('taskId:', tasksId);
+            content.innerHTML += compareIds();
         }
     }
 }
 
+function compareIds() {
+    for (let contactsIndex = 0; contactsIndex < contacts.length; contactsIndex++) {
+        const contactId = contacts[contactsIndex].id;
+        console.log('contactId', contactId);
+    }
+    return `<div class="card-user-initials">User</div>`;
+}
 
 /**
  * Checks the priority of a task and returns the corresponding HTML.
