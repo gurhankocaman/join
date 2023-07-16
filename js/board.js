@@ -244,9 +244,7 @@ function generateUsers() {
             const taskId = tasks[taskIndex].assignedTo[j].id;
             const users = getUsers(taskId); // Array mit den Namen der Benutzer
             for (let k = 0; k < users.length; k++) {
-                const userColor = contacts.find(contact => contact.id === taskId)?.color;
-                const userInitials = users[k];
-                content.innerHTML += `<div class="card-user-initials" style="background-color: ${userColor}">${userInitials}</div>`;
+                content.innerHTML += `<div class="card-user-initials">${users[k]}</div>`;
             }
         }
     }
