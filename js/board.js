@@ -232,79 +232,22 @@ function generateProgressBar() {
     }
 }
 
-
-function generateUsersPopupCard(taskIndex) {
-    let usersHTML = '';
-    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        const taskId = tasks[taskIndex].assignedTo[i].id;
-        const users = getUsers(taskId);
-        for (let j = 0; j < users.length; j++) {
-            usersHTML += `<div class="popup-card-assigned-to-container">
-                <div class="card-user-initials" style="background-color: ${users[j].color}">${users[j].initials}</div>
-                <div>${users[j].fullName}</div>
-            </div>`;
-        }
-    }
-    return usersHTML;
-}
-
-
+/**
+ * Generates the HTML code for displaying user information on the cards.
+ */
 function generateUsers() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
         let content = document.getElementById(`card-user-initials-${taskIndex}`);
         content.innerHTML = '';
         for (let j = 0; j < tasks[taskIndex].assignedTo.length; j++) {
             const taskId = tasks[taskIndex].assignedTo[j].id;
-            const users = getUsers(taskId); 
+            const users = getUsers(taskId);
             for (let k = 0; k < users.length; k++) {
                 content.innerHTML += `<div class="card-user-initials" style="background-color: ${users[k].color}">${users[k].initials}</div>`;
             }
         }
     }
 }
-
-function getUsers(taskId) {
-    const userInfos = [];
-
-    for (let contactsIndex = 0; contactsIndex < contacts.length; contactsIndex++) {
-        const contactId = contacts[contactsIndex].id;
-        if (contactId == taskId) {
-            const firstName = contacts[contactsIndex].firstName;
-            const lastName = contacts[contactsIndex].lastName;
-            const color = contacts[contactsIndex].color;
-            const initials = getInitials(firstName, lastName);
-            const fullName = `${firstName} ${lastName}`;
-            userInfos.push({ initials, fullName, color });
-        }
-    }
-    console.log(userInfos);
-    return userInfos;
-    
-}
-
-
-function getInitials(firstName, lastName) {
-    const firstInitial = firstName.charAt(0).toUpperCase();
-    const lastInitial = lastName.charAt(0).toUpperCase();
-    return `${firstInitial}${lastInitial}`;
-}
-
-
-/* function getUsers(taskId) {
-    const userNames = [];
-
-    for (let contactsIndex = 0; contactsIndex < contacts.length; contactsIndex++) {
-        const contactId = contacts[contactsIndex].id;
-        if (contactId == taskId) {
-            const firstName = contacts[contactsIndex].firstName;
-            const lastName = contacts[contactsIndex].lastName;
-            const fullName = `${firstName} ${lastName}`; // Voller Name aus Vorname und Nachname erstellen
-            userNames.push(fullName);
-        }
-    }
-
-    return userNames;
-} */
 
 /**
  * Checks the priority of a task and returns the corresponding HTML.
@@ -396,6 +339,26 @@ function checkPopupCardPrio(prio) {
     return `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>`;
 }
 
+
+/**
+ * Generates the HTML code for a popup card element containing user information.
+ * @param {number} taskIndex - The index of the task in the `tasks` list.
+ * @returns {string} - The generated HTML code.
+ */
+function generateUsersPopupCard(taskIndex) {
+    let usersHTML = '';
+    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
+        const taskId = tasks[taskIndex].assignedTo[i].id;
+        const users = getUsers(taskId);
+        for (let j = 0; j < users.length; j++) {
+            usersHTML += `<div class="popup-card-assigned-to-container">
+                <div class="popup-card-user-initials" style="background-color: ${users[j].color}">${users[j].initials}</div>
+                <div>${users[j].fullName}</div>
+            </div>`;
+        }
+    }
+    return usersHTML;
+}
 
 
 /**
@@ -495,18 +458,20 @@ function selectPriority(priority) {
 
 
 /**
- * Generates the user initials for the edit task popup card.
- * @param {number} taskIndex - The index of the task.
- * @returns {string} The HTML string for the user initials.
+ * Generates the HTML code for editing a task and displays the assigned users.
+ * @param {number} taskIndex - The index of the task in the `tasks` list.
+ * @returns {string} - The generated HTML code.
  */
 function generateUsersEditTask(taskIndex) {
     let usersHTML = '';
     for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        usersHTML += `<div class="popup-card-assigned-to-container">
-            <div class="popup-card-user-initials">
-                <div>User</div>
-            </div>
-        </div>`;
+        const taskId = tasks[taskIndex].assignedTo[i].id;
+        const users = getUsers(taskId);
+        for (let j = 0; j < users.length; j++) {
+            usersHTML += `<div class="popup-card-assigned-to-container">
+                <div class="popup-card-user-initials" style="background-color: ${users[j].color}">${users[j].initials}</div>
+            </div>`;
+        }
     }
     return usersHTML;
 }
@@ -535,15 +500,38 @@ async function saveEdit(taskIndex) {
 
 
 /**
- * Generates the initials for a user's name.
- * @param {string} name - The user's name.
- * @returns {string} The initials of the user's name.
+ * Compares the User ID from Array Tasks with Array Contacts and returns only the matching contacts.
+ * @param {number} taskId - The ID of the task.
+ * @returns {Array} - A list of user information.
  */
-function getUserInitials(name) {
-    const words = name.split(" ");
-    const initials = words.map(word => word.charAt(0));
-    const initialsString = initials.join("");
-    return initialsString;
+function getUsers(taskId) {
+    const userInfos = [];
+
+    for (let contactsIndex = 0; contactsIndex < contacts.length; contactsIndex++) {
+        const contactId = contacts[contactsIndex].id;
+        if (contactId == taskId) {
+            const firstName = contacts[contactsIndex].firstName;
+            const lastName = contacts[contactsIndex].lastName;
+            const color = contacts[contactsIndex].color;
+            const initials = getInitials(firstName, lastName);
+            const fullName = `${firstName} ${lastName}`;
+            userInfos.push({ initials, fullName, color });
+        }
+    }
+    return userInfos;
+}
+
+
+/**
+ * Returns the initials for the given first and last name.
+ * @param {string} firstName - The first name.
+ * @param {string} lastName - The last name.
+ * @returns {string} - The initials.
+ */
+function getInitials(firstName, lastName) {
+    const firstInitial = firstName.charAt(0).toUpperCase();
+    const lastInitial = lastName.charAt(0).toUpperCase();
+    return `${firstInitial}${lastInitial}`;
 }
 
 
