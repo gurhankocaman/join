@@ -233,9 +233,22 @@ function generateProgressBar() {
 }
 
 
-/**
- * Generates the user initials for each task.
- */
+function generateUsersPopupCard(taskIndex) {
+    let usersHTML = '';
+    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
+        const taskId = tasks[taskIndex].assignedTo[i].id;
+        const users = getUsers(taskId);
+        for (let j = 0; j < users.length; j++) {
+            usersHTML += `<div class="popup-card-assigned-to-container">
+                <div class="card-user-initials" style="background-color: ${users[j].color}">${users[j].initials}</div>
+                <div>${users[j].fullName}</div>
+            </div>`;
+        }
+    }
+    return usersHTML;
+}
+
+
 function generateUsers() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
         let content = document.getElementById(`card-user-initials-${taskIndex}`);
@@ -260,10 +273,13 @@ function getUsers(taskId) {
             const lastName = contacts[contactsIndex].lastName;
             const color = contacts[contactsIndex].color;
             const initials = getInitials(firstName, lastName);
-            userInfos.push({ initials, color });
+            const fullName = `${firstName} ${lastName}`;
+            userInfos.push({ initials, fullName, color });
         }
     }
+    console.log(userInfos);
     return userInfos;
+    
 }
 
 
@@ -380,24 +396,6 @@ function checkPopupCardPrio(prio) {
     return `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>`;
 }
 
-
-/**
- * Generates the user initials for the popup card of a task.
- * @param {number} taskIndex - The index of the task.
- * @returns {string} The HTML string for the user initials.
- */
-function generateUsersPopupCard(taskIndex) {
-    let usersHTML = '';
-    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        usersHTML += `<div class="popup-card-assigned-to-container">
-            <div class="popup-card-user-initials">
-                <div>User</div>
-            </div>
-            <div>${tasks[taskIndex].assignedTo[i].name}</div>
-        </div>`;
-    }
-    return usersHTML;
-}
 
 
 /**
