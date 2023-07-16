@@ -295,7 +295,7 @@ function closePopupCard() {
  */
 function generatePopupCardHTML(taskIndex) {
     let content = document.getElementById('popup-card');
-    content.innerHTML = '';gi
+    content.innerHTML = '';
     content.innerHTML += popupCardHTML(taskIndex);
     generateSubtasks(taskIndex);
 }
