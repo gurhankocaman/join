@@ -241,20 +241,56 @@ function generateUsers() {
         let content = document.getElementById(`card-user-initials-${taskIndex}`);
         content.innerHTML = '';
         for (let j = 0; j < tasks[taskIndex].assignedTo.length; j++) {
-            const tasksId = tasks[taskIndex].assignedTo[j];
-            console.log('taskId:', tasksId);
-            content.innerHTML += compareIds();
+            const taskId = tasks[taskIndex].assignedTo[j].id;
+            const users = getUsers(taskId); // Array mit den Namen der Benutzer
+            for (let k = 0; k < users.length; k++) {
+                const userColor = contacts.find(contact => contact.id === taskId)?.color;
+                const userInitials = users[k];
+                content.innerHTML += `<div class="card-user-initials" style="background-color: ${userColor}">${userInitials}</div>`;
+            }
         }
     }
 }
 
-function compareIds() {
+/* function getUsers(taskId) {
+    const userNames = [];
+
     for (let contactsIndex = 0; contactsIndex < contacts.length; contactsIndex++) {
         const contactId = contacts[contactsIndex].id;
-        console.log('contactId', contactId);
+        if (contactId == taskId) {
+            const firstName = contacts[contactsIndex].firstName;
+            const lastName = contacts[contactsIndex].lastName;
+            const fullName = `${firstName} ${lastName}`; // Voller Name aus Vorname und Nachname erstellen
+            userNames.push(fullName);
+        }
     }
-    return `<div class="card-user-initials">User</div>`;
+
+    return userNames;
+} */
+
+function getUsers(taskId) {
+    const userInitials = [];
+
+    for (let contactsIndex = 0; contactsIndex < contacts.length; contactsIndex++) {
+        const contactId = contacts[contactsIndex].id;
+        if (contactId == taskId) {
+            const firstName = contacts[contactsIndex].firstName;
+            const lastName = contacts[contactsIndex].lastName;
+            const initials = getInitials(firstName, lastName); // Initialen generieren
+            userInitials.push(initials);
+        }
+    }
+
+    return userInitials;
 }
+
+function getInitials(firstName, lastName) {
+    const firstInitial = firstName.charAt(0).toUpperCase();
+    const lastInitial = lastName.charAt(0).toUpperCase();
+    return `${firstInitial}${lastInitial}`;
+}
+
+
 
 /**
  * Checks the priority of a task and returns the corresponding HTML.
