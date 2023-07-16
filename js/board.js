@@ -207,9 +207,13 @@ function generateTasksHTML(task) {
  */
 function generateCategoryColor() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
-        document.getElementById(`card-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
+      let cardCategory = document.getElementById(`card-category-${taskIndex}`);
+      if (cardCategory !== null) {
+        cardCategory.style.backgroundColor = tasks[taskIndex].categoryColor;
+      }
     }
-}
+  }
+  
 
 
 /**
@@ -217,37 +221,45 @@ function generateCategoryColor() {
  */
 function generateProgressBar() {
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].subtask && tasks[i].subtask.length > 0) {
-            let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
-            let percent = trueSubtasks.length / tasks[i].subtask.length * 100;
-            let progressBar = document.getElementById(`progress-bar-${i}`);
-            progressBar.value = percent;
-
-            let progressValue = document.getElementById(`progress-value-${i}`);
-            progressValue.innerHTML = '';
-            progressValue.innerHTML += `${trueSubtasks.length}/${tasks[i].subtask.length} Done`;
-        } else {
-            document.getElementById('progress-bar-container').classList.add('d-none');
+      if (tasks[i].subtask && tasks[i].subtask.length > 0) {
+        let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
+        let percent = trueSubtasks.length / tasks[i].subtask.length * 100;
+        let progressBar = document.getElementById(`progress-bar-${i}`);
+        let progressValue = document.getElementById(`progress-value-${i}`);
+  
+        if (progressBar !== null && progressValue !== null) {
+          progressBar.value = percent;
+          progressValue.innerHTML = `${trueSubtasks.length}/${tasks[i].subtask.length} Done`;
         }
+      } else {
+        let progressBarContainer = document.getElementById('progress-bar-container');
+        if (progressBarContainer !== null) {
+          progressBarContainer.classList.add('d-none');
+        }
+      }
     }
-}
+  }
+  
 
 /**
  * Generates the HTML code for displaying user information on the cards.
  */
 function generateUsers() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
-        let content = document.getElementById(`card-user-initials-${taskIndex}`);
+      let content = document.getElementById(`card-user-initials-${taskIndex}`);
+      if (content !== null) {
         content.innerHTML = '';
         for (let j = 0; j < tasks[taskIndex].assignedTo.length; j++) {
-            const taskId = tasks[taskIndex].assignedTo[j].id;
-            const users = getUsers(taskId);
-            for (let k = 0; k < users.length; k++) {
-                content.innerHTML += `<div class="card-user-initials" style="background-color: ${users[k].color}">${users[k].initials}</div>`;
-            }
+          const taskId = tasks[taskIndex].assignedTo[j].id;
+          const users = getUsers(taskId);
+          for (let k = 0; k < users.length; k++) {
+            content.innerHTML += `<div class="card-user-initials" style="background-color: ${users[k].color}">${users[k].initials}</div>`;
+          }
         }
+      }
     }
-}
+  }
+  
 
 /**
  * Checks the priority of a task and returns the corresponding HTML.
