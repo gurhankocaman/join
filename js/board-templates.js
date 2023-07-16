@@ -97,11 +97,6 @@ function editTaskHTML(taskIndex) {
                     Low <img src="./assets/img/prio-low.png"></div>
             </div>
         </div>
-        <div>
-            <div class="margin-bottom-25"><b>Assigned To:</b>
-                <div class="edit-task-assigned-to">${generateUsersEditTask(taskIndex)}</div>
-            </div>
-        </div>
         <div class="popup-card-btns">
             <div class="dark-btn save-btn" onclick="saveEdit(${taskIndex})">
                 <span>OK ✓</span>
