@@ -100,9 +100,9 @@ function editTaskHTML(taskIndex) {
 
         <div>
             <div class="margin-bottom-25"><b>Assigned To:</b>
-            <div class="dropdown">
-            <div class="dropdown-title" onclick="toggleDropdown()">Kontakte anzeigen</div>
-            <div class="dropdown-content" id="dropdownContent"></div>
+            <div class="edit-task-dropdown">
+            <div class="edit-task-dropdown-title" onclick="showContacts()">Select contacts to assign</div>
+            <div class="edit-task-dropdown-content d-none" id="edit-task-dropdown-content"></div>
   </div>
             </div>
         </div>

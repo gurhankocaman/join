@@ -1,19 +1,43 @@
-function toggleDropdown() {
-    var dropdownContent = document.getElementById('dropdownContent');
-    dropdownContent.innerHTML = ''; // Löscht den Inhalt des Dropdowns
+function showContacts() {
+    let dropdownContent = document.getElementById('edit-task-dropdown-content');
+    dropdownContent.innerHTML = ''; 
   
-    if (dropdownContent.style.display === 'none') {
-      for (var i = 0; i < contacts.length; i++) {
-        var contactName = document.createElement('div');
-        contactName.textContent = contacts[i];
-        dropdownContent.appendChild(contactName);
+    if (dropdownContent.classList.contains('d-none')) {
+      let content = '';
+      for (let i = 0; i < contacts.length; i++) {
+        content += `
+            <div>
+                <input type="checkbox" id="contacts-${[i]}">
+                <label for="contacts-${[i]}">${contacts[i].firstName} ${contacts[i].lastName}</label>
+            </div>`;
       }
   
-      dropdownContent.style.display = 'block';
+      dropdownContent.innerHTML = content;
+      dropdownContent.classList.remove('d-none');
     } else {
-      dropdownContent.style.display = 'none';
+      dropdownContent.classList.add('d-none');
     }
   }
+
+  /* function getUsers(taskId) {
+    const userInfos = [];
+
+    for (let contactsIndex = 0; contactsIndex < contacts.length; contactsIndex++) {
+        const contactId = contacts[contactsIndex].id;
+        if (contactId == taskId) {
+            const firstName = contacts[contactsIndex].firstName;
+            const lastName = contacts[contactsIndex].lastName;
+            const color = contacts[contactsIndex].color;
+            const initials = getInitials(firstName, lastName);
+            const fullName = `${firstName} ${lastName}`;
+            userInfos.push({ initials, fullName, color });
+        }
+    }
+    return userInfos;
+} */
+  
+  
+  
   
 function clearTasks() {
     tasks = [];
