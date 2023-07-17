@@ -33,17 +33,21 @@ function showContacts(taskIndex) {
 }
 
 function editAssignedTo(taskIndex, contactId) {
-   
+    /* // Überprüfen, ob der angegebene Index gültig ist
+    if (taskIndex < 0 || taskIndex >= tasks.length) {
+        console.log("Ungültiger Aufgabenindex");
+        return;
+    } */
 
     // Das Objekt mit dem angegebenen Index aus dem Array tasks abrufen
     const task = tasks[taskIndex];
 
-    // Überprüfen, ob das Feld assignedTo bereits ein Array ist
+   /*  // Überprüfen, ob das Feld assignedTo bereits ein Array ist
     if (!Array.isArray(task.assignedTo)) {
         task.assignedTo = []; // Wenn nicht, ein leeres Array zuweisen
-    }
+    } */
 
-    // Überprüfen, ob die Kontakt-ID bereits im Array assignedTo enthalten ist
+    // Überprüfen, ob die Kontakt-ID bereits im Array Tasks im feld assignedTo enthalten ist
     const index = task.assignedTo.findIndex(item => item.id === contactId);
     if (index > -1) {
         // Kontakt-ID aus dem Array assignedTo entfernen

@@ -166,11 +166,14 @@ function getTime() {
     if (hour >= 5 && hour <= 12) {
         userGreetings = 'Good morning,';
     }
-    if (hour >= 14 && hour <= 18) {
+    else if (hour >= 14 && hour <= 18) {
         userGreetings = 'Good afternoon,';
     }
-    if (hour >= 18 && hour <= 23) {
+    else if (hour >= 18 && hour <= 23) {
         userGreetings = 'Good evening,';
+    }
+    else {
+        userGreetings = 'Hello,';
     }
 
     return userGreetings;
