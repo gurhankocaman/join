@@ -161,16 +161,17 @@ async function setCategoryOptions(){
 
 function selectContact() {
     var contact = document.getElementById('chooseContact');
-    var contactValue = contact.options[contact.selectedIndex].value;
+    var contactValue = parseInt(contact.options[contact.selectedIndex].value); // Wandelt den Wert in eine Zahl um
     contactValues.push({"id" : contactValue});
 
     let contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
     for (let i = 0; i < contactValues.length; i++) {
-        const contact = contacts.find( c => c.id == contactValues[i]["id"]);
+        const contact = contacts.find(c => c.id == contactValues[i]["id"]);
         contactList.innerHTML += `<li>${contact.firstName + " " + contact.lastName}</li>`
     }
     contact.selectedIndex = 0;
 }
+
 
 

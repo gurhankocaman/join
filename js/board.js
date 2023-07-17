@@ -1,44 +1,63 @@
-function showContacts() {
+function showContacts(taskIndex) {
+    // get Id of already assigned Users
+    let assignedContactIds = [];
+    
+    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
+        const assignedToId = tasks[taskIndex].assignedTo[i].id;
+        assignedContactIds.push(assignedToId);
+    }
+    
+    // show all contacts
     let dropdownContent = document.getElementById('edit-task-dropdown-content');
-    dropdownContent.innerHTML = ''; 
-  
+    dropdownContent.innerHTML = '';
+
     if (dropdownContent.classList.contains('d-none')) {
-      let content = '';
-      for (let i = 0; i < contacts.length; i++) {
-        content += `
-            <div>
-                <input type="checkbox" id="contacts-${[i]}">
-                <label for="contacts-${[i]}">${contacts[i].firstName} ${contacts[i].lastName}</label>
-            </div>`;
-      }
-  
-      dropdownContent.innerHTML = content;
-      dropdownContent.classList.remove('d-none');
-    } else {
-      dropdownContent.classList.add('d-none');
-    }
-  }
+        let content = '';
+        for (let i = 0; i < contacts.length; i++) {
+            const contactId = contacts[i].id;
 
-  /* function getUsers(taskId) {
-    const userInfos = [];
+            const isChecked = assignedContactIds.includes(contactId) ? 'checked="checked"' : '';
 
-    for (let contactsIndex = 0; contactsIndex < contacts.length; contactsIndex++) {
-        const contactId = contacts[contactsIndex].id;
-        if (contactId == taskId) {
-            const firstName = contacts[contactsIndex].firstName;
-            const lastName = contacts[contactsIndex].lastName;
-            const color = contacts[contactsIndex].color;
-            const initials = getInitials(firstName, lastName);
-            const fullName = `${firstName} ${lastName}`;
-            userInfos.push({ initials, fullName, color });
+            content += `
+                <div>
+                    <input type="checkbox" id="contacts-${[i]}" onchange="editAssignedTo(${taskIndex}, ${contactId})" ${isChecked}>
+                    <label for="contacts-${[i]}">${contacts[i].firstName} ${contacts[i].lastName}</label>
+                </div>`;
         }
+
+        dropdownContent.innerHTML = content;
+        dropdownContent.classList.remove('d-none');
+    } else {
+        dropdownContent.classList.add('d-none');
     }
-    return userInfos;
-} */
+}
+
+function editAssignedTo(taskIndex, contactId) {
+   
+
+    // Das Objekt mit dem angegebenen Index aus dem Array tasks abrufen
+    const task = tasks[taskIndex];
+
+    // Überprüfen, ob das Feld assignedTo bereits ein Array ist
+    if (!Array.isArray(task.assignedTo)) {
+        task.assignedTo = []; // Wenn nicht, ein leeres Array zuweisen
+    }
+
+    // Überprüfen, ob die Kontakt-ID bereits im Array assignedTo enthalten ist
+    const index = task.assignedTo.findIndex(item => item.id === contactId);
+    if (index > -1) {
+        // Kontakt-ID aus dem Array assignedTo entfernen
+        task.assignedTo.splice(index, 1);
+        console.log("Kontakt-ID wurde entfernt:", contactId);
+    } else {
+        // Die Kontakt-ID zum Array assignedTo hinzufügen
+        task.assignedTo.push({ id: contactId });
+        console.log("Kontakt-ID wurde hinzugefügt:", contactId);
+    }
+}
+
   
-  
-  
-  
+
 function clearTasks() {
     tasks = [];
     filteredTasks = [];
