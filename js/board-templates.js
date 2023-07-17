@@ -97,6 +97,16 @@ function editTaskHTML(taskIndex) {
                     Low <img src="./assets/img/prio-low.png"></div>
             </div>
         </div>
+
+        <div>
+            <div class="margin-bottom-25"><b>Assigned To:</b>
+            <div class="dropdown">
+            <div class="dropdown-title" onclick="toggleDropdown()">Kontakte anzeigen</div>
+            <div class="dropdown-content" id="dropdownContent"></div>
+  </div>
+            </div>
+        </div>
+
         <div class="popup-card-btns">
             <div class="dark-btn save-btn" onclick="saveEdit(${taskIndex})">
                 <span>OK ✓</span>

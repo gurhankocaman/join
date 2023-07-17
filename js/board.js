@@ -1,3 +1,20 @@
+function toggleDropdown() {
+    var dropdownContent = document.getElementById('dropdownContent');
+    dropdownContent.innerHTML = ''; // Löscht den Inhalt des Dropdowns
+  
+    if (dropdownContent.style.display === 'none') {
+      for (var i = 0; i < contacts.length; i++) {
+        var contactName = document.createElement('div');
+        contactName.textContent = contacts[i];
+        dropdownContent.appendChild(contactName);
+      }
+  
+      dropdownContent.style.display = 'block';
+    } else {
+      dropdownContent.style.display = 'none';
+    }
+  }
+  
 function clearTasks() {
     tasks = [];
     filteredTasks = [];
