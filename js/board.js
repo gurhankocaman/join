@@ -1,80 +1,8 @@
-function showContacts(taskIndex) {
-    // get Id of already assigned Users
-    let assignedContactIds = [];
-    
-    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        const assignedToId = tasks[taskIndex].assignedTo[i].id;
-        assignedContactIds.push(assignedToId);
-    }
-    
-    // show all contacts
-    let dropdownContent = document.getElementById('edit-task-dropdown-content');
-    dropdownContent.innerHTML = '';
-
-    if (dropdownContent.classList.contains('d-none')) {
-        let content = '';
-        for (let i = 0; i < contacts.length; i++) {
-            const contactId = contacts[i].id;
-
-            const isChecked = assignedContactIds.includes(contactId) ? 'checked="checked"' : '';
-
-            content += `
-                <div class="edit-task-dropdown-content">
-                    <input type="checkbox" id="contacts-${[i]}" onchange="editAssignedTo(${taskIndex}, ${contactId})" ${isChecked}>
-                    <label for="contacts-${[i]}">${contacts[i].firstName} ${contacts[i].lastName}</label>
-                </div>`;
-        }
-
-        dropdownContent.innerHTML = content;
-        dropdownContent.classList.remove('d-none');
-    } else {
-        dropdownContent.classList.add('d-none');
-    }
-}
-
-function editAssignedTo(taskIndex, contactId) {
-    /* // Überprüfen, ob der angegebene Index gültig ist
-    if (taskIndex < 0 || taskIndex >= tasks.length) {
-        console.log("Ungültiger Aufgabenindex");
-        return;
-    } */
-
-    // Das Objekt mit dem angegebenen Index aus dem Array tasks abrufen
-    const task = tasks[taskIndex];
-
-   /*  // Überprüfen, ob das Feld assignedTo bereits ein Array ist
-    if (!Array.isArray(task.assignedTo)) {
-        task.assignedTo = []; // Wenn nicht, ein leeres Array zuweisen
-    } */
-
-    // Überprüfen, ob die Kontakt-ID bereits im Array Tasks im feld assignedTo enthalten ist
-    const index = task.assignedTo.findIndex(item => item.id === contactId);
-    if (index > -1) {
-        // Kontakt-ID aus dem Array assignedTo entfernen
-        task.assignedTo.splice(index, 1);
-        console.log("Kontakt-ID wurde entfernt:", contactId);
-    } else {
-        // Die Kontakt-ID zum Array assignedTo hinzufügen
-        task.assignedTo.push({ id: contactId });
-        console.log("Kontakt-ID wurde hinzugefügt:", contactId);
-    }
-}
-
-  
-
-function clearTasks() {
-    tasks = [];
-    filteredTasks = [];
-    updateTasksHTML();
-    saveTasks();
-}
-
 let tasks = [];
 let contacts = [];
 let filteredTasks = [];
 let currentDraggedElement;
 let selectedPriority;
-
 
 /**
  * Initializes the board by retrieving tasks from storage, updating IDs, and generating HTML elements.
@@ -100,7 +28,6 @@ function updateId() {
     }
 }
 
-
 /**
  * Saves the updated tasks to storage.
  * @returns {Promise<void>}
@@ -108,7 +35,6 @@ function updateId() {
 async function saveTasks() {
     await setItem('tasks', JSON.stringify(tasks));
 }
-
 
 /**
  * Updates the HTML elements for the tasks on the board.
@@ -119,7 +45,6 @@ function updateTasksHTML() {
     updateAwaitingFeedback();
     updateDone();
 }
-
 
 /**
  * Updates the "To Do" column on the board.
@@ -133,7 +58,6 @@ function updateToDo() {
     }
 }
 
-
 /**
  * Updates the "In Progress" column on the board.
  */
@@ -145,7 +69,6 @@ function updateInProgress() {
         document.getElementById('in-progress').innerHTML += generateTasksHTML(task);
     }
 }
-
 
 /**
  * Updates the "Awaiting Feedback" column on the board.
@@ -159,7 +82,6 @@ function updateAwaitingFeedback() {
     }
 }
 
-
 /**
  * Updates the "Done" column on the board.
  */
@@ -172,7 +94,6 @@ function updateDone() {
     }
 }
 
-
 /**
  * Sets the current dragged element.
  * @param {number} id - The ID of the dragged element.
@@ -181,7 +102,6 @@ function startDragging(id) {
     currentDraggedElement = id;
 }
 
-
 /**
  * Allows dropping of elements during drag and drop.
  * @param {Event} ev - The drag event.
@@ -189,7 +109,6 @@ function startDragging(id) {
 function allowDrop(ev) {
     ev.preventDefault();
 }
-
 
 /**
  * Moves the current dragged task to the specified status and updates the board.
@@ -204,7 +123,6 @@ async function moveTo(status) {
     generateProgressBar();
     generateCategoryColor();
 }
-
 
 /**
  * Moves a task to the specified status based on its index and updates the board.
@@ -221,7 +139,6 @@ async function moveTask(taskIndex, status) {
     generateCategoryColor();
     closePopupCard();
 }
-
 
 /**
  * Finds tasks based on the search value and updates the board.
@@ -250,7 +167,6 @@ function findTasks() {
     generateCategoryColor();
 }
 
-
 /**
  * Generates the HTML for a task.
  * @param {Object} task - The task object.
@@ -264,7 +180,6 @@ function generateTasksHTML(task) {
     }
 }
 
-
 /**
  * Generates the category color for each task.
  */
@@ -276,7 +191,6 @@ function generateCategoryColor() {
         }
     }
 }
-
 
 /**
  * Generates the progress bar and value for each task.
@@ -302,7 +216,6 @@ function generateProgressBar() {
     }
 }
 
-
 /**
  * Generates the HTML code for displaying user information on the cards.
  */
@@ -321,7 +234,6 @@ function generateUsers() {
         }
     }
 }
-
 
 /**
  * Checks the priority of a task and returns the corresponding HTML.
@@ -342,236 +254,6 @@ function checkCardPrio(prio) {
     }
     return `<img src="${prioImg}">`;
 }
-
-
-/**
- * Opens the popup card for a task.
- * @param {number} i - The index of the task.
- */
-function openPopupCard(i) {
-    document.getElementById('popup-card').classList.remove('d-none');
-    generatePopupCardHTML(i);
-    generatePopupCardCategoryColor(i);
-}
-
-
-/**
- * Closes the popup card.
- */
-function closePopupCard() {
-    document.getElementById('popup-card').classList.add('d-none');
-}
-
-
-/**
- * Generates the HTML content for the popup card of a task.
- * @param {number} taskIndex - The index of the task.
- */
-function generatePopupCardHTML(taskIndex) {
-    let content = document.getElementById('popup-card');
-    content.innerHTML = '';
-    content.innerHTML += popupCardHTML(taskIndex);
-    generateSubtasks(taskIndex);
-}
-
-
-/**
- * Generates the category color for the popup card of a task.
- * @param {number} taskIndex - The index of the task.
- */
-function generatePopupCardCategoryColor(taskIndex) {
-    document.getElementById(`popup-card-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
-}
-
-
-/**
- * Checks the priority of a task in the popup card and returns the corresponding HTML.
- * @param {string} prio - The priority value of the task.
- * @returns {string} The HTML string for the priority.
- */
-function checkPopupCardPrio(prio) {
-    let prioImg;
-    let prioText;
-    let prioColor;
-
-    if (prio === 'Urgent') {
-        prioText = 'Urgent';
-        prioImg = "./assets/img/prio-urgent-white.png";
-        prioColor = "#FF3D00";
-    }
-    if (prio === 'Medium') {
-        prioText = 'Medium';
-        prioImg = "./assets/img/prio-medium-white.png";
-        prioColor = "#FFA800";
-    }
-    if (prio === 'Low') {
-        prioText = 'Low';
-        prioImg = "./assets/img/prio-low-white.png"
-        prioColor = "#7AE229";
-
-    }
-    return `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>`;
-}
-
-
-/**
- * Generates the HTML code for a popup card element containing user information.
- * @param {number} taskIndex - The index of the task in the `tasks` list.
- * @returns {string} - The generated HTML code.
- */
-function generateUsersPopupCard(taskIndex) {
-    let usersHTML = '';
-    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        const taskId = tasks[taskIndex].assignedTo[i].id;
-        const users = getUsers(taskId);
-        for (let j = 0; j < users.length; j++) {
-            usersHTML += `<div class="popup-card-assigned-to-container">
-                <div class="popup-card-user-initials" style="background-color: ${users[j].color}">${users[j].initials}</div>
-                <div>${users[j].fullName}</div>
-            </div>`;
-        }
-    }
-    return usersHTML;
-}
-
-
-/**
- * Generates the subtasks for the popup card of a task.
- * @param {number} taskIndex - The index of the task.
- */
-function generateSubtasks(taskIndex) {
-    let subtasks = tasks[taskIndex].subtask;
-    let content = document.getElementById('popup-card-subtasks');
-    content.innerHTML = '';
-
-    for (let i = 0; i < subtasks.length; i++) {
-        const checkboxId = `subtask-${taskIndex}-${i}`;
-        const isChecked = subtasks[i].checked ? 'checked' : '';
-
-        content.innerHTML += `
-            <input type="checkbox" id="${checkboxId}" onchange="submitCheckboxValue(${taskIndex}, ${i})" ${isChecked}>
-            <label for="${checkboxId}">${subtasks[i].name}</label><br>
-        `;
-    }
-};
-
-
-/**
- * Submits the checkbox value of a subtask.
- * @param {number} taskIndex - The index of the task.
- * @param {number} i - The index of the subtask.
- */
-function submitCheckboxValue(taskIndex, i) {
-    let checkbox = document.getElementById(`subtask-${taskIndex}-${i}`);
-    tasks[taskIndex].subtask[i].checked = checkbox.checked;
-    saveTasks();
-    generateProgressBar();
-}
-
-
-/**
- * Deletes a task.
- * @param {number} i - The index of the task.
- */
-function deleteTask(i) {
-    tasks.splice(i, 1);
-    updateId();
-    saveTasks();
-    closePopupCard();
-    updateTasksHTML();
-    generateUsers();
-    generateProgressBar();
-    generateCategoryColor();
-}
-
-
-/**
- * Edits a task.
- * @param {number} taskIndex - The index of the task.
- */
-function editTask(taskIndex) {
-    let content = document.getElementById('popup-card');
-    content.innerHTML = '';
-    content.innerHTML += editTaskHTML(taskIndex);
-    generateEditTaskCategoryColor(taskIndex);
-}
-
-
-/**
- * Generates the category color for the edit task popup card.
- * @param {number} taskIndex - The index of the task.
- */
-function generateEditTaskCategoryColor(taskIndex) {
-    document.getElementById(`edit-task-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
-}
-
-
-/**
- * Selects a priority for the task being edited.
- * @param {string} priority - The selected priority.
- */
-function selectPriority(priority) {
-    const urgentBtn = document.getElementById('edit-task-prio-urgent');
-    const mediumBtn = document.getElementById('edit-task-prio-medium');
-    const lowBtn = document.getElementById('edit-task-prio-low');
-
-    urgentBtn.classList.remove('edit-task-prio-urgent');
-    mediumBtn.classList.remove('edit-task-prio-medium');
-    lowBtn.classList.remove('edit-task-prio-low');
-
-    selectedPriority = priority;
-
-    if (priority === 'Urgent') {
-        urgentBtn.classList.add('edit-task-prio-urgent');
-    } else if (priority === 'Medium') {
-        mediumBtn.classList.add('edit-task-prio-medium');
-    } else if (priority === 'Low') {
-        lowBtn.classList.add('edit-task-prio-low');
-    }
-}
-
-
-/**
- * Generates the HTML code for editing a task and displays the assigned users.
- * @param {number} taskIndex - The index of the task in the `tasks` list.
- * @returns {string} - The generated HTML code.
- */
-function generateUsersEditTask(taskIndex) {
-    let usersHTML = '';
-    for (let i = 0; i < tasks[taskIndex].assignedTo.length; i++) {
-        const taskId = tasks[taskIndex].assignedTo[i].id;
-        const users = getUsers(taskId);
-        for (let j = 0; j < users.length; j++) {
-            usersHTML += `<div class="popup-card-assigned-to-container">
-                <div class="popup-card-user-initials" style="background-color: ${users[j].color}">${users[j].initials}</div>
-            </div>`;
-        }
-    }
-    return usersHTML;
-}
-
-
-/**
- * Saves the edited task.
- * @param {number} taskIndex - The index of the task.
- */
-async function saveEdit(taskIndex) {
-    tasks[taskIndex]['title'] = document.getElementById('input-title-edit-task').value;
-    tasks[taskIndex]['description'] = document.getElementById('input-description-edit-task').value;
-    tasks[taskIndex]['date'] = document.getElementById('input-date-edit-task').value;
-
-    if (selectedPriority) {
-        tasks[taskIndex]['priority'] = selectedPriority;
-    }
-
-    await setItem('tasks', JSON.stringify(tasks));
-    closePopupCard();
-    updateTasksHTML();
-    generateUsers();
-    generateProgressBar();
-    generateCategoryColor();
-}
-
 
 /**
  * Compares the User ID from Array Tasks with Array Contacts and returns only the matching contacts.
@@ -595,7 +277,6 @@ function getUsers(taskId) {
     return userInfos;
 }
 
-
 /**
  * Returns the initials for the given first and last name.
  * @param {string} firstName - The first name.
@@ -608,15 +289,13 @@ function getInitials(firstName, lastName) {
     return `${firstInitial}${lastInitial}`;
 }
 
-
 /**
  * Opens the add task popup.
  */
 function openAddTask() {
-    // window.location.href = 'add-task.html';
-    document.getElementById('add-task-popup').classList.remove('d-none');
+    window.location.href = 'add-task.html';
+    // document.getElementById('add-task-popup').classList.remove('d-none');
 }
-
 
 /**
  * Closes the add task popup.

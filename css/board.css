@@ -321,7 +321,6 @@ progress {
 }
 
 /* edit task */
-
 .edit-task-title input,
 .edit-task-description input,
 .edit-due-date input,
@@ -412,7 +411,7 @@ progress {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 8px;
+    padding: 4px 0px;
 }
 
 .edit-task-dropdown-content {
@@ -420,7 +419,7 @@ progress {
     justify-content: space-between;
     flex-direction: row-reverse;
     align-items: center;
-    padding: 4px 8px;
+    padding: 4px 0px;
 }
 
 .save-btn {
@@ -474,13 +473,13 @@ progress {
     cursor: pointer;
 }
 
-@media(max-width: 1440px) {
+@media(max-width: 1400px) {
     .board-content {
         flex-wrap: wrap;
     }
 }
 
-@media(max-width: 1024px) {
+@media(max-width: 1000px) {
     .popup-background {
         overflow-x: hidden;
     }
@@ -544,7 +543,7 @@ progress {
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 800px) {
     .popup-card {
         width: 380px;
         font-size: 16px;
@@ -576,7 +575,8 @@ progress {
 
     .edit-task-title input,
     .edit-task-description input,
-    .edit-due-date input {
+    .edit-due-date input,
+    .edit-task-dropdown {
         font-size: 16px;
     }
 

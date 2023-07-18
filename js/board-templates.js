@@ -97,18 +97,15 @@ function editTaskHTML(taskIndex) {
                     Low <img src="./assets/img/prio-low.png"></div>
             </div>
         </div>
-
         <div>
-    <div class="margin-bottom-25">
-        <b>Assigned To:</b>
-        <div class="edit-task-dropdown">
-            <div class="edit-task-dropdown-title" onclick="showContacts(${taskIndex})">Select contacts to assign <img src="./assets/img/arrow_down.png" alt="Arrow Down"></div>
-            <div class="d-none" id="edit-task-dropdown-content"></div>
+            <div class="margin-bottom-25">
+                <b>Assigned To:</b>
+                <div class="edit-task-dropdown">
+                    <div class="edit-task-dropdown-title" onclick="showContacts(${taskIndex})">Select contacts to assign <img src="./assets/img/arrow_down.png" alt="Arrow Down"></div>
+                    <div class="d-none" id="edit-task-dropdown-content"></div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
-
         <div class="popup-card-btns">
             <div class="dark-btn save-btn" onclick="saveEdit(${taskIndex})">
                 <span>OK ✓</span>
