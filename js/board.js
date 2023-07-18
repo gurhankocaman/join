@@ -19,7 +19,7 @@ function showContacts(taskIndex) {
             const isChecked = assignedContactIds.includes(contactId) ? 'checked="checked"' : '';
 
             content += `
-                <div>
+                <div class="edit-task-dropdown-content">
                     <input type="checkbox" id="contacts-${[i]}" onchange="editAssignedTo(${taskIndex}, ${contactId})" ${isChecked}>
                     <label for="contacts-${[i]}">${contacts[i].firstName} ${contacts[i].lastName}</label>
                 </div>`;
@@ -613,7 +613,8 @@ function getInitials(firstName, lastName) {
  * Opens the add task popup.
  */
 function openAddTask() {
-    window.location.href = 'add-task.html';
+    // window.location.href = 'add-task.html';
+    document.getElementById('add-task-popup').classList.remove('d-none');
 }
 
 
