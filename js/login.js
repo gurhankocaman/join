@@ -1,8 +1,8 @@
 let users = [];
 
 /**
- * Initializes the login process.
- * Loads users and remembers the user if applicable.
+ * Initializes the login process
+ * Loads users and remembers the user if applicable
  * @returns {Promise<void>}
  */
 async function initLogin() {
@@ -11,7 +11,7 @@ async function initLogin() {
 }
 
 /**
- * Loads users from backend.
+ * Loads users from backend
  * @returns {Promise<void>}
  */
 async function loadUsers() {
@@ -19,15 +19,15 @@ async function loadUsers() {
 }
 
 /**
- * Performs the login process.
+ * Runs the login process
  */
 function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
-    let rememberUser = document.getElementById('remember-me-checkbox').checked;  // Check radio button. If the button is checked, true is returned.
-    let user = users.find(currentUser => currentUser.email == email.value && currentUser.password == password.value);  // Filters array users for email and password match.
+    let rememberUser = document.getElementById('remember-me-checkbox').checked;  // Check radio button, if the button is checked, true is returned
+    let user = users.find(currentUser => currentUser.email == email.value && currentUser.password == password.value);  // Filters array users for email and password match
 
-    if (user) { // Save user and remember me button status in local storage.
+    if (user) { // Save user and remember me button status in local storage
         let userAsText = JSON.stringify(user);
         localStorage.setItem('currentUser', userAsText);
         let rememberUserAsText = JSON.stringify(rememberUser);
@@ -43,21 +43,21 @@ function login() {
 }
 
 /**
- * Checks if the remember user feature is enabled and sets the email and password accordingly.
+ * Checks if the remember user feature is enabled and sets the email and password accordingly
  * @returns {Promise<void>}
  */
 async function rememberUser() {
     let rememberUserAsText = localStorage.getItem('rememberUser');
 
-    if (rememberUserAsText) {     // Checks if remember user has a value.
+    if (rememberUserAsText) {     // Checks if remember user has a value
         remember = JSON.parse(rememberUserAsText);
-        let userAsText = localStorage.getItem('currentUser');     // Get current user.
+        let userAsText = localStorage.getItem('currentUser');     // Get current user
         if (userAsText) {
             user = JSON.parse(userAsText);
             username = user['email'];
             password = user['password'];
         }
-        if (remember === true) {     // Get login status and return email-address.
+        if (remember === true) {     // Get login status and return email-address
             document.getElementById('email').value = `${username}`;
             document.getElementById('password').value = `${password}`;
         }
@@ -65,7 +65,7 @@ async function rememberUser() {
 }
 
 /**
- * Displays an error message for an incorrect login attempt.
+ * Displays an error message for an incorrect login attempt
  */
 function loginError() {
     let content = document.getElementById('feedback-container');
@@ -76,7 +76,7 @@ function loginError() {
 }
 
 /**
- * Performs a guest login.
+ * Performs a guest login
  */
 function guestLogin() {
     localStorage.setItem('currentUser', '');
@@ -84,7 +84,7 @@ function guestLogin() {
 }
 
 /**
- * Registers a new user.
+ * Registers a new user
  */
 function newUser() {
     let name = document.getElementById('signup-name').value;
@@ -94,10 +94,10 @@ function newUser() {
 }
 
 /**
- * Checks if the email is already in use before registering a new user.
- * @param {string} name - The name of the user.
- * @param {string} email - The email of the user.
- * @param {string} password - The password of the user.
+ * Checks if the email is already in use before registering a new user
+ * @param {string} name - The name of the user
+ * @param {string} email - The email of the user
+ * @param {string} password - The password of the user
  */
 function matchEmail(name, email, password) {
     let found = false;
@@ -106,7 +106,7 @@ function matchEmail(name, email, password) {
         const newEmail = users[i]['email'];
         if (newEmail === email) {
             found = true;
-            break; // Stops function if match is found.
+            break; // Stops function if match is found
         }
     }
 
@@ -119,10 +119,10 @@ function matchEmail(name, email, password) {
 }
 
 /**
- * Registers a new user and stores their information.
- * @param {string} name - The name of the user.
- * @param {string} email - The email of the user.
- * @param {string} password - The password of the user.
+ * Registers a new user and stores their information
+ * @param {string} name - The name of the user
+ * @param {string} email - The email of the user
+ * @param {string} password - The password of the user
  * @returns {Promise<void>}
  */
 async function registerUser(name, email, password) {
@@ -138,7 +138,7 @@ async function registerUser(name, email, password) {
 }
 
 /**
- * Displays an error message for a registration attempt with an already registered email.
+ * Displays an error message for a registration attempt with an already registered email
  */
 function registerError() {
     let content = document.getElementById('feedback-container');
@@ -149,7 +149,7 @@ function registerError() {
 }
 
 /**
- * Displays a success message for a successful registration.
+ * Displays a success message for a successful registration
  */
 function registrationSuccessful() {
     let content = document.getElementById('feedback-container');
@@ -160,7 +160,7 @@ function registrationSuccessful() {
 }
 
 /**
- * Opens the sign-up form.
+ * Opens the sign-up form
  */
 function openSignUpForm() {
     document.getElementById('login-container').classList.add('d-none');
@@ -170,7 +170,7 @@ function openSignUpForm() {
 }
 
 /**
- * Closes the sign-up form.
+ * Closes the sign-up form
  */
 function closeSignUpForm() {
     document.getElementById('signup-container').classList.add('d-none');
@@ -179,7 +179,7 @@ function closeSignUpForm() {
 }
 
 /**
- * Opens the forgot password form.
+ * Opens the forgot password form
  */
 function openForgotPasswordForm() {
     document.getElementById('login-container').classList.add('d-none');
@@ -188,7 +188,7 @@ function openForgotPasswordForm() {
 }
 
 /**
- * Closes the forgot password form.
+ * Closes the forgot password form
  */
 function closeForgotPasswordForm() {
     document.getElementById('forgot-password-container').classList.add('d-none');
@@ -198,7 +198,7 @@ function closeForgotPasswordForm() {
 }
 
 /**
- * Resets the password for a user.
+ * Resets the password for a user
  */
 function resetPassword() {
     let email = document.getElementById('forgot-password');

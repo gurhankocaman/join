@@ -1,6 +1,5 @@
 /**
- * Initializes the summary page.
- * Calls the necessary functions to initialize the sidebar, header, and load tasks.
+ * Initializes the summary page
  */
 async function initSummary() {
     init(); // Initialize Sidebar and Header
@@ -8,9 +7,7 @@ async function initSummary() {
 };
 
 /**
- * Loads the tasks from local storage.
- * Parses the tasks JSON and assigns it to the 'tasks' variable.
- * Calls the 'loadContent' function.
+ * Loads the tasks from local storage and generates side content
  */
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
@@ -18,10 +15,10 @@ async function loadTasks() {
 }
 
 /**
- * Loads the content on the summary page.
- * Checks if there are any tasks available.
- * If tasks are available, calls several functions to display task-related information.
- * Calls functions to get the username, current time, and greet the user.
+ * Loads the content on the summary page
+ * Checks if there are any tasks available
+ * If tasks are available, calls several functions to display task-related information
+ * Calls functions to get the username, current time, and greet the user
  */
 function loadContent() {
     if (tasks.length > 0) {
@@ -39,7 +36,7 @@ function loadContent() {
 }
 
 /**
- * Displays the number of tasks in the HTML document.
+ * Displays the number of tasks in the HTML document
  */
 function numberOfTasks() {
     document.getElementById('tasks-in-board').innerHTML = '';
@@ -49,7 +46,7 @@ function numberOfTasks() {
 }
 
 /**
- * Displays the number of tasks in progress in the HTML document.
+ * Displays the number of tasks in progress in the HTML document
  */
 function tasksInProgress() {
     let inProgress = tasks.filter(t => t['status'] == 'in-progress');
@@ -60,7 +57,7 @@ function tasksInProgress() {
 }
 
 /**
- * Displays the number of tasks awaiting feedback in the HTML document.
+ * Displays the number of tasks awaiting feedback in the HTML document
  */
 function tasksAwaitingFeedback() {
     let awaitingFeedback = tasks.filter(t => t['status'] == 'awaiting-feedback');
@@ -71,7 +68,7 @@ function tasksAwaitingFeedback() {
 }
 
 /**
- * Displays the number of urgent tasks in the HTML document.
+ * Displays the number of urgent tasks in the HTML document
  */
 function tasksUrgent() {
     let urgent = tasks.filter(t => t['priority'] == 'Urgent');
@@ -82,7 +79,7 @@ function tasksUrgent() {
 }
 
 /**
- * Displays the upcoming deadline in the HTML document.
+ * Displays the upcoming deadline in the HTML document
  */
 function getDeadline() {
     document.getElementById('upcoming-deadline').innerHTML = '';
@@ -100,7 +97,7 @@ function getDeadline() {
 }
 
 /**
- * Displays the number of tasks to do in the HTML document.
+ * Displays the number of tasks to do in the HTML document
  */
 function tasksToDo() {
     let toDo = tasks.filter(t => t['status'] == 'to-do');
@@ -111,7 +108,7 @@ function tasksToDo() {
 }
 
 /**
- * Displays the number of tasks done in the HTML document.
+ * Displays the number of tasks done in the HTML document
  */
 function tasksDone() {
     let done = tasks.filter(t => t['status'] == 'done');
@@ -122,27 +119,24 @@ function tasksDone() {
 }
 
 /**
- * Greets the user by displaying a personalized message.
- * Updates the user-greetings and user-name elements in the HTML document.
+ * Greets the user by displaying a personalized message
+ * Updates the user-greetings and user-name elements in the HTML document
  */
 function greetUser() {
     document.getElementById('user-greetings').innerHTML = '';
     document.getElementById('user-name').innerHTML = '';
 
     if (getUsername()) {
-        // Display current time in user-greetings element
         document.getElementById('user-greetings').innerHTML += `<div>${getTime()}</div>`;
-        // Display username in user-name element
         document.getElementById('user-name').innerHTML += `<div>${getUsername()}</div>`;
-    } else {
-        // Display modified time (without comma) in user-greetings element
+    } else { // Display modified time (without comma) in user-greetings element
         document.getElementById('user-greetings').innerHTML += `<div>${getTime().slice(0, -1)}</div>`;
     }
 }
 
 /**
- * Retrieves the current username from local storage.
- * @returns {string} The username of the current user.
+ * Retrieves the current username from local storage
+ * @returns {string} The username of the current user
  */
 function getUsername() {
     let userAsText = localStorage.getItem('currentUser');
@@ -155,8 +149,8 @@ function getUsername() {
 }
 
 /**
- * Gets the current time and determines the appropriate greeting message based on the hour.
- * @returns {string} The greeting message based on the current time.
+ * Gets the current time and determines the appropriate greeting message based on the hour
+ * @returns {string} The greeting message based on the current time
  */
 function getTime() {
     const time = new Date();
@@ -180,7 +174,7 @@ function getTime() {
 }
 
 /**
- * Redirects the user to the board.html page.
+ * Redirects the user to the board.html page
  */
 function linkToBoard() {
     window.location.href = 'board.html';

@@ -5,7 +5,7 @@ let currentDraggedElement;
 let selectedPriority;
 
 /**
- * Initializes the board by retrieving tasks from storage, updating IDs, and generating HTML elements.
+ * Initializes the board
  * @returns {Promise<void>}
  */
 async function initBoard() {
@@ -16,7 +16,7 @@ async function initBoard() {
 }
 
 /**
- * Updates the board with the filtered tasks.
+ * Updates the board and generating HTML elements
  */
 function updateBoard() {
     updateTasksHTML();
@@ -26,7 +26,7 @@ function updateBoard() {
 }
 
 /**
- * Updates the IDs of tasks in the array.
+ * Updates the IDs of tasks in the array
  */
 function updateId() {
     for (let i = 0; i < tasks.length; i++) {
@@ -36,7 +36,7 @@ function updateId() {
 }
 
 /**
- * Saves the updated tasks to storage.
+ * Saves the updated tasks to storage
  * @returns {Promise<void>}
  */
 async function saveTasks() {
@@ -44,7 +44,7 @@ async function saveTasks() {
 }
 
 /**
- * Updates the HTML elements for the tasks on the board.
+ * Updates the HTML elements for the tasks on the board
  */
 function updateTasksHTML() {
     updateToDo();
@@ -54,7 +54,7 @@ function updateTasksHTML() {
 }
 
 /**
- * Updates the "To Do" column on the board.
+ * Updates the "To Do" column on the board
  */
 function updateToDo() {
     let toDo = tasks.filter(t => t['status'] == 'to-do');
@@ -66,7 +66,7 @@ function updateToDo() {
 }
 
 /**
- * Updates the "In Progress" column on the board.
+ * Updates the "In Progress" column on the board
  */
 function updateInProgress() {
     let inProgress = tasks.filter(t => t['status'] == 'in-progress');
@@ -78,7 +78,7 @@ function updateInProgress() {
 }
 
 /**
- * Updates the "Awaiting Feedback" column on the board.
+ * Updates the "Awaiting Feedback" column on the board
  */
 function updateAwaitingFeedback() {
     let awaitingFeedback = tasks.filter(t => t['status'] == 'awaiting-feedback');
@@ -90,7 +90,7 @@ function updateAwaitingFeedback() {
 }
 
 /**
- * Updates the "Done" column on the board.
+ * Updates the "Done" column on the board
  */
 function updateDone() {
     let done = tasks.filter(t => t['status'] == 'done');
@@ -102,24 +102,24 @@ function updateDone() {
 }
 
 /**
- * Sets the current dragged element.
- * @param {number} id - The ID of the dragged element.
+ * Sets the current dragged element
+ * @param {number} id - The ID of the dragged element
  */
 function startDragging(id) {
     currentDraggedElement = id;
 }
 
 /**
- * Allows dropping of elements during drag and drop.
- * @param {Event} ev - The drag event.
+ * Allows dropping of elements during drag and drop
+ * @param {Event} ev - The drag event
  */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
 /**
- * Moves the current dragged task to the specified status and updates the board.
- * @param {string} status - The status to move the task to.
+ * Moves the current dragged task to the specified status and updates the board
+ * @param {string} status - The status to move the task to
  * @returns {Promise<void>}
  */
 async function moveTo(status) {
@@ -129,9 +129,9 @@ async function moveTo(status) {
 }
 
 /**
- * Moves a task to the specified status based on its index and updates the board.
- * @param {number} taskIndex - The index of the task to move.
- * @param {string} status - The status to move the task to.
+ * Moves a task to the specified status based on its index and updates the board
+ * @param {number} taskIndex - The index of the task to move
+ * @param {string} status - The status to move the task to
  * @returns {Promise<void>}
  */
 async function moveTask(taskIndex, status) {
@@ -142,7 +142,7 @@ async function moveTask(taskIndex, status) {
 }
 
 /**
- * Finds tasks based on the search value and updates the board.
+ * Finds tasks based on the search value and updates the board
  */
 function findTasks() {
     let searchValue = document.querySelector('.search-box input').value;
@@ -152,9 +152,9 @@ function findTasks() {
 }
 
 /**
- * Filters tasks based on the search value.
- * @param {string} searchValue - The search value to filter tasks.
- * @returns {Array} - The filtered tasks.
+ * Filters tasks based on the search value
+ * @param {string} searchValue - The search value to filter tasks
+ * @returns {Array} - The filtered tasks
  */
 function filterTasksBySearch(searchValue) {
     let filteredTasks = [];
@@ -176,9 +176,9 @@ function filterTasksBySearch(searchValue) {
 }
 
 /**
- * Generates the HTML for a task.
- * @param {Object} task - The task object.
- * @returns {string} The HTML string for the task.
+ * Generates the HTML for a task
+ * @param {Object} task - The task object
+ * @returns {string} The HTML string for the task
  */
 function generateTasksHTML(task) {
     if (filteredTasks.length > 0 && !filteredTasks.includes(task)) {
@@ -189,7 +189,7 @@ function generateTasksHTML(task) {
 }
 
 /**
- * Generates the category color for each task.
+ * Generates the category color for each task
  */
 function generateCategoryColor() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
@@ -201,19 +201,19 @@ function generateCategoryColor() {
 }
 
 /**
- * Generates the progress bar and value for each task.
+ * Generates the progress bar and value for each task
  */
 function generateProgressBar() {
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].subtask && tasks[i].subtask.length > 0 || i === 0) {
-            let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
-            let percent = calculatePercent(i, trueSubtasks);
+            let subtasksTrue = tasks[i].subtask.filter(subtask => subtask.checked === true); // new Array
+            let percent = calculatePercent(i, subtasksTrue);
             let progressBar = document.getElementById(`progress-bar-${i}`);
             let progressValue = document.getElementById(`progress-value-${i}`);
 
             if (progressBar !== null && progressValue !== null) {
                 progressBar.value = percent;
-                progressValue.innerHTML = `${trueSubtasks.length}/${tasks[i].subtask.length} Done`;
+                progressValue.innerHTML = `${subtasksTrue.length}/${tasks[i].subtask.length} Done`;
             }
         } else {
             hideProgressBar(i);
@@ -222,18 +222,18 @@ function generateProgressBar() {
 }
 
 /**
- * Calculates the progress based on the true subtasks count.
- * @param {number} i - The index of the task.
- * @param {Array} trueSubtasks - The array of true subtasks.
- * @returns {number} The calculated progress percentage.
+ * Calculates the progress based on the true subtasks count
+ * @param {number} i - The index of the task
+ * @param {Array} subtasksTrue - The array of true subtasks
+ * @returns {number} The calculated progress percentage
  */
-function calculatePercent(i, trueSubtasks) {
-    return trueSubtasks.length / tasks[i].subtask.length * 100;
+function calculatePercent(i, subtasksTrue) {
+    return subtasksTrue.length / tasks[i].subtask.length * 100;
 }
 
 /**
- * Hides the progress bar container for a task.
- * @param {number} i - The index of the task.
+ * Hides the progress bar container for a task
+ * @param {number} i - The index of the task
  */
 function hideProgressBar(i) {
     let progressBarContainer = document.getElementById(`progress-bar-container-${i}`);
@@ -242,9 +242,8 @@ function hideProgressBar(i) {
     }
 }
 
-
 /**
- * Generates the HTML code for displaying user information on the cards.
+ * Generates the HTML code for displaying user information on the cards
  */
 function generateUsers() {
     for (let taskIndex = 0; taskIndex < tasks.length; taskIndex++) {
@@ -263,9 +262,9 @@ function generateUsers() {
 }
 
 /**
- * Checks the priority of a task and returns the corresponding HTML.
- * @param {string} prio - The priority value of the task.
- * @returns {string} The HTML string for the priority.
+ * Checks the priority of a task and returns the corresponding HTML
+ * @param {string} prio - The priority value of the task
+ * @returns {string} The HTML string for the priority
  */
 function checkCardPrio(prio) {
     let prioImg;
@@ -283,9 +282,9 @@ function checkCardPrio(prio) {
 }
 
 /**
- * Compares the User ID from Array Tasks with Array Contacts and returns only the matching contacts.
- * @param {number} taskId - The ID of the task.
- * @returns {Array} - A list of user information.
+ * Compares the User ID from Array Tasks with Array Contacts and returns only the matching contacts
+ * @param {number} taskId - The ID of the task
+ * @returns {Array} - A list of user information
  */
 function getUsers(taskId) {
     const userInfos = [];
@@ -302,9 +301,9 @@ function getUsers(taskId) {
 }
 
 /**
- * Creates user information object from contact object.
- * @param {Object} contact - The contact object.
- * @returns {Object} - The user information object.
+ * Creates user information object from contact object
+ * @param {Object} contact - The contact object
+ * @returns {Object} - The user information object
  */
 function createUserInfo(contact) {
     const firstName = contact.firstName;
@@ -316,10 +315,10 @@ function createUserInfo(contact) {
 }
 
 /**
- * Returns the initials for the given first and last name.
- * @param {string} firstName - The first name.
- * @param {string} lastName - The last name.
- * @returns {string} - The initials.
+ * Returns the initials for the given first and last name
+ * @param {string} firstName - The first name
+ * @param {string} lastName - The last name
+ * @returns {string} - The initials
  */
 function getInitials(firstName, lastName) {
     const firstInitial = firstName.charAt(0).toUpperCase();
@@ -328,7 +327,7 @@ function getInitials(firstName, lastName) {
 }
 
 /**
- * Opens the add task popup.
+ * Opens the add task popup
  */
 function openAddTask() {
     window.location.href = 'add-task.html';
@@ -336,7 +335,7 @@ function openAddTask() {
 }
 
 /**
- * Closes the add task popup.
+ * Closes the add task popup
  */
 function closePopUp() {
     document.getElementById('add-task-popup').classList.add('d-none');

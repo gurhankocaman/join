@@ -1,6 +1,6 @@
 /**
- * Opens the popup card for a task.
- * @param {number} i - The index of the task.
+ * Opens the popup card for a task
+ * @param {number} i - The index of the task
  */
 function openPopupCard(i) {
     document.getElementById('popup-card').classList.remove('d-none');
@@ -9,15 +9,15 @@ function openPopupCard(i) {
 }
 
 /**
- * Closes the popup card.
+ * Closes the popup card
  */
 function closePopupCard() {
     document.getElementById('popup-card').classList.add('d-none');
 }
 
 /**
- * Generates the HTML content for the popup card of a task.
- * @param {number} taskIndex - The index of the task.
+ * Generates the HTML content for the popup card of a task
+ * @param {number} taskIndex - The index of the task
  */
 function generatePopupCardHTML(taskIndex) {
     let content = document.getElementById('popup-card');
@@ -27,17 +27,17 @@ function generatePopupCardHTML(taskIndex) {
 }
 
 /**
- * Generates the category color for the popup card of a task.
- * @param {number} taskIndex - The index of the task.
+ * Generates the category color for the popup card of a task
+ * @param {number} taskIndex - The index of the task
  */
 function generatePopupCardCategoryColor(taskIndex) {
     document.getElementById(`popup-card-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
 }
 
 /**
- * Checks the priority of a task in the popup card and returns the corresponding HTML.
- * @param {string} prio - The priority value of the task.
- * @returns {string} The HTML string for the priority.
+ * Checks the priority of a task in the popup card and returns the corresponding HTML
+ * @param {string} prio - The priority value of the task
+ * @returns {string} The HTML string for the priority
  */
 function checkPopupCardPrio(prio) {
     let prioImg;
@@ -64,9 +64,9 @@ function checkPopupCardPrio(prio) {
 }
 
 /**
- * Generates the HTML code for a popup card element containing user information.
- * @param {number} taskIndex - The index of the task in the `tasks` list.
- * @returns {string} - The generated HTML code.
+ * Generates the HTML code for a popup card element containing user information
+ * @param {number} taskIndex - The index of the task in the `tasks` list
+ * @returns {string} - The generated HTML code
  */
 function generateUsersPopupCard(taskIndex) {
     let usersHTML = '';
@@ -84,8 +84,8 @@ function generateUsersPopupCard(taskIndex) {
 }
 
 /**
- * Generates the subtasks for the popup card of a task.
- * @param {number} taskIndex - The index of the task.
+ * Generates the subtasks for the popup card of a task
+ * @param {number} taskIndex - The index of the task
  */
 function generateSubtasks(taskIndex) {
     let subtasks = tasks[taskIndex].subtask;
@@ -104,9 +104,9 @@ function generateSubtasks(taskIndex) {
 };
 
 /**
- * Submits the checkbox value of a subtask.
- * @param {number} taskIndex - The index of the task.
- * @param {number} i - The index of the subtask.
+ * Submits the checkbox value of a subtask
+ * @param {number} taskIndex - The index of the task
+ * @param {number} i - The index of the subtask
  */
 function submitCheckboxValue(taskIndex, i) {
     let checkbox = document.getElementById(`subtask-${taskIndex}-${i}`);
@@ -116,11 +116,11 @@ function submitCheckboxValue(taskIndex, i) {
 }
 
 /**
- * Deletes a task.
- * @param {number} i - The index of the task.
+ * Deletes a task
+ * @param {number} taskIndex - The index of the task
  */
-function deleteTask(i) {
-    tasks.splice(i, 1);
+function deleteTask(taskIndex) {
+    tasks.splice(taskIndex, 1);
     updateId();
     saveTasks();
     closePopupCard();
@@ -128,8 +128,8 @@ function deleteTask(i) {
 }
 
 /**
- * Edits a task.
- * @param {number} taskIndex - The index of the task.
+ * Edits a task
+ * @param {number} taskIndex - The index of the task
  */
 function editTask(taskIndex) {
     let content = document.getElementById('popup-card');
@@ -139,16 +139,16 @@ function editTask(taskIndex) {
 }
 
 /**
- * Generates the category color for the edit task popup card.
- * @param {number} taskIndex - The index of the task.
+ * Generates the category color for the edit task popup card
+ * @param {number} taskIndex - The index of the task
  */
 function generateEditTaskCategoryColor(taskIndex) {
     document.getElementById(`edit-task-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
 }
 
 /**
- * Selects a priority for the task being edited.
- * @param {string} priority - The selected priority.
+ * Selects a priority for the task being edited
+ * @param {string} priority - The selected priority
  */
 function selectPriority(priority) {
     const urgentBtn = document.getElementById('edit-task-prio-urgent');
@@ -159,10 +159,10 @@ function selectPriority(priority) {
 }
 
 /**
- * Removes the priority selection classes from the buttons.
- * @param {HTMLElement} urgentBtn - The button for urgent priority.
- * @param {HTMLElement} mediumBtn - The button for medium priority.
- * @param {HTMLElement} lowBtn - The button for low priority.
+ * Removes the priority selection classes from the buttons
+ * @param {HTMLElement} urgentBtn - The button for urgent priority
+ * @param {HTMLElement} mediumBtn - The button for medium priority
+ * @param {HTMLElement} lowBtn - The button for low priority
  */
 function removePrioritySelection(urgentBtn, mediumBtn, lowBtn) {
     urgentBtn.classList.remove('edit-task-prio-urgent');
@@ -171,11 +171,11 @@ function removePrioritySelection(urgentBtn, mediumBtn, lowBtn) {
 }
 
 /**
- * Adds the appropriate priority selection class to the button based on the selected priority.
- * @param {string} priority - The selected priority.
- * @param {HTMLElement} urgentBtn - The button for urgent priority.
- * @param {HTMLElement} mediumBtn - The button for medium priority.
- * @param {HTMLElement} lowBtn - The button for low priority.
+ * Adds the appropriate priority selection class to the button based on the selected priority
+ * @param {string} priority - The selected priority
+ * @param {HTMLElement} urgentBtn - The button for urgent priority
+ * @param {HTMLElement} mediumBtn - The button for medium priority
+ * @param {HTMLElement} lowBtn - The button for low priority
  */
 function addPriority(priority, urgentBtn, mediumBtn, lowBtn) {
     selectedPriority = priority;
@@ -190,9 +190,9 @@ function addPriority(priority, urgentBtn, mediumBtn, lowBtn) {
 }
 
 /**
- * Generates the HTML code for editing a task and displays the assigned users.
- * @param {number} taskIndex - The index of the task in the `tasks` list.
- * @returns {string} - The generated HTML code.
+ * Generates the HTML code for editing a task and displays the assigned users
+ * @param {number} taskIndex - The index of the task in the `tasks` list
+ * @returns {string} - The generated HTML code
  */
 function generateUsersEditTask(taskIndex) {
     let usersHTML = '';
@@ -209,9 +209,9 @@ function generateUsersEditTask(taskIndex) {
 }
 
 /**
- * Displays the contacts in a dropdown menu for a specific task.
+ * Displays the contacts in a dropdown menu for a specific task
  *
- * @param {number} taskIndex - The index of the task.
+ * @param {number} taskIndex - The index of the task
  */
 function showContacts(taskIndex) {
     let assignedContactIds = getAssignedContactIds(taskIndex);
@@ -226,10 +226,10 @@ function showContacts(taskIndex) {
 }
 
 /**
- * Retrieves the assigned contact IDs for a specific task.
+ * Retrieves the assigned contact IDs for a specific task
  *
- * @param {number} taskIndex - The index of the task.
- * @returns {Array} An array of assigned contact IDs.
+ * @param {number} taskIndex - The index of the task
+ * @returns {Array} An array of assigned contact IDs
  */
 function getAssignedContactIds(taskIndex) {
     let assignedContactIds = [];
@@ -243,12 +243,12 @@ function getAssignedContactIds(taskIndex) {
 }
 
 /**
- * Displays the contacts in the dropdown menu.
+ * Displays the contacts in the dropdown menu
  *
- * @param {Array} contacts - An array of contact objects.
- * @param {Array} assignedContactIds - An array of assigned contact IDs.
- * @param {number} taskIndex - The index of the task.
- * @param {HTMLElement} dropdownContent - The dropdown content element.
+ * @param {Array} contacts - An array of contact objects
+ * @param {Array} assignedContactIds - An array of assigned contact IDs
+ * @param {number} taskIndex - The index of the task
+ * @param {HTMLElement} dropdownContent - The dropdown content element
  */
 function showContactsDropdown(contacts, assignedContactIds, taskIndex, dropdownContent) {
     for (let i = 0; i < contacts.length; i++) {
@@ -265,19 +265,19 @@ function showContactsDropdown(contacts, assignedContactIds, taskIndex, dropdownC
 }
 
 /**
- * Hides the contacts dropdown menu.
+ * Hides the contacts dropdown menu
  *
- * @param {HTMLElement} dropdownContent - The dropdown content element.
+ * @param {HTMLElement} dropdownContent - The dropdown content element
  */
 function hideContactsDropdown(dropdownContent) {
     dropdownContent.classList.add('d-none');
 }
 
 /**
- * Edits the assigned contact for a specific task.
+ * Edits the assigned contact for a specific task
  *
- * @param {number} taskIndex - The index of the task.
- * @param {number} contactId - The ID of the contact.
+ * @param {number} taskIndex - The index of the task
+ * @param {number} contactId - The ID of the contact
  */
 function editAssignedTo(taskIndex, contactId) {
     const task = tasks[taskIndex];
@@ -291,8 +291,8 @@ function editAssignedTo(taskIndex, contactId) {
 }
 
 /**
- * Saves the edited task.
- * @param {number} taskIndex - The index of the task.
+ * Saves the edited task
+ * @param {number} taskIndex - The index of the task
  */
 async function saveEdit(taskIndex) {
     tasks[taskIndex]['title'] = document.getElementById('input-title-edit-task').value;
