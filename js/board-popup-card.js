@@ -94,7 +94,7 @@ function generateSubtasks(taskIndex) {
 
     for (let i = 0; i < subtasks.length; i++) {
         const checkboxId = `subtask-${taskIndex}-${i}`;
-        const isChecked = subtasks[i].checked ? 'checked' : '';
+        const isChecked = subtasks[i].checked ? 'checked' : ''; // Ternary Operator ((Bedingung) ? wenn true : wenn false;)
 
         content.innerHTML += `
             <input type="checkbox" id="${checkboxId}" onchange="submitCheckboxValue(${taskIndex}, ${i})" ${isChecked}>
@@ -124,10 +124,7 @@ function deleteTask(i) {
     updateId();
     saveTasks();
     closePopupCard();
-    updateTasksHTML();
-    generateUsers();
-    generateProgressBar();
-    generateCategoryColor();
+    updateBoard();
 }
 
 /**
@@ -157,11 +154,30 @@ function selectPriority(priority) {
     const urgentBtn = document.getElementById('edit-task-prio-urgent');
     const mediumBtn = document.getElementById('edit-task-prio-medium');
     const lowBtn = document.getElementById('edit-task-prio-low');
+    removePrioritySelection(urgentBtn, mediumBtn, lowBtn);
+    addPriority(priority, urgentBtn, mediumBtn, lowBtn);
+}
 
+/**
+ * Removes the priority selection classes from the buttons.
+ * @param {HTMLElement} urgentBtn - The button for urgent priority.
+ * @param {HTMLElement} mediumBtn - The button for medium priority.
+ * @param {HTMLElement} lowBtn - The button for low priority.
+ */
+function removePrioritySelection(urgentBtn, mediumBtn, lowBtn) {
     urgentBtn.classList.remove('edit-task-prio-urgent');
     mediumBtn.classList.remove('edit-task-prio-medium');
     lowBtn.classList.remove('edit-task-prio-low');
+}
 
+/**
+ * Adds the appropriate priority selection class to the button based on the selected priority.
+ * @param {string} priority - The selected priority.
+ * @param {HTMLElement} urgentBtn - The button for urgent priority.
+ * @param {HTMLElement} mediumBtn - The button for medium priority.
+ * @param {HTMLElement} lowBtn - The button for low priority.
+ */
+function addPriority(priority, urgentBtn, mediumBtn, lowBtn) {
     selectedPriority = priority;
 
     if (priority === 'Urgent') {
@@ -237,7 +253,7 @@ function getAssignedContactIds(taskIndex) {
 function showContactsDropdown(contacts, assignedContactIds, taskIndex, dropdownContent) {
     for (let i = 0; i < contacts.length; i++) {
         const contactId = contacts[i].id;
-        const isChecked = assignedContactIds.includes(contactId) ? 'checked="checked"' : '';
+        const isChecked = assignedContactIds.includes(contactId) ? 'checked="checked"' : ''; // Ternary Operator
 
         dropdownContent.innerHTML += `
         <div class="edit-task-dropdown-content">
@@ -289,8 +305,5 @@ async function saveEdit(taskIndex) {
 
     await setItem('tasks', JSON.stringify(tasks));
     closePopupCard();
-    updateTasksHTML();
-    generateUsers();
-    generateProgressBar();
-    generateCategoryColor();
+    updateBoard();
 }

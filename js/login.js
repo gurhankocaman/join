@@ -24,19 +24,14 @@ async function loadUsers() {
 function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
-    // Check radio button. If the button is checked, true is returned.
-    let rememberUser = document.getElementById('remember-me-checkbox').checked;
-    // Filters array users for email and password match.
-    let user = users.find(currentUser => currentUser.email == email.value && currentUser.password == password.value);
+    let rememberUser = document.getElementById('remember-me-checkbox').checked;  // Check radio button. If the button is checked, true is returned.
+    let user = users.find(currentUser => currentUser.email == email.value && currentUser.password == password.value);  // Filters array users for email and password match.
 
-    if (user) {
-        // Save user in local storage.
+    if (user) { // Save user and remember me button status in local storage.
         let userAsText = JSON.stringify(user);
         localStorage.setItem('currentUser', userAsText);
-        // Save remember me button status in local storage.
         let rememberUserAsText = JSON.stringify(rememberUser);
         localStorage.setItem('rememberUser', rememberUserAsText);
-        // Redirect to next page.
         window.location.href = 'summary-user.html';
 
     } else {
@@ -53,18 +48,16 @@ function login() {
  */
 async function rememberUser() {
     let rememberUserAsText = localStorage.getItem('rememberUser');
-    // Checks if remember user has a value.
-    if (rememberUserAsText) {
+
+    if (rememberUserAsText) {     // Checks if remember user has a value.
         remember = JSON.parse(rememberUserAsText);
-        // Get current user.
-        let userAsText = localStorage.getItem('currentUser');
+        let userAsText = localStorage.getItem('currentUser');     // Get current user.
         if (userAsText) {
             user = JSON.parse(userAsText);
             username = user['email'];
             password = user['password'];
         }
-        // Get login status and return email-address.
-        if (remember === true) {
+        if (remember === true) {     // Get login status and return email-address.
             document.getElementById('email').value = `${username}`;
             document.getElementById('password').value = `${password}`;
         }

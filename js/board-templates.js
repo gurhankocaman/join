@@ -4,7 +4,7 @@ function tasksHTML(task) {
         <div id ="card-category-${task.id}" class="card-category margin-bottom-10">${task['category']}</div>
         <div class="card-title margin-bottom-10">${task['title']}</div>
         <div class="card-description margin-bottom-10">${task['description']}</div>
-        <div id="progress-bar-container" class="progress-bar-container">
+        <div id="progress-bar-container-${task.id}" class="progress-bar-container">
             <progress id="progress-bar-${task.id}" max="100" value="0"></progress>
             <div id="progress-value-${task.id}" class="progress-bar-counter"></div>
         </div>
@@ -40,7 +40,7 @@ function popupCardHTML(taskIndex) {
                 <div>${generateUsersPopupCard(taskIndex)}</div>
             </div>
         </div>
-        <div class="margin-bottom-25"><b>Subtasks:</b>
+        <div id="popup-card-subtasks-container-${taskIndex}" class="margin-bottom-25"><b>Subtasks:</b>
             <div id="popup-card-subtasks"></div>
         </div>
         <div class="margin-bottom-25">

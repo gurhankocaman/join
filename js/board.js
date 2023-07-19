@@ -12,6 +12,13 @@ async function initBoard() {
     tasks = JSON.parse(await getItem('tasks'));
     contacts = JSON.parse(await getItem('contacts'));
     updateId();
+    updateBoard();
+}
+
+/**
+ * Updates the board with the filtered tasks.
+ */
+function updateBoard() {
     updateTasksHTML();
     generateUsers();
     generateProgressBar();
@@ -118,10 +125,7 @@ function allowDrop(ev) {
 async function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     await saveTasks();
-    updateTasksHTML();
-    generateUsers();
-    generateProgressBar();
-    generateCategoryColor();
+    updateBoard();
 }
 
 /**
@@ -133,10 +137,7 @@ async function moveTo(status) {
 async function moveTask(taskIndex, status) {
     tasks[taskIndex].status = status;
     await saveTasks();
-    updateTasksHTML();
-    generateUsers();
-    generateProgressBar();
-    generateCategoryColor();
+    updateBoard();
     closePopupCard();
 }
 
@@ -146,8 +147,17 @@ async function moveTask(taskIndex, status) {
 function findTasks() {
     let searchValue = document.querySelector('.search-box input').value;
     searchValue = searchValue.toLowerCase();
+    filteredTasks = filterTasksBySearch(searchValue);
+    updateBoard();
+}
 
-    filteredTasks = [];
+/**
+ * Filters tasks based on the search value.
+ * @param {string} searchValue - The search value to filter tasks.
+ * @returns {Array} - The filtered tasks.
+ */
+function filterTasksBySearch(searchValue) {
+    let filteredTasks = [];
 
     if (searchValue.length > 0) {
         for (let i = 0; i < tasks.length; i++) {
@@ -161,10 +171,8 @@ function findTasks() {
             }
         }
     }
-    updateTasksHTML();
-    generateUsers();
-    generateProgressBar();
-    generateCategoryColor();
+
+    return filteredTasks;
 }
 
 /**
@@ -197,9 +205,9 @@ function generateCategoryColor() {
  */
 function generateProgressBar() {
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].subtask && tasks[i].subtask.length > 0) {
+        if (tasks[i].subtask && tasks[i].subtask.length > 0 || i === 0) {
             let trueSubtasks = tasks[i].subtask.filter(subtask => subtask.checked === true);
-            let percent = trueSubtasks.length / tasks[i].subtask.length * 100;
+            let percent = calculatePercent(i, trueSubtasks);
             let progressBar = document.getElementById(`progress-bar-${i}`);
             let progressValue = document.getElementById(`progress-value-${i}`);
 
@@ -208,13 +216,32 @@ function generateProgressBar() {
                 progressValue.innerHTML = `${trueSubtasks.length}/${tasks[i].subtask.length} Done`;
             }
         } else {
-            let progressBarContainer = document.getElementById('progress-bar-container');
-            if (progressBarContainer !== null) {
-                progressBarContainer.classList.add('d-none');
-            }
+            hideProgressBar(i);
         }
     }
 }
+
+/**
+ * Calculates the progress based on the true subtasks count.
+ * @param {number} i - The index of the task.
+ * @param {Array} trueSubtasks - The array of true subtasks.
+ * @returns {number} The calculated progress percentage.
+ */
+function calculatePercent(i, trueSubtasks) {
+    return trueSubtasks.length / tasks[i].subtask.length * 100;
+}
+
+/**
+ * Hides the progress bar container for a task.
+ * @param {number} i - The index of the task.
+ */
+function hideProgressBar(i) {
+    let progressBarContainer = document.getElementById(`progress-bar-container-${i}`);
+    if (progressBarContainer !== null) {
+        progressBarContainer.classList.add('d-none');
+    }
+}
+
 
 /**
  * Generates the HTML code for displaying user information on the cards.
@@ -266,15 +293,26 @@ function getUsers(taskId) {
     for (let contactsIndex = 0; contactsIndex < contacts.length; contactsIndex++) {
         const contactId = contacts[contactsIndex].id;
         if (contactId == taskId) {
-            const firstName = contacts[contactsIndex].firstName;
-            const lastName = contacts[contactsIndex].lastName;
-            const color = contacts[contactsIndex].color;
-            const initials = getInitials(firstName, lastName);
-            const fullName = `${firstName} ${lastName}`;
-            userInfos.push({ initials, fullName, color });
+            const contact = contacts[contactsIndex];
+            const userInfo = createUserInfo(contact);
+            userInfos.push(userInfo);
         }
     }
     return userInfos;
+}
+
+/**
+ * Creates user information object from contact object.
+ * @param {Object} contact - The contact object.
+ * @returns {Object} - The user information object.
+ */
+function createUserInfo(contact) {
+    const firstName = contact.firstName;
+    const lastName = contact.lastName;
+    const color = contact.color;
+    const initials = getInitials(firstName, lastName);
+    const fullName = `${firstName} ${lastName}`;
+    return { initials, fullName, color };
 }
 
 /**
