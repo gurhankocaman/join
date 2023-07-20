@@ -2,7 +2,6 @@ let tasks = [];
 let contacts = [];
 let filteredTasks = [];
 let currentDraggedElement;
-let selectedPriority;
 
 /**
  * Initializes the board

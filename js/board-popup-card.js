@@ -1,11 +1,13 @@
+let selectedPriority;
+
 /**
  * Opens the popup card for a task
- * @param {number} i - The index of the task
+ * @param {number} taskIndex - The index of the task
  */
-function openPopupCard(i) {
+function openPopupCard(taskIndex) {
     document.getElementById('popup-card').classList.remove('d-none');
-    generatePopupCardHTML(i);
-    generatePopupCardCategoryColor(i);
+    generatePopupCardHTML(taskIndex);
+    generatePopupCardCategoryColor(taskIndex);
 }
 
 /**
@@ -16,7 +18,7 @@ function closePopupCard() {
 }
 
 /**
- * Generates the HTML content for the popup card of a task
+ * Generates the HTML content for the popup card
  * @param {number} taskIndex - The index of the task
  */
 function generatePopupCardHTML(taskIndex) {
@@ -27,7 +29,7 @@ function generatePopupCardHTML(taskIndex) {
 }
 
 /**
- * Generates the category color for the popup card of a task
+ * Generates the category color for the popup card 
  * @param {number} taskIndex - The index of the task
  */
 function generatePopupCardCategoryColor(taskIndex) {
@@ -35,7 +37,7 @@ function generatePopupCardCategoryColor(taskIndex) {
 }
 
 /**
- * Checks the priority of a task in the popup card and returns the corresponding HTML
+ * Checks the priority of a task and returns the HTML
  * @param {string} prio - The priority value of the task
  * @returns {string} - The HTML string for the priority
  */
@@ -64,8 +66,8 @@ function checkPopupCardPrio(prio) {
 }
 
 /**
- * Generates the Users HTML
- * @param {number} taskIndex - The index of the task in the `tasks` list
+ * Generates the users HTML
+ * @param {number} taskIndex - The index of the task
  * @returns {string} - The generated HTML code
  */
 function generateUsersPopupCard(taskIndex) {
@@ -84,7 +86,7 @@ function generateUsersPopupCard(taskIndex) {
 }
 
 /**
- * Generates the subtasks for the popup card of a task
+ * Generates the subtasks for the popup card
  * @param {number} taskIndex - The index of the task
  */
 function generateSubtasks(taskIndex) {
@@ -139,7 +141,7 @@ function editTask(taskIndex) {
 }
 
 /**
- * Generates the category color for the edit task popup card
+ * Generates the category color for the task being edited
  * @param {number} taskIndex - The index of the task
  */
 function generateEditTaskCategoryColor(taskIndex) {
@@ -171,7 +173,7 @@ function removePrioritySelection(urgentBtn, mediumBtn, lowBtn) {
 }
 
 /**
- * Adds the appropriate priority selection class to the button based on the selected priority
+ * Adds the related css class to the clicked button
  * @param {string} priority - The selected priority
  * @param {HTMLElement} urgentBtn - The button for urgent priority
  * @param {HTMLElement} mediumBtn - The button for medium priority
@@ -190,8 +192,8 @@ function addPriority(priority, urgentBtn, mediumBtn, lowBtn) {
 }
 
 /**
- * Generates the HTML code for editing a task and displays the assigned users
- * @param {number} taskIndex - The index of the task in the `tasks` list
+ * Generates the users for the task being edited
+ * @param {number} taskIndex - The index of the task
  * @returns {string} - The generated HTML code
  */
 function generateUsersEditTask(taskIndex) {
@@ -209,7 +211,7 @@ function generateUsersEditTask(taskIndex) {
 }
 
 /**
- * Displays the contacts in a dropdown menu for a specific task
+ * Displays all contacts in a dropdown menu for a task
  *
  * @param {number} taskIndex - The index of the task
  */
@@ -226,7 +228,7 @@ function showContacts(taskIndex) {
 }
 
 /**
- * Retrieves the assigned contact IDs for a specific task
+ * Retrieves the assigned contact IDs for a task
  *
  * @param {number} taskIndex - The index of the task
  * @returns {Array} - An array of assigned contact IDs
@@ -243,7 +245,7 @@ function getAssignedContactIds(taskIndex) {
 }
 
 /**
- * Displays the contacts in the dropdown menu
+ * Displays all contacts from Array contantcs in a dropdown menu
  *
  * @param {Array} contacts - An array of contact objects
  * @param {Array} assignedContactIds - An array of assigned contact IDs
@@ -274,7 +276,7 @@ function hideContactsDropdown(dropdownContent) {
 }
 
 /**
- * Edits the assigned contact for a specific task
+ * Edits the assigned contact for a task
  *
  * @param {number} taskIndex - The index of the task
  * @param {number} contactId - The ID of the contact
