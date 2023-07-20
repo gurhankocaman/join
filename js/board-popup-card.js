@@ -37,7 +37,7 @@ function generatePopupCardCategoryColor(taskIndex) {
 /**
  * Checks the priority of a task in the popup card and returns the corresponding HTML
  * @param {string} prio - The priority value of the task
- * @returns {string} The HTML string for the priority
+ * @returns {string} - The HTML string for the priority
  */
 function checkPopupCardPrio(prio) {
     let prioImg;
@@ -64,7 +64,7 @@ function checkPopupCardPrio(prio) {
 }
 
 /**
- * Generates the HTML code for a popup card element containing user information
+ * Generates the Users HTML
  * @param {number} taskIndex - The index of the task in the `tasks` list
  * @returns {string} - The generated HTML code
  */
@@ -229,7 +229,7 @@ function showContacts(taskIndex) {
  * Retrieves the assigned contact IDs for a specific task
  *
  * @param {number} taskIndex - The index of the task
- * @returns {Array} An array of assigned contact IDs
+ * @returns {Array} - An array of assigned contact IDs
  */
 function getAssignedContactIds(taskIndex) {
     let assignedContactIds = [];

@@ -1,9 +1,7 @@
 let users = [];
 
 /**
- * Initializes the login process
- * Loads users and remembers the user if applicable
- * @returns {Promise<void>}
+ * Initializes the login process and loads user data if remember user feature was enabled
  */
 async function initLogin() {
     loadUsers();
@@ -12,7 +10,6 @@ async function initLogin() {
 
 /**
  * Loads users from backend
- * @returns {Promise<void>}
  */
 async function loadUsers() {
     users = JSON.parse(await getItem('users'));
@@ -44,7 +41,6 @@ function login() {
 
 /**
  * Checks if the remember user feature is enabled and sets the email and password accordingly
- * @returns {Promise<void>}
  */
 async function rememberUser() {
     let rememberUserAsText = localStorage.getItem('rememberUser');
@@ -76,7 +72,7 @@ function loginError() {
 }
 
 /**
- * Performs a guest login
+ * Guest login directly redirects to board without login
  */
 function guestLogin() {
     localStorage.setItem('currentUser', '');
@@ -123,7 +119,6 @@ function matchEmail(name, email, password) {
  * @param {string} name - The name of the user
  * @param {string} email - The email of the user
  * @param {string} password - The password of the user
- * @returns {Promise<void>}
  */
 async function registerUser(name, email, password) {
     users.push({ name: name, email: email, password: password });

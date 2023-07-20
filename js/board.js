@@ -6,7 +6,6 @@ let selectedPriority;
 
 /**
  * Initializes the board
- * @returns {Promise<void>}
  */
 async function initBoard() {
     tasks = JSON.parse(await getItem('tasks'));
@@ -37,7 +36,6 @@ function updateId() {
 
 /**
  * Saves the updated tasks to storage
- * @returns {Promise<void>}
  */
 async function saveTasks() {
     await setItem('tasks', JSON.stringify(tasks));
@@ -120,7 +118,6 @@ function allowDrop(ev) {
 /**
  * Moves the current dragged task to the specified status and updates the board
  * @param {string} status - The status to move the task to
- * @returns {Promise<void>}
  */
 async function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
@@ -132,7 +129,6 @@ async function moveTo(status) {
  * Moves a task to the specified status based on its index and updates the board
  * @param {number} taskIndex - The index of the task to move
  * @param {string} status - The status to move the task to
- * @returns {Promise<void>}
  */
 async function moveTask(taskIndex, status) {
     tasks[taskIndex].status = status;
@@ -178,7 +174,7 @@ function filterTasksBySearch(searchValue) {
 /**
  * Generates the HTML for a task
  * @param {Object} task - The task object
- * @returns {string} The HTML string for the task
+ * @returns {string} - The HTML string for the task
  */
 function generateTasksHTML(task) {
     if (filteredTasks.length > 0 && !filteredTasks.includes(task)) {
@@ -206,14 +202,14 @@ function generateCategoryColor() {
 function generateProgressBar() {
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].subtask && tasks[i].subtask.length > 0 || i === 0) {
-            let subtasksTrue = tasks[i].subtask.filter(subtask => subtask.checked === true); // new Array
-            let percent = calculatePercent(i, subtasksTrue);
+            let subtasksChecked = tasks[i].subtask.filter(subtask => subtask.checked === true); // new Array
+            let percent = calculatePercent(i, subtasksChecked);
             let progressBar = document.getElementById(`progress-bar-${i}`);
             let progressValue = document.getElementById(`progress-value-${i}`);
 
             if (progressBar !== null && progressValue !== null) {
                 progressBar.value = percent;
-                progressValue.innerHTML = `${subtasksTrue.length}/${tasks[i].subtask.length} Done`;
+                progressValue.innerHTML = `${subtasksChecked.length}/${tasks[i].subtask.length} Done`;
             }
         } else {
             hideProgressBar(i);
@@ -222,17 +218,17 @@ function generateProgressBar() {
 }
 
 /**
- * Calculates the progress based on the true subtasks count
+ * Calculates the progress based on the checked subtasks
  * @param {number} i - The index of the task
- * @param {Array} subtasksTrue - The array of true subtasks
- * @returns {number} The calculated progress percentage
+ * @param {Array} subtasksChecked - The array of checked subtasks
+ * @returns {number} - The calculated progress percentage
  */
-function calculatePercent(i, subtasksTrue) {
-    return subtasksTrue.length / tasks[i].subtask.length * 100;
+function calculatePercent(i, subtasksChecked) {
+    return subtasksChecked.length / tasks[i].subtask.length * 100;
 }
 
 /**
- * Hides the progress bar container for a task
+ * Hides the progress bar container for tasks without any subtasks
  * @param {number} i - The index of the task
  */
 function hideProgressBar(i) {
@@ -262,9 +258,9 @@ function generateUsers() {
 }
 
 /**
- * Checks the priority of a task and returns the corresponding HTML
+ * Checks the priority of a task and returns the HTML
  * @param {string} prio - The priority value of the task
- * @returns {string} The HTML string for the priority
+ * @returns {string} - The HTML string for the priority
  */
 function checkCardPrio(prio) {
     let prioImg;
@@ -284,7 +280,7 @@ function checkCardPrio(prio) {
 /**
  * Compares the User ID from Array Tasks with Array Contacts and returns only the matching contacts
  * @param {number} taskId - The ID of the task
- * @returns {Array} - A list of user information
+ * @returns {Array} - An array of user information
  */
 function getUsers(taskId) {
     const userInfos = [];
@@ -301,7 +297,7 @@ function getUsers(taskId) {
 }
 
 /**
- * Creates user information object from contact object
+ * Creates userInfos object from contact object
  * @param {Object} contact - The contact object
  * @returns {Object} - The user information object
  */
@@ -315,7 +311,7 @@ function createUserInfo(contact) {
 }
 
 /**
- * Returns the initials for the given first and last name
+ * Returns the initials for the first and last name
  * @param {string} firstName - The first name
  * @param {string} lastName - The last name
  * @returns {string} - The initials

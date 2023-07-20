@@ -15,10 +15,7 @@ async function loadTasks() {
 }
 
 /**
- * Loads the content on the summary page
- * Checks if there are any tasks available
- * If tasks are available, calls several functions to display task-related information
- * Calls functions to get the username, current time, and greet the user
+ * Loads the content on the summary page and checks if there are any tasks available
  */
 function loadContent() {
     if (tasks.length > 0) {
@@ -36,7 +33,7 @@ function loadContent() {
 }
 
 /**
- * Displays the number of tasks in the HTML document
+ * Displays the number of tasks
  */
 function numberOfTasks() {
     document.getElementById('tasks-in-board').innerHTML = '';
@@ -46,7 +43,7 @@ function numberOfTasks() {
 }
 
 /**
- * Displays the number of tasks in progress in the HTML document
+ * Displays the number of tasks in progress
  */
 function tasksInProgress() {
     let inProgress = tasks.filter(t => t['status'] == 'in-progress');
@@ -57,7 +54,7 @@ function tasksInProgress() {
 }
 
 /**
- * Displays the number of tasks awaiting feedback in the HTML document
+ * Displays the number of tasks awaiting feedback
  */
 function tasksAwaitingFeedback() {
     let awaitingFeedback = tasks.filter(t => t['status'] == 'awaiting-feedback');
@@ -68,7 +65,7 @@ function tasksAwaitingFeedback() {
 }
 
 /**
- * Displays the number of urgent tasks in the HTML document
+ * Displays the number of urgent tasks
  */
 function tasksUrgent() {
     let urgent = tasks.filter(t => t['priority'] == 'Urgent');
@@ -79,7 +76,7 @@ function tasksUrgent() {
 }
 
 /**
- * Displays the upcoming deadline in the HTML document
+ * Displays the upcoming deadline
  */
 function getDeadline() {
     document.getElementById('upcoming-deadline').innerHTML = '';
@@ -97,7 +94,7 @@ function getDeadline() {
 }
 
 /**
- * Displays the number of tasks to do in the HTML document
+ * Displays the number of tasks to do
  */
 function tasksToDo() {
     let toDo = tasks.filter(t => t['status'] == 'to-do');
@@ -108,7 +105,7 @@ function tasksToDo() {
 }
 
 /**
- * Displays the number of tasks done in the HTML document
+ * Displays the number of tasks done
  */
 function tasksDone() {
     let done = tasks.filter(t => t['status'] == 'done');
@@ -120,7 +117,6 @@ function tasksDone() {
 
 /**
  * Greets the user by displaying a personalized message
- * Updates the user-greetings and user-name elements in the HTML document
  */
 function greetUser() {
     document.getElementById('user-greetings').innerHTML = '';
@@ -136,7 +132,7 @@ function greetUser() {
 
 /**
  * Retrieves the current username from local storage
- * @returns {string} The username of the current user
+ * @returns {string} - The username of the current user
  */
 function getUsername() {
     let userAsText = localStorage.getItem('currentUser');
@@ -149,8 +145,8 @@ function getUsername() {
 }
 
 /**
- * Gets the current time and determines the appropriate greeting message based on the hour
- * @returns {string} The greeting message based on the current time
+* Gets the current time and chooses the greeting message based on the hour
+ * @returns {string} - The greeting message based on the current time
  */
 function getTime() {
     const time = new Date();
