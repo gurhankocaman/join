@@ -265,13 +265,13 @@ function checkCardPrio(prio) {
     let prioImg;
 
     if (prio === 'Urgent') {
-        prioImg = "./assets/img/prio-urgent.png"
+        prioImg = "./assets/img/Prio-urgent.png"
     }
     if (prio === 'Medium') {
-        prioImg = "./assets/img/prio-medium.png"
+        prioImg = "./assets/img/Prio-medium.png"
     }
     if (prio === 'Low') {
-        prioImg = "./assets/img/prio-low.png"
+        prioImg = "./assets/img/Prio-low.png"
     }
     return `<img src="${prioImg}">`;
 }
