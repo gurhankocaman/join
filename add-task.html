@@ -39,12 +39,13 @@
                         <textarea required id="descriptionField" class="textAreaStyle1"
                             placeholder="enter a description"></textarea>
                         <h4>Category</h4>
-                        <div id="selectToInput">
+                     
+                      <div id="selectToInput">
                             <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
                                 <option selected disabled>Choose Category</option>
                                 <option value="NewCategory">New Category</option>
                             </select>
-                        </div>
+                        </div> 
                         <div class="d-none" id="categoryColors">
                             <div class="categoryColor" id="1" style="background-color: #8aa4ff;"
                                 onclick="selectCategoryColor('#8aa4ff');"></div>
@@ -84,16 +85,20 @@
                         <input required id="dueDateField" name="dueDateField" class="textAreaStyle1" type="date">
                         <h4>Prio</h4>
                         <div id="prioField" class="prio">
-                            <input value="Urgent" type="checkbox" id="prio-button" class="button1">Urgent <img
-                                id="Urgent" src="./assets/img/Capa 2.png"></input type="checkbox">
+                            <label>
+                                <input value="Urgent" type="radio" name="priority" class="button1">Urgent
+                                <img id="Urgent" src="./assets/img/Capa 2.png">
+                            </label>
 
-                            <input value="Medium" type="checkbox" id="prio-button" class="button1">Medium<img
-                                id="Medium" src="./assets/img/Capa 2 (1).png"></input type="checkbox">
-                            <input value="Low" type="checkbox" id="prio-button" class="button1">Low <img id="Low"
-                                src="./assets/img/Capa 2 (2).png"></input type="checkbox">
-                        </div>
-                        <div>
+                            <label>
+                                <input value="Medium" type="radio" name="priority" class="button1">Medium
+                                <img id="Medium" src="./assets/img/Capa 2 (1).png">
+                            </label>
 
+                            <label>
+                                <input value="Low" type="radio" name="priority" class="button1">Low
+                                <img id="Low" src="./assets/img/Capa 2 (2).png">
+                            </label>
                         </div>
                         <h4>Subtasks</h4>
                         <div id="subtaskField">
