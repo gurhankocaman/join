@@ -5,7 +5,28 @@ var subtaskValues = [];
 var contactValues = [];
 var categoryColors = [];
 
-// Load Tasks
+async function initAddTask() {
+    await loadTasks();
+    await loadCategories();
+    await loadContacts();
+    await loadSubtasks();
+    await loadCategoryColors();
+    setCategoryOptions();
+    renderSubtasks(); 
+    setContactOptions();
+    console.log(categories);
+    console.log(categoryColors);
+}
+
+ function clearBackend() {
+    categories = [];
+    categoryColors = [];
+    subtasks = [];
+    setItem('categories', JSON.stringify(categories));
+    setItem('categoryColors', JSON.stringify(categoryColors));
+    setItem('subtasks', JSON.stringify(subtasks));
+  } 
+
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks')) || [];
 }
@@ -22,6 +43,10 @@ async function loadSubtasks() {
     subtasks = JSON.parse(await getItem('subtasks')) || [];
 }
 
+async function loadCategoryColors() {
+    categoryColors = JSON.parse(await getItem('categoryColors')) || [];
+}
+
 // Create Task
 async function createTask() {
 
@@ -34,13 +59,23 @@ async function createTask() {
     var date = document.getElementById('dueDateField');
     var checkedValue = document.querySelector('.button1:checked').value;
     var subtask = document.getElementById('subtaskInput');
-    var categoryColor = document.getElementById('colorSelect');
+    // var categoryColor = document.getElementById('colorSelect');
 
 
     subtasksToArray()
     
 
-    tasks.push({ "id" : tasks.length, "status" : "to-do", "title" : title.value, "description" : description.value, "category" : categoryValue, "assignedTo" : contactValues, "date" : date.value, "priority" : checkedValue, "subtask" : subtaskValues, "categoryColor" : categoryColor.value});
+    tasks.push({ 
+        "id" : tasks.length, 
+        "status" : "to-do", 
+        "title" : title.value, 
+        "description" : description.value, 
+        "category" : categoryValue, 
+        "assignedTo" : contactValues, 
+        "date" : date.value, 
+        "priority" : checkedValue, 
+        "subtask" : subtaskValues, 
+        "categoryColor" : "red"});
 
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
@@ -97,28 +132,43 @@ function selectToInput(){
     <div id="subtaskField">
         <div>
             <input id="newCategoryInput" type="text" placeholder="New Category">
+            <div class="categoryColor" id="selectedCategoryColor"></div>
             <img onclick="addNewCategory()" src="../assets/img/plus.png">
         </div>                  
     </div>`
     var element = document.getElementById("categoryColors");
     element.classList.remove("d-none");
+
 }
 
-async function addNewCategory(){
+var selectedCategoryColor = "#ffffff"; // Standardfarbe (z.B. weiß)
+
+
+function selectCategoryColor(color) {
+    selectedCategoryColor = color; // Aktualisiere die globale Variable
+    var selectedColorDiv = document.getElementById('selectedCategoryColor');
+    selectedColorDiv.style.backgroundColor = color;
+}
+
+
+
+async function addNewCategory() {
     var category = document.getElementById('newCategoryInput');
     
     categories.push({"category" : category.value});
+    categoryColors.push({ "color": selectedCategoryColor }); // Füge die Farbe zur Kategorie hinzu
     await setItem('categories', JSON.stringify(categories));
+    await setItem('categoryColors', JSON.stringify(categoryColors));
     resetSelect();
-    
 }
 
-async function addCategoryColor(){
+
+/* async function addCategoryColor(){
     var color = document.getElementById('colorSelect');
 
     categoryColors.push({"color" : color.value});
     await setItem('categoryColors', JSON.stringify(categoryColors));
-}
+} */
 
 async function addNewSubtask(){
     var subtask = document.getElementById('subtaskInput');

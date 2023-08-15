@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
-<body onload="init(), loadTasks(), loadContacts(), loadCategories(), loadSubtasks(), setCategoryOptions(), setContactOptions(), renderSubtasks()">
+<body onload="init(), initAddTask()">
     
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
@@ -44,9 +44,17 @@
                                 <option value="NewCategory">New Category</option>
                             </select>
                         </div>
-                        <div class="d-none" id="categoryColors">
+                         <!-- <div class="d-none" id="categoryColors">
                            <input type="color" id="colorSelect" value="#000000">
-                        </div>
+                        </div> -->
+                        <div class="d-none" id="categoryColors">
+                            <div class="categoryColor" id="1" style="background-color: #8aa4ff;" onclick="selectCategoryColor('#8aa4ff');"></div>
+                            <div class="categoryColor" id="2" style="background-color: #ff0000;" onclick="selectCategoryColor('#ff0000');"></div>
+                            <div class="categoryColor" id="3" style="background-color: #2ad300;" onclick="selectCategoryColor('#2ad300');"></div>
+                            <div class="categoryColor" id="4" style="background-color: #ff8a00;" onclick="selectCategoryColor('#ff8a00');"></div>
+                            <div class="categoryColor" id="5" style="background-color: #e200be;" onclick="selectCategoryColor('#e200be');"></div>
+                            <div class="categoryColor" id="6" style="background-color: #0038ff;" onclick="selectCategoryColor('#0038ff');"></div>
+                        </div> 
                         <h4>Assigned to</h4>
 
                         <select name="" id="chooseContact" class="chooseContact" onchange="selectContact()">
