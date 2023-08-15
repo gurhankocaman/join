@@ -1,10 +1,21 @@
+ function clearBackend() {
+    categories = [];
+    categoryColors = [];
+    subtasks = [];
+    setItem('categories', JSON.stringify(categories));
+    setItem('categoryColors', JSON.stringify(categoryColors));
+    setItem('subtasks', JSON.stringify(subtasks));
+  } 
+
 let tasks = [];
 let categories = [];
 let subtasks = [];
-var subtaskValues = [];
-var contactValues = [];
-var categoryColors = [];
+let subtaskValues = [];
+let contactValues = [];
+let categoryColors = [];
+let selectedCategoryColor = "#ffffff";
 
+// Init 
 async function initAddTask() {
     await loadTasks();
     await loadCategories();
@@ -15,15 +26,6 @@ async function initAddTask() {
     renderSubtasks(); 
     setContactOptions();
 }
-
- function clearBackend() {
-    categories = [];
-    categoryColors = [];
-    subtasks = [];
-    setItem('categories', JSON.stringify(categories));
-    setItem('categoryColors', JSON.stringify(categoryColors));
-    setItem('subtasks', JSON.stringify(subtasks));
-  } 
 
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks')) || [];
@@ -47,44 +49,56 @@ async function loadCategoryColors() {
 
 // Create Task
 async function createTask() {
+    // Deaktiviere den "Add Task" Button, während die Aufgabe erstellt wird
     addTaskBTN.disabled = true;
 
-    var title = document.getElementById('titleField');
-    var description = document.getElementById('descriptionField');
-    var category = document.getElementById('chooseCategory');
-    var categoryValue = category.options[category.selectedIndex].value;
-    var date = document.getElementById('dueDateField');
-    var checkedValue = document.querySelector('.button1:checked').value;
-    var subtask = document.getElementById('subtaskInput');
+    // Sammle die Daten aus den Eingabefeldern und Dropdowns
+    const title = document.getElementById('titleField').value;
+    const description = document.getElementById('descriptionField').value;
+    const category = document.getElementById('chooseCategory');
+    const categoryValue = category.options[category.selectedIndex].value;
+    const date = document.getElementById('dueDateField').value;
+    const checkedValue = document.querySelector('.button1:checked').value;
+    const subtask = document.getElementById('subtaskInput').value;
 
+    // Verarbeite die Subtasks
     subtasksToArray();
 
-    var categoryIndex = categories.findIndex(cat => cat.category === categoryValue);
-    var selectedCategoryColor = categoryColors[categoryIndex].color;
+    // Ermittle den Index der ausgewählten Kategorie
+    const categoryIndex = categories.findIndex(cat => cat.category === categoryValue);
+    const selectedCategoryColor = categoryColors[categoryIndex].color;
 
-    tasks.push({ 
-        "id" : tasks.length, 
-        "status" : "to-do", 
-        "title" : title.value, 
-        "description" : description.value, 
-        "category" : categoryValue, 
-        "assignedTo" : contactValues, 
-        "date" : date.value, 
-        "priority" : checkedValue, 
-        "subtask" : subtaskValues, 
-        "categoryColor" : selectedCategoryColor });
+    // Erstelle eine neue Aufgabe
+    const newTask = {
+        "id": tasks.length,
+        "status": "to-do",
+        "title": title,
+        "description": description,
+        "category": categoryValue,
+        "assignedTo": contactValues,
+        "date": date,
+        "priority": checkedValue,
+        "subtask": subtaskValues,
+        "categoryColor": selectedCategoryColor
+    };
 
+    // Füge die neue Aufgabe zur Liste hinzu und speichere sie
+    tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
-    title.value = '';
-    description.value = '';
+
+    // Setze die Eingabefelder und Optionen zurück
+    document.getElementById('titleField').value = '';
+    document.getElementById('descriptionField').value = '';
+    document.getElementById('prio-button').checked = false;
+    document.getElementById('dueDateField').value = '';
+    document.getElementById('subtaskInput').value = '';
     resetCategoryOptions();
     resetContactOptions();
-    let inputs = document.getElementById('prio-button');
-    inputs.checked = false;
-    date.value = '';
-    subtask.value = '';
-}
+    resetSubtasks();
 
+    // Aktiviere den "Add Task" Button wieder
+    addTaskBTN.disabled = false;
+}
 
 function subtasksToArray(){
     var subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
@@ -94,26 +108,30 @@ function subtasksToArray(){
 }
 
 function resetCategoryOptions() {
-    var categoryOptions = document.getElementById("chooseCategory");
+    let categoryOptions = document.getElementById("chooseCategory");
     categoryOptions.selectedIndex = 0;
  }
 
 function resetContactOptions() {
-    var contactOptions = document.getElementById("chooseContact");
+    let contactOptions = document.getElementById("chooseContact");
     contactOptions.selectedIndex = 0;
 }
 
-
-
-
-async function setContactOptions(){
-    await loadContacts();
-    let contactSelectBox = document.getElementById('chooseContact');
-    for (let i = 0; i < contacts.length; i++) {
-        contactSelectBox.innerHTML += `<option value="${contacts[i]['id']}">${contacts[i]['firstName'] + ' ' + contacts[i]['lastName']}</option>`; 
-    }
+function resetSubtasks() {
+    subtasks = [];
+    setItem('subtasks', JSON.stringify(subtasks));
 }
 
+// Categories
+async function setCategoryOptions(){
+    await loadCategories();
+    await loadCategoryColors();
+    let categorySelectBox = document.getElementById('chooseCategory');
+    for (let i = 0; i < categories.length; i++) {
+        categorySelectBox.innerHTML += `<option value="${categories[i]['category']}">${categories[i]['category']}</option>`;
+        console.log(categoryColors[i]['color']);
+    }
+}
 
 function addCategory() {
     var selectElement = document.getElementById("chooseCategory");
@@ -134,21 +152,16 @@ function selectToInput(){
             <img onclick="addNewCategory()" src="../assets/img/plus.png">
         </div>                  
     </div>`
-    var element = document.getElementById("categoryColors");
+    let element = document.getElementById("categoryColors");
     element.classList.remove("d-none");
 
 }
 
-var selectedCategoryColor = "#ffffff"; // Standardfarbe (z.B. weiß)
-
-
 function selectCategoryColor(color) {
     selectedCategoryColor = color; // Aktualisiere die globale Variable
-    var selectedColorDiv = document.getElementById('selectedCategoryColor');
+    let selectedColorDiv = document.getElementById('selectedCategoryColor');
     selectedColorDiv.style.backgroundColor = color;
 }
-
-
 
 async function addNewCategory() {
     var category = document.getElementById('newCategoryInput');
@@ -159,16 +172,6 @@ async function addNewCategory() {
     await setItem('categoryColors', JSON.stringify(categoryColors));
     resetSelect();
 }
-
-
-/* async function addCategoryColor(){
-    var color = document.getElementById('colorSelect');
-
-    categoryColors.push({"color" : color.value});
-    await setItem('categoryColors', JSON.stringify(categoryColors));
-} */
-
-
 
 function resetSelect(){
     let selectToInput = document.getElementById('selectToInput');
@@ -183,31 +186,12 @@ function resetSelect(){
     
 }
 
-async function setCategoryOptions(){
-    await loadCategories();
-    await loadCategoryColors();
-    let categorySelectBox = document.getElementById('chooseCategory');
-    for (let i = 0; i < categories.length; i++) {
-        categorySelectBox.innerHTML += `<option value="${categories[i]['category']}">${categories[i]['category']}</option>`;
-        console.log(categoryColors[i]['color']);
-    }
-}
-
-async function addNewSubtask(){
-    var subtask = document.getElementById('subtaskInput');
-    
-    subtasks.push({"subtask" : subtask.value});
-    await setItem('subtasks', JSON.stringify(subtasks));
-    subtask.value = ''
-    renderSubtasks();
-}
-
-async function renderSubtasks(){
-    await loadSubtasks();
-    let subtaskList = document.getElementById('subtaskList');
-    subtaskList.innerHTML = ''
-    for (let i = 0; i < subtasks.length; i++) {
-        subtaskList.innerHTML += `<li><input type="checkbox" name="${subtasks[i]['subtask']}">${subtasks[i]['subtask']}</li>`
+// Contacts 
+async function setContactOptions(){
+    await loadContacts();
+    let contactSelectBox = document.getElementById('chooseContact');
+    for (let i = 0; i < contacts.length; i++) {
+        contactSelectBox.innerHTML += `<option value="${contacts[i]['id']}">${contacts[i]['firstName'] + ' ' + contacts[i]['lastName']}</option>`; 
     }
 }
 
@@ -224,6 +208,28 @@ function selectContact() {
     }
     contact.selectedIndex = 0;
 }
+
+// Subtasks
+async function addNewSubtask(){
+    var subtask = document.getElementById('subtaskInput');
+    
+    subtasks.push({"subtask" : subtask.value});
+    await setItem('subtasks', JSON.stringify(subtasks));
+    subtask.value = '';
+    renderSubtasks();
+}
+
+async function renderSubtasks(){
+    await loadSubtasks();
+    let subtaskList = document.getElementById('subtaskList');
+    subtaskList.innerHTML = ''
+    for (let i = 0; i < subtasks.length; i++) {
+        subtaskList.innerHTML += `<li><input type="checkbox" name="${subtasks[i]['subtask']}" checked>${subtasks[i]['subtask']}</li>`
+    }
+}
+
+
+
 
 
 
