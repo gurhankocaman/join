@@ -200,18 +200,20 @@ function generateCategoryColor() {
  */
 function generateProgressBar() {
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].subtask && tasks[i].subtask.length > 0 || i === 0) {
-            let subtasksChecked = tasks[i].subtask.filter(subtask => subtask.checked === true); // new Array
-            let percent = calculatePercent(i, subtasksChecked);
-            let progressBar = document.getElementById(`progress-bar-${i}`);
-            let progressValue = document.getElementById(`progress-value-${i}`);
+        let subtasksChecked = tasks[i].subtask.filter(subtask => subtask.checked === true);
+        let percent = calculatePercent(i, subtasksChecked);
+        let progressBar = document.getElementById(`progress-bar-${i}`);
+        let progressValue = document.getElementById(`progress-value-${i}`);
+        let progressBarContainer = document.getElementById(`progress-bar-container-${i}`);
 
-            if (progressBar !== null && progressValue !== null) {
+        if (progressBarContainer !== null) {
+            if (tasks[i].subtask.length > 0) {
                 progressBar.value = percent;
                 progressValue.innerHTML = `${subtasksChecked.length}/${tasks[i].subtask.length} Done`;
+                progressBarContainer.classList.remove("d-none");
+            } else {
+                progressBarContainer.classList.add("d-none");
             }
-        } else {
-            hideProgressBar(i);
         }
     }
 }
@@ -223,18 +225,10 @@ function generateProgressBar() {
  * @returns {number} - The calculated progress percentage
  */
 function calculatePercent(i, subtasksChecked) {
-    return subtasksChecked.length / tasks[i].subtask.length * 100;
-}
-
-/**
- * Hides the progress bar container for tasks without any subtasks
- * @param {number} i - The index of the task
- */
-function hideProgressBar(i) {
-    let progressBarContainer = document.getElementById(`progress-bar-container-${i}`);
-    if (progressBarContainer !== null) {
-        progressBarContainer.classList.add('d-none');
+    if (tasks[i].subtask.length === 0) {
+        return 0; 
     }
+    return (subtasksChecked.length / tasks[i].subtask.length) * 100;
 }
 
 /**

@@ -14,8 +14,6 @@ async function initAddTask() {
     setCategoryOptions();
     renderSubtasks(); 
     setContactOptions();
-    console.log(categories);
-    console.log(categoryColors);
 }
 
  function clearBackend() {
@@ -49,7 +47,6 @@ async function loadCategoryColors() {
 
 // Create Task
 async function createTask() {
-
     addTaskBTN.disabled = true;
 
     var title = document.getElementById('titleField');
@@ -59,11 +56,11 @@ async function createTask() {
     var date = document.getElementById('dueDateField');
     var checkedValue = document.querySelector('.button1:checked').value;
     var subtask = document.getElementById('subtaskInput');
-    // var categoryColor = document.getElementById('colorSelect');
 
+    subtasksToArray();
 
-    subtasksToArray()
-    
+    var categoryIndex = categories.findIndex(cat => cat.category === categoryValue);
+    var selectedCategoryColor = categoryColors[categoryIndex].color;
 
     tasks.push({ 
         "id" : tasks.length, 
@@ -75,7 +72,7 @@ async function createTask() {
         "date" : date.value, 
         "priority" : checkedValue, 
         "subtask" : subtaskValues, 
-        "categoryColor" : "red"});
+        "categoryColor" : selectedCategoryColor });
 
     await setItem('tasks', JSON.stringify(tasks));
     title.value = '';
@@ -87,6 +84,7 @@ async function createTask() {
     date.value = '';
     subtask.value = '';
 }
+
 
 function subtasksToArray(){
     var subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
@@ -170,23 +168,7 @@ async function addNewCategory() {
     await setItem('categoryColors', JSON.stringify(categoryColors));
 } */
 
-async function addNewSubtask(){
-    var subtask = document.getElementById('subtaskInput');
-    
-    subtasks.push({"subtask" : subtask.value});
-    await setItem('subtasks', JSON.stringify(subtasks));
-    subtask.value = ''
-    renderSubtasks();
-}
 
-async function renderSubtasks(){
-    await loadSubtasks();
-    let subtaskList = document.getElementById('subtaskList');
-    subtaskList.innerHTML = ''
-    for (let i = 0; i < subtasks.length; i++) {
-        subtaskList.innerHTML += `<li><input type="checkbox" name="${subtasks[i]['subtask']}">${subtasks[i]['subtask']}</li>`
-    }
-}
 
 function resetSelect(){
     let selectToInput = document.getElementById('selectToInput');
@@ -203,9 +185,29 @@ function resetSelect(){
 
 async function setCategoryOptions(){
     await loadCategories();
+    await loadCategoryColors();
     let categorySelectBox = document.getElementById('chooseCategory');
     for (let i = 0; i < categories.length; i++) {
-        categorySelectBox.innerHTML += `<option value="${categories[i]['category']}">${categories[i]['category']}</option>`
+        categorySelectBox.innerHTML += `<option value="${categories[i]['category']}">${categories[i]['category']}</option>`;
+        console.log(categoryColors[i]['color']);
+    }
+}
+
+async function addNewSubtask(){
+    var subtask = document.getElementById('subtaskInput');
+    
+    subtasks.push({"subtask" : subtask.value});
+    await setItem('subtasks', JSON.stringify(subtasks));
+    subtask.value = ''
+    renderSubtasks();
+}
+
+async function renderSubtasks(){
+    await loadSubtasks();
+    let subtaskList = document.getElementById('subtaskList');
+    subtaskList.innerHTML = ''
+    for (let i = 0; i < subtasks.length; i++) {
+        subtaskList.innerHTML += `<li><input type="checkbox" name="${subtasks[i]['subtask']}">${subtasks[i]['subtask']}</li>`
     }
 }
 
