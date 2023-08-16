@@ -78,14 +78,14 @@ function openEditContactFormHTML(selectedContact) {
             <div class="contact-form-left">
                 <img class="contact-form-logo" src="./assets/img/Logo-Join.png" alt="#">
                 <span class="contact-form-heading">Edit Contact</span>
-                <img class="contact-form-underline" src="assets/img/underline.svg" alt="">
+                <img class="contact-form-underline" src="./assets/img/underline.svg" alt="">
             </div>
             <div class="contact-form-right">
             <div id="selectedContactColor" class="contact-letters big-letters margin-letters" style="background-color: ${selectedContact.color}">${selectedContact.lastName.charAt(0)} ${selectedContact.firstName.charAt(0)}</div>
             <div class="contact-input-container margin-top">
                 <div onclick="closeFormById('contactForm')" class="icon-top-right" title="close form">
                     <img class="contact-cancel-icon" src="./assets/img/contact-cancel-icon.svg" alt="#">
-                    <img class="contact-cancel-icon-mobile hide-content" src="assets/img/x_ixon.png" alt="">
+                    <img class="contact-cancel-icon-mobile hide-content" src="./assets/img/x_ixon.png" alt="">
                 </div>
                 <form onsubmit="updateContact(); return false;">
                     <div class="form-group">
@@ -230,28 +230,28 @@ function openAddTaskContactFormHTML() {
                             <input type="radio" class="checkbox_urgen" id="urgentBtn" name="radio">
                             <label for="urgentBtn" class="prio-btn prio-urgent urgentSection" for="checkbox_urgen"
                                 id="urgentSection">
-                                Urgent<img id="prioUrgentWhite" src="assets/img/Prio-urgent.png">
+                                Urgent<img id="prioUrgentWhite" src="./assets/img/Prio-urgent.png">
                             </label>
                             <input type="radio" class="checkbox_medium" id="mediumBtn" name="radio">
                             <label for="mediumBtn" class="prio-btn prio-urgent mediumSection" for="checkbox_urgen"
                                 id="mediumSection">
-                                Medium<img id="prioUrgentWhite" src="assets/img/Prio-medium.png">
+                                Medium<img id="prioUrgentWhite" src="./assets/img/Prio-medium.png">
                             </label>
                             <input type="radio" class="checkbox_low" id="lowBtn" name="radio" checked>
                             <label for="lowBtn" class="prio-btn prio-urgent lowSection" for="checkbox_urgen"
                                 id="lowSection">
-                                Low<img id="prioUrgentWhite" src="assets/img/Prio-low-white.png">
+                                Low<img id="prioUrgentWhite" src="./assets/img/Prio-low-white.png">
                             </label>
                         </div>
                         <div class="features-container">
                             <label>Subtasks</label>
                             <div class="subtask-container">
                                 <input class="subtask-input" onclick="inputChangeSubIcons()"placeholder="Add new subtask" id="subtask">
-                                <img id="plusSubtaskImg" class="plus-icon" src="assets/img/plus-icon.png" onclick="changeSubIcon()">
+                                <img id="plusSubtaskImg" class="plus-icon" src="./assets/img/plus-icon.png" onclick="changeSubIcon()">
                                 <div class="subtask-img-container">
-                                <img id="clearSubtaskImg" src="assets/img/icon_cancel_subtask.svg" onclick="clearSubtask()" class="subtask-icons d-none">
+                                <img id="clearSubtaskImg" src="./assets/img/icon_cancel_subtask.svg" onclick="clearSubtask()" class="subtask-icons d-none">
                                 <div class="gap-img-subtask"></div>
-                                <img id="addSubtaskImg" src="assets/img/icon_check_subtask.svg" onclick="addSubtask()" class="subtask-icons d-none">
+                                <img id="addSubtaskImg" src="./assets/img/icon_check_subtask.svg" onclick="addSubtask()" class="subtask-icons d-none">
                                 </div>
                             </div>
                             <div>
@@ -263,7 +263,7 @@ function openAddTaskContactFormHTML() {
                 <div class="contact-form-buttons btn-centered">
                     <button type="button" onclick="closeFormById('formTaskContainer')" class="contact-cancel-btn" title="close form">
                         <p>Cancel</p>
-                        <img class="contact-create-icon" src="assets/img/iconoir_cancel.svg" alt="#">
+                        <img class="contact-create-icon" src="./assets/img/iconoir_cancel.svg" alt="#">
                     </button>
                     <button type="submit" class="contact-add-btn" title="add new task">
                         <p>Create Task</p>
