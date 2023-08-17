@@ -40,6 +40,7 @@ async function loadCategoryColors() {
 
 // Create Task
 async function createTask() {
+    let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = true;
 
     const title = document.getElementById('titleField').value;
@@ -92,7 +93,7 @@ async function createTask() {
 
 
 function subtasksToArray() {
-    var subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
+    let subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
     subtasks.forEach(function (input) {
         subtaskValues.push({ name: input.name, checked: false });
     });
@@ -103,11 +104,12 @@ function resetForm() {
     document.getElementById('descriptionField').value = '';
     document.getElementById('dueDateField').value = '';
     document.getElementById('subtaskInput').value = '';
+    document.getElementById('contactList').innerHTML = '';
     resetCategoryOptions();
     resetContactOptions();
     resetSubtasks();
     resetPriorityButtons();
-    selectContact();
+    setContactOptions();
     addTaskBTN.disabled = false;
 }
 
@@ -145,8 +147,8 @@ function setCategoryOptions() {
 }
 
 function addCategory() {
-    var selectElement = document.getElementById("chooseCategory");
-    var selectedValue = selectElement.value;
+    let selectElement = document.getElementById("chooseCategory");
+    let selectedValue = selectElement.value;
 
     if (selectedValue === "NewCategory") {
         selectToInput();
@@ -154,6 +156,11 @@ function addCategory() {
 }
 
 function selectToInput() {
+    let addTaskBTN = document.getElementById('createTaskButton');
+    addTaskBTN.disabled = true;
+
+    console.log("Button disabled status:", addTaskBTN.disabled);
+
     let selectToInput = document.getElementById('selectToInput');
     selectToInput.innerHTML = /*html*/`
     <div id="subtaskField">
@@ -175,6 +182,10 @@ function selectCategoryColor(color) {
 }
 
 async function addNewCategory() {
+    let addTaskBTN = document.getElementById('createTaskButton');
+    addTaskBTN.disabled = false;
+
+    console.log("Button disabled status:", addTaskBTN.disabled);
     let category = document.getElementById('newCategoryInput');
 
     if (category.value.trim() !== "") {
@@ -190,13 +201,18 @@ async function addNewCategory() {
 
 
 function resetSelect() {
+    let addTaskBTN = document.getElementById('createTaskButton');
+    addTaskBTN.disabled = false;
+    console.log("Button disabled status:", addTaskBTN.disabled);
+    
+    document.getElementById('alertCategory').innerHTML = '';
     let selectToInput = document.getElementById('selectToInput');
     selectToInput.innerHTML = /*html*/`
     <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
         <option selected disabled>Choose Category</option>
         <option value="NewCategory">New Category</option>
     </select>`;
-    var element = document.getElementById("categoryColors");
+    let element = document.getElementById("categoryColors");
     element.classList.add("d-none");
     setCategoryOptions();
 
@@ -214,8 +230,8 @@ function setContactOptions() {
 }
 
 function selectContact() {
-    var contact = document.getElementById('chooseContact');
-    var contactValue = parseInt(contact.options[contact.selectedIndex].value);
+    let contact = document.getElementById('chooseContact');
+    let contactValue = parseInt(contact.options[contact.selectedIndex].value);
 
     if (contactValue !== -1 && !isContactSelected(contactValue)) {
         contactValues.push({ "id": contactValue });
