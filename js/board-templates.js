@@ -90,11 +90,11 @@ function editTaskHTML(taskIndex) {
             <b class="margin-bottom-25">Priority:</b> 
             <div class="edit-task-show-prio">
                 <div id="edit-task-prio-urgent" class="edit-task-prio-btn" onclick="selectPriority('Urgent')"> 
-                    Urgent<img src="./assets/img/Prio-urgent.png"></div>
+                    Urgent<img src="./assets/img/prio-urgent.png"></div>
                 <div id="edit-task-prio-medium" class="edit-task-prio-btn" onclick="selectPriority('Medium')">
-                    Medium<img src="./assets/img/Prio-medium.png"></div>
+                    Medium<img src="./assets/img/prio-medium.png"></div>
                 <div id="edit-task-prio-low" class="edit-task-prio-btn" onclick="selectPriority('Low')">
-                    Low <img src="./assets/img/Prio-low.png"></div>
+                    Low <img src="./assets/img/prio-low.png"></div>
             </div>
         </div>
         <div>

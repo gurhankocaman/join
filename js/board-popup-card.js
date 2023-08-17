@@ -48,17 +48,17 @@ function checkPopupCardPrio(prio) {
 
     if (prio === 'Urgent') {
         prioText = 'Urgent';
-        prioImg = "./assets/img/Prio-urgent-white.png";
+        prioImg = "./assets/img/prio-urgent-white.png";
         prioColor = "#FF3D00";
     }
     if (prio === 'Medium') {
         prioText = 'Medium';
-        prioImg = "./assets/img/Prio-medium-white.png";
+        prioImg = "./assets/img/prio-medium-white.png";
         prioColor = "#FFA800";
     }
     if (prio === 'Low') {
         prioText = 'Low';
-        prioImg = "./assets/img/Prio-low-white.png"
+        prioImg = "./assets/img/prio-low-white.png"
         prioColor = "#7AE229";
 
     }

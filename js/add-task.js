@@ -42,20 +42,19 @@ async function loadCategoryColors() {
 async function createTask() {
     addTaskBTN.disabled = true;
 
-    // Sammle die Daten aus den Eingabefeldern und Dropdowns
     const title = document.getElementById('titleField').value;
     const description = document.getElementById('descriptionField').value;
     const category = document.getElementById('chooseCategory');
     const categoryValue = category.options[category.selectedIndex].value;
     const date = document.getElementById('dueDateField').value;
     const checkedPrioBtn = document.querySelector('.button1:checked').value;
-
-    // Ermittle den Index der ausgewählten Kategorie
     const categoryIndex = categories.findIndex(cat => cat.category === categoryValue);
     const selectedCategoryColor = categoryColors[categoryIndex]?.color || "";
 
+    console.log(categoryValue);
+
     // Check if no category or no contact is selected
-    if (categoryValue === "Choose Category" || !categoryValue) {
+    if (categoryValue === "Choose Category") {
         document.getElementById('alertCategory').innerHTML = 'This field is required.';
         addTaskBTN.disabled = false;
         return;
@@ -67,10 +66,10 @@ async function createTask() {
         return;
     }
 
-    // Verarbeite die Subtasks
+    // Create Subtasks
     subtasksToArray();
 
-    // Erstelle eine neue Aufgabe
+    // New Task
     const newTask = {
         "id": tasks.length,
         "status": "to-do",
@@ -161,8 +160,8 @@ function selectToInput() {
         <div>
             <input id="newCategoryInput" type="text" placeholder="New Category">
             <div class="categoryColor" id="selectedCategoryColor"></div>
-            <img onclick="resetSelect()" src="../assets/img/close-btn.png">
-            <img onclick="addNewCategory()" src="../assets/img/checkmark.png">
+            <img onclick="resetSelect()" src="./assets/img/close-btn.png">
+            <img onclick="addNewCategory()" src="./assets/img/checkmark.png">
         </div>
     </div>`;
     let element = document.getElementById("categoryColors");
@@ -185,8 +184,7 @@ async function addNewCategory() {
         await setItem('categoryColors', JSON.stringify(categoryColors));
         resetSelect();
     } else {
-        // Zeige eine Fehlermeldung, wenn keine Kategorie eingegeben wurde
-        alert("Please enter a category name.");
+        document.getElementById('alertCategory').innerHTML = 'Please enter a category name.';
     }
 }
 
