@@ -29,7 +29,7 @@
 
     <form onsubmit="createTask(); return false;">
         <div id="addTaskPageBody" class="addTaskPage">
-            <h1 class="headline">Add Task</h1>
+           <div class="headline"><h1>Add Task</h1></div>
             <div class="addTaskLR">
                 <div class="addTaskLeft">
                     <div class="center">
@@ -38,30 +38,6 @@
                         <h4>Description</h4>
                         <textarea required id="descriptionField" class="textAreaStyle1"
                             placeholder="enter a description"></textarea>
-                        <h4>Category</h4>
-
-                        <div id="selectToInput">
-                            <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
-                                <option selected disabled>Choose Category</option>
-                                <option value="NewCategory">New Category</option>
-                            </select>
-                            
-                        </div>
-                        <div class="d-none" id="categoryColors">
-                            <div class="categoryColor" id="1" style="background-color: #8aa4ff;"
-                                onclick="selectCategoryColor('#8aa4ff');"></div>
-                            <div class="categoryColor" id="2" style="background-color: #ff0000;"
-                                onclick="selectCategoryColor('#ff0000');"></div>
-                            <div class="categoryColor" id="3" style="background-color: #2ad300;"
-                                onclick="selectCategoryColor('#2ad300');"></div>
-                            <div class="categoryColor" id="4" style="background-color: #ff8a00;"
-                                onclick="selectCategoryColor('#ff8a00');"></div>
-                            <div class="categoryColor" id="5" style="background-color: #e200be;"
-                                onclick="selectCategoryColor('#e200be');"></div>
-                            <div class="categoryColor" id="6" style="background-color: #0038ff;"
-                                onclick="selectCategoryColor('#0038ff');"></div>
-                        </div>
-                        <div id="alertCategory" class="noSelectionAlert"></div>
                     
                         <h4>Assigned to</h4>
                         <select name="" id="chooseContact" class="chooseContact" onchange="selectContact()">
@@ -100,6 +76,30 @@
                                 <img id="Low" src="./assets/img/Capa 2 (2).png">
                             </label>
                         </div>
+                        <h4>Category</h4>
+
+                        <div id="selectToInput">
+                            <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
+                                <option selected disabled>Choose Category</option>
+                                <option value="NewCategory">New Category</option>
+                            </select>
+                            
+                        </div>
+                        <div class="d-none" id="categoryColors">
+                            <div class="categoryColor" id="1" style="background-color: #8aa4ff;"
+                                onclick="selectCategoryColor('#8aa4ff');"></div>
+                            <div class="categoryColor" id="2" style="background-color: #ff0000;"
+                                onclick="selectCategoryColor('#ff0000');"></div>
+                            <div class="categoryColor" id="3" style="background-color: #2ad300;"
+                                onclick="selectCategoryColor('#2ad300');"></div>
+                            <div class="categoryColor" id="4" style="background-color: #ff8a00;"
+                                onclick="selectCategoryColor('#ff8a00');"></div>
+                            <div class="categoryColor" id="5" style="background-color: #e200be;"
+                                onclick="selectCategoryColor('#e200be');"></div>
+                            <div class="categoryColor" id="6" style="background-color: #0038ff;"
+                                onclick="selectCategoryColor('#0038ff');"></div>
+                        </div>
+                        <div id="alertCategory" class="noSelectionAlert"></div>
                         <h4>Subtasks</h4>
                         <div id="subtaskField">
                             <div>

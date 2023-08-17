@@ -13,6 +13,13 @@ input {
 .headline {
     font-size: 50px;
     padding: 0;
+    width: 100%;
+}
+h1 {
+    font-size: 61px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    margin-left: 47px;
 }
 
 #newCategory {
@@ -86,10 +93,9 @@ textarea {
 
 .addTaskLR {
     display: flex;
-    justify-content: space-between;
     width: 100%;
-    position: relative;
-    margin-top: 60px;
+    gap: 50px;
+
 }
 
 .dividingLine {
@@ -110,17 +116,20 @@ textarea {
 }
 
 .addTaskLeft {
-    position: relative;
-    width: 50%;
-    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    width: 452px;
+    height: 506px;
+    gap: 10px;
 }
 
 .addTaskRight {
-    position: relative;
-    width: 50%;
     display: flex;
-    align-items: flex-end;
     flex-direction: column;
+    width: 452px;
+    height: 506px;
+    gap: 10px;
+    position: relative;
 }
 
 .prio {
@@ -391,16 +400,6 @@ textarea {
     margin-left: 0 !important;
 }
 
-#addTaskPageBody {
-    z-index: -1;
-    position: fixed;
-    height: 85vh;
-    width: calc(100% - 272px);
-    display: flex;
-    padding: 50px;
-    box-sizing: border-box;
-}
-
 .addTaskPage {
     background-color: #f6f7f8 !important;
     margin: 90px 0 0 272px;
@@ -415,12 +414,9 @@ textarea {
 #addTaskPageBody h1 {
     z-index: 99;
     background-color: #f6f7f8;
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    margin: 50px;
-    margin-left: 110px;
 }
 
 .buttonGlobal1 {
@@ -495,7 +491,7 @@ textarea {
     border: 1px solid lightgrey;
     border-radius: 10px;
     padding: 10px 13px;
-    width: calc(345px - 15px);
+    width: calc(345px - 0px);
     font-family: inherit;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.6);
@@ -541,10 +537,11 @@ ul {
     }
     
     #addTaskPageBody h1 {
-        margin: 35px 0;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 60px;
+       
     }
 
     .center {
@@ -570,9 +567,9 @@ ul {
 
     .addTaskLR {
         flex-direction: column;
-        width: 100vw;
+        margin: 0;
         overflow-y: scroll;
-        padding: 48px 0 80px 0;
+
     }
 
     .addTaskLeft,
@@ -592,15 +589,6 @@ ul {
     }
 }
 }
-@media(max-width: 560px) {
-
-    .buttonGlobal1 {
-        margin-bottom: 35px;
-    }
-}
-
-
-
 
 @media(max-width: 374px) {
 
@@ -614,7 +602,9 @@ ul {
     .textAreaStyle1 {
         width: calc(280px - 44px);
     }
-
+    .chooseContact {
+        width: calc(280px - 0px);
+    }
     .button1 {
         padding: 13px 10px;
     }
