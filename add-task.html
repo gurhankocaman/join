@@ -39,13 +39,14 @@
                         <textarea required id="descriptionField" class="textAreaStyle1"
                             placeholder="enter a description"></textarea>
                         <h4>Category</h4>
-                     
-                      <div id="selectToInput">
+
+                        <div id="selectToInput">
                             <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
                                 <option selected disabled>Choose Category</option>
                                 <option value="NewCategory">New Category</option>
                             </select>
-                        </div> 
+                            <div id="alertCategory" class="noSelectionAlert"></div>
+                        </div>
                         <div class="d-none" id="categoryColors">
                             <div class="categoryColor" id="1" style="background-color: #8aa4ff;"
                                 onclick="selectCategoryColor('#8aa4ff');"></div>
@@ -60,9 +61,9 @@
                             <div class="categoryColor" id="6" style="background-color: #0038ff;"
                                 onclick="selectCategoryColor('#0038ff');"></div>
                         </div>
+                        
 
                         <h4>Assigned to</h4>
-
                         <select name="" id="chooseContact" class="chooseContact" onchange="selectContact()">
                             <option selected disabled>Choose Contact</option>
 
@@ -72,8 +73,7 @@
 
                             </ul>
                         </div>
-
-                        <div id="assignedAddTask" style="display: flex; margin-top: 15px;"></div>
+                        <div id="alertContact" class="noSelectionAlert"></div>
                     </div>
                 </div>
                 <div class="centerLine">
@@ -86,7 +86,7 @@
                         <h4>Prio</h4>
                         <div id="prioField" class="prio">
                             <label>
-                                <input value="Urgent" type="radio" name="priority" class="button1">Urgent
+                                <input required value="Urgent" type="radio" name="priority" class="button1">Urgent
                                 <img id="Urgent" src="./assets/img/Capa 2.png">
                             </label>
 

@@ -1,12 +1,3 @@
-function clearBackend() {
-    categories = [];
-    categoryColors = [];
-    subtasks = [];
-    setItem('categories', JSON.stringify(categories));
-    setItem('categoryColors', JSON.stringify(categoryColors));
-    setItem('subtasks', JSON.stringify(subtasks));
-}
-
 let tasks = [];
 let categories = [];
 let subtasks = [];
@@ -49,7 +40,6 @@ async function loadCategoryColors() {
 
 // Create Task
 async function createTask() {
-    // Deaktiviere den "Add Task" Button, während die Aufgabe erstellt wird
     addTaskBTN.disabled = true;
 
     // Sammle die Daten aus den Eingabefeldern und Dropdowns
@@ -58,15 +48,27 @@ async function createTask() {
     const category = document.getElementById('chooseCategory');
     const categoryValue = category.options[category.selectedIndex].value;
     const date = document.getElementById('dueDateField').value;
-    const checkedValue = document.querySelector('.button1:checked').value;
-    // const subtask = document.getElementById('subtaskInput').value;
-
-    // Verarbeite die Subtasks
-    subtasksToArray();
+    const checkedPrioBtn = document.querySelector('.button1:checked').value;
 
     // Ermittle den Index der ausgewählten Kategorie
     const categoryIndex = categories.findIndex(cat => cat.category === categoryValue);
-    const selectedCategoryColor = categoryColors[categoryIndex].color;
+    const selectedCategoryColor = categoryColors[categoryIndex]?.color || "";
+
+    // Check if no category or no contact is selected
+    if (categoryValue === "Choose Category" || !categoryValue) {
+        document.getElementById('alertCategory').innerHTML = 'This field is required.';
+        addTaskBTN.disabled = false;
+        return;
+    }
+
+    if (contactValues.length === 0) {
+        document.getElementById('alertContact').innerHTML = 'This field is required.';
+        addTaskBTN.disabled = false;
+        return;
+    }
+
+    // Verarbeite die Subtasks
+    subtasksToArray();
 
     // Erstelle eine neue Aufgabe
     const newTask = {
@@ -75,9 +77,9 @@ async function createTask() {
         "title": title,
         "description": description,
         "category": categoryValue,
-        "assignedTo": contactValues,
+        "assignedTo": contactValues, // Array with IDs
         "date": date,
-        "priority": checkedValue,
+        "priority": checkedPrioBtn,
         "subtask": subtaskValues,
         "categoryColor": selectedCategoryColor
     };
@@ -86,26 +88,28 @@ async function createTask() {
     tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
 
-    // Aktiviere den "Add Task" Button wieder
-    addTaskBTN.disabled = false;
-
-      // Setze die Eingabefelder und Optionen zurück
-      document.getElementById('titleField').value = '';
-      document.getElementById('descriptionField').value = '';
-      document.getElementById('dueDateField').value = '';
-      document.getElementById('subtaskInput').value = '';
-      resetCategoryOptions();
-      resetContactOptions();
-      resetSubtasks();
-      resetPriorityButtons();
-      selectContact();
+    resetForm();
 }
+
 
 function subtasksToArray() {
     var subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
     subtasks.forEach(function (input) {
         subtaskValues.push({ name: input.name, checked: false });
     });
+}
+
+function resetForm() {
+    document.getElementById('titleField').value = '';
+    document.getElementById('descriptionField').value = '';
+    document.getElementById('dueDateField').value = '';
+    document.getElementById('subtaskInput').value = '';
+    resetCategoryOptions();
+    resetContactOptions();
+    resetSubtasks();
+    resetPriorityButtons();
+    selectContact();
+    addTaskBTN.disabled = false;
 }
 
 function resetCategoryOptions() {
@@ -138,7 +142,6 @@ function setCategoryOptions() {
     let categorySelectBox = document.getElementById('chooseCategory');
     for (let i = 0; i < categories.length; i++) {
         categorySelectBox.innerHTML += `<option value="${categories[i]['category']}">${categories[i]['category']}</option>`;
-        console.log(categoryColors[i]['color']);
     }
 }
 
@@ -158,7 +161,8 @@ function selectToInput() {
         <div>
             <input id="newCategoryInput" type="text" placeholder="New Category">
             <div class="categoryColor" id="selectedCategoryColor"></div>
-            <img onclick="addNewCategory()" src="../assets/img/plus.png">
+            <img onclick="resetSelect()" src="../assets/img/close-btn.png">
+            <img onclick="addNewCategory()" src="../assets/img/checkmark.png">
         </div>
     </div>`;
     let element = document.getElementById("categoryColors");
@@ -166,7 +170,7 @@ function selectToInput() {
 }
 
 function selectCategoryColor(color) {
-    selectedCategoryColor = color; 
+    selectedCategoryColor = color;
     let selectedColorDiv = document.getElementById('selectedCategoryColor');
     selectedColorDiv.style.backgroundColor = color;
 }
@@ -176,12 +180,16 @@ async function addNewCategory() {
 
     if (category.value.trim() !== "") {
         categories.push({ "category": category.value });
-        categoryColors.push({ "color": selectedCategoryColor }); 
+        categoryColors.push({ "color": selectedCategoryColor });
         await setItem('categories', JSON.stringify(categories));
         await setItem('categoryColors', JSON.stringify(categoryColors));
         resetSelect();
+    } else {
+        // Zeige eine Fehlermeldung, wenn keine Kategorie eingegeben wurde
+        alert("Please enter a category name.");
     }
 }
+
 
 function resetSelect() {
     let selectToInput = document.getElementById('selectToInput');
@@ -218,10 +226,11 @@ function selectContact() {
         contactList.innerHTML = '';
         for (let i = 0; i < contactValues.length; i++) {
             const selectedContact = contacts.find(c => c.id == contactValues[i]["id"]);
-            contactList.innerHTML += `<li>${selectedContact.firstName + " " + selectedContact.lastName}</li>`;
+            if (selectedContact) {
+                contactList.innerHTML += `<li>${selectedContact.firstName + " " + selectedContact.lastName}</li>`;
+            }
         }
     }
-
     resetContactOptions();
 }
 
@@ -253,6 +262,14 @@ function renderSubtasks() {
     }
 }
 
+function clearBackend() {
+    categories = [];
+    categoryColors = [];
+    subtasks = [];
+    setItem('categories', JSON.stringify(categories));
+    setItem('categoryColors', JSON.stringify(categoryColors));
+    setItem('subtasks', JSON.stringify(subtasks));
+}
 
 
 

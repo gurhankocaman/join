@@ -59,6 +59,12 @@ textarea {
     color: white !important;
 }
 
+.noSelectionAlert {
+    font-size: 12px;
+    color: red;
+    margin-top: 8px;
+}
+
 /*add task*/
 #tasks {
     position: relative;
@@ -493,6 +499,10 @@ textarea {
     font-family: inherit;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.6);
+}
+
+#contactList {
+    margin: 0;
 }
 
 .d-none {
