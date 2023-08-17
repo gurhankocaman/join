@@ -167,8 +167,8 @@ function selectToInput() {
         <div>
             <input id="newCategoryInput" type="text" placeholder="New Category">
             <div class="categoryColor" id="selectedCategoryColor"></div>
-            <img onclick="resetSelect(addTaskBTN)" src="./assets/img/close-btn.png">
-            <img onclick="addNewCategory(addTaskBTN)" src="./assets/img/checkmark.png">
+            <img onclick="resetSelect()" src="./assets/img/close-btn.png">
+            <img onclick="addNewCategory()" src="./assets/img/checkmark.png">
         </div>
     </div>`;
     let element = document.getElementById("categoryColors");
@@ -181,7 +181,8 @@ function selectCategoryColor(color) {
     selectedColorDiv.style.backgroundColor = color;
 }
 
-async function addNewCategory(addTaskBTN) {
+async function addNewCategory() {
+    let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
 
     console.log("Button disabled status:", addTaskBTN.disabled);
@@ -199,10 +200,12 @@ async function addNewCategory(addTaskBTN) {
 }
 
 
-function resetSelect(addTaskBTN) {
+function resetSelect() {
+    let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
-
     console.log("Button disabled status:", addTaskBTN.disabled);
+    
+    document.getElementById('alertCategory').innerHTML = '';
     let selectToInput = document.getElementById('selectToInput');
     selectToInput.innerHTML = /*html*/`
     <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
