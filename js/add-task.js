@@ -52,8 +52,6 @@ async function createTask() {
     const categoryIndex = categories.findIndex(cat => cat.category === categoryValue);
     const selectedCategoryColor = categoryColors[categoryIndex]?.color || "";
 
-    console.log(categoryValue);
-
     // Check if no category or no contact is selected
     if (categoryValue === "Choose Category") {
         document.getElementById('alertCategory').innerHTML = 'This field is required.';
@@ -105,13 +103,31 @@ function resetForm() {
     document.getElementById('dueDateField').value = '';
     document.getElementById('subtaskInput').value = '';
     document.getElementById('contactList').innerHTML = '';
+    
+    // Reset radio buttons
+    document.querySelectorAll('.button1').forEach(button => button.checked = false);
+
+    // Reset category dropdown
     resetCategoryOptions();
-    resetContactOptions();
+    
+    // Clear category and contact alerts
+    document.getElementById('alertCategory').innerHTML = '';
+    document.getElementById('alertContact').innerHTML = '';
+    
+    // Clear contact values
+    contactValues = [];
+    
+    // Reset subtasks
     resetSubtasks();
-    resetPriorityButtons();
-    setContactOptions();
+    
+    // Reset contact dropdown
+    resetContactOptions();
+    
+    // Enable the task creation button
+    let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
 }
+
 
 function resetCategoryOptions() {
     let categoryOptions = document.getElementById("chooseCategory");
@@ -156,6 +172,8 @@ function addCategory() {
 }
 
 function selectToInput() {
+    document.getElementById('alertCategory').innerHTML = '';
+    
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = true;
 
@@ -230,6 +248,7 @@ function setContactOptions() {
 }
 
 function selectContact() {
+    document.getElementById('alertContact').innerHTML = '';
     let contact = document.getElementById('chooseContact');
     let contactValue = parseInt(contact.options[contact.selectedIndex].value);
 
