@@ -13,13 +13,7 @@
     <script src="js/script.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/add-task.js"></script>
-
     <link rel="stylesheet" href="./css/add-task.css">
-
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
 </head>
 
 <body onload="init(), initAddTask()">
@@ -116,6 +110,7 @@
                     </div>
                 </div>
                 <div class="finishButtonsATP" id="addTaskBTN">
+                    <button class="light-btn" id="clearTaskButton" onclick="resetForm()">Clear</button>
                     <button class="buttonGlobal1" id="createTaskButton" type="submit">Create Task</button>
 
                 </div>

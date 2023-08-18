@@ -6,7 +6,7 @@ let contactValues = [];
 let categoryColors = [];
 let selectedCategoryColor = "#CCCCCC";
 
-// Init 
+// Init Add Task
 async function initAddTask() {
     await loadTasks();
     await loadCategories();
@@ -43,6 +43,45 @@ async function createTask() {
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = true;
 
+    if (!validateInputFields()) {
+        addTaskBTN.disabled = false;
+        return;
+    }
+
+    await addNewTask();
+
+    addTaskBTN.disabled = false;
+}
+
+function validateInputFields() {
+    const category = document.getElementById('chooseCategory');
+    const categoryValue = category.options[category.selectedIndex].value;
+
+    if (categoryValue === "Choose Category") {
+        document.getElementById('alertCategory').innerHTML = 'This field is required.';
+        return false;
+    } else {
+        document.getElementById('alertCategory').innerHTML = '';
+    }
+
+    if (contactValues.length === 0) {
+        document.getElementById('alertContact').innerHTML = 'This field is required.';
+        return false;
+    } else {
+        document.getElementById('alertContact').innerHTML = '';
+    }
+
+    return true;
+}
+
+function createSubtasks() {
+    let subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
+    subtasks.forEach(function (input) {
+        subtaskValues.push({ name: input.name, checked: false });
+    });
+}
+
+async function addNewTask() {
     const title = document.getElementById('titleField').value;
     const description = document.getElementById('descriptionField').value;
     const category = document.getElementById('chooseCategory');
@@ -52,49 +91,25 @@ async function createTask() {
     const categoryIndex = categories.findIndex(cat => cat.category === categoryValue);
     const selectedCategoryColor = categoryColors[categoryIndex]?.color || "";
 
-    // Check if no category or no contact is selected
-    if (categoryValue === "Choose Category") {
-        document.getElementById('alertCategory').innerHTML = 'This field is required.';
-        addTaskBTN.disabled = false;
-        return;
-    }
+    createSubtasks();
 
-    if (contactValues.length === 0) {
-        document.getElementById('alertContact').innerHTML = 'This field is required.';
-        addTaskBTN.disabled = false;
-        return;
-    }
-
-    // Create Subtasks
-    subtasksToArray();
-
-    // New Task
     const newTask = {
         "id": tasks.length,
         "status": "to-do",
         "title": title,
         "description": description,
         "category": categoryValue,
-        "assignedTo": contactValues, // Array with IDs
+        "assignedTo": contactValues,
         "date": date,
         "priority": checkedPrioBtn,
         "subtask": subtaskValues,
         "categoryColor": selectedCategoryColor
     };
 
-    // Füge die neue Aufgabe zur Liste hinzu und speichere sie
     tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
 
     resetForm();
-}
-
-
-function subtasksToArray() {
-    let subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
-    subtasks.forEach(function (input) {
-        subtaskValues.push({ name: input.name, checked: false });
-    });
 }
 
 function resetForm() {
@@ -103,31 +118,19 @@ function resetForm() {
     document.getElementById('dueDateField').value = '';
     document.getElementById('subtaskInput').value = '';
     document.getElementById('contactList').innerHTML = '';
-    
-    // Reset radio buttons
     document.querySelectorAll('.button1').forEach(button => button.checked = false);
-
-    // Reset category dropdown
-    resetCategoryOptions();
-    
-    // Clear category and contact alerts
     document.getElementById('alertCategory').innerHTML = '';
     document.getElementById('alertContact').innerHTML = '';
-    
-    // Clear contact values
+
     contactValues = [];
-    
-    // Reset subtasks
+
     resetSubtasks();
-    
-    // Reset contact dropdown
     resetContactOptions();
-    
-    // Enable the task creation button
+    resetCategoryOptions();
+
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
 }
-
 
 function resetCategoryOptions() {
     let categoryOptions = document.getElementById("chooseCategory");
@@ -177,8 +180,6 @@ function selectToInput() {
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = true;
 
-    console.log("Button disabled status:", addTaskBTN.disabled);
-
     let selectToInput = document.getElementById('selectToInput');
     selectToInput.innerHTML = /*html*/`
     <div id="subtaskField">
@@ -203,7 +204,6 @@ async function addNewCategory() {
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
 
-    console.log("Button disabled status:", addTaskBTN.disabled);
     let category = document.getElementById('newCategoryInput');
 
     if (category.value.trim() !== "") {
@@ -216,7 +216,6 @@ async function addNewCategory() {
         document.getElementById('alertCategory').innerHTML = 'Please enter a category name.';
     }
 }
-
 
 function resetSelect() {
     let addTaskBTN = document.getElementById('createTaskButton');
