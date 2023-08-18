@@ -23,7 +23,9 @@
 
     <form onsubmit="createTask(); return false;">
         <div id="addTaskPageBody" class="addTaskPage">
-           <div class="headline"><h1>Add Task</h1></div>
+            <div class="headline">
+                <h1>Add Task</h1>
+            </div>
             <div class="addTaskLR">
                 <div class="addTaskLeft">
                     <div class="center">
@@ -32,16 +34,12 @@
                         <h4>Description</h4>
                         <textarea required id="descriptionField" class="textAreaStyle1"
                             placeholder="enter a description"></textarea>
-                    
                         <h4>Assigned to</h4>
                         <select name="" id="chooseContact" class="chooseContact" onchange="selectContact()">
                             <option selected disabled>Choose Contact</option>
-
                         </select>
                         <div>
-                            <ul id="contactList">
-
-                            </ul>
+                            <ul id="contactList"></ul>
                         </div>
                         <div id="alertContact" class="noSelectionAlert"></div>
                     </div>
@@ -59,25 +57,21 @@
                                 <input required value="Urgent" type="radio" name="priority" class="button1">Urgent
                                 <img id="Urgent" src="./assets/img/Capa 2.png">
                             </label>
-
                             <label>
                                 <input value="Medium" type="radio" name="priority" class="button1">Medium
                                 <img id="Medium" src="./assets/img/Capa 2 (1).png">
                             </label>
-
                             <label>
                                 <input value="Low" type="radio" name="priority" class="button1">Low
                                 <img id="Low" src="./assets/img/Capa 2 (2).png">
                             </label>
                         </div>
                         <h4>Category</h4>
-
                         <div id="selectToInput">
                             <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
                                 <option selected disabled>Choose Category</option>
                                 <option value="NewCategory">New Category</option>
                             </select>
-                            
                         </div>
                         <div class="d-none" id="categoryColors">
                             <div class="categoryColor" id="1" style="background-color: #8aa4ff;"
@@ -100,19 +94,15 @@
                                 <input id="subtaskInput" type="text" placeholder="new Subtask">
                                 <img onclick="addNewSubtask()" src="./assets/img/plus.png">
                             </div>
-
                         </div>
                         <div>
-                            <ul id="subtaskList">
-
-                            </ul>
+                            <ul id="subtaskList"></ul>
                         </div>
                     </div>
                 </div>
                 <div class="finishButtonsATP" id="addTaskBTN">
                     <button class="light-btn" id="clearTaskButton" onclick="resetForm()">Clear</button>
                     <button class="buttonGlobal1" id="createTaskButton" type="submit">Create Task</button>
-
                 </div>
             </div>
         </div>
