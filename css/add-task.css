@@ -19,7 +19,7 @@ h1 {
     font-size: 61px;
     margin-top: 60px;
     margin-bottom: 30px;
-    margin-left: 47px;
+    margin-left: 71px;
 }
 
 #newCategory {
@@ -118,16 +118,16 @@ textarea {
 .addTaskLeft {
     display: flex;
     flex-direction: column;
-    width: 452px;
-    height: 506px;
+    width: 500px;
+    height: 500px;
     gap: 10px;
 }
 
 .addTaskRight {
     display: flex;
     flex-direction: column;
-    width: 452px;
-    height: 506px;
+    width: 500px;
+    height: 500px;
     gap: 10px;
     position: relative;
 }
@@ -459,12 +459,9 @@ textarea {
 
 .finishButtonsATP {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
-    position: fixed;
     gap: 20px;
-    bottom: 64px;
-    right: 64px;
 }
 
 .center {
@@ -559,10 +556,6 @@ ul {
         margin: 0 auto;
     }
 
-    .finishButtonsATP {
-        bottom: 116px;
-        right: 16px;
-    }
     .buttonGlobal1 {
     font-size: 16px;
     height: 39px;
