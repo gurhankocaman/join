@@ -17,7 +17,6 @@ input {
 }
 h1 {
     font-size: 61px;
-    margin-top: 60px;
     margin-bottom: 30px;
     margin-left: 71px;
 }
@@ -462,6 +461,7 @@ textarea {
     justify-content: flex-end;
     align-items: center;
     gap: 20px;
+    margin-right: 70px;
 }
 
 .center {
@@ -601,8 +601,11 @@ ul {
         text-align: center;
         
     }
+    .finishButtonsATP {
+        margin-right: 20px;
+    }
 }
-}
+
 
 @media(max-width: 374px) {
 
@@ -626,9 +629,14 @@ ul {
 
 @media(max-width: 1130px) and (min-width: 1000px) {
     #addTaskPageBody {
-        padding: 64px 0;
+        padding: 0 0;
     }
     .addTaskLR {
         gap: 0px;
     }
+
+    .finishButtonsATP {
+        margin-right: 48px;
+    }
+
 }
