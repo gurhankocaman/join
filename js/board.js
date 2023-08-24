@@ -1,4 +1,4 @@
-let tasks = [];
+// let tasks = [];
 let contacts = [];
 let filteredTasks = [];
 let currentDraggedElement;
@@ -11,6 +11,7 @@ async function initBoard() {
     contacts = JSON.parse(await getItem('contacts'));
     updateId();
     updateBoard();
+    initAddTask();
 }
 
 /**
@@ -319,8 +320,8 @@ function getInitials(firstName, lastName) {
  * Opens the add task popup
  */
 function openAddTask() {
-    window.location.href = 'add-task.html';
-    // document.getElementById('add-task-popup').classList.remove('d-none');
+    // window.location.href = 'add-task.html';
+    document.getElementById('add-task-popup').classList.remove('d-none');
 }
 
 /**
@@ -328,4 +329,5 @@ function openAddTask() {
  */
 function closePopUp() {
     document.getElementById('add-task-popup').classList.add('d-none');
+    initBoard();
 }
