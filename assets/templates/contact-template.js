@@ -48,7 +48,6 @@ function showContactDetailsHTML(selectedContact, i, userShort) {
             <div id="selectedContactColor" class="contact-letters big-letters" style="background-color: ${selectedContact.color}">${selectedContact.lastName.charAt(0)} ${selectedContact.firstName.charAt(0)}</div>
             <div>
                 <div class="contact-information-name">${selectedContact.lastName} ${selectedContact.firstName}</div>
-                <div title="add new task" onclick="addTaskContact('${userShort}')" class="contact-add-task">+ Add Task</div>
             </div>
         </div>
         <div class="contact-information-title">

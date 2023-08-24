@@ -11,13 +11,12 @@ input {
 }
 
 .headline {
-    font-size: 50px;
-    padding: 0;
     width: 100%;
+    height: 0px;
 }
 .header-text {
-    font-size: 61px;
-    margin-bottom: 30px;
+    font-size: 50px;
+    margin-bottom: 10px;
     margin-left: 71px;
 }
 
@@ -94,6 +93,7 @@ textarea {
     display: flex;
     width: 100%;
     gap: 50px;
+    margin-top: 24px;
 
 }
 
@@ -410,7 +410,7 @@ textarea {
 
 #addTaskPageBody h4 {
     margin: 30px 0 10px 0;
-    font-size: 26px;
+    font-size: 22px;
     width: 70%;
 }
 
@@ -465,7 +465,8 @@ textarea {
     justify-content: flex-end;
     align-items: center;
     gap: 20px;
-    margin-right: 70px;
+    margin-right: 0px;
+    margin-top: -13px;
 }
 
 .center {
@@ -523,7 +524,7 @@ li {
         margin-left: 0px;
     }
     .headline {
-        display: flow-root;
+        margin-top: -55px;
     }
     #tasks {
         display: none;
@@ -542,11 +543,11 @@ li {
     }
 
     .centerLine {
-        height: 70vh;
+        height: 53vh;
     }
 
     .addTaskLR {
-        padding-top: 20px;
+        padding-top: 0px;
         gap: 0px;
     }
     
@@ -554,16 +555,21 @@ li {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 2px;
-        font-size: 46px;
+        margin-top: 0px;
+        font-size: 34px;
         margin-left: 0px;
-}
+    }
+
+    #addTaskPageBody h4 {
+        font-size: 18px;
+    }
        
     }
 
     .center {
         width: fit-content;
         margin: 0 auto;
+        margin-top: 24px;
     }
 
     .buttonGlobal1 {
@@ -648,7 +654,8 @@ li {
     }
 
     .finishButtonsATP {
-        margin-right: 48px;
+        margin-right: 0px;
     }
 
 }
+
