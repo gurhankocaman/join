@@ -185,7 +185,7 @@ function selectToInput() {
     <div id="subtaskField">
         <div>
             <input id="newCategoryInput" type="text" placeholder="New Category">
-            <div class="categoryColor" id="selectedCategoryColor"></div>
+            <div class="categoryColorNew" id="selectedCategoryColor"></div>
             <img onclick="resetSelect()" src="./assets/img/close-btn.png">
             <img onclick="addNewCategory()" src="./assets/img/checkmark.png">
         </div>

@@ -4,6 +4,11 @@ body {
     font-family: 'Inter', sans-serif !important;
 }
 
+.add-task-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 textarea,
 input {
     font-family: inherit;
@@ -14,6 +19,7 @@ input {
     width: 100%;
     height: 0px;
 }
+
 .header-text {
     font-size: 50px;
     margin-bottom: 10px;
@@ -112,7 +118,7 @@ textarea {
     top: 48px;
     left: 64px;
     margin: 0;
-}
+} 
 
 .addTaskLeft {
     display: flex;
@@ -200,6 +206,13 @@ textarea {
     margin: 10px;
     border-radius: 100%;
     cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.categoryColorNew {
+    height: 15px;
+    width: 15px;
+    margin: 10px;
     border: 1px solid transparent;
 }
 
@@ -415,8 +428,6 @@ textarea {
 }
 
 #addTaskPageBody h1 {
-    z-index: 99;
-    background-color: #f6f7f8;
     top: 0;
     left: 0;
     width: 100%;
@@ -523,9 +534,7 @@ li {
     h1 {
         margin-left: 0px;
     }
-    .headline {
-        margin-top: -55px;
-    }
+   
     #tasks {
         display: none;
     }
@@ -546,7 +555,15 @@ li {
         height: 53vh;
     }
 
+  
+
+    .addTaskLeft,
+    .addTaskRight {
+        overflow: visible;
+        
+    }
     .addTaskLR {
+        overflow-y: scroll;
         padding-top: 0px;
         gap: 0px;
     }
@@ -578,6 +595,7 @@ li {
     width: 100px;
     padding: 0px;
     }
+
     .light-btn {
     border-radius: 8px;
     border: 1px solid #2A3647;
@@ -618,6 +636,7 @@ li {
         text-align: center;
         
     }
+
     .finishButtonsATP {
         margin-right: 20px;
         margin-bottom: 120px;
