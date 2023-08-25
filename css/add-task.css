@@ -22,8 +22,7 @@ input {
 
 .header-text {
     font-size: 50px;
-    margin-bottom: 10px;
-    margin-left: 71px;
+    margin-left: 68px;
 }
 
 #newCategory {
@@ -142,6 +141,12 @@ textarea {
     justify-content: space-between;
     align-items: center;
     width: 345px;
+}
+
+.centerLine {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 75vh;
 }
 
 .finishButtons {
@@ -426,12 +431,13 @@ textarea {
     font-size: 22px;
     width: 70%;
 }
-
 #addTaskPageBody h1 {
     top: 0;
     left: 0;
     width: 100%;
 }
+
+
 
 .buttonGlobal1 {
     color: white;
@@ -534,6 +540,13 @@ li {
     h1 {
         margin-left: 0px;
     }
+
+    .header-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0px;
+    }
    
     #tasks {
         display: none;
@@ -546,13 +559,12 @@ li {
     #addTaskPageBody {
         width: 100vw;
         max-width: none;
-        height: calc(100vh - 200px);
-        margin-top: 100px;
+        margin-top: 75px;
         padding: 0;
     }
 
     .centerLine {
-        height: 53vh;
+        height: 77vh;
     }
 
   
@@ -568,19 +580,12 @@ li {
         gap: 0px;
     }
     
-    #addTaskPageBody h1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 0px;
-        font-size: 34px;
-        margin-left: 0px;
-    }
-
     #addTaskPageBody h4 {
         font-size: 18px;
     }
        
+    .finishButtonsATP {
+        margin-top: -30px;
     }
 
     .center {
@@ -607,8 +612,22 @@ li {
     width: 100px;
     padding: 0px;
 }
+}
+@media(max-width: 800px) {
+    .finishButtonsATP {
+        margin-top: -10px;
+    }
+
+    .centerLine {
+        margin-top: 33px;
+    }
+}
 
 @media(max-width: 750px) {
+    .headline {
+        height: auto;
+    }
+
     .centerLine {
         display: none;
     }
@@ -638,8 +657,8 @@ li {
     }
 
     .finishButtonsATP {
-        margin-right: 20px;
-        margin-bottom: 120px;
+        margin-right: 0px;
+        margin-bottom: 90px;
     }
 }
 
@@ -674,7 +693,17 @@ li {
 
     .finishButtonsATP {
         margin-right: 0px;
+        margin-top: -20px;
+    }
+    .centerLine {
+        height: 75vh;
+    }
+    .light-btn,
+    .buttonGlobal1
+     {
+        height: 38px;
     }
 
 }
+
 
