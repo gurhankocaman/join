@@ -424,6 +424,9 @@ textarea {
 .addTaskPage {
     background-color: #f6f7f8 !important;
     margin: 90px 0 0 272px;
+    border-radius: 50px;
+    padding-top: 20px;
+    margin-right: 90px;
 }
 
 #addTaskPageBody h4 {

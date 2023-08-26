@@ -38,6 +38,7 @@
 .search-container {
     padding-bottom: 50px;
     margin-left: 25px;
+    padding-top: 10px;
 }
 
 .search-box {
@@ -430,12 +431,12 @@ progress {
 
 /* add task popup */
 .add-task-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 999 !important;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -443,12 +444,12 @@ progress {
     margin: 0 !important;
     width: 1024px !important;
     height: 768px !important;
-    left: 100%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    animation: slideInFromRight 0.5s forwards;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
+    left: 100% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    animation: slideInFromRight 0.5s forwards !important;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 30px !important;
 }
 
 @keyframes slideInFromRight {
@@ -477,6 +478,38 @@ progress {
     .board-content {
         flex-wrap: wrap;
     }
+    .dark-btn {
+        padding: 0px 20px;
+        font-size: 18px;
+    }
+    .addTaskLR {
+        gap: 0px !important;
+        margin-top: 32px !important;
+    }
+    .light-btn,
+    .buttonGlobal1 {
+        height: 33px !important;
+    }
+    .finishButtonsATP {
+        margin-top: 0px;
+    }
+
+}
+
+@media(max-width: 1060px) {
+    
+    .dark-btn {
+        font-size: 13px;
+    }
+
+    .addTaskPage {
+        margin-right: 40px !important;
+    }
+
+    .finishButtonsATP {
+        margin-top: 0 !important;
+    }
+
 }
 
 @media(max-width: 1000px) {
@@ -484,12 +517,7 @@ progress {
         overflow-x: hidden;
     }
 
-    .headline-mobile {
-        display: block !important;
-        font-size: 16px;
-        line-height: 120%;
-    }
-
+   
     .board-section {
         margin-top: 100px;
         margin-left: 0;
@@ -518,12 +546,12 @@ progress {
 
     .add-task-btn-mobile {
         display: block !important;
-        cursor: pointer;
-        height: 40px;
+        cursor: pointer !important;
+        height: 40px !important;
     }
 
     .add-task-btn-big {
-        display: none;
+        display: none !important;
     }
 
     .board-add-task {
@@ -541,9 +569,18 @@ progress {
     .card-container {
         width: 312px;
     }
+    
+    .finishButtonsATP {
+        margin-top: 0px !important;
+    }
 }
 
 @media(max-width: 800px) {
+    .header-headline,
+    .headline-mobile {
+        display: none;
+    }
+
     .popup-card {
         width: 380px;
         font-size: 16px;
@@ -589,24 +626,12 @@ progress {
     }
 }
 
+
+
 @media(max-width: 480px) {
     .popup-card {
         width: auto;
         font-size: 16px;
-    }
-
-    .board-column {
-        width: auto;
-    }
-
-    .board-add-task {
-        width: auto;
-    }
-
-    .board-content {
-        display: flex;
-        justify-content: center;
-        width: auto;
     }
 
     .search-container {
@@ -624,5 +649,25 @@ progress {
     .edit-task-show-prio {
         gap: 10px;
         flex-direction: column;
+    }
+}
+
+@media(max-width: 380px) {
+    .board-column {
+        width: auto;
+    }
+
+    .board-add-task {
+        width: auto;
+    }
+
+    .board-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .board-column-head {
+        display: flex;
+        justify-content: space-evenly;
     }
 }
