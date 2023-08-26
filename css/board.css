@@ -558,7 +558,7 @@ progress {
         align-items: center;
         width: 360px;
         justify-content: space-between;
-        margin: 25px 0;
+        margin: 25px 23px;
     }
 
     .board-content {
