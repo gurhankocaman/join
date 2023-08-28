@@ -24,12 +24,12 @@
 <div class="add-task-content">
     <form onsubmit="createTask(); return false;">
         <div id="addTaskPageBody" class="addTaskPage">
-            <div class="headline">
-                <h1 class="header-text">Add Task</h1>
-            </div>
             <div class="addTaskLR">
                 <div class="addTaskLeft">
                     <div class="center">
+                        <div class="headline">
+                            <h1>Add Task</h1>
+                        </div>
                         <h4>Title</h4>
                         <input required id="titleField" type="text" class="textAreaStyle1" placeholder="enter a Title">
                         <h4>Description</h4>
@@ -101,7 +101,7 @@
                         </div>
                         <div class="finishButtonsATP" id="addTaskBTN">
                             <button class="light-btn" id="clearTaskButton" onclick="resetForm()">Clear</button>
-                            <button class="buttonGlobal1" id="createTaskButton" type="submit">Create Task</button>
+                            <button class="dark-btn" id="createTaskButton" type="submit">Create Task</button>
                         </div>
                     </div>
                     

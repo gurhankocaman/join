@@ -467,7 +467,7 @@ progress {
     width: auto !important;
 }
 
-.close-btn {
+.close-add-task-btn {
     position: absolute;
     top: 26px;
     right: 26px;

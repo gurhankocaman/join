@@ -17,7 +17,7 @@ input {
 
 .headline {
     width: 100%;
-    height: 0px;
+    height: 60px;
 }
 
 .header-text {
@@ -82,7 +82,6 @@ textarea {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     height: 85vh;
     width: 80vw;
     max-width: 1000px;
@@ -104,7 +103,8 @@ textarea {
 
 .dividingLine {
     border: 1px solid lightgrey;
-    height: 100%;
+    height: 75%;
+    margin-top: 100px;
 }
 
 #tasks h4 {
@@ -117,13 +117,13 @@ textarea {
     top: 48px;
     left: 64px;
     margin: 0;
-} 
+}
 
 .addTaskLeft {
     display: flex;
     flex-direction: column;
     width: 500px;
-    height: 500px;
+    /* height: 500px;*/
     gap: 10px;
 }
 
@@ -131,9 +131,10 @@ textarea {
     display: flex;
     flex-direction: column;
     width: 500px;
-    height: 500px;
+    /* height: 500px;*/
     gap: 10px;
-    position: relative;
+    /* position: relative; */
+    margin-top: 60px;
 }
 
 .prio {
@@ -144,9 +145,10 @@ textarea {
 }
 
 .centerLine {
-    margin-top: 10px;
+    margin: 10px;
+    /* margin-top: 10px;
     margin-bottom: 10px;
-    height: 75vh;
+    height: 75vh; */
 }
 
 .finishButtons {
@@ -201,7 +203,7 @@ textarea {
 }
 
 #categoryColors {
-    display:flex;
+    display: flex;
     margin-top: 20px;
 }
 
@@ -225,6 +227,7 @@ textarea {
     height: 18px;
     width: 0px;
 }
+
 .border {
     border: 2px solid white !important;
     transform: scale(1.2);
@@ -423,10 +426,8 @@ textarea {
 
 .addTaskPage {
     background-color: #f6f7f8 !important;
-    margin: 90px 0 0 272px;
+    margin: 110px 50px 0 272px;
     border-radius: 50px;
-    padding-top: 20px;
-    margin-right: 90px;
 }
 
 #addTaskPageBody h4 {
@@ -434,6 +435,7 @@ textarea {
     font-size: 22px;
     width: 70%;
 }
+
 #addTaskPageBody h1 {
     top: 0;
     left: 0;
@@ -486,7 +488,7 @@ textarea {
     align-items: center;
     gap: 20px;
     margin-right: 0px;
-    margin-top: -13px;
+    /* margin-top: -13px; */
 }
 
 .center {
@@ -494,7 +496,7 @@ textarea {
     margin: 0 auto;
 }
 
-.categoryX{
+.categoryX {
     display: flex;
     align-items: center;
     gap: 7px;
@@ -530,7 +532,7 @@ textarea {
 ul {
     display: flex;
     flex-direction: column;
-    
+
 }
 
 li {
@@ -550,7 +552,7 @@ li {
         align-items: center;
         margin-left: 0px;
     }
-   
+
     #tasks {
         display: none;
     }
@@ -570,25 +572,26 @@ li {
         height: 77vh;
     }
 
-  
+
 
     .addTaskLeft,
     .addTaskRight {
         overflow: visible;
-        
+
     }
+
     .addTaskLR {
         overflow-y: scroll;
         padding-top: 0px;
         gap: 0px;
     }
-    
+
     #addTaskPageBody h4 {
         font-size: 18px;
     }
-       
+
     .finishButtonsATP {
-        margin-top: -30px;
+        /* margin-top: -30px; */
     }
 
     .center {
@@ -597,28 +600,29 @@ li {
         margin-top: 24px;
     }
 
-    .buttonGlobal1 {
-    font-size: 16px;
-    height: 39px;
-    width: 100px;
-    padding: 0px;
+    .dark-btn {
+        font-size: 16px;
+        height: 39px;
+        width: 100px;
+        padding: 0px;
     }
 
     .light-btn {
-    border-radius: 8px;
-    border: 1px solid #2A3647;
-    font-weight: 700;
-    background-color: #FFFFFF;
-    cursor: pointer;
-    font-size: 16px;
-    height: 39px;
-    width: 100px;
-    padding: 0px;
+        border-radius: 8px;
+        border: 1px solid #2A3647;
+        font-weight: 700;
+        background-color: #FFFFFF;
+        cursor: pointer;
+        font-size: 16px;
+        height: 39px;
+        width: 100px;
+        padding: 0px;
+    }
 }
-}
+
 @media(max-width: 800px) {
     .finishButtonsATP {
-        margin-top: -10px;
+        /* margin-top: -10px; */
     }
 
     .centerLine {
@@ -649,14 +653,14 @@ li {
         height: fit-content;
         width: 100%;
         margin-top: -15px;
-        
+
     }
 
     #addTaskPageBody h1 {
         top: 0;
         left: 0;
         text-align: center;
-        
+
     }
 
     .finishButtonsATP {
@@ -678,9 +682,11 @@ li {
     .textAreaStyle1 {
         width: calc(280px - 44px);
     }
+
     .chooseContact {
         width: calc(280px - 0px);
     }
+
     .button1 {
         padding: 13px 10px;
     }
@@ -690,23 +696,23 @@ li {
     #addTaskPageBody {
         padding: 0 0;
     }
+
     .addTaskLR {
         gap: 0px;
     }
 
     .finishButtonsATP {
         margin-right: 0px;
-        margin-top: -20px;
+        /* margin-top: -20px; */
     }
+
     .centerLine {
         height: 75vh;
     }
+
     .light-btn,
-    .buttonGlobal1
-     {
-        height: 38px;
+    .dark-btn {
+        height: 39px;
     }
 
 }
-
-
