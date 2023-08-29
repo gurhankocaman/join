@@ -589,6 +589,9 @@ progress {
 }
 
 @media(max-width: 800px) {
+    h1 {
+        font-size: 47px;
+    }
     .header-headline,
     .headline-mobile {
         display: none;
