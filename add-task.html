@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-​
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,13 +15,10 @@
     <script src="js/add-task.js"></script>
     <link rel="stylesheet" href="./css/add-task.css">
 </head>
-​
+
 <body onload="init(), initAddTask()">
-​
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
-​
-<div class="add-task-content">
     <form onsubmit="createTask(); return false;">
         <div id="addTaskPageBody" class="addTaskPage">
             <div class="addTaskLR">
@@ -36,7 +33,7 @@
                         <textarea required id="descriptionField" class="textAreaStyle1"
                             placeholder="enter a description"></textarea>
                         <h4>Assigned to</h4>
-                        <select name="" id="chooseContact" class="chooseContact" onchange="selectContact()">
+                        <select name="" id="chooseContact" class="selectInput" onchange="selectContact()">
                             <option selected disabled>Choose Contact</option>
                         </select>
                         <div>
@@ -55,21 +52,24 @@
                         <h4>Prio</h4>
                         <div id="prioField" class="prio">
                             <label>
-                                <input required value="Urgent" type="radio" name="priority" class="button1">Urgent
+                                <input required value="Urgent" type="radio" name="priority" class="button1">
+                                <span>Urgent</span>
                                 <img id="Urgent" src="./assets/img/Capa 2.png">
                             </label>
                             <label>
-                                <input value="Medium" type="radio" name="priority" class="button1">Medium
+                                <input value="Medium" type="radio" name="priority" class="button1">
+                                <span>Medium</span>
                                 <img id="Medium" src="./assets/img/Capa 2 (1).png">
                             </label>
                             <label>
-                                <input value="Low" type="radio" name="priority" class="button1">Low
+                                <input value="Low" type="radio" name="priority" class="button1">
+                                <span>Low</span>
                                 <img id="Low" src="./assets/img/Capa 2 (2).png">
                             </label>
                         </div>
                         <h4>Category</h4>
                         <div id="selectToInput">
-                            <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
+                            <select name="" id="chooseCategory" class="selectInput" onchange="addCategory()">
                                 <option selected disabled>Choose Category</option>
                                 <option value="NewCategory">New Category</option>
                             </select>
@@ -104,13 +104,10 @@
                             <button class="dark-btn" id="createTaskButton" type="submit">Create Task</button>
                         </div>
                     </div>
-                    
                 </div>
-
             </div>
         </div>
     </form>
-    </div>
 </body>
-​
+
 </html>

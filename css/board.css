@@ -438,39 +438,31 @@ progress {
     height: 100% !important;
     z-index: 999 !important;
     background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto; 
 }
 
-.add-task-popup {
-    margin: 0 !important;
-    width: 1024px !important;
-    height: 768px !important;
-    left: 100% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    animation: slideInFromRight 0.5s forwards !important;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1) !important;
-    border-radius: 30px !important;
+.addTaskPageBoard {
+    background-color: #f6f7f8 !important;
+    margin: 110px 50px 0 272px;
+    border-radius: 50px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-@keyframes slideInFromRight {
-    0% {
-        left: 100%;
-    }
-
-    100% {
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+.addTaskLRBoard {
+    display: flex;
+    justify-content: center;
+    padding: 61px 74px;
 }
 
-#addTaskPageBody h1 {
+/* #addTaskPageBody h1 {
     width: auto !important;
-}
+} */
 
 .close-add-task-btn {
     position: absolute;
-    top: 26px;
-    right: 26px;
+    top: 150px;
+    right: 90px;
     cursor: pointer;
 }
 
@@ -482,41 +474,58 @@ progress {
         padding: 0px 20px;
         font-size: 18px;
     }
-    .addTaskLR {
+   /*  .addTaskLR {
         gap: 0px !important;
         margin-top: 32px !important;
     }
-    .light-btn,
-    .buttonGlobal1 {
-        height: 33px !important;
-    }
     .finishButtonsATP {
         margin-top: 0px;
+    } */
+
+}
+
+@media(max-width: 1200px) {
+    .addTaskPageBoard {
+        margin: 110px 200px 0 200px;
     }
 
+    .close-add-task-btn {
+        right: 240px;
+    }
+
+    .addTaskLRBoard {
+        flex-direction: column;
+        align-items: center;
+    }
+    .addTaskRight {
+        margin-top: 0 !important;
+    }
+
+    .addTaskLeft, .addTaskRight {
+        width: 800px !important;
+    }
 }
 
 @media(max-width: 1060px) {
     
-    .dark-btn {
+   /*  .light-btn, .dark-btn {
         font-size: 13px;
-    }
+    } */
 
-    .addTaskPage {
+    /* .addTaskPage {
         margin-right: 40px !important;
     }
 
     .finishButtonsATP {
         margin-top: 0 !important;
     }
-
+*/
 }
 
 @media(max-width: 1000px) {
     .popup-background {
         overflow-x: hidden;
     }
-
    
     .board-section {
         margin-top: 100px;
@@ -573,6 +582,10 @@ progress {
     .finishButtonsATP {
         margin-top: 0px !important;
     }
+
+    /* .addTaskPage {
+        margin: 0 !important;
+    } */
 }
 
 @media(max-width: 800px) {
@@ -623,6 +636,14 @@ progress {
 
     .edit-task-prio-btn {
         width: auto;
+    }
+
+    .addTaskPageBoard {
+        margin: 110px 50px 0 50px;
+    }
+
+    .close-add-task-btn {
+        right: 90px;
     }
 }
 

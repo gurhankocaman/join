@@ -92,103 +92,106 @@
 
     <!-- Popup Card -->
     <div id="popup-card" class="popup-card d-none"></div>
-    <!--   <div class="close-btn">
-                    <img onclick="closePopUp()" src="./assets/img/close-btn.png">
-                </div> -->
+
     <!-- Add Task PopUp -->
-    <div class="add-task-overlay d-none" id="add-task-popup">
-        <form onsubmit="createTask(); return false;">
-            <div id="addTaskPageBody" class="addTaskPage">
+    <!-- <div class="add-task-overlay d-none add-task-popup" id="add-task-popup">
+        <div class="add-task-popup">
+            <form onsubmit="createTask(), updateBoard(), closeAddTaskPopUp(); return false;">
                 <div class="close-add-task-btn">
-                    <img onclick="closePopUp()" src="./assets/img/close-btn.png">
-                </div> 
-                <div class="headline">
-                    <h1 class="header-text">Add Task</h1>
+                    <img onclick="closeAddTaskPopUp()" src="./assets/img/close-btn.png">
                 </div>
-                <div class="addTaskLR">
-                    <div class="addTaskLeft">
-                        <div class="center">
-                            <h4>Title</h4>
-                            <input required id="titleField" type="text" class="textAreaStyle1" placeholder="enter a Title">
-                            <h4>Description</h4>
-                            <textarea required id="descriptionField" class="textAreaStyle1"
-                                placeholder="enter a description"></textarea>
-                            <h4>Assigned to</h4>
-                            <select name="" id="chooseContact" class="chooseContact" onchange="selectContact()">
-                                <option selected disabled>Choose Contact</option>
-                            </select>
-                            <div>
-                                <ul id="contactList"></ul>
-                            </div>
-                            <div id="alertContact" class="noSelectionAlert"></div>
-                        </div>
-                    </div>
-                    <div class="centerLine">
-                        <div class="dividingLine"></div>
-                    </div>
-                    <div class="addTaskRight">
-                        <div class="center">
-                            <h4>Due date</h4>
-                            <input required id="dueDateField" name="dueDateField" class="textAreaStyle1" type="date">
-                            <h4>Prio</h4>
-                            <div id="prioField" class="prio">
-                                <label>
-                                    <input required value="Urgent" type="radio" name="priority" class="button1">Urgent
-                                    <img id="Urgent" src="./assets/img/Capa 2.png">
-                                </label>
-                                <label>
-                                    <input value="Medium" type="radio" name="priority" class="button1">Medium
-                                    <img id="Medium" src="./assets/img/Capa 2 (1).png">
-                                </label>
-                                <label>
-                                    <input value="Low" type="radio" name="priority" class="button1">Low
-                                    <img id="Low" src="./assets/img/Capa 2 (2).png">
-                                </label>
-                            </div>
-                            <h4>Category</h4>
-                            <div id="selectToInput">
-                                <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
-                                    <option selected disabled>Choose Category</option>
-                                    <option value="NewCategory">New Category</option>
+                <div id="addTaskPageBody" class="addTaskPageBoard">
+                    <div class="addTaskLRBoard">
+                        <div class="addTaskLeft">
+                            <div class="center">
+                                <div class="headline">
+                                    <h1>Add Task</h1>
+                                </div>
+                                <h4>Title</h4>
+                                <input required id="titleField" type="text" class="textAreaStyle1"
+                                    placeholder="enter a Title">
+                                <h4>Description</h4>
+                                <textarea required id="descriptionField" class="textAreaStyle1"
+                                    placeholder="enter a description"></textarea>
+                                <h4>Assigned to</h4>
+                                <select name="" id="chooseContact" class="selectInput" onchange="selectContact()">
+                                    <option selected disabled>Choose Contact</option>
                                 </select>
-                            </div>
-                            <div class="d-none" id="categoryColors">
-                                <div class="categoryColor" id="1" style="background-color: #8aa4ff;"
-                                    onclick="selectCategoryColor('#8aa4ff');"></div>
-                                <div class="categoryColor" id="2" style="background-color: #ff0000;"
-                                    onclick="selectCategoryColor('#ff0000');"></div>
-                                <div class="categoryColor" id="3" style="background-color: #2ad300;"
-                                    onclick="selectCategoryColor('#2ad300');"></div>
-                                <div class="categoryColor" id="4" style="background-color: #ff8a00;"
-                                    onclick="selectCategoryColor('#ff8a00');"></div>
-                                <div class="categoryColor" id="5" style="background-color: #e200be;"
-                                    onclick="selectCategoryColor('#e200be');"></div>
-                                <div class="categoryColor" id="6" style="background-color: #0038ff;"
-                                    onclick="selectCategoryColor('#0038ff');"></div>
-                            </div>
-                            <div id="alertCategory" class="noSelectionAlert"></div>
-                            <h4>Subtasks</h4>
-                            <div id="subtaskField">
                                 <div>
-                                    <input id="subtaskInput" type="text" placeholder="new Subtask">
-                                    <img onclick="addNewSubtask()" src="./assets/img/plus.png">
+                                    <ul id="contactList"></ul>
+                                </div>
+                                <div id="alertContact" class="noSelectionAlert"></div>
+                            </div>
+                        </div>
+                        <div class="centerLine">
+                            <div class="dividingLine"></div>
+                        </div>
+                        <div class="addTaskRight">
+                            <div class="center">
+                                <h4>Due date</h4>
+                                <input required id="dueDateField" name="dueDateField" class="textAreaStyle1"
+                                    type="date">
+                                <h4>Prio</h4>
+                                <div id="prioField" class="prio">
+                                    <label>
+                                        <input required value="Urgent" type="radio" name="priority" class="button1">
+                                        <span>Urgent</span>
+                                        <img id="Urgent" src="./assets/img/Capa 2.png">
+                                    </label>
+                                    <label>
+                                        <input value="Medium" type="radio" name="priority" class="button1">
+                                        <span>Medium</span>
+                                        <img id="Medium" src="./assets/img/Capa 2 (1).png">
+                                    </label>
+                                    <label>
+                                        <input value="Low" type="radio" name="priority" class="button1">
+                                        <span>Low</span>
+                                        <img id="Low" src="./assets/img/Capa 2 (2).png">
+                                    </label>
+                                </div>
+                                <h4>Category</h4>
+                                <div id="selectToInput">
+                                    <select name="" id="chooseCategory" class="selectInput" onchange="addCategory()">
+                                        <option selected disabled>Choose Category</option>
+                                        <option value="NewCategory">New Category</option>
+                                    </select>
+                                </div>
+                                <div class="d-none" id="categoryColors">
+                                    <div class="categoryColor" id="1" style="background-color: #8aa4ff;"
+                                        onclick="selectCategoryColor('#8aa4ff');"></div>
+                                    <div class="categoryColor" id="2" style="background-color: #ff0000;"
+                                        onclick="selectCategoryColor('#ff0000');"></div>
+                                    <div class="categoryColor" id="3" style="background-color: #2ad300;"
+                                        onclick="selectCategoryColor('#2ad300');"></div>
+                                    <div class="categoryColor" id="4" style="background-color: #ff8a00;"
+                                        onclick="selectCategoryColor('#ff8a00');"></div>
+                                    <div class="categoryColor" id="5" style="background-color: #e200be;"
+                                        onclick="selectCategoryColor('#e200be');"></div>
+                                    <div class="categoryColor" id="6" style="background-color: #0038ff;"
+                                        onclick="selectCategoryColor('#0038ff');"></div>
+                                </div>
+                                <div id="alertCategory" class="noSelectionAlert"></div>
+                                <h4>Subtasks</h4>
+                                <div id="subtaskField">
+                                    <div>
+                                        <input id="subtaskInput" type="text" placeholder="new Subtask">
+                                        <img onclick="addNewSubtask()" src="./assets/img/plus.png">
+                                    </div>
+                                </div>
+                                <div>
+                                    <ul id="subtaskList"></ul>
+                                </div>
+                                <div class="finishButtonsATP" id="addTaskBTN">
+                                    <button class="light-btn" id="clearTaskButton" onclick="resetForm()">Clear</button>
+                                    <button class="dark-btn" id="createTaskButton" type="submit">Create Task</button>
                                 </div>
                             </div>
-                            <div>
-                                <ul id="subtaskList"></ul>
-                            </div>
-                            <div class="finishButtonsATP" id="addTaskBTN">
-                                <button class="light-btn" id="clearTaskButton" onclick="resetForm()">Clear</button>
-                                <button class="buttonGlobal1" id="createTaskButton" type="submit">Create Task</button>
-                            </div>
                         </div>
-                        
                     </div>
-    
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    </div> -->
 
 
 </body>

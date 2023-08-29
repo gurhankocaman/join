@@ -108,7 +108,6 @@ async function addNewTask() {
 
     tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
-
     resetForm();
 }
 
@@ -182,7 +181,7 @@ function selectToInput() {
 
     let selectToInput = document.getElementById('selectToInput');
     selectToInput.innerHTML = /*html*/`
-    <div id="subtaskField">
+    <div id="categoryField">
         <div>
             <input id="newCategoryInput" type="text" placeholder="New Category">
             <div class="categoryColorNew" id="selectedCategoryColor"></div>
@@ -225,7 +224,7 @@ function resetSelect() {
     document.getElementById('alertCategory').innerHTML = '';
     let selectToInput = document.getElementById('selectToInput');
     selectToInput.innerHTML = /*html*/`
-    <select name="" id="chooseCategory" class="chooseContact" onchange="addCategory()">
+    <select name="" id="chooseCategory" class="selectInput" onchange="addCategory()">
         <option selected disabled>Choose Category</option>
         <option value="NewCategory">New Category</option>
     </select>`;

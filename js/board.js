@@ -320,14 +320,19 @@ function getInitials(firstName, lastName) {
  * Opens the add task popup
  */
 function openAddTask() {
-    // window.location.href = 'add-task.html';
-    document.getElementById('add-task-popup').classList.remove('d-none');
+    window.location.href = 'add-task.html';
+    // document.getElementById('add-task-popup').classList.remove('d-none');
 }
 
 /**
  * Closes the add task popup
  */
-function closePopUp() {
+async function closeAddTaskPopUp() {
     document.getElementById('add-task-popup').classList.add('d-none');
-    initBoard();
+    resetForm();
+    await loadTasks();
+    await loadCategories();
+    await loadContacts();
+    await loadSubtasks();
+    await loadCategoryColors();
 }
