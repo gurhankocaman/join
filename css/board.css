@@ -20,6 +20,7 @@
 }
 
 .board-header input {
+    width: 100%;
     height: 31px;
     padding-left: 21px;
     border: none;
@@ -553,6 +554,10 @@ progress {
         width: 100%;
     }
 
+    .search-box {
+       width: 360px;
+    }
+
     .add-task-btn-mobile {
         display: block !important;
         cursor: pointer !important;
@@ -659,7 +664,7 @@ progress {
     }
 
     .search-container {
-        margin-left: 0;
+        font-size: 16px;
     }
 
     .card-container {
@@ -678,11 +683,11 @@ progress {
 
 @media(max-width: 380px) {
     .board-column {
-        width: auto;
+        width: 280px;
     }
 
     .board-add-task {
-        width: auto;
+        width: 280px;
     }
 
     .board-content {
@@ -694,4 +699,8 @@ progress {
         display: flex;
         justify-content: space-evenly;
     }
+
+    .search-box {
+        width: 280px;
+     }
 }
