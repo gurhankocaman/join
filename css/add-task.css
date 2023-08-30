@@ -5,12 +5,6 @@ body {
     font-size: 20px !important;
 }
 
-textarea,
-input {
-    font-family: inherit;
-    font-size: 16px;
-}
-
 .headline {
     margin-bottom: 25px;
 }
@@ -78,6 +72,12 @@ textarea {
     resize: none;
 }
 
+textarea,
+input {
+    font-family: inherit;
+    font-size: 16px;
+}
+
 /* .bgDark {
     background: #2A3647 !important;
     color: white !important;
@@ -86,7 +86,6 @@ textarea {
 .noSelectionAlert {
     font-size: 12px;
     color: red;
-    margin-top: 8px;
 }
 
 /*add task*/
@@ -112,12 +111,6 @@ textarea {
     /* width: 100%; */
     /* gap: 50px; */
 
-}
-
-.dividingLine {
-    border: 1px solid lightgrey;
-    height: 75%;
-    margin-top: 100px;
 }
 
 /* #tasks h4 {
@@ -150,6 +143,19 @@ textarea {
     margin-top: 107px;
 }
 
+.centerLine {
+    margin: 10px;
+    /* margin-top: 10px;
+    margin-bottom: 10px;
+    height: 75vh; */
+}
+
+.dividingLine {
+    border: 1px solid lightgrey;
+    height: 75%;
+    margin-top: 100px;
+}
+
 .prio {
     display: flex;
     justify-content: space-between;
@@ -179,14 +185,6 @@ textarea {
     margin-bottom: 2px;
     margin-left: 0;
     margin-right: 0;
-}
-
-
-.centerLine {
-    margin: 10px;
-    /* margin-top: 10px;
-    margin-bottom: 10px;
-    height: 75vh; */
 }
 
 /* .finishButtons {
@@ -242,7 +240,7 @@ textarea {
 
 #categoryColors {
     display: flex;
-    margin-top: 20px;
+    margin-top: 8px;
 }
 
 .categoryColor {
@@ -266,11 +264,11 @@ textarea {
     width: 0px;
 }
 
-.border {
+/* .border {
     border: 2px solid white !important;
     transform: scale(1.2);
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
-}
+} */
 
 /* .dropdownInput {
     height: 0 !important;
@@ -589,13 +587,12 @@ textarea {
 ul {
     display: flex;
     flex-direction: column;
+    margin: 8px;
 
 }
 
 li {
-    padding: 3px;
     font-size: 16px;
-    font-weight: 400;
 }
 
 @media(max-width: 1200px) {
@@ -647,11 +644,7 @@ li {
 
     .contactContainer,
     .subtaskContainer {
-        margin-bottom: 0;
-    }
-
-    .categoryContainer {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     @media(max-width: 400px) {
@@ -659,7 +652,6 @@ li {
         .prio,
         #subtaskField,
         #categoryField,
-        .dropdown-content,
         .selectInput {
             width: 280px;
         }

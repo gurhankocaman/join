@@ -287,7 +287,8 @@ function renderSubtasks() {
     for (let i = 0; i < subtasks.length; i++) {
         subtaskList.innerHTML += /*html*/ `
             <li>
-                 <input type="checkbox" name="${subtasks[i]['subtask']}" checked>${subtasks[i]['subtask']}
+                 <input type="checkbox" name="${subtasks[i]['subtask']}" checked>
+                 <label for="${subtasks[i]['subtask']}">${subtasks[i]['subtask']}</label>
             </li>
         `;
     }
