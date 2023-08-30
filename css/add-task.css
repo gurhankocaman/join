@@ -23,7 +23,43 @@ input {
     background-color: white;
 } */
 
-.inputContainer {
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.descriptionContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.contactContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.dateContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.priorityContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.categoryContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.subtaskContainer {
     display: flex;
     flex-direction: column;
     margin-bottom: 25px;
@@ -162,14 +198,14 @@ textarea {
     right: 64px;
 }
 
-.close {
+/* .close {
     position: absolute;
     top: 45px;
     right: 55px;
     margin: 0;
     font-size: 30px;
     cursor: pointer;
-}
+} */
 
 /* categories */
 
@@ -607,6 +643,59 @@ li {
 
     .addTaskRight {
         margin-top: 0;
+    }
+
+    .contactContainer, .subtaskContainer {
+        margin-bottom: 0;
+    }
+
+    .categoryContainer {
+        margin-bottom: 15px;
+    }
+
+    @media(max-width: 400px) {
+
+        .dropbtn,
+        .prio,
+        #subtaskField,
+        .dropdown-content,
+        .selectInput {
+            width: 280px;
+        }
+
+        .textAreaStyle1 {
+            width: calc(280px - 44px);
+        }
+
+        .chooseContact {
+            width: calc(280px - 0px);
+        }
+
+        .button1 {
+            padding: 13px 10px;
+        }
+
+        .prio {
+            flex-direction: column;
+        }
+
+        .prioBtn {
+            width: calc(280px - 16px);
+            margin-bottom: 4px;
+        }
+
+        .finishButtonsATP {
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .light-btn,
+        .dark-btn {
+            width: 100%;
+        }
     }
 }
 
