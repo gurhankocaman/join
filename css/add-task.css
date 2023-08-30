@@ -109,8 +109,8 @@ textarea {
 
 .addTaskLR {
     display: flex;
-    width: 100%;
-    gap: 50px;
+    /* width: 100%; */
+    /* gap: 50px; */
 
 }
 
@@ -137,7 +137,7 @@ textarea {
     flex-direction: column;
     width: 500px;
     /* height: 500px;*/
-    gap: 10px;
+    /* gap: 10px; */
 }
 
 .addTaskRight {
@@ -145,7 +145,7 @@ textarea {
     flex-direction: column;
     width: 500px;
     /* height: 500px;*/
-    gap: 10px;
+    /* gap: 10px; */
     /* position: relative; */
     margin-top: 107px;
 }
@@ -189,14 +189,14 @@ textarea {
     height: 75vh; */
 }
 
-.finishButtons {
+/* .finishButtons {
     display: flex;
     justify-content: space-around;
     align-items: center;
     position: absolute;
     bottom: 64px;
     right: 64px;
-}
+} */
 
 /* .close {
     position: absolute;
@@ -272,22 +272,22 @@ textarea {
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
 }
 
-.dropdownInput {
+/* .dropdownInput {
     height: 0 !important;
     width: 0 !important;
     outline: 0 !important;
     z-index: -999 !important;
     padding: 0 !important;
     opacity: 0;
-}
+} */
 
 /* dropdown category*/
 
-.dropdown {
+/* .dropdown {
     width: 70%;
-}
+} */
 
-.dropbtn {
+/* .dropbtn {
     border: 1px solid lightgrey;
     background-color: white;
     border-radius: 10px;
@@ -334,14 +334,14 @@ textarea {
 
 .dropdown-content a:hover {
     background-color: rgba(0, 0, 0, 0.1);
-}
+} */
 
-#dropbtnCategory {
+/* #dropbtnCategory {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-}
+} */
 
 /* subtask and category fields */
 #subtaskField,
@@ -475,7 +475,7 @@ textarea {
 
 .addTaskPage {
     background-color: #f6f7f8 !important;
-    margin: 171px 32px 16px 272px;
+    margin: 171px 0px 0px 232px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -532,7 +532,7 @@ textarea {
     transition: 125ms;
 } */
 
-.finishButtonsATP {
+.finishButtons {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -546,7 +546,7 @@ textarea {
     margin: 0 auto;
 }
 
-.categoryX {
+/* .categoryX {
     display: flex;
     align-items: center;
     gap: 7px;
@@ -556,7 +556,7 @@ textarea {
     background-color: white;
     border-radius: 100%;
     transition: 125ms;
-}
+} */
 
 .selectInput {
     width: 345px;
@@ -600,12 +600,12 @@ li {
 
 @media(max-width: 1200px) {
     .addTaskPage {
-        margin: 171px 16px 16px 272px;
+        margin: 171px 0px 0px 232px;
     }
 
-    .addTaskLR {
+    /* .addTaskLR {
         gap: 16px;
-    }
+    } */
 
     .centerLine {
         display: none;
@@ -614,7 +614,7 @@ li {
 
 @media(max-width: 1000px) {
     .addTaskPage {
-        margin: 171px 0 80px 16px;
+        margin: 152px 0 80px 0px;
     }
 
     .addTaskLR {
@@ -628,7 +628,7 @@ li {
     input,
     option,
     .textAreaStyle1 {
-        font-size: 16px;
+        font-size: 16px !important;
     }
 
     h1 {
@@ -645,7 +645,8 @@ li {
         margin-top: 0;
     }
 
-    .contactContainer, .subtaskContainer {
+    .contactContainer,
+    .subtaskContainer {
         margin-bottom: 0;
     }
 
@@ -655,9 +656,9 @@ li {
 
     @media(max-width: 400px) {
 
-        .dropbtn,
         .prio,
         #subtaskField,
+        #categoryField,
         .dropdown-content,
         .selectInput {
             width: 280px;
@@ -684,7 +685,7 @@ li {
             margin-bottom: 4px;
         }
 
-        .finishButtonsATP {
+        .finishButtons {
             display: flex;
             justify-content: flex-end;
             flex-direction: column-reverse;

@@ -529,7 +529,7 @@ progress {
     }
    
     .board-section {
-        margin-top: 100px;
+        margin-top: 152px;
         margin-left: 0;
         display: flex;
         flex-direction: column;
@@ -539,7 +539,7 @@ progress {
     .board-header {
         flex-direction: column;
         align-items: unset;
-        padding-top: 35px;
+        padding-top: 0;
     }
 
     .search-container {
@@ -572,7 +572,7 @@ progress {
         align-items: center;
         width: 360px;
         justify-content: space-between;
-        margin: 25px 23px;
+        margin: 0 23px 25px 23px;
     }
 
     .board-content {
