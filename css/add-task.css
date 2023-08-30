@@ -7,7 +7,7 @@ body {
 textarea,
 input {
     font-family: inherit;
-    font-size: inherit;
+    font-size: 16px;
 }
 
 .headline {
@@ -30,7 +30,6 @@ input {
     border-radius: 10px;
     width: calc(345px - 44px);
     padding: 13px 21px;
-    font-size: 16px;
 }
 
 textarea {
@@ -38,31 +37,10 @@ textarea {
     resize: none;
 }
 
-.button1 {
-    border: 1px solid rgb(226, 226, 226);
-    border-radius: 10px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.button1 img {
-    width: 15px;
-    margin-left: 5px;
-}
-
-.button1:hover {
-    box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.4);
-}
-
-
-.bgDark {
+/* .bgDark {
     background: #2A3647 !important;
     color: white !important;
-}
+} */
 
 .noSelectionAlert {
     font-size: 12px;
@@ -92,7 +70,6 @@ textarea {
     display: flex;
     width: 100%;
     gap: 50px;
-    margin-top: 24px;
 
 }
 
@@ -136,8 +113,33 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 345px;
+    font-size: 16px;
 }
+
+.prioBtn {
+    background-color: white;
+    border-radius: 10px;
+    padding: 4px 6px;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d1d1d1;
+    cursor: pointer;
+    gap: 8px;
+}
+
+.prioBtn:hover {
+    transition: all 125ms ease-in-out;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.prioRadio {
+    margin-bottom: 2px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
 
 .centerLine {
     margin: 10px;
@@ -301,7 +303,8 @@ textarea {
 }
 
 /* subtask and category fields */
-#subtaskField, #categoryField {
+#subtaskField,
+#categoryField {
     border: 1px solid lightgrey;
     border-radius: 10px;
     width: 343px;
@@ -309,14 +312,16 @@ textarea {
     font-size: 16px
 }
 
-#subtaskField div, #categoryField div {
+#subtaskField div,
+#categoryField div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 21px;
 }
 
-#subtaskField input, #categoryField input {
+#subtaskField input,
+#categoryField input {
     border: 0;
     outline: 0;
     width: 90%;
@@ -337,7 +342,8 @@ textarea {
     cursor: pointer;
 }
 
-#subtaskField span, #categoryField span {
+#subtaskField span,
+#categoryField span {
     padding: 5px 0 5px 21px;
     border-top: 1px solid lightgrey;
 }
@@ -376,26 +382,26 @@ textarea {
 
 /* scrollbar */
 /* width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 2px;
-}
+} */
 
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 16px;
-}
+} */
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
     background: #e1e1e1;
     border-radius: 16px;
-}
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
     background: #8f8f8f;
-}
+} */
 
 /* fullscreen */
 #fullscreenBackground {
@@ -428,7 +434,7 @@ textarea {
 
 .addTaskPage {
     background-color: #f6f7f8 !important;
-    margin: 110px 32px 0 272px;
+    margin: 171px 32px 16px 272px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -492,7 +498,7 @@ textarea {
     gap: 20px;
     margin-right: 0px;
     /* margin-top: -13px; */
-} 
+}
 
 .center {
     width: fit-content;
@@ -524,7 +530,7 @@ textarea {
     font-family: inherit;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.6);
-    background: url('../assets/img/arrow_down.png') no-repeat right center; 
+    background: url('../assets/img/arrow_down.png') no-repeat right center;
     background-position: calc(100% - 25px) center;
     background-color: white !important;
     cursor: pointer;
@@ -553,8 +559,9 @@ li {
 
 @media(max-width: 1200px) {
     .addTaskPage {
-        margin: 110px 16px 0 272px;
+        margin: 171px 16px 0 272px;
     }
+
     .addTaskLR {
         gap: 16px;
     }
@@ -566,7 +573,7 @@ li {
 
 @media(max-width: 1000px) {
     .addTaskPage {
-        margin: 110px 0 80px 0;
+        margin: 171px 0 80px 0;
     }
 
     .addTaskLR {
@@ -575,6 +582,18 @@ li {
 }
 
 @media(max-width: 800px) {
+
+    body,
+    input,
+    option,
+    .textAreaStyle1 {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 47px;
+    }
+
     .addTaskLR {
         display: flex;
         flex-direction: column;
