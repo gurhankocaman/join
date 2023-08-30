@@ -697,7 +697,6 @@ progress {
     }
     .board-column-head {
         display: flex;
-        justify-content: space-evenly;
     }
 
     .search-box {
