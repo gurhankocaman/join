@@ -11,7 +11,7 @@ async function initBoard() {
     contacts = JSON.parse(await getItem('contacts'));
     updateId();
     updateBoard();
-    initAddTask();
+    // initAddTask();
 }
 
 /**
@@ -327,7 +327,7 @@ function openAddTask() {
 /**
  * Closes the add task popup
  */
-async function closeAddTaskPopUp() {
+/* async function closeAddTaskPopUp() {
     document.getElementById('add-task-popup').classList.add('d-none');
     resetForm();
     await loadTasks();
@@ -335,4 +335,4 @@ async function closeAddTaskPopUp() {
     await loadContacts();
     await loadSubtasks();
     await loadCategoryColors();
-}
+} */

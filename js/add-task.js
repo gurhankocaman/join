@@ -87,7 +87,7 @@ async function addNewTask() {
     const category = document.getElementById('chooseCategory');
     const categoryValue = category.options[category.selectedIndex].value;
     const date = document.getElementById('dueDateField').value;
-    const checkedPrioBtn = document.querySelector('.button1:checked').value;
+    const checkedPrioBtn = document.querySelector('.prioRadio:checked').value;
     const categoryIndex = categories.findIndex(cat => cat.category === categoryValue);
     const selectedCategoryColor = categoryColors[categoryIndex]?.color || "";
 
@@ -117,7 +117,7 @@ function resetForm() {
     document.getElementById('dueDateField').value = '';
     document.getElementById('subtaskInput').value = '';
     document.getElementById('contactList').innerHTML = '';
-    document.querySelectorAll('.button1').forEach(button => button.checked = false);
+    document.querySelectorAll('.prioRadio').forEach(button => button.checked = false);
     document.getElementById('alertCategory').innerHTML = '';
     document.getElementById('alertContact').innerHTML = '';
 
@@ -149,7 +149,7 @@ function resetSubtasks() {
 }
 
 function resetPriorityButtons() {
-    const priorityButtons = document.querySelectorAll('.button1');
+    const priorityButtons = document.querySelectorAll('.prioRadio');
     for (const button of priorityButtons) {
         button.checked = false;
     }
