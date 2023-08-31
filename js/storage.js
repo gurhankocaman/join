@@ -19,3 +19,5 @@ async function downloadFromServer() {
   console.log(getContacts);
   return getContacts;
 }
+
+  
