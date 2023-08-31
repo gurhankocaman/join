@@ -121,7 +121,7 @@ function resetForm() {
     document.querySelectorAll('.prioRadio').forEach(button => button.checked = false);
     document.getElementById('alertCategory').innerHTML = '';
     document.getElementById('alertContact').innerHTML = '';
-git 
+
     contactValues = [];
 
     resetSubtasks();
@@ -224,7 +224,6 @@ async function addNewCategory() {
 function resetSelect() {
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
-    console.log("Button disabled status:", addTaskBTN.disabled);
     
     document.getElementById('alertCategory').innerHTML = '';
     let selectToInput = document.getElementById('selectToInput');

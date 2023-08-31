@@ -317,12 +317,3 @@ async function saveNotes() {
     let tasksAsJson = JSON.stringify(tasks);
     await setItem('allTasks', tasksAsJson);
 }
-
-function clearBackend() {
-    contacts = [];
-    newContact = [];
-    tasks = [];
-    setItem('contacts', JSON.stringify(contacts));
-    setItem('newContact', JSON.stringify(newContact));
-    setItem('tasks ', JSON.stringify(tasks));
-   }
