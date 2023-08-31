@@ -28,7 +28,7 @@ function addContacts() {
     let phone = document.getElementById('phone').value;
     let color = document.getElementById('color').value;
     createContactCard(id, firstName, lastName, email, phone, color);
-    newContact.id = contacts.length;
+    newContact.id = contacts.length + (new Date()).getTime();
     contacts.push(newContact);
     setItem('contacts', JSON.stringify(contacts));
     popupSuccess();
