@@ -129,6 +129,7 @@ function resetForm() {
 
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
+    redirectToBoard();
 }
 
 function resetCategoryOptions() {
@@ -153,6 +154,10 @@ function resetPriorityButtons() {
     for (const button of priorityButtons) {
         button.checked = false;
     }
+}
+
+function redirectToBoard() {
+    window.location.href = 'board.html';
 }
 
 // Categories

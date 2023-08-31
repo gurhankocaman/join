@@ -646,49 +646,52 @@ li {
     .subtaskContainer {
         margin-bottom: 10px;
     }
+}
 
-    @media(max-width: 400px) {
+@media (max-width: 500px) {
+    .finishButtons {
+        justify-content: space-between;
+    }
+}
 
-        .prio,
-        #subtaskField,
-        #categoryField,
-        .selectInput {
-            width: 280px;
-        }
+@media(max-width: 400px) {
 
-        .textAreaStyle1 {
-            width: calc(280px - 44px);
-        }
+    .prio,
+    #subtaskField,
+    #categoryField,
+    .selectInput {
+        width: 280px;
+    }
 
-        .chooseContact {
-            width: calc(280px - 0px);
-        }
+    .textAreaStyle1 {
+        width: calc(280px - 44px);
+    }
 
-        .button1 {
-            padding: 13px 10px;
-        }
+    .chooseContact {
+        width: calc(280px - 0px);
+    }
 
-        .prio {
-            flex-direction: column;
-        }
+    .button1 {
+        padding: 13px 10px;
+    }
 
-        .prioBtn {
-            width: calc(280px - 16px);
-            margin-bottom: 4px;
-        }
+    .prio {
+        flex-direction: column;
+    }
 
-        .finishButtons {
-            display: flex;
-            justify-content: flex-end;
-            flex-direction: column-reverse;
-            align-items: center;
-            gap: 4px;
-        }
+    .prioBtn {
+        width: calc(280px - 16px);
+        margin-bottom: 4px;
+    }
 
-        .light-btn,
-        .dark-btn {
-            width: 100%;
-        }
+    .finishButtons {
+        flex-direction: column-reverse;
+        gap: 4px;
+    }
+
+    .light-btn,
+    .dark-btn {
+        width: 100%;
     }
 }
 
