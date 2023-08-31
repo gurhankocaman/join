@@ -301,23 +301,6 @@ function closeFormById(formId) {
 }
 
 
-/**
- * Loads tasks from server (used for add task-popup)
- */
-async function loadNotes() {
-    await downloadFromServer();
-    tasks = getItem('allTasks') || [];
-}
-
-
-/**
- * Saves tasks to server (used for add task-popup)
- */
-async function saveNotes() {
-    let tasksAsJson = JSON.stringify(tasks);
-    await setItem('allTasks', tasksAsJson);
-}
-
 function clearBackend() {
     contacts = [];
     setItem('contacts', JSON.stringify(contacts));
