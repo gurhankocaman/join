@@ -109,6 +109,7 @@ async function addNewTask() {
     tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
     resetForm();
+    redirectToBoard();
 }
 
 function resetForm() {
@@ -129,7 +130,6 @@ function resetForm() {
 
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
-    redirectToBoard();
 }
 
 function resetCategoryOptions() {
