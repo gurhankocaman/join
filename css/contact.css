@@ -348,7 +348,7 @@ h1 {
 }
 
 .contact-cancel-btn:hover .contact-create-icon {
-    content: url('../assets/img/iconoir_cancel_hover.svg');
+    content: url('./assets/img/iconoir_cancel_hover.svg');
 }
 
 
@@ -541,7 +541,7 @@ select {
 
 select {
     appearance: none;
-    background: url(/assets/img/arrow.png) 96% / 3% no-repeat white;
+    background: url(./assets/img/arrow.png) 96% / 3% no-repeat white;
     cursor: pointer;
 }
 
