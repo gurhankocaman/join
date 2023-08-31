@@ -121,7 +121,7 @@ function resetForm() {
     document.querySelectorAll('.prioRadio').forEach(button => button.checked = false);
     document.getElementById('alertCategory').innerHTML = '';
     document.getElementById('alertContact').innerHTML = '';
-
+git 
     contactValues = [];
 
     resetSubtasks();
