@@ -224,7 +224,6 @@ async function addNewCategory() {
 function resetSelect() {
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
-    console.log("Button disabled status:", addTaskBTN.disabled);
     
     document.getElementById('alertCategory').innerHTML = '';
     let selectToInput = document.getElementById('selectToInput');
