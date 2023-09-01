@@ -266,6 +266,10 @@ progress {
     margin-top: 5px;
 }
 
+.popup-card-move-task-mobile {
+    display: none;
+}
+
 .move-task-btn {
     height: 41px;
     padding: 4px 18px;
@@ -574,6 +578,10 @@ progress {
         gap: 10px;
         margin-top: 5px;
         height: auto;
+    }
+
+    .popup-card-move-task-mobile {
+        display: block;
     }
 
     .edit-task-title input,
