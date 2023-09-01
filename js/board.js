@@ -227,7 +227,7 @@ function generateProgressBar() {
  */
 function calculatePercent(i, subtasksChecked) {
     if (tasks[i].subtask.length === 0) {
-        return 0; 
+        return 0;
     }
     return (subtasksChecked.length / tasks[i].subtask.length) * 100;
 }
@@ -321,18 +321,11 @@ function getInitials(firstName, lastName) {
  */
 function openAddTask() {
     window.location.href = 'add-task.html';
-    // document.getElementById('add-task-popup').classList.remove('d-none');
 }
 
-/**
- * Closes the add task popup
- */
-/* async function closeAddTaskPopUp() {
-    document.getElementById('add-task-popup').classList.add('d-none');
-    resetForm();
-    await loadTasks();
-    await loadCategories();
-    await loadContacts();
-    await loadSubtasks();
-    await loadCategoryColors();
-} */
+/* function clearBackend() {
+    tasks = [];
+    setItem('tasks', JSON.stringify(tasks));
+    console.log('Clear');
+  } */
+

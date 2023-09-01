@@ -301,7 +301,8 @@ function closeFormById(formId) {
 }
 
 
-function clearBackend() {
+/* function clearBackend() {
     contacts = [];
     setItem('contacts', JSON.stringify(contacts));
-   }
+    console.log('Clear');
+   } */

@@ -16,7 +16,6 @@ async function getItem(key) {
 
 async function downloadFromServer() {
   const getContacts = JSON.parse(await getItem('contacts'));
-  console.log(getContacts);
   return getContacts;
 }
 

@@ -298,14 +298,15 @@ function renderSubtasks() {
     }
 }
 
-function clearBackend() {
+/* function clearBackend() {
     categories = [];
     categoryColors = [];
     subtasks = [];
     setItem('categories', JSON.stringify(categories));
     setItem('categoryColors', JSON.stringify(categoryColors));
     setItem('subtasks', JSON.stringify(subtasks));
-}
+    console.log('Clear');
+} */
 
 
 
