@@ -1,6 +1,6 @@
 function tasksHTML(task) {
     return /*html*/ `
-    <div class="card-container" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
+    <div class="card-container margin-bottom-25" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
         <div id ="card-category-${task.id}" class="card-category margin-bottom-10">${task['category']}</div>
         <div class="card-title margin-bottom-10">${task['title']}</div>
         <div class="card-description margin-bottom-10">${task['description']}</div>
@@ -43,7 +43,7 @@ function popupCardHTML(taskIndex) {
         <div id="popup-card-subtasks-container-${taskIndex}" class="margin-bottom-25"><b>Subtasks:</b>
             <div id="popup-card-subtasks"></div>
         </div>
-        <div class="margin-bottom-25">
+        <div class="popup-card-move-task-mobile margin-bottom-25">
             <b>Move Task:</b>
             <div>
                 <div class="popup-card-move-task">
