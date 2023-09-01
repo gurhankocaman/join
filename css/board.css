@@ -105,9 +105,15 @@
 
 /* cards */
 .drag-area {
-    min-width: 200px;
+    width: 100%;
     min-height: 200px;
 }
+
+.drag-area-highlight {
+    background-color: #D1D1D1;
+    border-radius: 30px;
+    border: 1px dashed;
+  }
 
 .card-container {
     border: 1px solid transparent;
@@ -116,6 +122,7 @@
     background-color: #ffffff;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     padding: 18px 19px;
+    margin: 12px 0;
     cursor: pointer;
 }
 
@@ -484,6 +491,7 @@ progress {
 
     .board-column {
         width: 360px;
+        height: 100%;
     }
 
     .board-column-head {
