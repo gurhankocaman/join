@@ -9,6 +9,7 @@ body {
 
 .overflow {
     position: relative;
+    overflow-y: auto;
     overflow-x: hidden;
     /* height: 100vh; */
 }
@@ -29,17 +30,17 @@ h1 {
 .contact-list-container {
     display: flex;
     justify-content: center;
-    width: 360px;
+    width: 400px;
     height: 100vh;
+    word-break: break-word;
     background-color: white;
-    overflow: auto;
     scroll-behavior: smooth;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
 #contactList {
     margin-top: 110px;
-    width: 360px;
+    /* width: 360px; */
 }
 
 #firstLetter {
@@ -105,12 +106,12 @@ h1 {
 }
 
 .contact-email {
-    font-size: 10px;
+    font-size: 16px;
     color: #007CEE;
 }
 
 .contact-letters {
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 100%;
     background-color: aqua;
     color: white;
@@ -118,18 +119,19 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-    border: 2px solid white;
+    /* border: 2px solid white; */
 }
 
 .small-letters {
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     font-size: 16px;
 }
 
 .big-letters {
-    height: 65px;
-    width: 65px;
+    height: 120px;
+    width: 120px;
+    font-size: 47px;
 }
 
 
@@ -716,7 +718,7 @@ select::-ms-expand {
 @media(max-width:1000px) {    
     .contact-list-container {
         height: unset;
-        margin-bottom: 80px;
+        margin-bottom: 60px;
         height: 100vh;
     }
 
@@ -850,10 +852,13 @@ select::-ms-expand {
         position: fixed;
         top: 32%;
     }
+
     .big-letters {
         height: 110px;
         width: 110px;
+        font-size: 47px;
     }
+
     .margin-letters {
         margin-top: 20px;
         margin-left: 0px!important;

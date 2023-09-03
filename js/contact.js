@@ -262,7 +262,7 @@ function deleteSelectedContact(i) {
  * Open contact form to add new task with assigned contact
  * @param {string} userShort - The short name of the contact to assign the task to
  */
-async function addTaskContact(userShort) {
+/* async function addTaskContact(userShort) {
     const formTaskContainer = document.getElementById("formContainer");
     if (!formTaskContainer) {
         console.error('Error: formContainer is null or undefined.');
@@ -274,21 +274,21 @@ async function addTaskContact(userShort) {
     // setDateToday();  @ addtask_board.js
     checkAssignedTo(userShort);
     document.getElementById('formTaskContainer').classList.remove('d-none');
-}
+} */
 
 
 /**
  * Check assigned-to checkbox for the given userShort
  * @param {string} userShort - The short name of the contact to check the assigned-to checkbox for
  */
-function checkAssignedTo(userShort) {
+/* function checkAssignedTo(userShort) {
     for (let i = 0; i < contacts.length; i++) {
         const assignedTo = document.getElementById('assigned-to-' + i);
         if (assignedTo && userShort == assignedTo.value.toLowerCase()) {
             assignedTo.checked = true;
         }
     }
-}
+} */
 
 
 /**
