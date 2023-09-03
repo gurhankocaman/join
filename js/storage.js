@@ -1,4 +1,4 @@
-const STORAGE_TOKEN = 'A8GJT5S6UBP8EPYL0725HTO6OYCZCCP07A7XDAEY';
+const STORAGE_TOKEN = 'O7AJXACVZ5CAI1NBKYLNHDS1WBLN0V24RQ1QN2S7';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 // Save value into backend
