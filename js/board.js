@@ -328,7 +328,15 @@ function getInitials(firstName, lastName) {
  * Opens the add task popup
  */
 function openAddTask() {
-    window.location.href = 'add-task.html';
+    document.getElementById('add-task-overlay').classList.remove('d-none');
+}
+
+/**
+ * Closes the add task popup
+ */
+function closeAddTask() {
+    document.getElementById('add-task-overlay').classList.add('d-none');
+    initBoard();
 }
 
 /* function clearBackend() {

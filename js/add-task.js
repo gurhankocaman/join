@@ -41,6 +41,7 @@ async function loadCategoryColors() {
 // Create Task
 async function createTask() {
     let addTaskBTN = document.getElementById('createTaskButton');
+    closeTaskAddedMessage();
     addTaskBTN.disabled = true;
 
     if (!validateInputFields()) {
@@ -109,7 +110,7 @@ async function addNewTask() {
     tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
     resetForm();
-    redirectToBoard();
+    showTaskAddedMessage();
 }
 
 function resetForm() {
@@ -156,8 +157,12 @@ function resetPriorityButtons() {
     }
 }
 
-function redirectToBoard() {
-    window.location.href = 'board.html';
+function showTaskAddedMessage() {
+    document.getElementById('task-added-msg').classList.remove('d-none');
+}
+
+function closeTaskAddedMessage() {
+    document.getElementById('task-added-msg').classList.add('d-none');
 }
 
 // Categories
@@ -180,7 +185,7 @@ function addCategory() {
 
 function selectToInput() {
     document.getElementById('alertCategory').innerHTML = '';
-    
+
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = true;
 
@@ -224,7 +229,7 @@ async function addNewCategory() {
 function resetSelect() {
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
-    
+
     document.getElementById('alertCategory').innerHTML = '';
     let selectToInput = document.getElementById('selectToInput');
     selectToInput.innerHTML = /*html*/`
