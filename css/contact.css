@@ -358,7 +358,7 @@ h1 {
 
 .contact-form-overlay {
     position: absolute;
-    top: 54%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
@@ -711,7 +711,11 @@ select::-ms-expand {
     border-radius: 10px;
 }
 
-@media(max-width:1100px) {    
+@media(max-width: 1100px) {
+    
+}  
+
+@media(max-width:1000px) {    
     .contact-list-container {
         height: unset;
         margin-bottom: 60px;

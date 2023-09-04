@@ -7,11 +7,11 @@ let currentDraggedElement;
  * Initializes the board
  */
 async function initBoard() {
+    await includeHTML();
     tasks = JSON.parse(await getItem('tasks'));
     contacts = JSON.parse(await getItem('contacts'));
     updateId();
     updateBoard();
-    // initAddTask();
 }
 
 /**
@@ -327,8 +327,9 @@ function getInitials(firstName, lastName) {
 /**
  * Opens the add task popup
  */
-function openAddTask() {
+function openAddTask(chosenStatus) {
     document.getElementById('add-task-overlay').classList.remove('d-none');
+    status = chosenStatus;
 }
 
 /**
@@ -339,9 +340,9 @@ function closeAddTask() {
     initBoard();
 }
 
-/* function clearBackend() {
+function clearBackend() {
     tasks = [];
     setItem('tasks', JSON.stringify(tasks));
     console.log('Clear');
-  } */
+  } 
 

@@ -2,6 +2,7 @@
  * Initializes the summary page
  */
 async function initSummary() {
+    await includeHTML();
     init(); // Initialize Sidebar and Header
     loadTasks();
 };

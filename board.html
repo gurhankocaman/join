@@ -22,7 +22,7 @@
 
 </head>
 
-<body onload="init(); initBoard(); initAddTask()">
+<body onload="initBoard(); initAddTask()">
     <!-- Header + Nav Templates> -->
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
@@ -34,7 +34,7 @@
                 <div class="headline-mobile d-none">Kanban Project Management Tool</div>
                 <div class="board-add-task">
                     <h1>Board</h1>
-                    <img onclick="openAddTask()" class="add-task-btn-mobile d-none" src="./assets/img/add_task_mob.svg"
+                    <img onclick="openAddTask('to-do')" class="add-task-btn-mobile d-none" src="./assets/img/add_task_mob.svg"
                         alt="">
                 </div>
                 <div class="search-container">
@@ -42,7 +42,7 @@
                         <div class="dividing-line"></div>
                         <div class="search-icon"><img src="./assets/img/magnifier.png" alt=""></div>
                     </div>
-                    <button class="dark-btn add-task-btn-big" onclick="openAddTask()">Add task +</button>
+                    <button class="dark-btn add-task-btn-big" onclick="openAddTask('to-do')">Add task +</button>
                 </div>
 
             </div>

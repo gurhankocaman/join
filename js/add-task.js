@@ -5,9 +5,11 @@ let subtaskValues = [];
 let contactValues = [];
 let categoryColors = [];
 let selectedCategoryColor = "#CCCCCC";
+let status = 'to-do';
 
 // Init Add Task
 async function initAddTask() {
+    await includeHTML();
     await loadTasks();
     await loadCategories();
     await loadContacts();
@@ -96,7 +98,7 @@ async function addNewTask() {
 
     const newTask = {
         "id": tasks.length,
-        "status": "to-do",
+        "status": status,
         "title": title,
         "description": description,
         "category": categoryValue,
