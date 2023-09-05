@@ -17,7 +17,6 @@ async function initAddTask() {
     await loadCategoryColors();
     setCategoryOptions();
     renderSubtasks();
-    setContactOptions();
 }
 
 async function loadTasks() {
@@ -120,7 +119,6 @@ function resetForm() {
     document.getElementById('descriptionField').value = '';
     document.getElementById('dueDateField').value = '';
     document.getElementById('subtaskInput').value = '';
-    document.getElementById('contactList').innerHTML = '';
     document.querySelectorAll('.prioRadio').forEach(button => button.checked = false);
     document.getElementById('alertCategory').innerHTML = '';
     document.getElementById('alertContact').innerHTML = '';
@@ -128,8 +126,8 @@ function resetForm() {
     contactValues = [];
 
     resetSubtasks();
-    resetContactOptions();
     resetCategoryOptions();
+    hideContactListDropdown();
 
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
@@ -256,25 +254,42 @@ function setContactOptions() {
     }
 }
 
-function selectContact() {
-    document.getElementById('alertContact').innerHTML = '';
-    let contact = document.getElementById('chooseContact');
-    let contactValue = parseInt(contact.options[contact.selectedIndex].value);
+function showContactList() {
+    let dropdownContent = document.getElementById('add-task-dropdown-content');
+    dropdownContent.innerHTML = '';
 
-    if (contactValue !== -1 && !isContactSelected(contactValue)) {
-        contactValues.push({ "id": contactValue });
-
-        let contactList = document.getElementById('contactList');
-        contactList.innerHTML = '';
-        for (let i = 0; i < contactValues.length; i++) {
-            const selectedContact = contacts.find(c => c.id == contactValues[i]["id"]);
-            if (selectedContact) {
-                contactList.innerHTML += `<li>${selectedContact.firstName + " " + selectedContact.lastName}</li>`;
-            }
-        }
+    if (dropdownContent.classList.contains('d-none')) {
+        showContactListDropdown(dropdownContent);
+    } else {
+        hideContactListDropdown();
     }
-    resetContactOptions();
 }
+
+function showContactListDropdown(dropdownContent) {
+    for (let i = 0; i < contacts.length; i++) {
+        dropdownContent.innerHTML += /*html*/`
+        <div class="add-task-dropdown-content">
+            <input type="checkbox" onclick="selectContact(this, ${i})">
+            <label for="contacts-${[i]}">${contacts[i].firstName} ${contacts[i].lastName}</label>
+        </div>`;
+    }
+    dropdownContent.classList.remove('d-none');
+}
+
+function hideContactListDropdown() {
+    let dropdownContent = document.getElementById('add-task-dropdown-content');
+    dropdownContent.classList.add('d-none');
+}
+
+function selectContact(checkbox, contactIndex) {
+    document.getElementById('alertCategory').innerHTML = '';
+    if (checkbox.checked) {
+        const selectedContact = contacts[contactIndex]['id'];
+        contactValues.push({ "id": selectedContact });
+        console.log(`Ausgewählter Kontakt: ${selectedContact}`);
+    }
+}
+
 
 function isContactSelected(contactId) {
     return contactValues.some(contact => contact.id === contactId);

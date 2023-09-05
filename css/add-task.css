@@ -37,6 +37,15 @@ body {
     margin-bottom: 25px;
 }
 
+.dueDateField {
+    outline: 0;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    width: calc(345px - 44px);
+    padding: 12px 21px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
 .priorityContainer {
     display: flex;
     flex-direction: column;
@@ -69,7 +78,8 @@ textarea {
 }
 
 textarea,
-input {
+input,
+.add-task-dropdown {
     font-family: inherit;
     font-size: 16px;
 }
@@ -94,7 +104,7 @@ input {
     display: flex;
     flex-direction: column;
     width: 500px;
-    margin-top: 107px;
+    margin-top: 100px;
 }
 
 .centerLine {
@@ -118,7 +128,7 @@ input {
     background-color: white;
     border-radius: 10px;
     padding: 4px 8px;
-    height: 41px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -224,7 +234,7 @@ input {
 }
 
 /* prio buttons */
-.bg-Urgent {
+/* .bg-Urgent {
     background-color: #ff3d00;
     border: 0;
     color: white;
@@ -240,6 +250,31 @@ input {
     background-color: #8ce54d;
     border: 0;
     color: white;
+} */
+
+/* contact dropdown */
+.add-task-dropdown {
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    outline: transparent;
+    padding: 9px 21px;
+    background-color: white;
+}
+
+.add-task-dropdown-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0px;
+}
+
+.add-task-dropdown-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    align-items: center;
+    padding: 4px 0px;
 }
 
 /* add task page */
@@ -286,12 +321,11 @@ input {
     -moz-appearance: none;
     position: relative;
     display: inline-block;
-    padding: 13px 21px;
+    padding: 14px 21px;
     border: 1px solid lightgrey;
     border-radius: 10px;
     font-family: inherit;
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
     background: url('../assets/img/arrow_down.png') no-repeat right center;
     background-position: calc(100% - 25px) center;
     background-color: white !important;
@@ -320,9 +354,9 @@ li {
 
 .task-added-msg {
     position: fixed;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 280px;
     height: 74px;
     padding: 0px 20px;
@@ -349,11 +383,12 @@ li {
 @keyframes slideInFromBottom {
     0% {
         transform: translate(-50%, 100%);
-        opacity: 0; 
+        opacity: 0;
     }
+
     100% {
-        transform: translate(-50%, -50%); 
-        opacity: 1; 
+        transform: translate(-50%, -50%);
+        opacity: 1;
     }
 }
 
@@ -361,6 +396,7 @@ li {
     0% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -390,16 +426,17 @@ li {
         padding: 0px 17px;
         font-weight: 400;
         font-size: 23px;
-        gap: 10px; 
+        gap: 10px;
     }
 }
 
 @media(max-width: 800px) {
-
     body,
     input,
     option,
-    .textAreaStyle1 {
+    .textAreaStyle1,
+    .dueDateField,
+    .add-task-dropdown {
         font-size: 16px !important;
     }
 
@@ -417,19 +454,12 @@ li {
         margin-top: 0;
     }
 
-    .contactContainer,
     .subtaskContainer {
         margin-bottom: 10px;
     }
 }
 
-@media (max-width: 500px) {
-    .finishButtons {
-        justify-content: space-between;
-    }
-}
-
-@media(max-width: 400px) {
+@media(max-width: 480px) {
     .prio,
     #subtaskField,
     #categoryField,
@@ -437,7 +467,7 @@ li {
         width: 280px;
     }
 
-    .textAreaStyle1 {
+    .textAreaStyle1, .dueDateField {
         width: calc(280px - 44px);
     }
 
@@ -463,8 +493,51 @@ li {
         gap: 4px;
     }
 
+    .finishButtons {
+        justify-content: space-between;
+    }
+
     .light-btn,
     .dark-btn {
         width: 100%;
+    }
+
+    .addTaskRight,
+    .addTaskLeft {
+        width: 400px;
+    }
+}
+
+@media(max-width: 380px) {
+    .prio,
+    #subtaskField,
+    #categoryField,
+    .selectInput {
+        width: 220px;
+    }
+
+    .textAreaStyle1, .dueDateField {
+        width: calc(220px - 44px);
+    }
+
+    .chooseContact {
+        width: calc(220px - 0px);
+    }
+
+    .button1 {
+        padding: 13px 10px;
+    }
+
+    .prioBtn {
+        width: calc(220px - 16px);
+    }
+
+    .addTaskRight,
+    .addTaskLeft {
+        width: 340px;
+    }
+
+    .headline h1 {
+        font-size: 36px;
     }
 }

@@ -107,7 +107,7 @@
                 <img src="./assets/img/close-btn.png">
             </div>
             <div class="add-task-content">
-                <form onsubmit="createTask(); return false;">
+                <form onsubmit="createTask('to-do'); return false;">
                     <div id="addTaskPageBody" class="addTaskPage">
                         <div class="addTaskLR">
                             <div class="addTaskLeft">
@@ -117,22 +117,19 @@
                                     </div>
                                     <div class="titleContainer">
                                         <label for="titleField" class="subHeadline">Title</label>
-                                        <input required name="titleField" id="titleField" type="text"
-                                            class="textAreaStyle1" placeholder="Enter a Title">
+                                        <input required name="titleField" id="titleField" type="text" class="textAreaStyle1"
+                                            placeholder="Enter a Title">
                                     </div>
                                     <div class="descriptionContainer">
                                         <label for="descriptionField" class="subHeadline">Description</label>
-                                        <textarea required name="descriptionField" id="descriptionField"
-                                            class="textAreaStyle1" placeholder="Enter a description"></textarea>
+                                        <textarea required name="descriptionField" id="descriptionField" class="textAreaStyle1"
+                                            placeholder="Enter a description"></textarea>
                                     </div>
                                     <div class="contactContainer">
                                         <label for="chooseContact" class="subHeadline">Assigned to</label>
-                                        <select name="chooseContact" id="chooseContact" class="selectInput"
-                                            onchange="selectContact()">
-                                            <option selected disabled>Choose Contact</option>
-                                        </select>
-                                        <div>
-                                            <ul id="contactList"></ul>
+                                        <div class="add-task-dropdown">
+                                            <div class="add-task-dropdown-title" onclick="showContactList()">Select contacts<img src="./assets/img/arrow_down.png" alt="Arrow Down"></div>
+                                            <div class="d-none" id="add-task-dropdown-content"></div>
                                         </div>
                                         <div id="alertContact" class="noSelectionAlert"></div>
                                     </div>
@@ -145,24 +142,21 @@
                                 <div class="center">
                                     <div class="dateContainer">
                                         <label for="dueDateField" class="subHeadline">Due date</label>
-                                        <input required id="dueDateField" name="dueDateField" class="textAreaStyle1"
-                                            type="date">
+                                        <input required id="dueDateField" name="dueDateField" class="dueDateField" type="date">
                                     </div>
                                     <div class="priorityContainer">
                                         <label for="priority" class="subHeadline">Prio</label>
                                         <div id="prioField" class="prio">
                                             <label>
                                                 <div class="prioBtn">
-                                                    <input required value="Urgent" type="radio" name="priority"
-                                                        class="prioRadio">
+                                                    <input required value="Urgent" type="radio" name="priority" class="prioRadio">
                                                     <span>Urgent</span>
                                                     <img id="Urgent" src="./assets/img/prio-urgent.png">
                                                 </div>
                                             </label>
                                             <label>
                                                 <div class="prioBtn">
-                                                    <input value="Medium" type="radio" name="priority"
-                                                        class="prioRadio">
+                                                    <input value="Medium" type="radio" name="priority" class="prioRadio">
                                                     <span>Medium</span>
                                                     <img id="Medium" src="./assets/img/prio-medium.png">
                                                 </div>
@@ -215,8 +209,7 @@
                                         </div>
                                     </div>
                                     <div class="finishButtons" id="addTaskBTN">
-                                        <button class="light-btn" id="clearTaskButton"
-                                            onclick="resetForm()">Clear</button>
+                                        <button class="light-btn" id="clearTaskButton" onclick="resetForm()">Clear</button>
                                         <button class="dark-btn" id="createTaskButton" type="submit">Create
                                             Task</button>
                                     </div>

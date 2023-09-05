@@ -389,34 +389,6 @@ progress {
     margin-right: 0;
 }
 
-/* .edit-task-prio-urgent {
-    color: white;
-    background-color: #FF3D00;
-}
-
-.edit-task-prio-urgent img {
-    content: url("../assets/img/prio-urgent-white.png");
-}
-
-
-.edit-task-prio-medium {
-    color: white;
-    background-color: #FFA800;
-}
-
-.edit-task-prio-medium img {
-    content: url("../assets/img/prio-medium-white.png");
-}
-
-.edit-task-prio-low {
-    color: white;
-    background-color: #7AE229;
-}
-
-.edit-task-prio-low img {
-    content: url("../assets/img/prio-low-white.png");
-} */
-
 .edit-task-dropdown {
     border: 1px solid #d1d1d1;
     border-radius: 10px;
@@ -573,6 +545,11 @@ progress {
     .addTaskRight {
         margin-top: 0 !important;
     }
+
+    .addTaskLeft, .addTaskRight {
+        width: auto !important;
+        padding: 0 80px;
+    }
 }
 
 @media(max-width: 800px) {
@@ -628,7 +605,17 @@ progress {
 
     .edit-task-show-prio {
         flex-direction: column;
-        gap:10px;
+        gap: 10px;
+    }
+}
+
+@media(max-width: 600px) {
+    .addTaskLeft, .addTaskRight {
+        padding: 0 60px;
+    }
+
+    .add-task-close-btn {
+        right: 30px;
     }
 }
 
@@ -656,6 +643,10 @@ progress {
         flex-direction: column;
         align-items: center;
     }
+
+    .addTaskLeft, .addTaskRight {
+        padding: 0 40px;
+    }
 }
 
 @media(max-width: 380px) {
@@ -680,92 +671,12 @@ progress {
     .search-box {
         width: 280px;
     }
-    
+
     .popup-card {
         width: 320px;
     }
 
     .popup-card-content {
         padding: 25px;
-    }
-}
-
-/* add task */
-@media(max-width: 500px) {
-    .prio,
-    #subtaskField,
-    #categoryField,
-    .selectInput {
-        width: 280px !important;
-    }
-
-    .textAreaStyle1 {
-        width: calc(280px - 44px) !important;
-    }
-
-    .chooseContact {
-        width: calc(280px - 0px) !important;
-    }
-
-    .button1 {
-        padding: 13px 10px !important;
-    }
-
-    .prio {
-        flex-direction: column !important;
-    }
-
-    .prioBtn {
-        width: calc(280px - 16px) !important;
-        margin-bottom: 4px !important;
-    }
-
-    .finishButtons {
-        flex-direction: column-reverse !important;
-        gap: 4px;
-    }
-
-    .light-btn,
-    .dark-btn {
-        width: 100% !important;
-    }
-
-    .addTaskRight,
-    .addTaskLeft {
-        width: 400px !important;
-    }
-}
-
-@media(max-width: 400px) {
-    .prio,
-    #subtaskField,
-    #categoryField,
-    .selectInput {
-        width: 220px !important;
-    }
-
-    .textAreaStyle1 {
-        width: calc(220px - 44px) !important;
-    }
-
-    .chooseContact {
-        width: calc(220px - 0px) !important;
-    }
-
-    .button1 {
-        padding: 13px 10px !important;
-    }
-
-    .prioBtn {
-        width: calc(220px - 16px) !important;
-    }
-
-    .addTaskRight,
-    .addTaskLeft {
-        width: 340px !important;
-    }
-
-    .headline h1 {
-        font-size: 36px;
     }
 }
