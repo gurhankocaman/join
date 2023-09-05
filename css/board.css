@@ -600,7 +600,7 @@ progress {
 
     .edit-task-show-prio {
         flex-direction: column;
-        gap: 10px;
+        gap: 4px;
     }
 }
 

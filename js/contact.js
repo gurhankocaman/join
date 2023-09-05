@@ -47,24 +47,24 @@ function addContacts() {
     closeAddContactForm();
 }
 
+/**
+ * Confirmation message when contact is created 
+ */
 function popupSuccess(){
     const popup = document.createElement('div');
     popup.classList.add('popup-contact-added');
-    popup.innerHTML = `<p>contact successfully created</p>`;
+    popup.innerHTML = `<p>Contact successfully created</p>`;
     document.body.appendChild(popup);
-    setTimeout(() => {
-        popup.remove();
-    }, 2000);
 }
 
 /**
  * Create contact card
  * @param {*} id - The unique identifier for the contact 
- * @param {*} firstName - The first name of the contact. 
- * @param {*} lastName - The last name of the contact. 
- * @param {*} email - The email address of the contact.
- * @param {*} phone - The phone number of the contact. 
- * @param {*} color - The color associated with the contact. 
+ * @param {*} firstName - The first name of the contact
+ * @param {*} lastName - The last name of the contact
+ * @param {*} email - The email address of the contact
+ * @param {*} phone - The phone number of the contact
+ * @param {*} color - The color associated with the contact
  */
 function createContactCard(id, firstName, lastName, email, phone, color) {
     newContact = {
@@ -266,39 +266,6 @@ function deleteSelectedContact(i) {
     updateContactList();
     updateContactSelection();
 }
-
-
-/**
- * Open contact form to add new task with assigned contact
- * @param {string} userShort - The short name of the contact to assign the task to
- */
-/* async function addTaskContact(userShort) {
-    const formTaskContainer = document.getElementById("formContainer");
-    if (!formTaskContainer) {
-        console.error('Error: formContainer is null or undefined.');
-        return;
-    }
-    formTaskContainer.innerHTML += openAddTaskContactFormHTML();
-    addAssignedToList();
-    await loadNotes();
-    // setDateToday();  @ addtask_board.js
-    checkAssignedTo(userShort);
-    document.getElementById('formTaskContainer').classList.remove('d-none');
-} */
-
-
-/**
- * Check assigned-to checkbox for the given userShort
- * @param {string} userShort - The short name of the contact to check the assigned-to checkbox for
- */
-/* function checkAssignedTo(userShort) {
-    for (let i = 0; i < contacts.length; i++) {
-        const assignedTo = document.getElementById('assigned-to-' + i);
-        if (assignedTo && userShort == assignedTo.value.toLowerCase()) {
-            assignedTo.checked = true;
-        }
-    }
-} */
 
 
 /**
