@@ -360,22 +360,22 @@ progress {
 }
 
 .edit-task-show-prio {
-    width: 623px;
     display: flex;
     justify-content: space-between;
-    gap: 10px
+    font-size: 16px;
 }
 
 .edit-task-prio-btn {
+    background-color: white;
     border-radius: 10px;
-    padding: 4px 18px;
-    width: 100%;
+    padding: 4px 37px;
     height: 41px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid #d1d1d1;
     cursor: pointer;
+    gap: 6px;
 }
 
 .edit-task-prio-btn:hover {
@@ -383,11 +383,13 @@ progress {
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-.edit-task-prio-btn img {
-    margin-left: 10px;
+.edit-task-prio-radio {
+    margin-bottom: 2px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.edit-task-prio-urgent {
+/* .edit-task-prio-urgent {
     color: white;
     background-color: #FF3D00;
 }
@@ -413,7 +415,7 @@ progress {
 
 .edit-task-prio-low img {
     content: url("../assets/img/prio-low-white.png");
-}
+} */
 
 .edit-task-dropdown {
     border: 1px solid #d1d1d1;
@@ -619,23 +621,25 @@ progress {
     .edit-task-title input,
     .edit-task-description input,
     .edit-due-date input,
-    .edit-task-dropdown {
+    .edit-task-dropdown,
+    .edit-task-show-prio {
         font-size: 16px;
     }
 
     .edit-task-show-prio {
-        width: 380px;
-    }
-
-    .edit-task-prio-btn {
-        width: auto;
+        flex-direction: column;
+        gap:10px;
     }
 }
 
 @media(max-width: 480px) {
     .popup-card {
-        width: auto;
+        width: 380px;
         font-size: 16px;
+    }
+
+    .popup-card-content {
+        padding: 30px;
     }
 
     .search-container {
@@ -646,14 +650,6 @@ progress {
         width: 240px;
     }
 
-    .edit-task-show-prio {
-        width: 240px;
-    }
-
-    .edit-task-show-prio {
-        gap: 10px;
-        flex-direction: column;
-    }
 
     .drag-area {
         display: flex;
@@ -683,6 +679,14 @@ progress {
 
     .search-box {
         width: 280px;
+    }
+    
+    .popup-card {
+        width: 320px;
+    }
+
+    .popup-card-content {
+        padding: 25px;
     }
 }
 

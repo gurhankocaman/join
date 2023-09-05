@@ -141,6 +141,17 @@ function editTask(taskIndex) {
 }
 
 /**
+ * Updates the selected priority when a radio button is checked
+ * @param {HTMLInputElement} radioButton - The radio button element that was checked
+ */
+function updateSelectedPriority(radioButton) {
+    if (radioButton.checked) {
+        selectedPriority = radioButton.value;
+        console.log('Ausgewählte Priorität:', selectedPriority);
+    }
+}
+
+/**
  * Generates the category color for the task being edited
  * @param {number} taskIndex - The index of the task
  */
@@ -152,13 +163,13 @@ function generateEditTaskCategoryColor(taskIndex) {
  * Selects a priority for the task being edited
  * @param {string} priority - The selected priority
  */
-function selectPriority(priority) {
+/* function selectPriority(priority) {
     const urgentBtn = document.getElementById('edit-task-prio-urgent');
     const mediumBtn = document.getElementById('edit-task-prio-medium');
     const lowBtn = document.getElementById('edit-task-prio-low');
     removePrioritySelection(urgentBtn, mediumBtn, lowBtn);
     addPriority(priority, urgentBtn, mediumBtn, lowBtn);
-}
+}*/
 
 /**
  * Removes the priority selection classes from the buttons
@@ -166,11 +177,11 @@ function selectPriority(priority) {
  * @param {HTMLElement} mediumBtn - The button for medium priority
  * @param {HTMLElement} lowBtn - The button for low priority
  */
-function removePrioritySelection(urgentBtn, mediumBtn, lowBtn) {
+/* function removePrioritySelection(urgentBtn, mediumBtn, lowBtn) {
     urgentBtn.classList.remove('edit-task-prio-urgent');
     mediumBtn.classList.remove('edit-task-prio-medium');
     lowBtn.classList.remove('edit-task-prio-low');
-}
+}*/
 
 /**
  * Adds the related css class to the clicked button
@@ -179,7 +190,7 @@ function removePrioritySelection(urgentBtn, mediumBtn, lowBtn) {
  * @param {HTMLElement} mediumBtn - The button for medium priority
  * @param {HTMLElement} lowBtn - The button for low priority
  */
-function addPriority(priority, urgentBtn, mediumBtn, lowBtn) {
+/* function addPriority(priority, urgentBtn, mediumBtn, lowBtn) {
     selectedPriority = priority;
 
     if (priority === 'Urgent') {
@@ -189,7 +200,7 @@ function addPriority(priority, urgentBtn, mediumBtn, lowBtn) {
     } else if (priority === 'Low') {
         lowBtn.classList.add('edit-task-prio-low');
     }
-}
+}*/
 
 /**
  * Generates the users for the task being edited

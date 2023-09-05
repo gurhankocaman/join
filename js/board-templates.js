@@ -86,7 +86,35 @@ function editTaskHTML(taskIndex) {
             <p><b>Due date:</b></p> 
             <input required id="input-date-edit-task" value="${tasks[taskIndex]['date']}" class="edit-task-input" type="date" placeholder="DD/MM/YYYY">
         </div>
-        <div class="popup-card-prio-container edit-task-prio-container margin-bottom-25">
+        <div class="edit-priority margin-bottom-25">
+    <label for="priority">
+        <p><b>Priority:</b> </p>
+    </label>
+    <div class="edit-task-show-prio">
+        <label>
+            <div class="edit-task-prio-btn">
+                <input required value="Urgent" type="radio" name="priority" class="edit-task-prio-radio" onclick="updateSelectedPriority(this)">
+                <span>Urgent</span>
+                <img id="Urgent" src="./assets/img/prio-urgent.png">
+            </div>
+        </label>
+        <label>
+            <div class="edit-task-prio-btn">
+                <input value="Medium" type="radio" name="priority" class="edit-task-prio-radio" onclick="updateSelectedPriority(this)">
+                <span>Medium</span>
+                <img id="Medium" src="./assets/img/prio-medium.png">
+            </div>
+        </label>
+        <label>
+            <div class="edit-task-prio-btn">
+                <input value="Low" type="radio" name="priority" class="edit-task-prio-radio" onclick="updateSelectedPriority(this)">
+                <span>Low</span>
+                <img id="Low" src="./assets/img/prio-low.png">
+            </div>
+        </label>
+    </div>
+</div>
+        <!-- <div class="popup-card-prio-container edit-task-prio-container margin-bottom-25">
             <b class="margin-bottom-25">Priority:</b> 
             <div class="edit-task-show-prio">
                 <div id="edit-task-prio-urgent" class="edit-task-prio-btn" onclick="selectPriority('Urgent')"> 
@@ -96,7 +124,7 @@ function editTaskHTML(taskIndex) {
                 <div id="edit-task-prio-low" class="edit-task-prio-btn" onclick="selectPriority('Low')">
                     Low <img src="./assets/img/prio-low.png"></div>
             </div>
-        </div>
+        </div> -->
         <div>
             <div class="margin-bottom-25">
                 <b>Assigned To:</b>
