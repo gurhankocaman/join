@@ -463,11 +463,6 @@ progress {
     .board-content {
         flex-wrap: wrap;
     }
-
-    .dark-btn {
-        padding: 0px 20px;
-        font-size: 18px;
-    }
 }
 
 @media(max-width: 1000px) {

@@ -3,7 +3,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #F5F5F5;
     font-size: 16px;
-    
+
 }
 
 a {
@@ -51,4 +51,12 @@ h1 {
     border: 1px solid #29ABE2;
     transition: all 125ms ease-in-out;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+@media(max-width: 800px) {
+
+    .dark-btn,
+    .light-btn {
+        font-size: 14px;
+    }
 }

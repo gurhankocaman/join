@@ -12,7 +12,7 @@ async function initLogin() {
  * Loads users from backend
  */
 async function loadUsers() {
-    users = JSON.parse(await getItem('users'));
+    users = JSON.parse(await getItem('users')) || [];
 }
 
 /**
