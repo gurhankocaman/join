@@ -3,7 +3,6 @@
  */
 async function initSummary() {
     await includeHTML();
-    init(); // Initialize Sidebar and Header
     loadTasks();
 };
 

@@ -15,6 +15,16 @@ async function initContact() {
 }
 
 /**
+ * Downloads contacts from the server
+ *
+ * @returns {Promise} A promise that resolves with the downloaded contacts
+ */
+async function downloadFromServer() {
+    const getContacts = JSON.parse(await getItem('contacts'));
+    return getContacts;
+  }
+
+/**
  * Add contacts to array
  * Reload the contact list
  * Reset the input fields
