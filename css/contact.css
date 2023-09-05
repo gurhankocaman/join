@@ -1,10 +1,10 @@
 body {
-    margin: 0;
+    /* margin: 0;
     padding: 0;
     background-color: #F5F5F5;
     font-family: 'Inter', sans-serif;
     user-select: none;
-    height: 100vh;
+    height: 100vh; */
 }
 
 .overflow {
@@ -173,7 +173,7 @@ h1 {
     padding: 0px 0 15px 0;
 }
 
-.contact-add-task {
+/* .contact-add-task {
     font-size: 14px;
     color: #007CEE;
     cursor: pointer;
@@ -182,7 +182,7 @@ h1 {
 
 .contact-add-task:hover {
     color: #2A3647;
-}
+} */
 
 .contact-information-title {
     font-size: 20px;
@@ -445,6 +445,7 @@ h1 {
     box-sizing: border-box;
     width: 422px;
     height: 51px;
+    font-size: 18px;
 }
 
 .input-email-img {

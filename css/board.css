@@ -351,7 +351,7 @@ progress {
     border-radius: 10px;
     margin-bottom: 4px;
     outline: transparent;
-    font-size: 21px;
+    font-size: 18px;
 }
 
 .edit-task-prio-container {
@@ -395,7 +395,7 @@ progress {
     margin-bottom: 4px;
     margin-top: 10px;
     outline: transparent;
-    font-size: 21px;
+    font-size: 18px;
 }
 
 .edit-task-dropdown-title {
