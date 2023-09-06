@@ -18,11 +18,12 @@
 </head>
 
 <body onload="initSummary()">
-
+    <!-- Header + Nav Templates> -->
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
+    <!-- Animation -->
     <div class="background-cover"></div>
-
+    <!-- Content -->
     <main>
         <div class="main-container">
             <div class="headline">
@@ -33,10 +34,8 @@
                 </div>
             </div>
             <div class="content">
-
                 <!-- Main Left -->
                 <div class="content-left">
-
                     <!-- Tasks First Row -->
                     <div class="content-first-row">
                         <div class="task-small-container" onclick="linkToBoard()">
@@ -92,17 +91,14 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Main Right -->
                 <div class="content-right animation">
                     <div id="user-greetings" class="user-greetings"></div>
                     <div id="user-name" class="user-name"></div>
                 </div>
             </div>
-
         </div>
     </main>
-
 </body>
 
 </html>

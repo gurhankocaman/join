@@ -1,5 +1,6 @@
 let users = [];
 
+
 /**
  * Initializes the login process and loads user data if remember user feature was enabled
  */
@@ -8,12 +9,14 @@ async function initLogin() {
     rememberUser();
 }
 
+
 /**
  * Loads users from backend
  */
 async function loadUsers() {
     users = JSON.parse(await getItem('users')) || [];
 }
+
 
 /**
  * Runs the login process
@@ -39,6 +42,7 @@ function login() {
     password.value = '';
 }
 
+
 /**
  * Checks if the remember user feature is enabled and sets the email and password accordingly
  */
@@ -60,6 +64,7 @@ async function rememberUser() {
     }
 }
 
+
 /**
  * Displays an error message for an incorrect login attempt
  */
@@ -71,6 +76,7 @@ function loginError() {
     `;
 }
 
+
 /**
  * Guest login directly redirects to board without login
  */
@@ -78,6 +84,7 @@ function guestLogin() {
     localStorage.setItem('currentUser', '');
     window.location.href = 'summary-user.html';
 }
+
 
 /**
  * Registers a new user
@@ -88,6 +95,7 @@ function newUser() {
     let password = document.getElementById('signup-password').value;
     matchEmail(name, email, password);
 }
+
 
 /**
  * Checks if the email is already in use before registering a new user
@@ -114,6 +122,7 @@ function matchEmail(name, email, password) {
     }
 }
 
+
 /**
  * Registers a new user and stores their information
  * @param {string} name - The name of the user
@@ -132,6 +141,7 @@ async function registerUser(name, email, password) {
     password.value = '';
 }
 
+
 /**
  * Displays an error message for a registration attempt with an already registered email
  */
@@ -142,6 +152,7 @@ function registerError() {
         <div class="danger-text">This Email is already registered. Please sign in or try another one.</div>
     `;
 }
+
 
 /**
  * Displays a success message for a successful registration
@@ -154,6 +165,7 @@ function registrationSuccessful() {
     `;
 }
 
+
 /**
  * Opens the sign-up form
  */
@@ -164,6 +176,7 @@ function openSignUpForm() {
 
 }
 
+
 /**
  * Closes the sign-up form
  */
@@ -172,6 +185,7 @@ function closeSignUpForm() {
     document.getElementById('login-container').classList.remove('d-none');
     document.getElementById('login-header-right').classList.remove('d-none');
 }
+
 
 /**
  * Opens the forgot password form
@@ -182,6 +196,7 @@ function openForgotPasswordForm() {
     document.getElementById('forgot-password-container').classList.remove('d-none');
 }
 
+
 /**
  * Closes the forgot password form
  */
@@ -191,6 +206,7 @@ function closeForgotPasswordForm() {
     document.getElementById('login-header-right').classList.remove('d-none');
     document.getElementById('confirmation-msg').classList.add('d-none');
 }
+
 
 /**
  * Resets the password for a user

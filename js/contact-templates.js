@@ -112,6 +112,5 @@ function openEditContactFormHTML(selectedContact) {
             </div>
             </div>
         </div>
-        
     `;
 }

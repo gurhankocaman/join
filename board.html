@@ -19,14 +19,12 @@
     <script src="js/board-templates.js"></script>
     <script src="js/add-task.js"></script>
     <script src="js/login.js"></script>
-
 </head>
 
 <body onload="initBoard(); initAddTask()">
     <!-- Header + Nav Templates> -->
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
-
     <!-- Main Content> -->
     <main>
         <div class="board-section">
@@ -34,8 +32,8 @@
                 <div class="headline-mobile d-none">Kanban Project Management Tool</div>
                 <div class="board-add-task">
                     <h1>Board</h1>
-                    <img onclick="openAddTask('to-do')" class="add-task-btn-mobile d-none" src="./assets/img/add_task_mob.svg"
-                        alt="">
+                    <img onclick="openAddTask('to-do')" class="add-task-btn-mobile d-none"
+                        src="./assets/img/add_task_mob.svg" alt="">
                 </div>
                 <div class="search-container">
                     <div class="search-box"><input type="text" placeholder="Find Task" onkeyup="findTasks()">
@@ -44,9 +42,7 @@
                     </div>
                     <button class="dark-btn add-task-btn-big" onclick="openAddTask('to-do')">Add task +</button>
                 </div>
-
             </div>
-
             <div class="board-content">
                 <div class="board-column">
                     <div class="board-column-head">
@@ -56,8 +52,8 @@
                         </div>
                     </div>
                     <div class="drag-area" id="to-do" ondrop="moveTo('to-do'); removeHighlight('to-do')"
-                        ondragover="allowDrop(event); highlight('to-do')" ondragleave="removeHighlight('to-do')"></div>
-
+                        ondragover="allowDrop(event); highlight('to-do')" ondragleave="removeHighlight('to-do')">
+                    </div>
                 </div>
                 <div class="board-column">
                     <div class="board-column-head">
@@ -96,10 +92,8 @@
             </div>
         </div>
     </main>
-
     <!-- Popup Card -->
     <div id="popup-card" class="popup-card d-none"></div>
-
     <!-- Add Task -->
     <div id="add-task-overlay" class="add-task-overlay d-none">
         <div class="add-task-container">
@@ -117,18 +111,19 @@
                                     </div>
                                     <div class="titleContainer">
                                         <label for="titleField" class="subHeadline">Title</label>
-                                        <input required name="titleField" id="titleField" type="text" class="textAreaStyle1"
-                                            placeholder="Enter a Title">
+                                        <input required name="titleField" id="titleField" type="text"
+                                            class="textAreaStyle1" placeholder="Enter a Title">
                                     </div>
                                     <div class="descriptionContainer">
                                         <label for="descriptionField" class="subHeadline">Description</label>
-                                        <textarea required name="descriptionField" id="descriptionField" class="textAreaStyle1"
-                                            placeholder="Enter a description"></textarea>
+                                        <textarea required name="descriptionField" id="descriptionField"
+                                            class="textAreaStyle1" placeholder="Enter a description"></textarea>
                                     </div>
                                     <div class="contactContainer">
                                         <label for="chooseContact" class="subHeadline">Assigned to</label>
                                         <div class="add-task-dropdown">
-                                            <div class="add-task-dropdown-title" onclick="showContactList()">Select contacts<img src="./assets/img/arrow_down.png" alt="Arrow Down"></div>
+                                            <div class="add-task-dropdown-title" onclick="showContactList()">Select
+                                                contacts<img src="./assets/img/arrow_down.png" alt="Arrow Down"></div>
                                             <div class="d-none" id="add-task-dropdown-content"></div>
                                         </div>
                                         <div id="alertContact" class="noSelectionAlert"></div>
@@ -142,21 +137,24 @@
                                 <div class="center">
                                     <div class="dateContainer">
                                         <label for="dueDateField" class="subHeadline">Due date</label>
-                                        <input required id="dueDateField" name="dueDateField" class="dueDateField" type="date">
+                                        <input required id="dueDateField" name="dueDateField" class="dueDateField"
+                                            type="date">
                                     </div>
                                     <div class="priorityContainer">
                                         <label for="priority" class="subHeadline">Prio</label>
                                         <div id="prioField" class="prio">
                                             <label>
                                                 <div class="prioBtn">
-                                                    <input required value="Urgent" type="radio" name="priority" class="prioRadio">
+                                                    <input required value="Urgent" type="radio" name="priority"
+                                                        class="prioRadio">
                                                     <span>Urgent</span>
                                                     <img id="Urgent" src="./assets/img/prio-urgent.png">
                                                 </div>
                                             </label>
                                             <label>
                                                 <div class="prioBtn">
-                                                    <input value="Medium" type="radio" name="priority" class="prioRadio">
+                                                    <input value="Medium" type="radio" name="priority"
+                                                        class="prioRadio">
                                                     <span>Medium</span>
                                                     <img id="Medium" src="./assets/img/prio-medium.png">
                                                 </div>
@@ -209,7 +207,8 @@
                                         </div>
                                     </div>
                                     <div class="finishButtons" id="addTaskBTN">
-                                        <button class="light-btn" id="clearTaskButton" onclick="resetForm()">Clear</button>
+                                        <button class="light-btn" id="clearTaskButton"
+                                            onclick="resetForm()">Clear</button>
                                         <button class="dark-btn" id="createTaskButton" type="submit">Create
                                             Task</button>
                                     </div>
@@ -221,7 +220,8 @@
             </div>
         </div>
     </div>
-    <div id="task-added-msg" class="task-added-msg d-none" onclick="closeTaskAddedMessage()">
+    <!-- Success Message-->
+    <div id="task-added-msg" class="task-added-msg d-none">
         <span>Task added to board</span>
         <img src="assets/img/task-added.png">
     </div>

@@ -1,7 +1,7 @@
-// let tasks = [];
 let contacts = [];
 let filteredTasks = [];
 let currentDraggedElement;
+
 
 /**
  * Initializes the board
@@ -14,6 +14,7 @@ async function initBoard() {
     updateBoard();
 }
 
+
 /**
  * Updates the board and generating HTML elements
  */
@@ -23,6 +24,7 @@ function updateBoard() {
     generateProgressBar();
     generateCategoryColor();
 }
+
 
 /**
  * Updates the IDs of tasks in the array
@@ -34,12 +36,14 @@ function updateId() {
     }
 }
 
+
 /**
  * Saves the updated tasks to storage
  */
 async function saveTasks() {
     await setItem('tasks', JSON.stringify(tasks));
 }
+
 
 /**
  * Updates the HTML elements for the tasks on the board
@@ -50,6 +54,7 @@ function updateTasksHTML() {
     updateAwaitingFeedback();
     updateDone();
 }
+
 
 /**
  * Updates the "To Do" column on the board
@@ -63,6 +68,7 @@ function updateToDo() {
     }
 }
 
+
 /**
  * Updates the "In Progress" column on the board
  */
@@ -74,6 +80,7 @@ function updateInProgress() {
         document.getElementById('in-progress').innerHTML += generateTasksHTML(task);
     }
 }
+
 
 /**
  * Updates the "Awaiting Feedback" column on the board
@@ -87,6 +94,7 @@ function updateAwaitingFeedback() {
     }
 }
 
+
 /**
  * Updates the "Done" column on the board
  */
@@ -99,13 +107,22 @@ function updateDone() {
     }
 }
 
+
+/**
+ * Highlights drag area while moving
+ */
 function highlight(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
 }
   
+
+/**
+ * Removes highlight drag area while moving
+ */
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
+
 
 /**
  * Sets the current dragged element
@@ -115,6 +132,7 @@ function startDragging(id) {
     currentDraggedElement = id;
 }
 
+
 /**
  * Allows dropping of elements during drag and drop
  * @param {Event} ev - The drag event
@@ -122,6 +140,7 @@ function startDragging(id) {
 function allowDrop(ev) {
     ev.preventDefault();
 }
+
 
 /**
  * Moves the current dragged task to the specified status and updates the board
@@ -132,6 +151,7 @@ async function moveTo(status) {
     await saveTasks();
     updateBoard();
 }
+
 
 /**
  * Moves a task to the specified status based on its index and updates the board
@@ -145,6 +165,7 @@ async function moveTask(taskIndex, status) {
     closePopupCard();
 }
 
+
 /**
  * Finds tasks based on the search value and updates the board
  */
@@ -154,6 +175,7 @@ function findTasks() {
     filteredTasks = filterTasksBySearch(searchValue);
     updateBoard();
 }
+
 
 /**
  * Filters tasks based on the search value
@@ -179,6 +201,7 @@ function filterTasksBySearch(searchValue) {
     return filteredTasks;
 }
 
+
 /**
  * Generates the HTML for a task
  * @param {Object} task - The task object
@@ -192,6 +215,7 @@ function generateTasksHTML(task) {
     }
 }
 
+
 /**
  * Generates the category color for each task
  */
@@ -203,6 +227,7 @@ function generateCategoryColor() {
         }
     }
 }
+
 
 /**
  * Generates the progress bar and value for each task
@@ -227,6 +252,7 @@ function generateProgressBar() {
     }
 }
 
+
 /**
  * Calculates the progress based on the checked subtasks
  * @param {number} i - The index of the task
@@ -239,6 +265,7 @@ function calculatePercent(i, subtasksChecked) {
     }
     return (subtasksChecked.length / tasks[i].subtask.length) * 100;
 }
+
 
 /**
  * Generates the HTML code for displaying user information on the cards
@@ -258,6 +285,7 @@ function generateUsers() {
         }
     }
 }
+
 
 /**
  * Checks the priority of a task and returns the HTML
@@ -279,6 +307,7 @@ function checkCardPrio(prio) {
     return `<img src="${prioImg}">`;
 }
 
+
 /**
  * Compares the User ID from Array Tasks with Array Contacts and returns only the matching contacts
  * @param {number} taskId - The ID of the task
@@ -298,6 +327,7 @@ function getUsers(taskId) {
     return userInfos;
 }
 
+
 /**
  * Creates userInfos object from contact object
  * @param {Object} contact - The contact object
@@ -312,6 +342,7 @@ function createUserInfo(contact) {
     return { initials, fullName, color };
 }
 
+
 /**
  * Returns the initials for the first and last name
  * @param {string} firstName - The first name
@@ -324,6 +355,7 @@ function getInitials(firstName, lastName) {
     return `${firstInitial}${lastInitial}`;
 }
 
+
 /**
  * Opens the add task popup
  */
@@ -332,6 +364,7 @@ function openAddTask(chosenStatus) {
     status = chosenStatus;
 }
 
+
 /**
  * Closes the add task popup
  */
@@ -339,10 +372,3 @@ function closeAddTask() {
     document.getElementById('add-task-overlay').classList.add('d-none');
     initBoard();
 }
-
-function clearBackend() {
-    tasks = [];
-    setItem('tasks', JSON.stringify(tasks));
-    console.log('Clear');
-  } 
-

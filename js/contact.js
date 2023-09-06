@@ -3,6 +3,7 @@ let newContact = [];
 let tasks = [];
 let previouslySelectedContact = null;
 
+
 /**
  * Loading the contacts from the server
  * @param {Array} contacts
@@ -14,6 +15,7 @@ async function initContact() {
     loadContacts();
 }
 
+
 /**
  * Downloads contacts from the server
  *
@@ -23,6 +25,7 @@ async function downloadFromServer() {
     const getContacts = JSON.parse(await getItem('contacts'));
     return getContacts;
   }
+
 
 /**
  * Add contacts to array
@@ -47,6 +50,7 @@ function addContacts() {
     closeAddContactForm();
 }
 
+
 /**
  * Confirmation message when contact is created 
  */
@@ -56,6 +60,7 @@ function popupSuccess(){
     popup.innerHTML = `<p>Contact successfully created</p>`;
     document.body.appendChild(popup);
 }
+
 
 /**
  * Create contact card
@@ -276,10 +281,3 @@ function closeFormById(formId) {
     const form = document.getElementById(formId);
     form.remove();
 }
-
-
-/* function clearBackend() {
-    contacts = [];
-    setItem('contacts', JSON.stringify(contacts));
-    console.log('Clear');
-   } */

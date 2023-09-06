@@ -17,8 +17,10 @@
 </head>
 
 <body onload="initAddTask()">
+    <!-- Header + Nav Templates> -->
     <div w3-include-html="assets/templates/header.html"></div>
     <div w3-include-html="assets/templates/nav.html"></div>
+    <!-- Add Task Content -->
     <form onsubmit="createTask('to-do'); return false;">
         <div id="addTaskPageBody" class="addTaskPage">
             <div class="addTaskLR">
@@ -40,7 +42,8 @@
                         <div class="contactContainer">
                             <label for="chooseContact" class="subHeadline">Assigned to</label>
                             <div class="add-task-dropdown">
-                                <div class="add-task-dropdown-title" onclick="showContactList()">Select contacts<img src="./assets/img/arrow_down.png" alt="Arrow Down"></div>
+                                <div class="add-task-dropdown-title" onclick="showContactList()">Select contacts<img
+                                        src="./assets/img/arrow_down.png" alt="Arrow Down"></div>
                                 <div class="d-none" id="add-task-dropdown-content"></div>
                             </div>
                             <div id="alertContact" class="noSelectionAlert"></div>
@@ -130,6 +133,7 @@
             </div>
         </div>
     </form>
+    <!-- Success Message -->
     <div id="task-added-msg" class="task-added-msg d-none" onclick="closeTaskAddedMessage()">
         <span>Task added to board</span>
         <img src="assets/img/task-added.png">

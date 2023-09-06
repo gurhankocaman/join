@@ -11,6 +11,7 @@
           url('../assets/fonts/inter-v12-latin-100.ttf') format('truetype'), /* Safari, Android, iOS */
           url('../assets/fonts/inter-v12-latin-100.svg#Inter') format('svg'); /* Legacy iOS */
    }
+
    /* inter-200 - latin */
    @font-face {
      font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -24,6 +25,7 @@
           url('../assets/fonts/inter-v12-latin-200.ttf') format('truetype'), /* Safari, Android, iOS */
           url('../assets/fonts/inter-v12-latin-200.svg#Inter') format('svg'); /* Legacy iOS */
    }
+
    /* inter-300 - latin */
    @font-face {
      font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -37,6 +39,7 @@
           url('../assets/fonts/inter-v12-latin-300.ttf') format('truetype'), /* Safari, Android, iOS */
           url('../assets/fonts/inter-v12-latin-300.svg#Inter') format('svg'); /* Legacy iOS */
    }
+
    /* inter-regular - latin */
    @font-face {
      font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -50,6 +53,7 @@
           url('../assets/fonts/inter-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
           url('../assets/fonts/inter-v12-latin-regular.svg#Inter') format('svg'); /* Legacy iOS */
    }
+
    /* inter-500 - latin */
    @font-face {
      font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -63,6 +67,7 @@
           url('../assets/fonts/inter-v12-latin-500.ttf') format('truetype'), /* Safari, Android, iOS */
           url('../assets/fonts/inter-v12-latin-500.svg#Inter') format('svg'); /* Legacy iOS */
    }
+
    /* inter-600 - latin */
    @font-face {
      font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -76,6 +81,7 @@
           url('../assets/fonts/inter-v12-latin-600.ttf') format('truetype'), /* Safari, Android, iOS */
           url('../assets/fonts/inter-v12-latin-600.svg#Inter') format('svg'); /* Legacy iOS */
    }
+
    /* inter-700 - latin */
    @font-face {
      font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -89,6 +95,7 @@
           url('../assets/fonts/inter-v12-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
           url('../assets/fonts/inter-v12-latin-700.svg#Inter') format('svg'); /* Legacy iOS */
    }
+
    /* inter-800 - latin */
    @font-face {
      font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -102,6 +109,7 @@
           url('../assets/fonts/inter-v12-latin-800.ttf') format('truetype'), /* Safari, Android, iOS */
           url('../assets/fonts/inter-v12-latin-800.svg#Inter') format('svg'); /* Legacy iOS */
    }
+   
    /* inter-900 - latin */
    @font-face {
      font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */

@@ -226,12 +226,24 @@
             opacity: 1;
         }
 
+        25% {
+            opacity: 0.75;
+          }
+          50% {
+            opacity: 0.5;
+          }
+          75% {
+            opacity: 0.25;
+          }
+
         100% {
             opacity: 0;
             display: none;
             z-index: -999;
         }
     }
+
+    
 
     .user-name,
     .user-greetings {

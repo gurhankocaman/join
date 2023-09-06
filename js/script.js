@@ -16,6 +16,7 @@ async function includeHTML() {
     }
 }
 
+
 /**
  * Shows or hides the logout menu by adding or removing the 'd-none' CSS class.
  */
@@ -27,6 +28,7 @@ function toggleLogoutMenu() {
         menu.classList.add('d-none');
     }
 }
+
 
 /**
  * Logs the user out, clears local storage data, and redirects them to the homepage.

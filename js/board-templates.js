@@ -1,3 +1,9 @@
+/**
+ * Generates the HTML of the task cards
+ *
+ * @param {Object} task - The task object containing task information
+ * @returns {string} - The HTML markup for the task card
+ */
 function tasksHTML(task) {
     return /*html*/ `
     <div class="card-container margin-bottom-25" draggable="true" ondragstart="startDragging(${task['id']})" onclick="openPopupCard(${task['id']})">
@@ -18,6 +24,12 @@ function tasksHTML(task) {
 }
 
 
+/**
+ * Generates the HTML of the popup card of a task
+ *
+ * @param {number} taskIndex - The index of the task in the tasks array
+ * @returns {string} - The HTML markup for the popup card
+ */
 function popupCardHTML(taskIndex) {
     return /*html*/ `
     <div class="popup-card-content">
@@ -67,6 +79,12 @@ function popupCardHTML(taskIndex) {
 }
 
 
+/**
+ * Generates the HTML of the edit task popup
+ *
+ * @param {number} taskIndex - The index of the task in the tasks array
+ * @returns {string} - The HTML markup for the popup card
+ */
 function editTaskHTML(taskIndex) {
     return /*html*/ `
     <div class="popup-card-content">
@@ -87,44 +105,33 @@ function editTaskHTML(taskIndex) {
             <input required id="input-date-edit-task" value="${tasks[taskIndex]['date']}" class="edit-task-input" type="date" placeholder="DD/MM/YYYY">
         </div>
         <div class="edit-priority margin-bottom-25">
-    <label for="priority">
-        <p><b>Priority:</b> </p>
-    </label>
-    <div class="edit-task-show-prio">
-        <label>
-            <div class="edit-task-prio-btn">
-                <input required value="Urgent" type="radio" name="priority" class="edit-task-prio-radio" onclick="updateSelectedPriority(this)">
-                <span>Urgent</span>
-                <img id="Urgent" src="./assets/img/prio-urgent.png">
-            </div>
-        </label>
-        <label>
-            <div class="edit-task-prio-btn">
-                <input value="Medium" type="radio" name="priority" class="edit-task-prio-radio" onclick="updateSelectedPriority(this)">
-                <span>Medium</span>
-                <img id="Medium" src="./assets/img/prio-medium.png">
-            </div>
-        </label>
-        <label>
-            <div class="edit-task-prio-btn">
-                <input value="Low" type="radio" name="priority" class="edit-task-prio-radio" onclick="updateSelectedPriority(this)">
-                <span>Low</span>
-                <img id="Low" src="./assets/img/prio-low.png">
-            </div>
-        </label>
-    </div>
-</div>
-        <!-- <div class="popup-card-prio-container edit-task-prio-container margin-bottom-25">
-            <b class="margin-bottom-25">Priority:</b> 
+            <label for="priority">
+                <p><b>Priority:</b> </p>
+            </label>
             <div class="edit-task-show-prio">
-                <div id="edit-task-prio-urgent" class="edit-task-prio-btn" onclick="selectPriority('Urgent')"> 
-                    Urgent<img src="./assets/img/prio-urgent.png"></div>
-                <div id="edit-task-prio-medium" class="edit-task-prio-btn" onclick="selectPriority('Medium')">
-                    Medium<img src="./assets/img/prio-medium.png"></div>
-                <div id="edit-task-prio-low" class="edit-task-prio-btn" onclick="selectPriority('Low')">
-                    Low <img src="./assets/img/prio-low.png"></div>
+                <label>
+                    <div class="edit-task-prio-btn">
+                        <input required value="Urgent" type="radio" name="priority" class="edit-task-prio-radio" onclick="updateSelectedPriority(this)">
+                        <span>Urgent</span>
+                        <img id="Urgent" src="./assets/img/prio-urgent.png">
+                    </div>
+                </label>
+                <label>
+                    <div class="edit-task-prio-btn">
+                        <input value="Medium" type="radio" name="priority" class="edit-task-prio-radio" onclick="updateSelectedPriority(this)">
+                        <span>Medium</span>
+                        <img id="Medium" src="./assets/img/prio-medium.png">
+                    </div>
+                </label>
+                <label>
+                    <div class="edit-task-prio-btn">
+                        <input value="Low" type="radio" name="priority" class="edit-task-prio-radio" onclick="updateSelectedPriority(this)">
+                        <span>Low</span>
+                        <img id="Low" src="./assets/img/prio-low.png">
+                    </div>
+                </label>
             </div>
-        </div> -->
+        </div>
         <div>
             <div class="margin-bottom-25">
                 <b>Assigned To:</b>
@@ -135,9 +142,8 @@ function editTaskHTML(taskIndex) {
             </div>
         </div>
         <div class="popup-card-btns">
-            <div class="dark-btn save-btn" onclick="saveEdit(${taskIndex})">
-                <span>OK ✓</span>
-            </div>
+        <div class="dark-btn save-btn" onclick="saveEdit(${taskIndex})">
+            <span>OK ✓</span>
         </div>
     </div>
 `;

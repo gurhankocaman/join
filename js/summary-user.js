@@ -6,6 +6,7 @@ async function initSummary() {
     loadTasks();
 };
 
+
 /**
  * Loads the tasks from local storage and generates side content
  */
@@ -13,6 +14,7 @@ async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks'));
     loadContent();
 }
+
 
 /**
  * Loads the content on the summary page and checks if there are any tasks available
@@ -32,6 +34,7 @@ function loadContent() {
     greetUser();
 }
 
+
 /**
  * Displays the number of tasks
  */
@@ -41,6 +44,7 @@ function numberOfTasks() {
         ${tasks.length}
     `;
 }
+
 
 /**
  * Displays the number of tasks in progress
@@ -53,6 +57,7 @@ function tasksInProgress() {
     `;
 }
 
+
 /**
  * Displays the number of tasks awaiting feedback
  */
@@ -64,6 +69,7 @@ function tasksAwaitingFeedback() {
     `;
 }
 
+
 /**
  * Displays the number of urgent tasks
  */
@@ -74,6 +80,7 @@ function tasksUrgent() {
         ${urgent.length}
     `;
 }
+
 
 /**
  * Displays the upcoming deadline
@@ -93,6 +100,7 @@ function getDeadline() {
     `;
 }
 
+
 /**
  * Displays the number of tasks to do
  */
@@ -104,6 +112,7 @@ function tasksToDo() {
     `;
 }
 
+
 /**
  * Displays the number of tasks done
  */
@@ -114,6 +123,7 @@ function tasksDone() {
         ${done.length}
     `;
 }
+
 
 /**
  * Greets the user by displaying a personalized message
@@ -130,6 +140,7 @@ function greetUser() {
     }
 }
 
+
 /**
  * Retrieves the current username from local storage
  * @returns {string} - The username of the current user
@@ -143,6 +154,7 @@ function getUsername() {
         return username;
     }
 }
+
 
 /**
 * Gets the current time and chooses the greeting message based on the hour
@@ -168,6 +180,7 @@ function getTime() {
 
     return userGreetings;
 }
+
 
 /**
  * Redirects the user to the board.html page

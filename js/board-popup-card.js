@@ -1,5 +1,6 @@
 let selectedPriority;
 
+
 /**
  * Opens the popup card for a task
  * @param {number} taskIndex - The index of the task
@@ -10,12 +11,14 @@ function openPopupCard(taskIndex) {
     generatePopupCardCategoryColor(taskIndex);
 }
 
+
 /**
  * Closes the popup card
  */
 function closePopupCard() {
     document.getElementById('popup-card').classList.add('d-none');
 }
+
 
 /**
  * Generates the HTML content for the popup card
@@ -28,6 +31,7 @@ function generatePopupCardHTML(taskIndex) {
     generateSubtasks(taskIndex);
 }
 
+
 /**
  * Generates the category color for the popup card 
  * @param {number} taskIndex - The index of the task
@@ -35,6 +39,7 @@ function generatePopupCardHTML(taskIndex) {
 function generatePopupCardCategoryColor(taskIndex) {
     document.getElementById(`popup-card-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
 }
+
 
 /**
  * Checks the priority of a task and returns the HTML
@@ -65,6 +70,7 @@ function checkPopupCardPrio(prio) {
     return `<div class="popup-card-prio-btn" style="background-color:${prioColor};"><span>${prioText}</span> <img src="${prioImg}"></div>`;
 }
 
+
 /**
  * Generates the users HTML
  * @param {number} taskIndex - The index of the task
@@ -84,6 +90,7 @@ function generateUsersPopupCard(taskIndex) {
     }
     return usersHTML;
 }
+
 
 /**
  * Generates the subtasks for the popup card
@@ -105,6 +112,7 @@ function generateSubtasks(taskIndex) {
     }
 };
 
+
 /**
  * Submits the checkbox value of a subtask
  * @param {number} taskIndex - The index of the task
@@ -116,6 +124,7 @@ function submitCheckboxValue(taskIndex, i) {
     saveTasks();
     generateProgressBar();
 }
+
 
 /**
  * Deletes a task
@@ -129,6 +138,7 @@ function deleteTask(taskIndex) {
     updateBoard();
 }
 
+
 /**
  * Edits a task
  * @param {number} taskIndex - The index of the task
@@ -140,6 +150,7 @@ function editTask(taskIndex) {
     generateEditTaskCategoryColor(taskIndex);
 }
 
+
 /**
  * Updates the selected priority when a radio button is checked
  * @param {HTMLInputElement} radioButton - The radio button element that was checked
@@ -147,9 +158,9 @@ function editTask(taskIndex) {
 function updateSelectedPriority(radioButton) {
     if (radioButton.checked) {
         selectedPriority = radioButton.value;
-        console.log('Ausgewählte Priorität:', selectedPriority);
     }
 }
+
 
 /**
  * Generates the category color for the task being edited
@@ -159,48 +170,6 @@ function generateEditTaskCategoryColor(taskIndex) {
     document.getElementById(`edit-task-category-${taskIndex}`).style.backgroundColor = `${tasks[taskIndex].categoryColor}`;
 }
 
-/**
- * Selects a priority for the task being edited
- * @param {string} priority - The selected priority
- */
-/* function selectPriority(priority) {
-    const urgentBtn = document.getElementById('edit-task-prio-urgent');
-    const mediumBtn = document.getElementById('edit-task-prio-medium');
-    const lowBtn = document.getElementById('edit-task-prio-low');
-    removePrioritySelection(urgentBtn, mediumBtn, lowBtn);
-    addPriority(priority, urgentBtn, mediumBtn, lowBtn);
-}*/
-
-/**
- * Removes the priority selection classes from the buttons
- * @param {HTMLElement} urgentBtn - The button for urgent priority
- * @param {HTMLElement} mediumBtn - The button for medium priority
- * @param {HTMLElement} lowBtn - The button for low priority
- */
-/* function removePrioritySelection(urgentBtn, mediumBtn, lowBtn) {
-    urgentBtn.classList.remove('edit-task-prio-urgent');
-    mediumBtn.classList.remove('edit-task-prio-medium');
-    lowBtn.classList.remove('edit-task-prio-low');
-}*/
-
-/**
- * Adds the related css class to the clicked button
- * @param {string} priority - The selected priority
- * @param {HTMLElement} urgentBtn - The button for urgent priority
- * @param {HTMLElement} mediumBtn - The button for medium priority
- * @param {HTMLElement} lowBtn - The button for low priority
- */
-/* function addPriority(priority, urgentBtn, mediumBtn, lowBtn) {
-    selectedPriority = priority;
-
-    if (priority === 'Urgent') {
-        urgentBtn.classList.add('edit-task-prio-urgent');
-    } else if (priority === 'Medium') {
-        mediumBtn.classList.add('edit-task-prio-medium');
-    } else if (priority === 'Low') {
-        lowBtn.classList.add('edit-task-prio-low');
-    }
-}*/
 
 /**
  * Generates the users for the task being edited
@@ -221,6 +190,7 @@ function generateUsersEditTask(taskIndex) {
     return usersHTML;
 }
 
+
 /**
  * Displays all contacts in a dropdown menu for a task
  *
@@ -238,6 +208,7 @@ function showContacts(taskIndex) {
     }
 }
 
+
 /**
  * Retrieves the assigned contact IDs for a task
  *
@@ -254,6 +225,7 @@ function getAssignedContactIds(taskIndex) {
 
     return assignedContactIds;
 }
+
 
 /**
  * Displays all contacts from Array contantcs in a dropdown menu
@@ -277,6 +249,7 @@ function showContactsDropdown(contacts, assignedContactIds, taskIndex, dropdownC
     dropdownContent.classList.remove('d-none');
 }
 
+
 /**
  * Hides the contacts dropdown menu
  *
@@ -285,6 +258,7 @@ function showContactsDropdown(contacts, assignedContactIds, taskIndex, dropdownC
 function hideContactsDropdown(dropdownContent) {
     dropdownContent.classList.add('d-none');
 }
+
 
 /**
  * Edits the assigned contact for a task
@@ -302,6 +276,7 @@ function editAssignedTo(taskIndex, contactId) {
         task.assignedTo.push({ id: contactId });
     }
 }
+
 
 /**
  * Saves the edited task

@@ -1,6 +1,7 @@
 const STORAGE_TOKEN = 'O7AJXACVZ5CAI1NBKYLNHDS1WBLN0V24RQ1QN2S7';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
+
 /**
  * Saves a key-value pair into the backend storage
  *
@@ -13,6 +14,7 @@ async function setItem(key, value) {
   return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload)})
   .then(res => res.json());
 }
+
 
 /**
  * Loads a value from the backend storage based on the provided key

@@ -7,7 +7,11 @@ let categoryColors = [];
 let selectedCategoryColor = "#CCCCCC";
 let status = 'to-do';
 
-// Init Add Task
+
+/**
+ * Initializes the Add Task functionality by loading necessary data and setting up the UI
+ * @returns {Promise<void>} A promise that resolves when initialization is complete
+ */
 async function initAddTask() {
     await includeHTML();
     await loadTasks();
@@ -19,33 +23,57 @@ async function initAddTask() {
     renderSubtasks();
 }
 
+
+/**
+ * Loads tasks from the backend.
+ */
 async function loadTasks() {
     tasks = JSON.parse(await getItem('tasks')) || [];
 }
 
+
+/**
+ * Loads categorys from the backend.
+ */
 async function loadCategories() {
     categories = JSON.parse(await getItem('categories')) || [];
 }
 
+
+/**
+ * Loads contacts from the backend.
+ */
 async function loadContacts() {
     contacts = JSON.parse(await getItem('contacts')) || [];
 }
 
+
+/**
+ * Loads subtaskss from the backend.
+ */
 async function loadSubtasks() {
     subtasks = JSON.parse(await getItem('subtasks')) || [];
 }
 
+
+/**
+ * Loads category colors from the backend.
+ */
 async function loadCategoryColors() {
     categoryColors = JSON.parse(await getItem('categoryColors')) || [];
 }
 
-// Create Task
+
+/**
+ * Creates a new task by validating inputs, disabling the button during processing,
+ * adding the new task, and re-enabling the button upon completion
+ * @returns {Promise<void>} A promise that resolves when the new task is created
+ */
 async function createTask() {
     let addTaskBTN = document.getElementById('createTaskButton');
-    closeTaskAddedMessage();
     addTaskBTN.disabled = true;
 
-    if (!validateInputFields()) {
+    if (!validateContacts() || !validateCategorys()) {
         addTaskBTN.disabled = false;
         return;
     }
@@ -55,7 +83,12 @@ async function createTask() {
     addTaskBTN.disabled = false;
 }
 
-function validateInputFields() {
+
+/**
+ * Validates selected category
+ * @returns {boolean} True if a valid category is selected, false otherwise
+ */
+function validateCategorys() {
     const category = document.getElementById('chooseCategory');
     const categoryValue = category.options[category.selectedIndex].value;
 
@@ -66,6 +99,15 @@ function validateInputFields() {
         document.getElementById('alertCategory').innerHTML = '';
     }
 
+    return true;
+}
+
+
+/**
+ * Validates the presence of at least one selected contact
+ * @returns {boolean} True if at least one contact is selected, false otherwise
+ */
+function validateContacts() {
     if (contactValues.length === 0) {
         document.getElementById('alertContact').innerHTML = 'This field is required.';
         return false;
@@ -76,6 +118,10 @@ function validateInputFields() {
     return true;
 }
 
+
+/**
+ * Creates subtasks based on selected checkboxes.
+ */
 function createSubtasks() {
     let subtasks = document.querySelectorAll("#subtaskList input[type='checkbox']:checked");
     subtasks.forEach(function (input) {
@@ -83,6 +129,11 @@ function createSubtasks() {
     });
 }
 
+
+/**
+ * Adds a new task to the 'tasks' array and stores it in the backend
+ * @returns {Promise<void>} A promise that resolves when the task is added and stored
+ */
 async function addNewTask() {
     const title = document.getElementById('titleField').value;
     const description = document.getElementById('descriptionField').value;
@@ -111,9 +162,24 @@ async function addNewTask() {
     tasks.push(newTask);
     await setItem('tasks', JSON.stringify(tasks));
     resetForm();
-    showTaskAddedMessage();
+    showSuccess();
 }
 
+
+/**
+ * Shows a success message and redirects to the board page after a new task is added
+ */
+function showSuccess() {
+    document.getElementById('task-added-msg').classList.remove('d-none');
+    setTimeout(function () {
+        window.location.href = 'board.html';
+    }, 3000);
+}
+
+
+/**
+ * Resets the task form to its initial state
+ */
 function resetForm() {
     document.getElementById('titleField').value = '';
     document.getElementById('descriptionField').value = '';
@@ -133,16 +199,19 @@ function resetForm() {
     addTaskBTN.disabled = false;
 }
 
+
+/**
+ * Resets the category selection dropdown to its initial state
+ */
 function resetCategoryOptions() {
     let categoryOptions = document.getElementById("chooseCategory");
     categoryOptions.selectedIndex = 0;
 }
 
-function resetContactOptions() {
-    let contactOptions = document.getElementById("chooseContact");
-    contactOptions.selectedIndex = 0;
-}
 
+/**
+ * Resets the subtasks list to its initial state
+ */
 function resetSubtasks() {
     subtasks = [];
     subtaskValues = []
@@ -150,22 +219,85 @@ function resetSubtasks() {
     renderSubtasks();
 }
 
-function resetPriorityButtons() {
-    const priorityButtons = document.querySelectorAll('.prioRadio');
-    for (const button of priorityButtons) {
-        button.checked = false;
+
+/**
+ * Sets contact options in the contact selection dropdown
+ */
+function setContactOptions() {
+    let contactSelectBox = document.getElementById('chooseContact');
+
+    for (let i = 0; i < contacts.length; i++) {
+        contactSelectBox.innerHTML += /*html*/`
+            <option value="${contacts[i]['id']}">${contacts[i]['firstName'] + ' ' + contacts[i]['lastName']}</option>
+        `;
     }
 }
 
-function showTaskAddedMessage() {
-    document.getElementById('task-added-msg').classList.remove('d-none');
+
+/**
+ * Toggles the visibility of the contact list dropdown
+ */
+function showContactList() {
+    let dropdownContent = document.getElementById('add-task-dropdown-content');
+    dropdownContent.innerHTML = '';
+
+    if (dropdownContent.classList.contains('d-none')) {
+        showContactListDropdown(dropdownContent);
+    } else {
+        hideContactListDropdown();
+    }
 }
 
-function closeTaskAddedMessage() {
-    document.getElementById('task-added-msg').classList.add('d-none');
+
+/**
+ * Displays the contact list dropdown
+ * @param {HTMLElement} dropdownContent - The contact list dropdown content
+ */
+function showContactListDropdown(dropdownContent) {
+    for (let i = 0; i < contacts.length; i++) {
+        const isChecked = contactValues.some(contact => contact.id === contacts[i].id) ? 'checked="checked"' : '';
+        dropdownContent.innerHTML += /*html*/`
+        <div class="add-task-dropdown-content">
+            <input type="checkbox" ${isChecked} id="contacts-${i}" onclick="selectContact(this, ${i})">
+            <label for="contacts-${i}">${contacts[i].firstName} ${contacts[i].lastName}</label>
+        </div>`;
+    }
+    dropdownContent.classList.remove('d-none');
 }
 
-// Categories
+
+/**
+ * Hides the contact list dropdown
+ */
+function hideContactListDropdown() {
+    let dropdownContent = document.getElementById('add-task-dropdown-content');
+    dropdownContent.classList.add('d-none');
+}
+
+
+/**
+ * Handles the selection of a contact
+ * @param {HTMLInputElement} checkbox - The checkbox input element
+ * @param {number} contactIndex - The index of the selected contact
+ */
+function selectContact(checkbox, contactIndex) {
+    document.getElementById('alertCategory').innerHTML = '';
+    const selectedContact = contacts[contactIndex];
+
+    if (checkbox.checked) {
+        contactValues.push({ id: selectedContact.id });
+    } else {
+        const indexToRemove = contactValues.findIndex(contact => contact.id === selectedContact.id);
+        if (indexToRemove !== -1) {
+            contactValues.splice(indexToRemove, 1);
+        }
+    }
+}
+
+
+/**
+ * Sets category options in the category selection dropdown
+ */
 function setCategoryOptions() {
 
     let categorySelectBox = document.getElementById('chooseCategory');
@@ -174,6 +306,10 @@ function setCategoryOptions() {
     }
 }
 
+
+/**
+ * Handles the addition of a new category
+ */
 function addCategory() {
     let selectElement = document.getElementById("chooseCategory");
     let selectedValue = selectElement.value;
@@ -183,6 +319,10 @@ function addCategory() {
     }
 }
 
+
+/**
+ * Switches the category selection dropdown to input mode for creating a new category
+ */
 function selectToInput() {
     document.getElementById('alertCategory').innerHTML = '';
 
@@ -203,12 +343,21 @@ function selectToInput() {
     element.classList.remove("d-none");
 }
 
+
+/**
+ * Sets the selected category color
+ * @param {string} color - The selected category color
+ */
 function selectCategoryColor(color) {
     selectedCategoryColor = color;
     let selectedColorDiv = document.getElementById('selectedCategoryColor');
     selectedColorDiv.style.backgroundColor = color;
 }
 
+
+/**
+ * Adds a new category to the 'categories' array and stores it in the backend
+ */
 async function addNewCategory() {
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
@@ -226,6 +375,10 @@ async function addNewCategory() {
     }
 }
 
+
+/**
+ * Resets the category selection dropdown to its initial state.
+ */
 function resetSelect() {
     let addTaskBTN = document.getElementById('createTaskButton');
     addTaskBTN.disabled = false;
@@ -240,62 +393,12 @@ function resetSelect() {
     let element = document.getElementById("categoryColors");
     element.classList.add("d-none");
     setCategoryOptions();
-
-}
-
-// Contacts 
-function setContactOptions() {
-    let contactSelectBox = document.getElementById('chooseContact');
-
-    for (let i = 0; i < contacts.length; i++) {
-        contactSelectBox.innerHTML += /*html*/`
-            <option value="${contacts[i]['id']}">${contacts[i]['firstName'] + ' ' + contacts[i]['lastName']}</option>
-        `;
-    }
-}
-
-function showContactList() {
-    let dropdownContent = document.getElementById('add-task-dropdown-content');
-    dropdownContent.innerHTML = '';
-
-    if (dropdownContent.classList.contains('d-none')) {
-        showContactListDropdown(dropdownContent);
-    } else {
-        hideContactListDropdown();
-    }
-}
-
-function showContactListDropdown(dropdownContent) {
-    for (let i = 0; i < contacts.length; i++) {
-        dropdownContent.innerHTML += /*html*/`
-        <div class="add-task-dropdown-content">
-            <input type="checkbox" onclick="selectContact(this, ${i})">
-            <label for="contacts-${[i]}">${contacts[i].firstName} ${contacts[i].lastName}</label>
-        </div>`;
-    }
-    dropdownContent.classList.remove('d-none');
-}
-
-function hideContactListDropdown() {
-    let dropdownContent = document.getElementById('add-task-dropdown-content');
-    dropdownContent.classList.add('d-none');
-}
-
-function selectContact(checkbox, contactIndex) {
-    document.getElementById('alertCategory').innerHTML = '';
-    if (checkbox.checked) {
-        const selectedContact = contacts[contactIndex]['id'];
-        contactValues.push({ "id": selectedContact });
-        console.log(`Ausgewählter Kontakt: ${selectedContact}`);
-    }
 }
 
 
-function isContactSelected(contactId) {
-    return contactValues.some(contact => contact.id === contactId);
-}
-
-// Subtasks
+/**
+ * Adds a new subtask to the 'subtasks' array and stores it in the backend
+ */
 async function addNewSubtask() {
     let subtask = document.getElementById('subtaskInput');
 
@@ -307,6 +410,10 @@ async function addNewSubtask() {
     }
 }
 
+
+/**
+ * Renders the list of subtasks in the UI
+ */
 function renderSubtasks() {
     let subtaskList = document.getElementById('subtaskList');
     subtaskList.innerHTML = '';
@@ -319,16 +426,5 @@ function renderSubtasks() {
         `;
     }
 }
-
-/* function clearBackend() {
-    categories = [];
-    categoryColors = [];
-    subtasks = [];
-    setItem('categories', JSON.stringify(categories));
-    setItem('categoryColors', JSON.stringify(categoryColors));
-    setItem('subtasks', JSON.stringify(subtasks));
-    console.log('Clear');
-} */
-
 
 
