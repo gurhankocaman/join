@@ -199,7 +199,7 @@ progress {
     transform: translate(-50%, -50%);
     z-index: 999;
     width: 623px;
-    max-height: 100%;
+    max-height: 90vh; 
     background-color: #ffffff;
     border-radius: 30px;
     background: #FFFFFF;
@@ -442,7 +442,7 @@ progress {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     overflow-y: auto;
-    max-height: 100%;
+    max-height: 90vh; 
     animation: slideInFromRight 250ms forwards ease-in-out;
 }
 

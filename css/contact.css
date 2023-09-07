@@ -132,8 +132,9 @@ h1 {
 
 #contactForm {
     overflow-y: auto;
-    max-height: 100vh; /* Ändern Sie die maximale Höhe nach Bedarf */
+    max-height: 90vh; 
 }
+
 .contact-selection-container {
     padding-left: 50px;
 }
