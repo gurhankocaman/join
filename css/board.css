@@ -91,7 +91,6 @@ body {
     display: flex;
     justify-content: space-between;
     width: 230px;
-    margin-bottom: 1em;
 }
 
 .board-column-head h3 {
