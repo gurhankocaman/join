@@ -129,6 +129,11 @@ h1 {
 
 
 /* Content - right side */
+
+#contactForm {
+    overflow-y: auto;
+    max-height: 100vh; /* Ändern Sie die maximale Höhe nach Bedarf */
+}
 .contact-selection-container {
     padding-left: 50px;
 }
@@ -657,6 +662,7 @@ h1 {
         border-top-right-radius: unset;
         text-align: center;
         flex-direction: column;
+        padding: 0 8px;
     }
 
     .contact-form-user-icon {
@@ -751,11 +757,6 @@ h1 {
 }
 
 @media(max-width: 500px) {
-    .contact-form-overlay {
-        width: 100%;
-        height: 100%;
-    }
-
     .add-form-left {
         width: unset;
     }
@@ -772,44 +773,23 @@ h1 {
         font-size: 13px !important;
     }
 
-}
-
-@media(max-width: 400px) {
-    .contact-form-overlay {
-        border-radius: 0px;
+    .contact-form-user-icon {
+        display: none;
     }
 
     .contact-form-left {
-        border-top-left-radius: unset;
-        border-top-right-radius: unset;
         padding-bottom: 50px;
     }
 
-    .contact-form-right {
-        border-bottom-left-radius: unset;
-        border-bottom-right-radius: unset;
-    }
+}
 
-    .add-form-left {
-        border-top-right-radius: unset;
-        border-top-left-radius: unset;
-    }
-
-    .add-form-right {
-        border-bottom-left-radius: unset;
-        border-bottom-right-radius: unset;
-    }
-
+@media(max-width: 400px) {
     .margin-top {
         margin-top: 20px !important;
     }
 
     .contact-input-field {
         width: 280px;
-    }
-
-    .contact-form-user-icon {
-        display: none;
     }
 
     .big-letters {
