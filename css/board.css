@@ -682,6 +682,26 @@ progress {
     .addTaskRight {
         padding: 0 40px;
     }
+
+    .prio,
+    #subtaskField,
+    #categoryField,
+    .selectInput {
+        width: 280px !important;
+    }
+
+    .textAreaStyle1, .dueDateField {
+        width: calc(280px - 44px) !important;
+    }
+
+    .chooseContact {
+        width: calc(280px - 0px) !important;
+    }
+
+    .prioBtn {
+        width: calc(280px - 16px) !important;
+        margin-bottom: 4px;
+    }
 }
 
 @media(max-width: 380px) {
@@ -717,5 +737,25 @@ progress {
 
     .popup-card-content {
         padding: 25px;
+    }
+
+    .prio,
+    #subtaskField,
+    #categoryField,
+    .selectInput {
+        width: 240px !important;
+    }
+
+    .textAreaStyle1, .dueDateField {
+        width: calc(240px - 44px) !important;
+    }
+
+    .chooseContact {
+        width: calc(240px - 0px) !important;
+    }
+
+    .prioBtn {
+        width: calc(240px - 16px) !important;
+        margin-bottom: 4px;
     }
 }
