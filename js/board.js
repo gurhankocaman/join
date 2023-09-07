@@ -7,7 +7,26 @@ let currentDraggedElement;
  * Initializes the board
  */
 async function initBoard() {
+    await loadBoardHeaderAndSidebar();
+    await loadBoardData();
+}
+
+
+/**
+ * Loads the header and sidebar.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete
+ */
+async function loadBoardHeaderAndSidebar() {
     await includeHTML();
+    navLinkActive('nav-board');
+}
+
+
+/**
+ * Loads data for the board, including tasks and contacts.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete
+ */
+async function loadBoardData() {
     tasks = JSON.parse(await getItem('tasks'));
     contacts = JSON.parse(await getItem('contacts'));
     updateId();
@@ -114,7 +133,7 @@ function updateDone() {
 function highlight(id) {
     document.getElementById(id).classList.add('drag-area-highlight');
 }
-  
+
 
 /**
  * Removes highlight drag area while moving
@@ -357,18 +376,19 @@ function getInitials(firstName, lastName) {
 
 
 /**
- * Opens the add task popup
+ * Opens the add task popup and loads the add task content from backend
  */
-function openAddTask(chosenStatus) {
+async function openAddTask(chosenStatus) {
     document.getElementById('add-task-overlay').classList.remove('d-none');
     status = chosenStatus;
 }
 
 
 /**
- * Closes the add task popup
+ * Closes the add task popup, resets the form and loads the board content
  */
-function closeAddTask() {
+async function closeAddTask() {
     document.getElementById('add-task-overlay').classList.add('d-none');
-    initBoard();
+    loadBoardData();
+    resetForm();
 }

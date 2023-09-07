@@ -13,6 +13,7 @@ async function initContact() {
     const serverContacts = await downloadFromServer();
     contacts = serverContacts || [];
     loadContacts();
+    navLinkActive('nav-contact');
 }
 
 

@@ -29,7 +29,6 @@ b {
     font-weight: bolder;
 }
 
-
 @media(max-width: 1000px) {
     .help-content {
         margin-left: 0;

@@ -10,10 +10,30 @@ let status = 'to-do';
 
 /**
  * Initializes the Add Task functionality by loading necessary data and setting up the UI
- * @returns {Promise<void>} A promise that resolves when initialization is complete
+ * @returns {Promise<void>} A promise that resolves when the operation is complete
  */
 async function initAddTask() {
+   await loadAddTaskHeaderAndSidebar();
+   await loadAddTaskData();
+}
+
+
+/**
+ * Loads the header and sidebar.
+ * @returns {Promise<void>} A promise that resolves when the operation is complete
+ */
+async function loadAddTaskHeaderAndSidebar() {
     await includeHTML();
+    navLinkActive('nav-add-task');
+}
+
+
+/**
+ * Loads data for the "Add Task" page, including tasks, categories, contacts, subtasks, and category colors
+ * Sets category options, renders subtasks, and sets the minimum date
+ * @returns {Promise<void>} A promise that resolves when the operation is complete
+ */
+async function loadAddTaskData() {
     await loadTasks();
     await loadCategories();
     await loadContacts();
@@ -21,8 +41,8 @@ async function initAddTask() {
     await loadCategoryColors();
     setCategoryOptions();
     renderSubtasks();
+    setMinDate();
 }
-
 
 /**
  * Loads tasks from the backend.
@@ -117,6 +137,15 @@ function validateContacts() {
 
     return true;
 }
+
+/**
+ * Sets the minimum date for the date input element to the current date
+ */
+function setMinDate() {
+    const today = new Date();
+    const currentDate = today.toISOString().split('T')[0];
+    document.getElementById("dueDateField").min = currentDate;
+  }
 
 
 /**
@@ -426,5 +455,3 @@ function renderSubtasks() {
         `;
     }
 }
-
-

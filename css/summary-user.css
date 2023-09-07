@@ -61,6 +61,7 @@
     justify-content: center;
     align-items: center;
     transition: all 225ms ease-in-out;
+    cursor: pointer;
 }
 
 .task-small-container:hover {
@@ -84,6 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    cursor: pointer;
 }
 
 .task-urgent-container:hover {
@@ -142,6 +144,7 @@
     justify-content: space-around;
     align-items: center;
     transition: all 225ms ease-in-out;
+    cursor: pointer;
 }
 
 .task-todo-container:hover,

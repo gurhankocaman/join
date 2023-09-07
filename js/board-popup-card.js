@@ -140,14 +140,32 @@ function deleteTask(taskIndex) {
 
 
 /**
- * Edits a task
+ * Edits a task and loads the selected priority
  * @param {number} taskIndex - The index of the task
  */
 function editTask(taskIndex) {
+    const currentPriority = tasks[taskIndex]['priority'];
     let content = document.getElementById('popup-card');
     content.innerHTML = '';
     content.innerHTML += editTaskHTML(taskIndex);
     generateEditTaskCategoryColor(taskIndex);
+    loadPriorityButtons(currentPriority);
+}
+
+
+/**
+ * Updates the priority radio buttons based on the current priority
+ * @param {string} currentPriority - The current priority of the task
+ */
+function loadPriorityButtons(currentPriority) {
+    const radioButtons = document.querySelectorAll('input[type="radio"][name="priority"]');
+    for (let radioButton of radioButtons) {
+        if (radioButton.value === currentPriority) {
+            radioButton.checked = true;
+        } else {
+            radioButton.checked = false;
+        }
+    }
 }
 
 
@@ -159,7 +177,7 @@ function updateSelectedPriority(radioButton) {
     if (radioButton.checked) {
         selectedPriority = radioButton.value;
     }
-}
+} 
 
 
 /**

@@ -175,6 +175,10 @@ input,
     width: 0px;
 }
 
+#chooseCategory {
+    color: black;
+}
+
 /* subtask and category fields */
 #subtaskField,
 #categoryField {
@@ -441,15 +445,15 @@ li {
     #subtaskField,
     #categoryField,
     .selectInput {
-        width: 280px;
+        width: 320px;
     }
 
     .textAreaStyle1, .dueDateField {
-        width: calc(280px - 44px);
+        width: calc(320px - 44px);
     }
 
     .chooseContact {
-        width: calc(280px - 0px);
+        width: calc(320px - 0px);
     }
 
     .button1 {
@@ -461,7 +465,7 @@ li {
     }
 
     .prioBtn {
-        width: calc(280px - 16px);
+        width: calc(320px - 16px);
         margin-bottom: 4px;
     }
 
@@ -490,15 +494,15 @@ li {
     #subtaskField,
     #categoryField,
     .selectInput {
-        width: 220px;
+        width: 280px;
     }
 
     .textAreaStyle1, .dueDateField {
-        width: calc(220px - 44px);
+        width: calc(280px - 44px);
     }
 
     .chooseContact {
-        width: calc(220px - 0px);
+        width: calc(280px - 0px);
     }
 
     .button1 {
@@ -506,7 +510,7 @@ li {
     }
 
     .prioBtn {
-        width: calc(220px - 16px);
+        width: calc(280px - 16px);
     }
 
     .addTaskRight,

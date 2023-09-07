@@ -138,7 +138,7 @@ nav {
     white-space: nowrap;
 }
 
-.nav-main:hover {
+.nav-active {
     background-color: #091931;
 }
 
@@ -163,10 +163,6 @@ nav {
     height: 31px;
     margin-top: auto;
     white-space: nowrap;
-}
-
-.legal-notice:hover {
-    background-color: #091931;
 }
 
 .d-none {

@@ -18,6 +18,16 @@ async function includeHTML() {
 
 
 /**
+ * @param {STRING} id -> ID of the active navbar link
+ * Changes the background color of the active link in the navbar element
+ */
+function navLinkActive(id) {
+    let showActiveLink = document.getElementById(id);
+    showActiveLink.classList.add('nav-active');
+  }
+
+
+/**
  * Shows or hides the logout menu by adding or removing the 'd-none' CSS class.
  */
 function toggleLogoutMenu() {

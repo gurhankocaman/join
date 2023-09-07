@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 .margin-bottom-10 {
     margin-bottom: 10px;
 }
@@ -628,8 +632,30 @@ progress {
 }
 
 @media(max-width: 480px) {
+    .board-column {
+        width: 320px;
+    }
+
+    .board-add-task {
+        width: 320px;
+    }
+
+    .board-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .board-column-head {
+        display: flex;
+    }
+
+    .search-box {
+        width: 320px;
+    }
+    
     .popup-card {
-        width: 380px;
+        width: 320px;
         font-size: 16px;
     }
 
@@ -642,13 +668,14 @@ progress {
     }
 
     .card-container {
-        width: 240px;
+        width: 270px;
     }
 
     .drag-area {
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-height: 24px;
     }
 
     .addTaskLeft,
@@ -678,6 +705,10 @@ progress {
 
     .search-box {
         width: 280px;
+    }
+
+    .card-container {
+        width: 240px;
     }
 
     .popup-card {

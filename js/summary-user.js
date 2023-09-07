@@ -3,7 +3,8 @@
  */
 async function initSummary() {
     await includeHTML();
-    loadTasks();
+    await loadTasks();
+    navLinkActive('nav-summary-user');
 };
 
 
@@ -188,6 +189,5 @@ function getTime() {
 function linkToBoard() {
     window.location.href = 'board.html';
 }
-
 
 
