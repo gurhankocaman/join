@@ -675,7 +675,7 @@ progress {
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-height: 24px;
+        min-height: 50px;
     }
 
     .addTaskLeft,
