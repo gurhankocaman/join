@@ -13,6 +13,7 @@ body {
 .board-section {
     margin-left: 232px;
     margin-top: 90px;
+    max-width: 1440px;
 }
 
 .board-header {
@@ -231,10 +232,11 @@ progress {
     font-size: 27px;
 }
 
-.popup-card-title h2 {
-    font-size: 61px;
-    font-weight: 700;
-    margin: 0;
+.popup-card-title h2,
+.headline h2 {
+  font-size: 61px;
+  font-weight: 700;
+  margin: 0;
 }
 
 .popup-card-prio-container {
@@ -265,7 +267,11 @@ progress {
 }
 
 .popup-card-move-task {
-    margin-top: 5px;
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: auto;
 }
 
 .popup-card-move-task-mobile {
@@ -273,13 +279,11 @@ progress {
 }
 
 .move-task-btn {
-    height: 41px;
-    padding: 4px 18px;
+    padding: 4px 12px;
     border-radius: 8px;
     border: 1px solid #2A3647;
-    font-weight: 700;
     background-color: #FFFFFF;
-    font-size: 21px;
+    font-size: 16px;
     cursor: pointer;
 }
 
@@ -356,6 +360,17 @@ progress {
     outline: transparent;
     font-size: 18px;
 }
+
+.edit-due-date-input {
+    width: calc(100% - 20px);
+    padding: 12px 10px;
+    font-family: inherit;
+    background-color: white;
+    -webkit-appearance: none; 
+    appearance: none; 
+    -moz-appearance: none; 
+    -webkit-padding: 12px 21px;
+  }
 
 .edit-task-prio-container {
     align-items: flex-start;
@@ -442,8 +457,13 @@ progress {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     overflow-y: auto;
-    max-height: 90vh; 
+    max-height: 95vh;
+    width: 900px; 
     animation: slideInFromRight 250ms forwards ease-in-out;
+}
+
+.add-task-content {
+    padding: 50px;
 }
 
 @keyframes slideInFromRight {
@@ -456,11 +476,6 @@ progress {
     }
 }
 
-.add-task-content {
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
 .add-task-close-btn {
     position: absolute;
     width: 32px;
@@ -469,15 +484,21 @@ progress {
     cursor: pointer;
 }
 
-.addTaskPage {
-    margin: 0 !important;
-}
 
 @media(max-width: 1400px) {
     .board-content {
         flex-wrap: wrap;
     }
 }
+
+@media (max-width: 1200px) {
+    .add-task-container {
+      width: 623px;
+    }
+    .popup-card-move-task-mobile {
+        display: block;
+      }
+} 
 
 @media(max-width: 1000px) {
     .popup-background {
@@ -534,31 +555,11 @@ progress {
 
     .board-content {
         width: 360px;
-        margin: 0;
+        margin: 0 0 90px 0;
     }
 
     .card-container {
         width: 312px;
-    }
-
-    .finishButtonsATP {
-        margin-top: 0px !important;
-    }
-
-    .addTaskLR {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-    }
-
-    .addTaskRight {
-        margin-top: 0 !important;
-    }
-
-    .addTaskLeft,
-    .addTaskRight {
-        width: auto !important;
-        padding: 0 80px;
     }
 }
 
@@ -572,9 +573,10 @@ progress {
         display: none;
     }
 
-    .popup-card {
-        width: 380px;
-        font-size: 16px;
+    .popup-card,
+    .add-task-container {
+      width: 80vw;
+      font-size: 16px;
     }
 
     .popup-card-category {
@@ -585,24 +587,13 @@ progress {
         word-break: break-all;
     }
 
-    .popup-card-title h2 {
-        font-size: 35px;
+    .popup-card-title h2,
+    .headline h2 {
+      font-size: 35px;
     }
 
     .popup-card-assigned-to-container {
         margin-top: 10px;
-    }
-
-    .popup-card-move-task {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 5px;
-        height: auto;
-    }
-
-    .popup-card-move-task-mobile {
-        display: block;
     }
 
     .edit-task-title input,
@@ -617,17 +608,20 @@ progress {
         flex-direction: column;
         gap: 4px;
     }
-}
 
-@media(max-width: 600px) {
-    .addTaskLeft,
-    .addTaskRight {
-        padding: 0 60px;
-    }
-
-    .add-task-close-btn {
-        right: 30px;
-    }
+    .prio {
+        flex-direction: column !important;
+      }
+    
+      .prio label {
+        width: 100% !important;
+      }
+    
+      .formFooter {
+        flex-direction: column !important;
+        gap: 16px !important;
+        align-items: flex-end !important;
+      }
 }
 
 @media(max-width: 480px) {
@@ -653,15 +647,6 @@ progress {
         width: 320px;
     }
     
-    .popup-card {
-        width: 320px;
-        font-size: 16px;
-    }
-
-    .popup-card-content {
-        padding: 30px;
-    }
-
     .search-container {
         font-size: 16px;
     }
@@ -677,29 +662,19 @@ progress {
         min-height: 50px;
     }
 
-    .addTaskLeft,
-    .addTaskRight {
-        padding: 0 40px;
+    .popup-card-content,
+    .add-task-content {
+      padding: 30px;
     }
-
-    .prio,
-    #subtaskField,
-    #categoryField,
-    .selectInput {
-        width: 280px !important;
+  
+    .close-popup-card,
+    .add-task-close-btn {
+      top: 30px;
+      right: 30px;
     }
-
-    .textAreaStyle1, .dueDateField {
-        width: calc(280px - 44px) !important;
-    }
-
-    .chooseContact {
-        width: calc(280px - 0px) !important;
-    }
-
-    .prioBtn {
-        width: calc(280px - 16px) !important;
-        margin-bottom: 4px;
+    .light-btn,
+    .dark-btn {
+      padding: 0 16px;
     }
 }
 
@@ -707,54 +682,35 @@ progress {
     .board-column {
         width: 280px;
     }
-
-    .board-add-task {
+    
+      .board-add-task {
         width: 280px;
     }
-
-    .board-content {
+    
+      .board-content {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-
-    .board-column-head {
+    
+      .board-column-head {
         display: flex;
     }
-
-    .search-box {
+    
+      .search-box {
         width: 280px;
     }
-
-    .card-container {
+    
+      .card-container {
         width: 240px;
     }
-
-    .popup-card {
-        width: 320px;
+    
+      .popup-card,
+      .add-task-container {
+        width: 90vw;
     }
-
-    .popup-card-content {
+    
+      .popup-card-content {
         padding: 25px;
-    }
-
-    .prio,
-    #subtaskField,
-    #categoryField,
-    .selectInput {
-        width: 240px !important;
-    }
-
-    .textAreaStyle1, .dueDateField {
-        width: calc(240px - 44px) !important;
-    }
-
-    .chooseContact {
-        width: calc(240px - 0px) !important;
-    }
-
-    .prioBtn {
-        width: calc(240px - 16px) !important;
-        margin-bottom: 4px;
     }
 }
